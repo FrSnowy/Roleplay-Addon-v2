@@ -1,0 +1,9 @@
+## Interface: 30300
+## Title: [2.0] Ролевая система от FriendSnowy
+## Version: 2.0
+## DefaultState: Enabled
+## SavedVariablesPerCharacter: SS_PLAYER
+SnowySystem.xml
+PlayerInfo.lua
+PlotInfo.lua
+SnowySystem.lua
