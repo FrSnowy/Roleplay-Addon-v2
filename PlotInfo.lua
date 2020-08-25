@@ -25,5 +25,11 @@ SS_createPlot = function(plotName, authorName)
     },
     author = authorName,
   };
+
+  SS_PLAYER.leadingPlots[plotUniqueName] = {
+    name = plotName,
+    players = { authorName }
+  };
+
   return true;
 end;

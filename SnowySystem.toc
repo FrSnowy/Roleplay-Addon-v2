@@ -6,4 +6,5 @@
 SnowySystem.xml
 PlayerInfo.lua
 PlotInfo.lua
+DrawElements.lua
 SnowySystem.lua

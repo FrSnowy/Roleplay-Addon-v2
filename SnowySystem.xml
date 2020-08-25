@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Script file="SnowySystem.lua"/>
+  <Include file="DrawElements.lua"/>
   <Include file="Config.lua"/>
   <Frame name="SS_Small_Menu" parent="UIParent" toplevel="true" enableMouse="true">
     <Scripts>
@@ -65,6 +66,11 @@
     </Frames>
   </Frame>
   <Frame name="SS_Controll_Menu" hidden="true">
+    <Scripts>
+      <OnShow>
+        SS_DrawPlots(SS_Controll_Menu_Settings_PlotType:GetText())
+      </OnShow>
+    </Scripts>
     <Size><AbsDimension x="500" y="250"/></Size>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Small_Menu">
@@ -167,6 +173,7 @@
               SS_Controll_Menu_Settings_PlotType:SetText("Участник");
               SS_Controll_Menu_Settings_Create_New_Plot:Hide();
             end;
+            SS_DrawPlots(SS_Controll_Menu_Settings_PlotType:GetText());
           </OnClick>
         </Scripts>
       </Button>
@@ -183,11 +190,21 @@
           </OnClick>
         </Scripts>
       </Button>
+      <Frame name="SS_Plots_Container">
+        <Size><AbsDimension x="300" y="140"/></Size>
+        <Anchors>
+          <Anchor point="RIGHT" relativeTo="SS_Controll_Menu">
+          <Offset><AbsDimension x="0" y="0"/></Offset>
+          </Anchor>
+        </Anchors>
+      </Frame>
     </Frames>
   </Frame>
   <Frame name="SS_Create_Menu" parent = "UIParent" hidden="true" movable="true">
     <Scripts>
-      <OnLoad>self:RegisterForDrag("LeftButton");</OnLoad>
+      <OnLoad>
+        self:RegisterForDrag("LeftButton");
+      </OnLoad>
       <OnDragStart>self:StartMoving();</OnDragStart>
       <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
     </Scripts>
