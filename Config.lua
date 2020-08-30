@@ -1,5 +1,5 @@
 SS_loadConfiguration = function()
-  SS_PLAYER = SS_PLAYER or {
+  SS_User = SS_User or {
     plots = { },
     leadingPlots = { },
     settings = {

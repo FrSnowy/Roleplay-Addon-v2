@@ -1,7 +1,7 @@
 SS_createPlot = function(plotName, authorName)
   local plotUniqueName = plotName..'-'..random(1, 1000000)..'-'..random(1, 1000000)..'-'..random(1, 1000000);
 
-  SS_PLAYER.plots[plotUniqueName] = {
+  SS_User.plots[plotUniqueName] = {
     name = plotName,
     skills = {
       active = {
@@ -26,7 +26,7 @@ SS_createPlot = function(plotName, authorName)
     author = authorName,
   };
 
-  SS_PLAYER.leadingPlots[plotUniqueName] = {
+  SS_User.leadingPlots[plotUniqueName] = {
     name = plotName,
     players = { authorName }
   };

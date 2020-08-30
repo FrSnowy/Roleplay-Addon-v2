@@ -2,9 +2,10 @@
 ## Title: [2.0] Ролевая система от FriendSnowy
 ## Version: 2.0
 ## DefaultState: Enabled
-## SavedVariablesPerCharacter: SS_PLAYER
+## SavedVariablesPerCharacter: SS_User
 SnowySystem.xml
 PlayerInfo.lua
 PlotInfo.lua
 DrawElements.lua
+Shared.lua
 SnowySystem.lua

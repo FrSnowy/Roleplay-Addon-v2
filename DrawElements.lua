@@ -13,17 +13,16 @@ SS_DrawPlots = function(categoryName)
   end
 
   local counter = 0;
-  for index, plot in pairs(SS_PLAYER[plotType]) do
+  for index, plot in pairs(SS_User[plotType]) do
     local panelName = "OpenPlotPanel-"..plotType.."-"..index;
     local PlotPanel = CreateFrame("Button", panelName, SS_Plots_Container);
           PlotPanel:Show();
           PlotPanel:EnableMouse();
           PlotPanel:SetWidth(200);
           PlotPanel:SetHeight(16);
-          PlotPanel:SetToplevel(true);
           PlotPanel:SetBackdropColor(0, 0, 0, 1);
           PlotPanel:SetFrameStrata("FULLSCREEN_DIALOG");
-          PlotPanel:SetPoint("RIGHT", SS_Controll_Menu, "TOPRIGHT", -92, -80 - 32 * counter);
+          PlotPanel:SetPoint("RIGHT", SS_Controll_Menu, "TOPRIGHT", -92, -86 - 32 * counter);
           PlotPanel:SetNormalTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
           PlotPanel:SetHighlightTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
 
