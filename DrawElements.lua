@@ -31,6 +31,23 @@ SS_DrawPlots = function(categoryName)
             PlotName:SetText(plot.name);
             PlotName:Show();
 
+      PlotPanel:SetScript("OnClick", function()
+        
+      end);
+
       counter = counter + 1;
+  end;
+end;
+
+SS_HideEmptyPlotsText = function(plotType)
+  if (not(plotType == 'plots') and not(plotType == 'leadingPlots')) then
+    return 0;
+  end;
+
+  if (SS_getPlotsCount(plotType) == 0) then
+    SS_Controll_Menu_Settings_EmptyPlot:Show();
+    SS_Controll_Menu_Settings_EmptyPlot:SetText("Сюжетов не найдено");
+  else
+    SS_Controll_Menu_Settings_EmptyPlot:Hide();
   end;
 end;

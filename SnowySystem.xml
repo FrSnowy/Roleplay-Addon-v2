@@ -138,7 +138,7 @@
           </Anchors>
         </FontString>
         <FontString name="$parent_Settings_EmptyPlot" font="Fonts\FRIZQT__.TTF">
-          <Color r="0.9" g="0.9" b="0.9" a="1"/>
+          <Color r="0.6" g="0.6" b="0.6" a="1"/>
           <FontHeight val="12"/>
           <Anchors>
             <Anchor point="TOPRIGHT" relativeTo="$parent" x="-168" y="-76" />
@@ -173,33 +173,22 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnLoad>
-              if (SS_getPlotsCount('plots') == 0) then
-                SS_Controll_Menu_Settings_EmptyPlot:Show();
-                SS_Controll_Menu_Settings_EmptyPlot:SetText("Сюжетов не найдено");
-              else
-                SS_Controll_Menu_Settings_EmptyPlot:Hide();
-              end;
-          </OnLoad>
+          <OnShow>
+            if (SS_Controll_Menu_Settings_PlotType:GetText() == "Участник") then
+              SS_HideEmptyPlotsText('plots');
+            else
+              SS_HideEmptyPlotsText('leadingPlots');
+            end;
+          </OnShow>
           <OnClick>
             if (SS_Controll_Menu_Settings_PlotType:GetText() == "Участник") then
               SS_Controll_Menu_Settings_PlotType:SetText("Ведущий");
               SS_Controll_Menu_Settings_Create_New_Plot:Show();
-              if (SS_getPlotsCount('leadingPlots') == 0) then
-                SS_Controll_Menu_Settings_EmptyPlot:Show();
-                SS_Controll_Menu_Settings_EmptyPlot:SetText("Сюжетов не найдено");
-              else
-                SS_Controll_Menu_Settings_EmptyPlot:Hide();
-              end;
+              SS_HideEmptyPlotsText('leadingPlots');
             else
               SS_Controll_Menu_Settings_PlotType:SetText("Участник");
               SS_Controll_Menu_Settings_Create_New_Plot:Hide();
-              if (SS_getPlotsCount('plots') == 0) then
-                SS_Controll_Menu_Settings_EmptyPlot:Show();
-                SS_Controll_Menu_Settings_EmptyPlot:SetText("Сюжетов не найдено");
-              else
-                SS_Controll_Menu_Settings_EmptyPlot:Hide();
-              end;
+              SS_HideEmptyPlotsText('plots');
             end;
             SS_DrawPlots(SS_Controll_Menu_Settings_PlotType:GetText());
           </OnClick>
