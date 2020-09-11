@@ -31,7 +31,7 @@ SS_DrawPlots = function(categoryName)
             PlotName:SetText(plot.name);
             PlotName:Show();
 
-      if (not(SS_User.leadingPlots[index] == nil)) then
+      if (SS_User.leadingPlots[index]) then
         local PlotButton = CreateFrame("Button", nil, PlotPanel, "SecureHandlerClickTemplate");
               PlotButton:SetSize(16, 16);
               PlotButton:SetPoint("RIGHT", PlotPanel, "RIGHT", 0, 4);
@@ -39,12 +39,23 @@ SS_DrawPlots = function(categoryName)
               PlotButton:Show();
       end;
 
+      if (index == SS_User.settings.currentPlot) then
+        local PlotButton = CreateFrame("Button", nil, PlotPanel, "SecureHandlerClickTemplate");
+              PlotButton:SetSize(12, 12);
+              if (SS_User.leadingPlots[index]) then
+                PlotButton:SetPoint("RIGHT", PlotPanel, "RIGHT", -24, 4);
+              else
+                PlotButton:SetPoint("RIGHT", PlotPanel, "RIGHT", 0, 4);
+              end;
+              PlotButton:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\green-check.blp");
+              PlotButton:Show();
+      end;
 
       PlotPanel:SetScript("OnClick", function()
         SS_Controll_Menu:Hide();
-        SS_Player_Plot_Activate:Hide();
+        SS_Plot_Activate:Hide();
         SS_MakePlotSelected(index);
-        SS_Player_Plot_Activate:Show();
+        SS_Plot_Activate:Show();
       end);
 
       counter = counter + 1;
@@ -62,4 +73,12 @@ SS_HideEmptyPlotsText = function(plotType)
   else
     SS_Controll_Menu_Settings_EmptyPlot:Hide();
   end;
+end;
+
+SS_ResizePlayerMenuOnPlotActivate = function()
+  SS_Small_Menu:SetSize(84, 168);
+end;
+
+SS_ResizePlayerMenuOnPlotDeactivate = function()
+  SS_Small_Menu:SetSize(84, 84);
 end;

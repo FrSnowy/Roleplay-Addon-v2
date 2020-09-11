@@ -304,11 +304,20 @@
       </Button>
     </Frames>
   </Frame>
-  <Frame name="SS_Player_Plot_Activate" parent = "UIParent" hidden="true">
+  <Frame name="SS_Plot_Activate" parent = "UIParent" hidden="true">
     <Size><AbsDimension x="300" y="200"/></Size>
     <Scripts>
       <OnShow>
-        SS_Player_Plot_Activate_Name:SetText('"'..SS_GetPlotSummary("selected").name..'"');
+        SS_Plot_Activate_Name:SetText('"'..SS_GetPlotSummary("selected").name..'"');
+        if (SS_User.plots[SS_User.settings.selectedPlot] and SS_User.leadingPlots[SS_User.settings.selectedPlot]) then
+          SS_Plot_Activate_Role:SetText('Вы - игрок и ведущий сюжета');
+        else
+          if (SS_User.plots[SS_User.settings.selectedPlot]) then
+            SS_Plot_Activate_Role:SetText('Вы - участник сюжета');
+          elseif (SS_User.leadingPlots[SS_User.settings.selectedPlot]) then
+            SS_Plot_Activate_Role:SetText('Вы - ведущий сюжета');
+          end;
+        end;
       </OnShow>
     </Scripts>
     <Anchors>
@@ -331,7 +340,7 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="16"/>
           <Anchors>
-            <Anchor point="CENTER" relativeTo="$parent" x="0" y="30" />
+            <Anchor point="CENTER" relativeTo="$parent" x="0" y="50" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -342,7 +351,18 @@
           <Color r="1" g="0.6" b="0" a="1"/>
           <FontHeight val="20"/>
           <Anchors>
-            <Anchor point="CENTER" relativeTo="$parent" x="0" y="0" />
+            <Anchor point="CENTER" relativeTo="$parent" x="0" y="20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Role" font="Fonts\FRIZQT__.TTF" text="">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="CENTER" relativeTo="$parent" x="0" y="-10" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -364,6 +384,53 @@
             self:GetParent():Hide()
             SS_User.settings.selectedPlot = nil;
           </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Remove_Button" inherits="OptionsButtonTemplate" text="Удалить">
+        <Size x = "80" y = "30" />
+        <Anchors>
+          <Anchor point="BOTTOMLEFT">
+            <Offset x="20" y="20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
+              SS_User.settings.currentPlot = nil;
+            end;
+            SS_User.plots[SS_User.settings.selectedPlot] = nil;
+            SS_User.leadingPlots[SS_User.settings.selectedPlot] = nil;
+            SS_MakePlotSelected(nil);
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Activate_Button" inherits="OptionsButtonTemplate">
+        <Size x = "110" y = "30" />
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset x="-20" y="20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
+              SS_MakePlotCurrent(nil);
+              SS_ResizePlayerMenuOnPlotDeactivate();
+            else
+              SS_MakePlotCurrent(SS_User.settings.selectedPlot);
+              SS_ResizePlayerMenuOnPlotActivate();
+            end;
+            SS_MakePlotSelected(nil);
+            self:GetParent():Hide()
+          </OnClick>
+          <OnShow>
+            if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
+              SS_Plot_Activate_Activate_Button:SetText("Деактивировать");
+            else
+              SS_Plot_Activate_Activate_Button:SetText("Активировать");
+            end;
+          </OnShow>
         </Scripts>
       </Button>
     </Frames>
