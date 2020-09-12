@@ -12,12 +12,10 @@ SS_getPlotsCount = function(plotType)
 end;
 
 SS_MakePlotSelected = function(plotIndex)
-  SS_loadConfiguration();
   SS_User.settings.selectedPlot = plotIndex;
 end;
 
 SS_MakePlotCurrent = function(plotIndex)
-  SS_loadConfiguration();
   SS_User.settings.currentPlot = plotIndex;
 end;
 
@@ -26,7 +24,6 @@ SS_GetPlotSummary = function(plotType)
     return { };
   end;
  
-  SS_loadConfiguration();
   local plot = { };
 
   local lookFor = nil;
