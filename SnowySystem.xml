@@ -3,7 +3,7 @@
   <Include file="Shared.lua"/>
   <Include file="DrawElements.lua"/>
   <Include file="Config.lua"/>
-  <Frame name="SS_Small_Menu" parent="UIParent" enableMouse="true">
+  <Frame name="SS_Player_Menu" parent="UIParent" enableMouse="true">
     <Scripts>
       <OnLoad>
         SS_ApplicationLoad();
@@ -35,16 +35,78 @@
       </EdgeSize>
     </Backdrop>
     <Frames>
-      <Button name="$parent_SettingsIcon" text="Close">
+      <Button name="$parent_StatsIcon">
         <Scripts>
           <OnEnter>
-            SS_Small_Menu:SetPoint("LEFT", -12, 0);
+            SS_Player_Menu:SetPoint("LEFT", -12, 0);
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Характеристики")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            SS_Player_Menu:SetPoint("LEFT", -64, 0);
+            GameTooltip:Hide()
+          </OnLeave>
+          <OnClick>
+            if (SS_Controll_Menu:IsVisible()) then
+              SS_Controll_Menu:Hide();
+            else
+              SS_Controll_Menu:Show();
+            end;
+          </OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOP">
+            <Offset>
+              <AbsDimension x="0" y="-20"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Size>
+          <AbsDimension x="32" y="32" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\stats.blp" />
+        <HighlightTexture file = "Interface\AddOns\SnowySystem\IMG\stats.blp" />
+      </Button>
+      <Button name="$parent_SkillsIcon">
+        <Scripts>
+          <OnEnter>
+            SS_Player_Menu:SetPoint("LEFT", -12, 0);
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Навыки")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            SS_Player_Menu:SetPoint("LEFT", -64, 0);
+            GameTooltip:Hide()
+          </OnLeave>
+          <OnClick>
+            if (SS_Controll_Menu:IsVisible()) then
+              SS_Controll_Menu:Hide();
+            else
+              SS_Controll_Menu:Show();
+            end;
+          </OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="CENTER" />
+        </Anchors>
+        <Size>
+          <AbsDimension x="32" y="32" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\skills.blp" />
+        <HighlightTexture file = "Interface\AddOns\SnowySystem\IMG\skills.blp" />
+      </Button>
+      <Button name="$parent_SettingsIcon">
+        <Scripts>
+          <OnEnter>
+            SS_Player_Menu:SetPoint("LEFT", -12, 0);
             GameTooltip:SetOwner(this, "CENTER")
             GameTooltip:AddLine("Управление")
             GameTooltip:Show()
           </OnEnter>
           <OnLeave>
-            SS_Small_Menu:SetPoint("LEFT", -64, 0);
+            SS_Player_Menu:SetPoint("LEFT", -64, 0);
             GameTooltip:Hide()
           </OnLeave>
           <OnClick>
@@ -74,7 +136,7 @@
     </Scripts>
     <Size><AbsDimension x="500" y="250"/></Size>
     <Anchors>
-      <Anchor point="LEFT" relativeTo="SS_Small_Menu">
+      <Anchor point="LEFT" relativeTo="SS_Player_Menu">
       <Offset><AbsDimension x="57" y="0"/></Offset>
       </Anchor>
     </Anchors>

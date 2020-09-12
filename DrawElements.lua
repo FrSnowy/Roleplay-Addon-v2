@@ -49,6 +49,8 @@ SS_DrawPlots = function(categoryName)
               end;
               PlotButton:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\green-check.blp");
               PlotButton:Show();
+
+        PlotName:SetTextColor(0.901, 0.494, 0.133, 1)
       end;
 
       PlotPanel:SetScript("OnClick", function()
@@ -76,9 +78,13 @@ SS_HideEmptyPlotsText = function(plotType)
 end;
 
 SS_ResizePlayerMenuOnPlotActivate = function()
-  SS_Small_Menu:SetSize(84, 168);
+  SS_Player_Menu:SetSize(84, 168);
+  SS_Player_Menu_StatsIcon:Show();
+  SS_Player_Menu_SkillsIcon:Show();
 end;
 
 SS_ResizePlayerMenuOnPlotDeactivate = function()
-  SS_Small_Menu:SetSize(84, 84);
+  SS_Player_Menu:SetSize(84, 84);
+  SS_Player_Menu_StatsIcon:Hide();
+  SS_Player_Menu_SkillsIcon:Hide();
 end;
