@@ -92,3 +92,8 @@ SS_ResizePlayerMenuOnPlotDeactivate = function()
   SS_Player_Menu_SettingsIcon:ClearAllPoints()
   SS_Player_Menu_SettingsIcon:SetPoint("CENTER", SS_Player_Menu, "CENTER", 0, 0);
 end;
+
+SS_HideAllSubmenus = function()
+  SS_Stats_Menu:Hide();
+  SS_Controll_Menu:Hide();
+end;

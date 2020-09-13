@@ -60,10 +60,11 @@
             GameTooltip:Hide()
           </OnLeave>
           <OnClick>
-            if (SS_Controll_Menu:IsVisible()) then
-              SS_Controll_Menu:Hide();
+            if (SS_Stats_Menu:IsVisible()) then
+              SS_Stats_Menu:Hide();
             else
-              SS_Controll_Menu:Show();
+              SS_HideAllSubmenus();
+              SS_Stats_Menu:Show();
             end;
           </OnClick>
         </Scripts>
@@ -96,6 +97,7 @@
             if (SS_Controll_Menu:IsVisible()) then
               SS_Controll_Menu:Hide();
             else
+              SS_HideAllSubmenus();
               SS_Controll_Menu:Show();
             end;
           </OnClick>
@@ -125,6 +127,7 @@
             if (SS_Controll_Menu:IsVisible()) then
               SS_Controll_Menu:Hide();
             else
+              SS_HideAllSubmenus();
               SS_Controll_Menu:Show();
             end;
           </OnClick>
@@ -290,6 +293,25 @@
         </Anchors>
       </Frame>
     </Frames>
+  </Frame>
+  <Frame name="SS_Stats_Menu" hidden="true">
+    <Size><AbsDimension x="300" y="300"/></Size>
+    <Anchors>
+      <Anchor point="LEFT" relativeTo="SS_Player_Menu">
+      <Offset><AbsDimension x="57" y="0"/></Offset>
+      </Anchor>
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="32"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
   </Frame>
   <Frame name="SS_Create_Menu" parent = "UIParent" hidden="true">
     <Size><AbsDimension x="300" y="164"/></Size>
