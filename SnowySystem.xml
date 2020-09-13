@@ -79,7 +79,6 @@
           <AbsDimension x="32" y="32" />
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\stats.blp" />
-        <HighlightTexture file = "Interface\AddOns\SnowySystem\IMG\stats.blp" />
       </Button>
       <Button name="$parent_SkillsIcon">
         <Scripts>
@@ -109,7 +108,6 @@
           <AbsDimension x="32" y="32" />
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\skills.blp" />
-        <HighlightTexture file = "Interface\AddOns\SnowySystem\IMG\skills.blp" />
       </Button>
       <Button name="$parent_SettingsIcon">
         <Scripts>
@@ -139,7 +137,6 @@
           <AbsDimension x="32" y="32" />
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\settings_normal" />
-        <HighlightTexture file = "Interface\AddOns\SnowySystem\IMG\settings_hover" />
       </Button>
     </Frames>
   </Frame>
@@ -170,25 +167,25 @@
       <Layer>
         <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Управление">
           <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="14"/>
+          <FontHeight val="12"/>
           <Anchors>
-            <Anchor point="TOP" relativeTo="$parent" x="0" y="-20" />
+            <Anchor point="TOP" x="0" y="-20" />
           </Anchors>
         </FontString>
       </Layer>
       <Layer>
         <FontString name="$parent_SettingsTitle" font="Fonts\FRIZQT__.TTF" text="Настройки">
           <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
+          <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" relativeTo="$parent" x="20" y="-48" />
+            <Anchor point="TOPLEFT" x="20" y="-48" />
           </Anchors>
         </FontString>
         <FontString name="$parent_PlotsTitle" font="Fonts\FRIZQT__.TTF" text="Сюжеты">
           <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
+          <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOP" relativeTo="$parent" x="-18" y="-48" />
+            <Anchor point="TOP" x="-14" y="-48" />
           </Anchors>
         </FontString>
       </Layer>
@@ -197,28 +194,28 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" relativeTo="$parent" x="40" y="-76" />
+            <Anchor point="TOPLEFT" x="40" y="-76" />
           </Anchors>
         </FontString>
         <FontString name="$parent_Settings_Invites" font="Fonts\FRIZQT__.TTF" text="Принимать приглашения">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" relativeTo="$parent" x="40" y="-106" />
+            <Anchor point="TOPLEFT" x="40" y="-106" />
           </Anchors>
         </FontString>
         <FontString name="$parent_Settings_PlotType" font="Fonts\FRIZQT__.TTF" text="Участник">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPRIGHT" relativeTo="$parent" x="-50" y="-48" />
+            <Anchor point="TOPRIGHT" x="-50" y="-48" />
           </Anchors>
         </FontString>
         <FontString name="$parent_Settings_EmptyPlot" font="Fonts\FRIZQT__.TTF">
           <Color r="0.6" g="0.6" b="0.6" a="1"/>
-          <FontHeight val="12"/>
+          <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPRIGHT" relativeTo="$parent" x="-168" y="-76" />
+            <Anchor point="TOPRIGHT" x="-168" y="-76" />
           </Anchors>
         </FontString>
       </Layer>
@@ -295,7 +292,7 @@
     </Frames>
   </Frame>
   <Frame name="SS_Stats_Menu" hidden="true">
-    <Size><AbsDimension x="300" y="300"/></Size>
+    <Size><AbsDimension x="200" y="215"/></Size>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Player_Menu">
       <Offset><AbsDimension x="57" y="0"/></Offset>
@@ -312,6 +309,423 @@
         <AbsValue val="32"/>
       </EdgeSize>
     </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Характеристики">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString name="$parent_Stat_Power_Name" font="Fonts\FRIZQT__.TTF" text="Мощь:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Vigilance_Name" font="Fonts\FRIZQT__.TTF" text="Зоркость:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-70" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Wisdom_Name" font="Fonts\FRIZQT__.TTF" text="Мудрость:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-95" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Reaction_Name" font="Fonts\FRIZQT__.TTF" text="Реакция:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-120" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Empathy_Name" font="Fonts\FRIZQT__.TTF" text="Эмпатия:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-145" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Stamina_Name" font="Fonts\FRIZQT__.TTF" text="Стойкость:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-170" />
+          </Anchors>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString name="$parent_Stat_Power_Value" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="57" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Vigilance_Value" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="75" y="-70" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Wisdom_Value" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="77" y="-95" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Reaction_Value" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="70" y="-120" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Empathy_Value" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="70" y="-145" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Stamina_Value" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="79" y="-170" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_Stat_Power_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-43"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Power_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-43"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Power_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-43"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Power_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-43"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Vigilance_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-68"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Vigilance_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-68"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Vigilance_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-68"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Vigilance_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-68"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Wisdom_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-93"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Wisdom_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-93"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Wisdom_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-93"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Wisdom_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-93"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Reaction_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Reaction_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Reaction_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Reaction_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Empathy_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-143"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Empathy_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-143"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Empathy_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-143"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Empathy_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-143"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Stamina_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-168"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Stamina_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-168"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Stamina_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-168"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Stamina_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-168"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
   </Frame>
   <Frame name="SS_Create_Menu" parent = "UIParent" hidden="true">
     <Size><AbsDimension x="300" y="164"/></Size>
@@ -335,7 +749,7 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="14"/>
           <Anchors>
-            <Anchor point="TOP" relativeTo="$parent" x="0" y="-20" />
+            <Anchor point="TOP" x="0" y="-20" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -346,7 +760,7 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="LEFT" relativeTo="$parent" x="52" y="36" />
+            <Anchor point="LEFT" x="52" y="36" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -436,7 +850,7 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="16"/>
           <Anchors>
-            <Anchor point="CENTER" relativeTo="$parent" x="0" y="50" />
+            <Anchor point="CENTER" x="0" y="50" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -447,7 +861,7 @@
           <Color r="1" g="0.6" b="0" a="1"/>
           <FontHeight val="20"/>
           <Anchors>
-            <Anchor point="CENTER" relativeTo="$parent" x="0" y="20" />
+            <Anchor point="CENTER" x="0" y="20" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -458,7 +872,7 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="14"/>
           <Anchors>
-            <Anchor point="CENTER" relativeTo="$parent" x="0" y="-10" />
+            <Anchor point="CENTER" x="0" y="-10" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />

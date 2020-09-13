@@ -22,13 +22,14 @@ SS_DrawPlots = function(categoryName)
           PlotPanel:SetWidth(200);
           PlotPanel:SetHeight(16);
           PlotPanel:SetBackdropColor(0, 0, 0, 1);
-          PlotPanel:SetPoint("RIGHT", SS_Controll_Menu, "TOPRIGHT", -92, -86 - 32 * counter);
+          PlotPanel:SetPoint("RIGHT", SS_Controll_Menu, "TOPRIGHT", -85, -82 - 30 * counter);
           PlotPanel:SetNormalTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
           PlotPanel:SetHighlightTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
 
       local PlotName = PlotPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
             PlotName:SetPoint("LEFT", PlotPanel, "LEFT", 0, 4);
             PlotName:SetText(plot.name);
+            PlotName:SetFont("Fonts\\FRIZQT__.TTF", 11);
             PlotName:Show();
 
       if (SS_User.leadingPlots[index]) then
