@@ -215,7 +215,7 @@
           <Color r="0.6" g="0.6" b="0.6" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPRIGHT" x="-168" y="-76" />
+            <Anchor point="TOPRIGHT" x="-174" y="-76" />
           </Anchors>
         </FontString>
       </Layer>
@@ -292,6 +292,16 @@
     </Frames>
   </Frame>
   <Frame name="SS_Stats_Menu" hidden="true">
+    <Scripts>
+      <OnShow>
+        SS_Stats_Menu_Stat_Power_Value:SetText(SS_User.plots[SS_User.settings.currentPlot].stats.power);
+        SS_Stats_Menu_Stat_Vigilance_Value:SetText(SS_User.plots[SS_User.settings.currentPlot].stats.vigilance);
+        SS_Stats_Menu_Stat_Wisdom_Value:SetText(SS_User.plots[SS_User.settings.currentPlot].stats.wisdom);
+        SS_Stats_Menu_Stat_Reaction_Value:SetText(SS_User.plots[SS_User.settings.currentPlot].stats.reaction);
+        SS_Stats_Menu_Stat_Empathy_Value:SetText(SS_User.plots[SS_User.settings.currentPlot].stats.empathy);
+        SS_Stats_Menu_Stat_Stamina_Value:SetText(SS_User.plots[SS_User.settings.currentPlot].stats.stamina);
+      </OnShow>
+    </Scripts>
     <Size><AbsDimension x="200" y="215"/></Size>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Player_Menu">
@@ -422,7 +432,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -435,7 +445,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-1, 'power', SS_Stats_Menu_Stat_Power_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -448,7 +458,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-SS_User.plots[SS_User.settings.currentPlot].stats.power, 'power', SS_Stats_Menu_Stat_Power_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -474,7 +484,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(1, 'vigilance', SS_Stats_Menu_Stat_Vigilance_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -487,7 +497,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-1, 'vigilance', SS_Stats_Menu_Stat_Vigilance_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -500,7 +510,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-SS_User.plots[SS_User.settings.currentPlot].stats.vigilance, 'vigilance', SS_Stats_Menu_Stat_Vigilance_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -526,7 +536,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(1, 'wisdom', SS_Stats_Menu_Stat_Wisdom_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -539,7 +549,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-1, 'wisdom', SS_Stats_Menu_Stat_Wisdom_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -552,7 +562,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-SS_User.plots[SS_User.settings.currentPlot].stats.wisdom, 'wisdom', SS_Stats_Menu_Stat_Wisdom_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -578,7 +588,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(1, 'reaction', SS_Stats_Menu_Stat_Reaction_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -591,7 +601,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-1, 'reaction', SS_Stats_Menu_Stat_Reaction_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -604,7 +614,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-SS_User.plots[SS_User.settings.currentPlot].stats.reaction, 'reaction', SS_Stats_Menu_Stat_Reaction_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -630,7 +640,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(1, 'empathy', SS_Stats_Menu_Stat_Empathy_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -643,7 +653,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-1, 'empathy', SS_Stats_Menu_Stat_Empathy_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -656,7 +666,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-SS_User.plots[SS_User.settings.currentPlot].stats.empathy, 'empathy', SS_Stats_Menu_Stat_Empathy_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -682,7 +692,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(1, 'stamina', SS_Stats_Menu_Stat_Stamina_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -695,7 +705,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-1, 'stamina', SS_Stats_Menu_Stat_Stamina_Value);
           </OnClick>
         </Scripts>
       </Button>
@@ -708,7 +718,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            self:GetParent():Hide()
+            SS_PointToStat(-SS_User.plots[SS_User.settings.currentPlot].stats.stamina, 'stamina', SS_Stats_Menu_Stat_Stamina_Value);
           </OnClick>
         </Scripts>
       </Button>

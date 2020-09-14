@@ -23,6 +23,14 @@ SS_createPlot = function(plotName, authorName)
         athletics = 0,
       }
     },
+    stats = {
+      power = 0,
+      vigilance = 0,
+      wisdom = 0,
+      reaction = 0,
+      empathy = 0,
+      stamina = 0,
+    },
     author = authorName,
   };
 
