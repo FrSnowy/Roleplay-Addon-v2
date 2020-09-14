@@ -101,7 +101,7 @@ end;
 
 SS_UpdatePlayerFrameOnPlotActivate = function()
   --https://www.wowinterface.com/forums/showthread.php?t=48319
-  PlayerLevelText:SetTextColor(0.15,0.8,1);
+  PlayerLevelText:SetTextColor(0.25,0.75,1);
   PlayerLevelText:SetText(1);
 end;
 
