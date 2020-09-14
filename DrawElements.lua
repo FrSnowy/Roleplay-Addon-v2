@@ -98,3 +98,14 @@ SS_HideAllSubmenus = function()
   SS_Stats_Menu:Hide();
   SS_Controll_Menu:Hide();
 end;
+
+SS_UpdatePlayerFrameOnPlotActivate = function()
+  --https://www.wowinterface.com/forums/showthread.php?t=48319
+  PlayerLevelText:SetTextColor(0.15,0.8,1);
+  PlayerLevelText:SetText(1);
+end;
+
+SS_UpdatePlayerFrameOnPlotDeactivate = function()
+  PlayerLevelText:SetText(UnitLevel("player"));
+  PlayerLevelText:SetTextColor(0.82, 0.71, 0);
+end;

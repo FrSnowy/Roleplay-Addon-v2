@@ -6,15 +6,17 @@
   <Frame name="SS_Player_Menu" parent="UIParent" enableMouse="true">
     <Scripts>
       <OnLoad>
-        self:RegisterEvent("ADDON_LOADED");
+        self:RegisterEvent("PLAYER_ENTERING_WORLD");
       </OnLoad>
 			<OnEvent>
-        if(event == "ADDON_LOADED") then
+        if(event == "PLAYER_ENTERING_WORLD") then
           SS_ApplicationLoad();
           if (SS_User.settings.currentPlot) then
             SS_ResizePlayerMenuOnPlotActivate();
+            SS_UpdatePlayerFrameOnPlotActivate();
           else
             SS_ResizePlayerMenuOnPlotDeactivate();
+            SS_UpdatePlayerFrameOnPlotDeactivate();
           end;
         end;
       </OnEvent>
@@ -937,9 +939,11 @@
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
               SS_MakePlotCurrent(nil);
               SS_ResizePlayerMenuOnPlotDeactivate();
+              SS_UpdatePlayerFrameOnPlotDeactivate();
             else
               SS_MakePlotCurrent(SS_User.settings.selectedPlot);
               SS_ResizePlayerMenuOnPlotActivate();
+              SS_UpdatePlayerFrameOnPlotActivate();
             end;
             SS_MakePlotSelected(nil);
             self:GetParent():Hide()
