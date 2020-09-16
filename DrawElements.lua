@@ -102,12 +102,14 @@ end;
 SS_UpdatePlayerFrameOnPlotActivate = function()
   --https://www.wowinterface.com/forums/showthread.php?t=48319
   PlayerLevelText:SetTextColor(0.25,0.75,1);
-  PlayerLevelText:SetText(20);
+  PlayerLevelText:SetText(SS_GetPlayerLevel());
   PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 11);
+  SS_Exp_Bar:Show();
 end;
 
 SS_UpdatePlayerFrameOnPlotDeactivate = function()
   PlayerLevelText:SetText(UnitLevel("player"));
   PlayerLevelText:SetTextColor(0.82, 0.71, 0);
   PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 10);
+  SS_Exp_Bar:Hide();
 end;

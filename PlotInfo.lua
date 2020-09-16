@@ -31,6 +31,8 @@ SS_createPlot = function(plotName, authorName)
       empathy = 0,
       stamina = 0,
     },
+    level = 1,
+    experience = 0,
     author = authorName,
   };
 
