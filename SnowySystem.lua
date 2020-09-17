@@ -31,8 +31,14 @@ function SS_GetStatValue(stat)
   end;
 end;
 
+function SS_GetSkillValue(skill)
+  if (SS_User.settings.currentPlot) then
+    return SS_User.plots[SS_User.settings.currentPlot].skills[skill];
+  end;
+end;
+
 function SS_GetSummaryStatsValue()
-  return SS_GetStatValue('power') + SS_GetStatValue('vigilance') + SS_GetStatValue('wisdom') + SS_GetStatValue('reaction') + SS_GetStatValue('empathy') + SS_GetStatValue('stamina');
+  return SS_GetStatValue('power') + SS_GetStatValue('accuracy') + SS_GetStatValue('mobility') + SS_GetStatValue('wisdom')  + SS_GetStatValue('empathy') + SS_GetStatValue('morale');
 end;
 
 function SS_GetMaxStatPoints(playerLevel)
@@ -64,4 +70,9 @@ function SS_PointToStat(value, stat, statView)
   SS_User.plots[SS_User.settings.currentPlot].stats[stat] = SS_GetStatValue(stat) + value;
   statView:SetText(SS_GetStatValue(stat));
   SS_Stats_Menu_Points_Value:SetText(SS_GetAvailableStatPoints());
+end;
+
+function SS_PointToSkill(value, skill, skillView)
+  SS_User.plots[SS_User.settings.currentPlot].skills[skill] = SS_GetSkillValue(skill) + value;
+  skillView:SetText(SS_GetSkillValue(skill));
 end;
