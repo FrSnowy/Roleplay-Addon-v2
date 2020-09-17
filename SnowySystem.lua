@@ -10,6 +10,21 @@ function SS_GetPlayerLevel()
   return 0;
 end;
 
+function SS_GetPlayerExperience()
+  if (SS_User.settings.currentPlot) then
+    return SS_User.plots[SS_User.settings.currentPlot].experience;
+  end;
+
+  return 0;
+end;
+
+function SS_GetExperienceForLevelUp()
+  local levelWithPow = math.floor(math.pow(SS_GetPlayerLevel(), 1.566));
+  local experienceForEvent = 100;
+
+  return levelWithPow * experienceForEvent;
+end;
+
 function SS_GetStatValue(stat)
   if (SS_User.settings.currentPlot) then
     return SS_User.plots[SS_User.settings.currentPlot].stats[stat];

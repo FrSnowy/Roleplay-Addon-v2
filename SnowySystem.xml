@@ -489,9 +489,15 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Мощь")
+            GameTooltip:AddLine("Облегчает проверки ближнего боя и атлетики")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Vigilance_Add" inherits="OptionsButtonTemplate" text="+">
@@ -541,9 +547,15 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Зоркость")
+            GameTooltip:AddLine("Облегчает проверки дальнего боя и внимательности")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Wisdom_Add" inherits="OptionsButtonTemplate" text="+">
@@ -593,9 +605,15 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Мудрость")
+            GameTooltip:AddLine("Облегчает проверки чародейства и знания")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Reaction_Add" inherits="OptionsButtonTemplate" text="+">
@@ -645,9 +663,15 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Реакция")
+            GameTooltip:AddLine("Облегчает проверки ловкости рук, акробатики и скрытности")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Empathy_Add" inherits="OptionsButtonTemplate" text="+">
@@ -697,9 +721,15 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Эмпатия")
+            GameTooltip:AddLine("Облегчает проверки религии и выступления")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Stamina_Add" inherits="OptionsButtonTemplate" text="+">
@@ -749,9 +779,15 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Стойкость")
+            GameTooltip:AddLine("Увеличивает максимальное ОЗ, облегчает проверки самоконтроля")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
         </Scripts>
       </Button>
     </Frames>
@@ -980,12 +1016,13 @@
     <Scripts>
       <OnShow>
         SS_Exp_Bar:SetWidth(MainMenuExpBar:GetWidth() + 20);
+        SS_DrawExprienceProgress();
       </OnShow>
     </Scripts>
     <Size><AbsDimension x="300" y="30"/></Size>
     <Anchors>
       <Anchor point="BOTTOMLEFT" relativeTo = "MainMenuExpBar">
-        <Offset><AbsDimension x="-10" y="-15"/></Offset>
+        <Offset><AbsDimension x="-10" y="-13"/></Offset>
       </Anchor>
     </Anchors>
     <Layers>
@@ -994,15 +1031,23 @@
           <Color a="0.5" r="0" g="0" b="0" />
         </Texture>
       </Layer>
+      <Layer>
+        <FontString name="$parent_Experience" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="10"/>
+          <Anchors>
+            <Anchor point="CENTER" x="0" y="7" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
     </Layers>
     <Frames>
       <Frame name="SS_Exp_Bar_Progress" parent = "$parent">
-        <Scripts>
-          <OnShow>
-            SS_Exp_Bar_Progress:SetWidth((MainMenuExpBar:GetWidth() - 180) * 0);
-          </OnShow>
-        </Scripts>
-        <Size><AbsDimension x="0" y="15"/></Size>
+        <Size><AbsDimension x="0" y="17"/></Size>
         <Anchors>
           <Anchor point="BOTTOMLEFT" relativeTo = "MainMenuExpBar">
             <Offset><AbsDimension x="-10" y="-5"/></Offset>

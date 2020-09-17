@@ -78,6 +78,13 @@ SS_HideEmptyPlotsText = function(plotType)
   end;
 end;
 
+SS_DrawExprienceProgress = function()
+  local fullWidth = MainMenuExpBar:GetWidth() - 180;
+  local progress = (SS_GetPlayerExperience() / SS_GetExperienceForLevelUp())
+  SS_Exp_Bar_Progress:SetWidth(fullWidth * progress);
+  SS_Exp_Bar_Experience:SetText(SS_GetPlayerExperience().."/"..SS_GetExperienceForLevelUp());
+end;
+
 SS_ResizePlayerMenuOnPlotActivate = function()
   SS_Player_Menu:SetSize(84, 168);
   SS_Player_Menu_StatsIcon:Show();
@@ -101,10 +108,11 @@ end;
 
 SS_UpdatePlayerFrameOnPlotActivate = function()
   --https://www.wowinterface.com/forums/showthread.php?t=48319
-  PlayerLevelText:SetTextColor(0.25,0.75,1);
+  PlayerLevelText:SetTextColor(1, 1, 1);
   PlayerLevelText:SetText(SS_GetPlayerLevel());
   PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 11);
   SS_Exp_Bar:Show();
+  SS_DrawExprienceProgress();
 end;
 
 SS_UpdatePlayerFrameOnPlotDeactivate = function()
