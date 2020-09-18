@@ -381,42 +381,42 @@
         </FontString>
       </Layer>
       <Layer>
-        <FontString name="$parent_Stat_Power_Value" font="Fonts\FRIZQT__.TTF" text="0">
+        <FontString name="$parent_Stat_Power_Value" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="57" y="-45" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Accuracy_Value" font="Fonts\FRIZQT__.TTF" text="0">
+        <FontString name="$parent_Stat_Accuracy_Value" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="73" y="-70" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Mobility_Value" font="Fonts\FRIZQT__.TTF" text="0">
+        <FontString name="$parent_Stat_Mobility_Value" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="70" y="-95" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Wisdom_Value" font="Fonts\FRIZQT__.TTF" text="0">
+        <FontString name="$parent_Stat_Wisdom_Value" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="77" y="-120" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Empathy_Value" font="Fonts\FRIZQT__.TTF" text="0">
+        <FontString name="$parent_Stat_Empathy_Value" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="70" y="-145" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Morale_Value" font="Fonts\FRIZQT__.TTF" text="0">
+        <FontString name="$parent_Stat_Morale_Value" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -902,42 +902,42 @@
             </FontString>
           </Layer>
           <Layer>
-            <FontString name="$parent_Skill_Melee_Value" font="Fonts\FRIZQT__.TTF" text="0">
+            <FontString name="$parent_Skill_Melee_Value" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
                 <Anchor point="TOPLEFT" x="88" y="-45" />
               </Anchors>
             </FontString>
-            <FontString name="$parent_Skill_Range_Value" font="Fonts\FRIZQT__.TTF" text="0">
+            <FontString name="$parent_Skill_Range_Value" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
                 <Anchor point="TOPLEFT" x="94" y="-70" />
               </Anchors>
             </FontString>
-            <FontString name="$parent_Skill_Magic_Value" font="Fonts\FRIZQT__.TTF" text="0">
+            <FontString name="$parent_Skill_Magic_Value" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
                 <Anchor point="TOPLEFT" x="96" y="-95" />
               </Anchors>
             </FontString>
-            <FontString name="$parent_Skill_Religion_Value" font="Fonts\FRIZQT__.TTF" text="0">
+            <FontString name="$parent_Skill_Religion_Value" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
                 <Anchor point="TOPLEFT" x="53" y="-120" />
               </Anchors>
             </FontString>
-            <FontString name="$parent_Skill_Perfomance_Value" font="Fonts\FRIZQT__.TTF" text="0">
+            <FontString name="$parent_Skill_Perfomance_Value" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
                 <Anchor point="TOPLEFT" x="94" y="-145" />
               </Anchors>
             </FontString>
-            <FontString name="$parent_Skill_Hands_Value" font="Fonts\FRIZQT__.TTF" text="0">
+            <FontString name="$parent_Skill_Hands_Value" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
@@ -1317,6 +1317,16 @@
         </Frames>
       </Frame>
       <Frame name="$parent_Passive">
+        <Scripts>
+          <OnShow>
+            SS_Skills_Menu_Passive_Skill_Stealth_Value:SetText(SS_GetSkillValue('stealth'));
+            SS_Skills_Menu_Passive_Skill_Observation_Value:SetText(SS_GetSkillValue('observation'));
+            SS_Skills_Menu_Passive_Skill_Controll_Value:SetText(SS_GetSkillValue('controll'));
+            SS_Skills_Menu_Passive_Skill_Knowledge_Value:SetText(SS_GetSkillValue('knowledge'));
+            SS_Skills_Menu_Passive_Skill_Athletics_Value:SetText(SS_GetSkillValue('athletics'));
+            SS_Skills_Menu_Passive_Skill_Acrobats_Value:SetText(SS_GetSkillValue('acrobats'));
+          </OnShow>
+        </Scripts>
         <Size><AbsDimension x="205" y="210"/></Size>
         <Anchors>
           <Anchor point="TOPRIGHT">
@@ -1342,46 +1352,459 @@
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-45" />
+                <Anchor point="TOPLEFT" x="16" y="-45" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Skill_Observation_Name" font="Fonts\FRIZQT__.TTF" text="Суждение:">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-70" />
+                <Anchor point="TOPLEFT" x="16" y="-70" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Skill_Controll_Name" font="Fonts\FRIZQT__.TTF" text="Самоконтроль:">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-95" />
+                <Anchor point="TOPLEFT" x="16" y="-95" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Skill_Knowledge_Name" font="Fonts\FRIZQT__.TTF" text="Знание:">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-120" />
+                <Anchor point="TOPLEFT" x="16" y="-120" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Skill_Athletics_Name" font="Fonts\FRIZQT__.TTF" text="Атлетика:">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-145" />
+                <Anchor point="TOPLEFT" x="16" y="-145" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Skill_Acrobats_Name" font="Fonts\FRIZQT__.TTF" text="Акробатика:">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-170" />
+                <Anchor point="TOPLEFT" x="16" y="-170" />
+              </Anchors>
+            </FontString>
+          </Layer>
+          <Layer>
+            <FontString name="$parent_Skill_Stealth_Value" font="Fonts\FRIZQT__.TTF">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="11"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="84" y="-45" />
+              </Anchors>
+            </FontString>
+            <FontString name="$parent_Skill_Observation_Value" font="Fonts\FRIZQT__.TTF">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="11"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="76" y="-70" />
+              </Anchors>
+            </FontString>
+            <FontString name="$parent_Skill_Controll_Value" font="Fonts\FRIZQT__.TTF">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="11"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="98" y="-95" />
+              </Anchors>
+            </FontString>
+            <FontString name="$parent_Skill_Knowledge_Value" font="Fonts\FRIZQT__.TTF">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="11"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="60" y="-120" />
+              </Anchors>
+            </FontString>
+            <FontString name="$parent_Skill_Athletics_Value" font="Fonts\FRIZQT__.TTF">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="11"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="68" y="-145" />
+              </Anchors>
+            </FontString>
+            <FontString name="$parent_Skill_Acrobats_Value" font="Fonts\FRIZQT__.TTF">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="11"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="84" y="-170" />
               </Anchors>
             </FontString>
           </Layer>
         </Layers>
+        <Frames>
+          <Button name="$parent_Skill_Stealth_Add" inherits="OptionsButtonTemplate" text="+">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-68" y="-41"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Stealth_Reduce" inherits="OptionsButtonTemplate" text="-">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-52" y="-41"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Stealth_Reset" inherits="OptionsButtonTemplate" text="x">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-36" y="-41"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-SS_GetSkillValue('stealth'), 'stealth', SS_Skills_Menu_Passive_Skill_Stealth_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Stealth_Info" inherits="OptionsButtonTemplate" text="?">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-41"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "BOTTOM")
+                GameTooltip:AddLine("Ближний бой")
+                GameTooltip:AddLine("Применяется для всех атак, проводимых в ближнем бою.")
+                GameTooltip:AddLine("-----------")
+                GameTooltip:AddLine("Пример: Ударить дубиной")
+                GameTooltip:AddLine("Бонус: Мощь")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Observation_Add" inherits="OptionsButtonTemplate" text="+">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-68" y="-66"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(1, 'observation', SS_Skills_Menu_Passive_Skill_Observation_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Observation_Reduce" inherits="OptionsButtonTemplate" text="-">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-52" y="-66"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-1, 'observation', SS_Skills_Menu_Passive_Skill_Observation_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Observation_Reset" inherits="OptionsButtonTemplate" text="x">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-36" y="-66"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-SS_GetSkillValue('observation'), 'observation', SS_Skills_Menu_Passive_Skill_Observation_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Observation_Info" inherits="OptionsButtonTemplate" text="?">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-66"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "BOTTOM")
+                GameTooltip:AddLine("Дальний бой")
+                GameTooltip:AddLine("Применяется для всех атак, проводимых в дальнем бою.")
+                GameTooltip:AddLine("-----------")
+                GameTooltip:AddLine("Пример: Выстрелить из лука")
+                GameTooltip:AddLine("Бонус: Точность")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Controll_Add" inherits="OptionsButtonTemplate" text="+">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-68" y="-91"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(1, 'controll', SS_Skills_Menu_Passive_Skill_Controll_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Controll_Reduce" inherits="OptionsButtonTemplate" text="-">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-52" y="-91"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-1, 'controll', SS_Skills_Menu_Passive_Skill_Controll_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Controll_Reset" inherits="OptionsButtonTemplate" text="x">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-36" y="-91"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-SS_GetSkillValue('controll'), 'controll', SS_Skills_Menu_Passive_Skill_Controll_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Controll_Info" inherits="OptionsButtonTemplate" text="?">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-91"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "BOTTOM")
+                GameTooltip:AddLine("Чародейство")
+                GameTooltip:AddLine("Применяется для атак с использованием магии.")
+                GameTooltip:AddLine("-----------")
+                GameTooltip:AddLine("Пример: Заклинания чернокнижников, магов")
+                GameTooltip:AddLine("Бонус: Мудрость")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Knowledge_Add" inherits="OptionsButtonTemplate" text="+">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-68" y="-116"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Knowledge_Reduce" inherits="OptionsButtonTemplate" text="-">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-52" y="-116"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Knowledge_Reset" inherits="OptionsButtonTemplate" text="x">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-36" y="-116"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-SS_GetSkillValue('knowledge'), 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Knowledge_Info" inherits="OptionsButtonTemplate" text="?">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-116"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "BOTTOM")
+                GameTooltip:AddLine("Вера")
+                GameTooltip:AddLine("Применяется для атак, основанных на веровании персонажа.")
+                GameTooltip:AddLine("-----------")
+                GameTooltip:AddLine("Пример: Свет, Шаманизм, Друидизм")
+                GameTooltip:AddLine("Бонус: Мораль")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Athletics_Add" inherits="OptionsButtonTemplate" text="+">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-68" y="-141"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Athletics_Reduce" inherits="OptionsButtonTemplate" text="-">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-52" y="-141"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Athletics_Reset" inherits="OptionsButtonTemplate" text="x">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-36" y="-141"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-SS_GetSkillValue('athletics'), 'athletics', SS_Skills_Menu_Passive_Skill_Athletics_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Athletics_Info" inherits="OptionsButtonTemplate" text="?">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-141"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "BOTTOM")
+                GameTooltip:AddLine("Выступление")
+                GameTooltip:AddLine("Применяется для действий связанных с психологическим")
+                GameTooltip:AddLine("воздействием на других персонажей")
+                GameTooltip:AddLine("-----------")
+                GameTooltip:AddLine("Пример: Обман, Привлечение внимания, Убеждение")
+                GameTooltip:AddLine("Бонус: Эмпатия")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Acrobats_Add" inherits="OptionsButtonTemplate" text="+">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-68" y="-167"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Acrobats_Reduce" inherits="OptionsButtonTemplate" text="-">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-52" y="-167"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Acrobats_Reset" inherits="OptionsButtonTemplate" text="x">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-36" y="-167"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToSkill(-SS_GetSkillValue('acrobats'), 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Skill_Acrobats_Info" inherits="OptionsButtonTemplate" text="?">
+            <Size x = "14" y = "16" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-167"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "BOTTOM")
+                GameTooltip:AddLine("Ловкость рук")
+                GameTooltip:AddLine("Применяется для действий, требующих мелкой моторики")
+                GameTooltip:AddLine("-----------")
+                GameTooltip:AddLine("Пример: Карманная кража, взлом замка")
+                GameTooltip:AddLine("Бонус: Точность")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
+            </Scripts>
+          </Button>
+        </Frames>
       </Frame>
     </Frames>
   </Frame>
