@@ -793,7 +793,12 @@
     </Frames>
   </Frame>
   <Frame name="SS_Skills_Menu" hidden="true">
-    <Size><AbsDimension x="400" y="230"/></Size>
+    <Scripts>
+      <OnShow>
+        SS_Skills_Menu_Points_Value:SetText(SS_GetAvailableSkillPoints());
+      </OnShow>
+    </Scripts>
+    <Size><AbsDimension x="400" y="250"/></Size>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Player_Menu">
       <Offset><AbsDimension x="57" y="0"/></Offset>
@@ -822,6 +827,22 @@
             <Offset x="-1" y="-1" />
             <Color r="0" g="0" b="0"/>
           </Shadow>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString name="$parent_Points_Name" font="Fonts\FRIZQT__.TTF" text="Доступно:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="20" y="20" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Points_Value" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="76" y="20" />
+          </Anchors>
         </FontString>
       </Layer>
     </Layers>
@@ -1486,11 +1507,11 @@
             <Scripts>
               <OnEnter>
                 GameTooltip:SetOwner(this, "BOTTOM")
-                GameTooltip:AddLine("Ближний бой")
-                GameTooltip:AddLine("Применяется для всех атак, проводимых в ближнем бою.")
+                GameTooltip:AddLine("Скрытность")
+                GameTooltip:AddLine("Применяется для действий, которые требуется совершить незаметно.")
                 GameTooltip:AddLine("-----------")
-                GameTooltip:AddLine("Пример: Ударить дубиной")
-                GameTooltip:AddLine("Бонус: Мощь")
+                GameTooltip:AddLine("Пример: Красться, Прятаться от противника")
+                GameTooltip:AddLine("Бонус: Подвижность")
                 GameTooltip:Show()
               </OnEnter>
               <OnLeave>
@@ -1547,11 +1568,12 @@
             <Scripts>
               <OnEnter>
                 GameTooltip:SetOwner(this, "BOTTOM")
-                GameTooltip:AddLine("Дальний бой")
-                GameTooltip:AddLine("Применяется для всех атак, проводимых в дальнем бою.")
+                GameTooltip:AddLine("Суждение")
+                GameTooltip:AddLine("Применяется для формирования корректных выводов")
+                GameTooltip:AddLine("на основе имеющейся информации.")
                 GameTooltip:AddLine("-----------")
-                GameTooltip:AddLine("Пример: Выстрелить из лука")
-                GameTooltip:AddLine("Бонус: Точность")
+                GameTooltip:AddLine("Пример: Распознать истинные намерения собеседника")
+                GameTooltip:AddLine("Бонус: Эмпатия")
                 GameTooltip:Show()
               </OnEnter>
               <OnLeave>
@@ -1608,11 +1630,11 @@
             <Scripts>
               <OnEnter>
                 GameTooltip:SetOwner(this, "BOTTOM")
-                GameTooltip:AddLine("Чародейство")
-                GameTooltip:AddLine("Применяется для атак с использованием магии.")
+                GameTooltip:AddLine("Самоконтроль")
+                GameTooltip:AddLine("Применяется для противодействию психологическому и психическому воздействию.")
                 GameTooltip:AddLine("-----------")
-                GameTooltip:AddLine("Пример: Заклинания чернокнижников, магов")
-                GameTooltip:AddLine("Бонус: Мудрость")
+                GameTooltip:AddLine("Пример: Сопротивление испугу, очарованию.")
+                GameTooltip:AddLine("Бонус: Мораль")
                 GameTooltip:Show()
               </OnEnter>
               <OnLeave>
@@ -1669,11 +1691,11 @@
             <Scripts>
               <OnEnter>
                 GameTooltip:SetOwner(this, "BOTTOM")
-                GameTooltip:AddLine("Вера")
-                GameTooltip:AddLine("Применяется для атак, основанных на веровании персонажа.")
+                GameTooltip:AddLine("Знание")
+                GameTooltip:AddLine("Применяется для проверок знания о мире, существах или истории.")
                 GameTooltip:AddLine("-----------")
-                GameTooltip:AddLine("Пример: Свет, Шаманизм, Друидизм")
-                GameTooltip:AddLine("Бонус: Мораль")
+                GameTooltip:AddLine("Пример: Опознать существо, прочесть текст на древнем языке")
+                GameTooltip:AddLine("Бонус: Мудрость")
                 GameTooltip:Show()
               </OnEnter>
               <OnLeave>
@@ -1730,12 +1752,11 @@
             <Scripts>
               <OnEnter>
                 GameTooltip:SetOwner(this, "BOTTOM")
-                GameTooltip:AddLine("Выступление")
-                GameTooltip:AddLine("Применяется для действий связанных с психологическим")
-                GameTooltip:AddLine("воздействием на других персонажей")
+                GameTooltip:AddLine("Атлетика")
+                GameTooltip:AddLine("Используется для проверок силового взаимодействия персонажа и окружения")
                 GameTooltip:AddLine("-----------")
-                GameTooltip:AddLine("Пример: Обман, Привлечение внимания, Убеждение")
-                GameTooltip:AddLine("Бонус: Эмпатия")
+                GameTooltip:AddLine("Пример: Удержать крупный камень, залезть на выступ")
+                GameTooltip:AddLine("Бонус: Мощь")
                 GameTooltip:Show()
               </OnEnter>
               <OnLeave>
@@ -1792,11 +1813,11 @@
             <Scripts>
               <OnEnter>
                 GameTooltip:SetOwner(this, "BOTTOM")
-                GameTooltip:AddLine("Ловкость рук")
-                GameTooltip:AddLine("Применяется для действий, требующих мелкой моторики")
+                GameTooltip:AddLine("Акробатика")
+                GameTooltip:AddLine("Испоьзуется для проверок ловких взаимодействий игрока с миром")
                 GameTooltip:AddLine("-----------")
-                GameTooltip:AddLine("Пример: Карманная кража, взлом замка")
-                GameTooltip:AddLine("Бонус: Точность")
+                GameTooltip:AddLine("Пример: прыжок на большое расстояние, баланс на краю уступа")
+                GameTooltip:AddLine("Бонус: Подвижность")
                 GameTooltip:Show()
               </OnEnter>
               <OnLeave>

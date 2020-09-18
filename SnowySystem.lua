@@ -37,7 +37,7 @@ function SS_GetSkillValue(skill)
   end;
 end;
 
-function SS_GetSummaryStatsValue()
+function SS_GetSummaryStatPoints()
   return SS_GetStatValue('power') + SS_GetStatValue('accuracy') + SS_GetStatValue('mobility') + SS_GetStatValue('wisdom')  + SS_GetStatValue('empathy') + SS_GetStatValue('morale');
 end;
 
@@ -48,10 +48,37 @@ function SS_GetMaxStatPoints(playerLevel)
   return math.floor(3 + ((playerLevel / 3.25) * 2));
 end;
 
+function SS_GetSummarySkillPoints()
+  local active = SS_GetSkillValue('melee') + SS_GetSkillValue('range') + SS_GetSkillValue('magic') + SS_GetSkillValue('religion') + SS_GetSkillValue('perfomance') + SS_GetSkillValue('hands');
+  local passive = SS_GetSkillValue('stealth') + SS_GetSkillValue('observation') + SS_GetSkillValue('controll') + SS_GetSkillValue('knowledge') + SS_GetSkillValue('athletics') + SS_GetSkillValue('acrobats');
+
+  return active + passive;
+end;
+
+function SS_GetMaxSkillPoints(playerLevel)
+  if (not(playerLevel)) then
+    playerLevel = SS_GetPlayerLevel();
+  end;
+  return 5 + playerLevel * 10;
+end;
+
+function SS_GetMaxSkillPointsInSingleSkill(playerLevel)
+  if (not(playerLevel)) then
+    playerLevel = SS_GetPlayerLevel();
+  end;
+  return playerLevel * 5;
+end;
+
 function SS_GetAvailableStatPoints()
   local baseStatPoints = SS_GetMaxStatPoints();
-  local summaryPoints = SS_GetSummaryStatsValue();
+  local summaryPoints = SS_GetSummaryStatPoints();
   return baseStatPoints - summaryPoints;
+end;
+
+function SS_GetAvailableSkillPoints()
+  local baseSkillPoints = SS_GetMaxSkillPoints();
+  local summaryPoints = SS_GetSummarySkillPoints();
+  return baseSkillPoints - summaryPoints;
 end;
 
 function SS_PointToStat(value, stat, statView)
@@ -73,6 +100,19 @@ function SS_PointToStat(value, stat, statView)
 end;
 
 function SS_PointToSkill(value, skill, skillView)
+  if (SS_GetSkillValue(skill) + value < 0) then
+    return 0;
+  end;
+
+  if (SS_GetAvailableSkillPoints() < 1 and value > 0) then
+    return 0;
+  end;
+
+  if (SS_GetSkillValue(skill) + value > SS_GetMaxSkillPointsInSingleSkill()) then
+    return 0;
+  end;
+
   SS_User.plots[SS_User.settings.currentPlot].skills[skill] = SS_GetSkillValue(skill) + value;
   skillView:SetText(SS_GetSkillValue(skill));
+  SS_Skills_Menu_Points_Value:SetText(SS_GetAvailableSkillPoints());
 end;
