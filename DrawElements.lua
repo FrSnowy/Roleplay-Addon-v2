@@ -109,6 +109,7 @@ SS_HideAllSubmenus = function()
   SS_Stats_Menu:Hide();
   SS_Skills_Menu:Hide();
   SS_Controll_Menu:Hide();
+  SS_Armor_Menu:Hide();
 end;
 
 SS_UpdatePlayerFrameOnPlotActivate = function()
