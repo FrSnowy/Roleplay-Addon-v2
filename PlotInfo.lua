@@ -27,6 +27,8 @@ SS_createPlot = function(plotName, authorName)
     },
     level = 1,
     experience = 0,
+    health = 2,
+    barrier = 0,
     author = authorName,
   };
 

@@ -2100,4 +2100,104 @@
       </Frame>
     </Frames>
   </Frame>
+  <Frame name = "SS_PlayerFrame" parent = "PlayerFrame" hidden = "true">
+    <Scripts>
+      <OnLoad>
+        self:RegisterEvent("PLAYER_ENTERING_WORLD");
+      </OnLoad>
+			<OnEvent>
+        if(event == "PLAYER_ENTERING_WORLD") then
+          SS_DrawHealthPoints()
+        end;
+      </OnEvent>
+    </Scripts>
+    <Size>
+      <AbsDimension x="138" y="48" />
+    </Size>
+    <Anchors>
+      <Anchor point="BOTTOMRIGHT">
+        <Offset><AbsDimension x="4" y="0"/></Offset>
+      </Anchor>
+    </Anchors>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_HP" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="36" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Shield" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="105" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_HP_Icon">
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Очки Боеспособности (ОБ)");
+            GameTooltip:AddLine("Обозначают количество очков урона,")
+            GameTooltip:AddLine("которые ваш персонаж может принять");
+            GameTooltip:AddLine("до того, как окажется выведен из боя");
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="16" y="-18"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Size>
+          <AbsDimension x="16" y="16" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\hp.blp" />
+      </Button>
+      <Button name="$parent_Shield_Icon">
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Очки Защиты (ОЗ)");
+            GameTooltip:AddLine("Обозначают количество очков урона,")
+            GameTooltip:AddLine("который будет поглощен доспехами, не уменьшая");
+            GameTooltip:AddLine("при этом очков боеспособности");
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="85" y="-18"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Size>
+          <AbsDimension x="16" y="16" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\shield.blp" />
+      </Button>
+    </Frames>
+  </Frame>
 </Ui>

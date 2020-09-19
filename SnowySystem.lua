@@ -81,6 +81,11 @@ function SS_GetAvailableSkillPoints()
   return baseSkillPoints - summaryPoints;
 end;
 
+function UpdateHPOnPointAddToStat()
+  SS_User.plots[SS_User.settings.currentPlot].health = SS_GetMaxHealth();
+  SS_DrawHealthPoints();
+end;
+
 function SS_PointToStat(value, stat, statView)
   if (SS_GetStatValue(stat) + value < -SS_GetMaxStatPoints(1)) then
     return 0;
@@ -97,6 +102,7 @@ function SS_PointToStat(value, stat, statView)
   SS_User.plots[SS_User.settings.currentPlot].stats[stat] = SS_GetStatValue(stat) + value;
   statView:SetText(SS_GetStatValue(stat));
   SS_Stats_Menu_Points_Value:SetText(SS_GetAvailableStatPoints());
+  UpdateHPOnPointAddToStat();
 end;
 
 function SS_PointToSkill(value, skill, skillView)
@@ -115,4 +121,16 @@ function SS_PointToSkill(value, skill, skillView)
   SS_User.plots[SS_User.settings.currentPlot].skills[skill] = SS_GetSkillValue(skill) + value;
   skillView:SetText(SS_GetSkillValue(skill));
   SS_Skills_Menu_Points_Value:SetText(SS_GetAvailableSkillPoints());
+end;
+
+function SS_GetCurrentHealth()
+  return SS_User.plots[SS_User.settings.currentPlot].health;
+end;
+
+function SS_GetMaxHealth()
+  local sumOfStats = SS_GetStatValue('power') + SS_GetStatValue('mobility') + SS_GetStatValue('morale');
+  local healthPoints = 2 + math.floor(sumOfStats / 3);
+
+  if (healthPoints < 1) then return 1; end;
+  return healthPoints;
 end;

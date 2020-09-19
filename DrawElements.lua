@@ -101,6 +101,10 @@ SS_ResizePlayerMenuOnPlotDeactivate = function()
   SS_Player_Menu_SettingsIcon:SetPoint("CENTER", SS_Player_Menu, "CENTER", 0, 0);
 end;
 
+function SS_DrawHealthPoints()
+  SS_PlayerFrame_HP:SetText(SS_GetCurrentHealth().."/"..SS_GetMaxHealth());
+end;
+
 SS_HideAllSubmenus = function()
   SS_Stats_Menu:Hide();
   SS_Skills_Menu:Hide();
@@ -114,6 +118,8 @@ SS_UpdatePlayerFrameOnPlotActivate = function()
   PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 11);
   SS_Exp_Bar:Show();
   SS_DrawExprienceProgress();
+  SS_PlayerFrame:Show();
+  SS_DrawHealthPoints();
 end;
 
 SS_UpdatePlayerFrameOnPlotDeactivate = function()
@@ -121,4 +127,5 @@ SS_UpdatePlayerFrameOnPlotDeactivate = function()
   PlayerLevelText:SetTextColor(0.82, 0.71, 0);
   PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 10);
   SS_Exp_Bar:Hide();
+  SS_PlayerFrame:Hide();
 end;
