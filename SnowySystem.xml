@@ -104,12 +104,49 @@
           </OnClick>
         </Scripts>
         <Anchors>
-          <Anchor point="CENTER" />
+          <Anchor point="TOP">
+            <Offset>
+              <AbsDimension x="0" y="-70"/>
+            </Offset>
+          </Anchor>
         </Anchors>
         <Size>
           <AbsDimension x="32" y="32" />
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\skills.blp" />
+      </Button>
+      <Button name="$parent_ArmorIcon">
+        <Scripts>
+          <OnEnter>
+            SS_Player_Menu:SetPoint("LEFT", -12, 0);
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Снаряжение")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            SS_Player_Menu:SetPoint("LEFT", -64, 0);
+            GameTooltip:Hide()
+          </OnLeave>
+          <OnClick>
+            if (SS_Skills_Menu:IsVisible()) then
+              SS_Skills_Menu:Hide();
+            else
+              SS_HideAllSubmenus();
+              SS_Skills_Menu:Show();
+            end;
+          </OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOP">
+            <Offset>
+              <AbsDimension x="0" y="-120"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Size>
+          <AbsDimension x="32" y="32" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\armor.blp" />
       </Button>
       <Button name="$parent_SettingsIcon">
         <Scripts>

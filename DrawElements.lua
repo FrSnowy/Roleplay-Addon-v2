@@ -86,7 +86,7 @@ SS_DrawExprienceProgress = function()
 end;
 
 SS_ResizePlayerMenuOnPlotActivate = function()
-  SS_Player_Menu:SetSize(84, 168);
+  SS_Player_Menu:SetSize(84, 224);
   SS_Player_Menu_StatsIcon:Show();
   SS_Player_Menu_SkillsIcon:Show();
   SS_Player_Menu_SettingsIcon:ClearAllPoints()
