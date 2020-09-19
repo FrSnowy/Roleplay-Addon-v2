@@ -102,7 +102,24 @@ SS_ResizePlayerMenuOnPlotDeactivate = function()
 end;
 
 function SS_DrawHealthPoints()
-  SS_PlayerFrame_HP:SetText(SS_GetCurrentHealth().."/"..SS_GetMaxHealth());
+  local maxHP = SS_GetMaxHealth();
+  local currentHP = SS_GetCurrentHealth();
+  SS_PlayerFrame_HP:SetText(currentHP.."/"..maxHP);
+end;
+
+function SS_DrawBarrierPoints()
+  local maxBarrierPoints = SS_GetMaxBarrier();
+  if (maxBarrierPoints == 0) then
+    SS_PlayerFrame_Barrier:Hide();
+    SS_PlayerFrame_Barrier_Icon:Hide();
+    return;
+  end;
+
+  SS_PlayerFrame_Barrier:Show();
+  SS_PlayerFrame_Barrier_Icon:Show();
+
+  local currentBarrier = SS_GetCurrentBarrier();
+  SS_PlayerFrame_Barrier:SetText(currentBarrier.."/"..maxBarrierPoints)
 end;
 
 function SS_DrawCheckmarkOnArmor()

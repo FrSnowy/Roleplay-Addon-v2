@@ -130,7 +130,59 @@ end;
 function SS_GetMaxHealth()
   local sumOfStats = SS_GetStatValue('power') + SS_GetStatValue('mobility') + SS_GetStatValue('morale');
   local healthPoints = 2 + math.floor(sumOfStats / 3);
+  if (healthPoints < 1) then healthPoints = 1 end;
 
-  if (healthPoints < 1) then return 1; end;
+  local isFullHP = SS_GetCurrentHealth() == healthPoints;
+
+  if (SS_User.plots[SS_User.settings.currentPlot].armor == 'ignore') then
+    healthPoints = math.floor(healthPoints + (healthPoints) * 0.3) + 1;
+  end;
+
+  if (SS_GetCurrentHealth() > healthPoints) then
+    SS_User.plots[SS_User.settings.currentPlot].health = healthPoints;
+  end;
+
+  -- Ещё флаг, что не в бою
+  if (isFullHP) then
+    SS_User.plots[SS_User.settings.currentPlot].health = healthPoints;
+  end;
+
   return healthPoints;
+end;
+
+function SS_GetCurrentBarrier()
+  return SS_User.plots[SS_User.settings.currentPlot].barrier;
+end;
+
+function SS_GetMaxBarrier()
+  local armorType = SS_GetArmorType();
+  if (armorType == 'light' or armorType =='ignore') then return 0; end;
+
+  local maxHP = SS_GetMaxHealth();
+  local maxBarrier = 0;
+
+  if (armorType == 'medium') then
+    maxBarrier = math.floor(maxHP / 3);
+  end;
+  if (armorType == 'heavy') then
+    maxBarrier = math.floor(maxHP / 2);
+  end;
+
+  -- Ещё флаг, что не в бою
+  if (SS_GetCurrentBarrier() == 0 or SS_GetCurrentBarrier() > maxBarrier) then
+    SS_User.plots[SS_User.settings.currentPlot].barrier = maxBarrier;
+  end;
+
+  return maxBarrier;
+end;
+
+function SS_GetArmorType()
+  return  SS_User.plots[SS_User.settings.currentPlot].armor;
+end;
+
+function SS_SelectArmorType(armorType)
+  SS_User.plots[SS_User.settings.currentPlot].armor = armorType;
+  SS_DrawCheckmarkOnArmor();
+  SS_DrawHealthPoints();
+  SS_DrawBarrierPoints();
 end;

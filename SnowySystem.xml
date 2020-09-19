@@ -2213,8 +2213,7 @@
       <CheckButton name="$parent_Armor_Light" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_User.plots[SS_User.settings.currentPlot].armor = 'light';
-            SS_DrawCheckmarkOnArmor();
+            SS_SelectArmorType('light')
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2228,8 +2227,7 @@
       <CheckButton name="$parent_Armor_Medium" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_User.plots[SS_User.settings.currentPlot].armor = 'medium';
-            SS_DrawCheckmarkOnArmor();
+            SS_SelectArmorType('medium')
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2243,8 +2241,7 @@
       <CheckButton name="$parent_Armor_Heavy" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_User.plots[SS_User.settings.currentPlot].armor = 'heavy';
-            SS_DrawCheckmarkOnArmor();
+            SS_SelectArmorType('heavy')
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2258,8 +2255,7 @@
       <CheckButton name="$parent_Armor_Ignore" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_User.plots[SS_User.settings.currentPlot].armor = 'ignore';
-            SS_DrawCheckmarkOnArmor();
+            SS_SelectArmorType('ignore')
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2575,7 +2571,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Shield" font="Fonts\FRIZQT__.TTF" text="0">
+        <FontString name="$parent_Barrier" font="Fonts\FRIZQT__.TTF" text="0">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2615,7 +2611,7 @@
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\hp.blp" />
       </Button>
-      <Button name="$parent_Shield_Icon">
+      <Button name="$parent_Barrier_Icon">
         <Scripts>
           <OnEnter>
             GameTooltip:SetOwner(this, "CENTER")
