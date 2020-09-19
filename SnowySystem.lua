@@ -81,9 +81,14 @@ function SS_GetAvailableSkillPoints()
   return baseSkillPoints - summaryPoints;
 end;
 
-function UpdateHPOnPointAddToStat()
+local function UpdateHPOnPointAddToStat()
   SS_User.plots[SS_User.settings.currentPlot].health = SS_GetMaxHealth();
   SS_DrawHealthPoints();
+end;
+
+local function UpdateBarrierOnPointAddtoStat()
+  SS_User.plots[SS_User.settings.currentPlot].barrier = SS_GetMaxBarrier();
+  SS_DrawBarrierPoints();
 end;
 
 function SS_PointToStat(value, stat, statView)
@@ -103,6 +108,7 @@ function SS_PointToStat(value, stat, statView)
   statView:SetText(SS_GetStatValue(stat));
   SS_Stats_Menu_Points_Value:SetText(SS_GetAvailableStatPoints());
   UpdateHPOnPointAddToStat();
+  UpdateBarrierOnPointAddtoStat();
 end;
 
 function SS_PointToSkill(value, skill, skillView)
@@ -156,11 +162,11 @@ end;
 
 function SS_GetMaxBarrier()
   local armorType = SS_GetArmorType();
-  if (armorType == 'light' or armorType =='ignore') then return 0; end;
 
   local maxHP = SS_GetMaxHealth();
   local maxBarrier = 0;
 
+  if (armorType == 'light' or armorType =='ignore') then maxBarrier = 0; end;
   if (armorType == 'medium') then
     maxBarrier = math.floor(maxHP / 3);
   end;

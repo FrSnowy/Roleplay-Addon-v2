@@ -109,7 +109,7 @@ end;
 
 function SS_DrawBarrierPoints()
   local maxBarrierPoints = SS_GetMaxBarrier();
-  if (maxBarrierPoints == 0) then
+  if (maxBarrierPoints == 0 and SS_GetCurrentBarrier() == 0) then
     SS_PlayerFrame_Barrier:Hide();
     SS_PlayerFrame_Barrier_Icon:Hide();
     return;
