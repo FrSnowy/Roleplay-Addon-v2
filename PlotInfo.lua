@@ -29,6 +29,7 @@ SS_createPlot = function(plotName, authorName)
     experience = 0,
     health = 2,
     barrier = 0,
+    armor = 'light',
     author = authorName,
   };
 

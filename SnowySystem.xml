@@ -1867,6 +1867,11 @@
     </Frames>
   </Frame>
   <Frame name="SS_Armor_Menu" hidden="true">
+    <Scripts>
+      <OnShow>
+        SS_DrawCheckmarkOnArmor();
+      </OnShow>
+    </Scripts>
     <Size><AbsDimension x="360" y="370"/></Size>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Player_Menu">
@@ -2158,7 +2163,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Ignore_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="боеспособ. увелич. на 30%">
+        <FontString name="$parent_Armor_Ignore_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="боеспособ. увелич. на 30%">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2169,7 +2174,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Ignore_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Только по решению мастера">
+        <FontString name="$parent_Armor_Ignore_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="Только по решению мастера">
           <Color r="0.9" g="0.5" b="0.25" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2180,10 +2185,38 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
+        <FontString name="$parent_Armor_Ignore_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="для особых существ, к-рые">
+          <Color r="0.9" g="0.5" b="0.25" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="190" y="-286" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Armor_Ignore_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="не могут носить брони">
+          <Color r="0.9" g="0.5" b="0.25" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="190" y="-296" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
       </Layer>
     </Layers>
     <Frames>
-      <CheckButton name="$parent_Armor_Light" inherits="OptionsCheckButtonTemplate" checked="true">
+      <CheckButton name="$parent_Armor_Light" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>
+            SS_User.plots[SS_User.settings.currentPlot].armor = 'light';
+            SS_DrawCheckmarkOnArmor();
+          </OnClick>
+        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
@@ -2192,7 +2225,13 @@
           </Anchor>
         </Anchors>
       </CheckButton>
-      <CheckButton name="$parent_Armor_Medium" inherits="OptionsCheckButtonTemplate" checked="true">
+      <CheckButton name="$parent_Armor_Medium" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>
+            SS_User.plots[SS_User.settings.currentPlot].armor = 'medium';
+            SS_DrawCheckmarkOnArmor();
+          </OnClick>
+        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
@@ -2201,7 +2240,13 @@
           </Anchor>
         </Anchors>
       </CheckButton>
-      <CheckButton name="$parent_Armor_Heavy" inherits="OptionsCheckButtonTemplate" checked="true">
+      <CheckButton name="$parent_Armor_Heavy" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>
+            SS_User.plots[SS_User.settings.currentPlot].armor = 'heavy';
+            SS_DrawCheckmarkOnArmor();
+          </OnClick>
+        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
@@ -2210,7 +2255,13 @@
           </Anchor>
         </Anchors>
       </CheckButton>
-      <CheckButton name="$parent_Armor_Ignore" inherits="OptionsCheckButtonTemplate" checked="true">
+      <CheckButton name="$parent_Armor_Ignore" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>
+            SS_User.plots[SS_User.settings.currentPlot].armor = 'ignore';
+            SS_DrawCheckmarkOnArmor();
+          </OnClick>
+        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>

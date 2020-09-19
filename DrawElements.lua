@@ -105,6 +105,24 @@ function SS_DrawHealthPoints()
   SS_PlayerFrame_HP:SetText(SS_GetCurrentHealth().."/"..SS_GetMaxHealth());
 end;
 
+function SS_DrawCheckmarkOnArmor()
+  local armorType = SS_User.plots[SS_User.settings.currentPlot].armor;
+  SS_Armor_Menu_Armor_Light:SetChecked('false');
+  SS_Armor_Menu_Armor_Medium:SetChecked('false');
+  SS_Armor_Menu_Armor_Heavy:SetChecked('false');
+  SS_Armor_Menu_Armor_Ignore:SetChecked('false');
+
+  if (armorType == 'light') then
+    SS_Armor_Menu_Armor_Light:SetChecked('true')
+  elseif (armorType == 'medium') then
+    SS_Armor_Menu_Armor_Medium:SetChecked('true')
+  elseif (armorType == 'heavy') then
+    SS_Armor_Menu_Armor_Heavy:SetChecked('true')
+  elseif (armorType == 'ignore') then
+    SS_Armor_Menu_Armor_Ignore:SetChecked('true')
+  end;
+end;
+
 SS_HideAllSubmenus = function()
   SS_Stats_Menu:Hide();
   SS_Skills_Menu:Hide();
