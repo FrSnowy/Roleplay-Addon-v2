@@ -89,6 +89,7 @@ SS_ResizePlayerMenuOnPlotActivate = function()
   SS_Player_Menu:SetSize(84, 224);
   SS_Player_Menu_StatsIcon:Show();
   SS_Player_Menu_SkillsIcon:Show();
+  SS_Player_Menu_ArmorIcon:Show();
   SS_Player_Menu_SettingsIcon:ClearAllPoints()
   SS_Player_Menu_SettingsIcon:SetPoint("BOTTOM", SS_Player_Menu, "BOTTOM", 0, 20);
 end;
@@ -97,6 +98,7 @@ SS_ResizePlayerMenuOnPlotDeactivate = function()
   SS_Player_Menu:SetSize(84, 84);
   SS_Player_Menu_StatsIcon:Hide();
   SS_Player_Menu_SkillsIcon:Hide();
+  SS_Player_Menu_ArmorIcon:Hide();
   SS_Player_Menu_SettingsIcon:ClearAllPoints()
   SS_Player_Menu_SettingsIcon:SetPoint("CENTER", SS_Player_Menu, "CENTER", 0, 0);
 end;

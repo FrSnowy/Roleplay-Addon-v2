@@ -2547,6 +2547,7 @@
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
           SS_DrawHealthPoints()
+          SS_DrawBarrierPoints()
         end;
       </OnEvent>
     </Scripts>
