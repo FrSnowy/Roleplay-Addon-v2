@@ -49,7 +49,40 @@
       </EdgeSize>
     </Backdrop>
     <Frames>
-      <Button name="$parent_StatsIcon">
+      <Button name="$parent_DicesIcon" hidden="true">
+        <Scripts>
+          <OnEnter>
+            SS_Player_Menu:SetPoint("LEFT", -12, 0);
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Проверки")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            SS_Player_Menu:SetPoint("LEFT", -64, 0);
+            GameTooltip:Hide()
+          </OnLeave>
+          <OnClick>
+            if (SS_Dices_Menu:IsVisible()) then
+              SS_Dices_Menu:Hide();
+            else
+              SS_HideAllSubmenus();
+              SS_Dices_Menu:Show();
+            end;
+          </OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOP">
+            <Offset>
+              <AbsDimension x="0" y="-20"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Size>
+          <AbsDimension x="32" y="32" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\actions.blp" />
+      </Button>
+      <Button name="$parent_StatsIcon" hidden = "true">
         <Scripts>
           <OnEnter>
             SS_Player_Menu:SetPoint("LEFT", -12, 0);
@@ -73,7 +106,7 @@
         <Anchors>
           <Anchor point="TOP">
             <Offset>
-              <AbsDimension x="0" y="-20"/>
+              <AbsDimension x="0" y="-65"/>
             </Offset>
           </Anchor>
         </Anchors>
@@ -82,7 +115,7 @@
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\stats.blp" />
       </Button>
-      <Button name="$parent_SkillsIcon">
+      <Button name="$parent_SkillsIcon" hidden = "true">
         <Scripts>
           <OnEnter>
             SS_Player_Menu:SetPoint("LEFT", -12, 0);
@@ -106,7 +139,7 @@
         <Anchors>
           <Anchor point="TOP">
             <Offset>
-              <AbsDimension x="0" y="-70"/>
+              <AbsDimension x="0" y="-110"/>
             </Offset>
           </Anchor>
         </Anchors>
@@ -115,7 +148,7 @@
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\skills.blp" />
       </Button>
-      <Button name="$parent_ArmorIcon">
+      <Button name="$parent_ArmorIcon" hidden = "true">
         <Scripts>
           <OnEnter>
             SS_Player_Menu:SetPoint("LEFT", -12, 0);
@@ -139,7 +172,7 @@
         <Anchors>
           <Anchor point="TOP">
             <Offset>
-              <AbsDimension x="0" y="-120"/>
+              <AbsDimension x="0" y="-155"/>
             </Offset>
           </Anchor>
         </Anchors>
@@ -327,6 +360,248 @@
           <Offset><AbsDimension x="0" y="0"/></Offset>
           </Anchor>
         </Anchors>
+      </Frame>
+    </Frames>
+  </Frame>
+  <Frame name="SS_Dices_Menu" hidden="true">
+    <Size><AbsDimension x="280" y="236"/></Size>
+    <Anchors>
+      <Anchor point="LEFT" relativeTo="SS_Player_Menu">
+        <Offset><AbsDimension x="57" y="0"/></Offset>
+      </Anchor>
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="32"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Проверки">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Frame name="$parent_Active">
+        <Size><AbsDimension x="140" y="210"/></Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="0" y="-20"/></Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Активные">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="12"/>
+              <Anchors>
+                <Anchor point="TOP" x="0" y="-20" />
+              </Anchors>
+              <Shadow>
+                <Offset x="-1" y="-1" />
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parent_Melee" inherits="OptionsButtonTemplate" text="Ближний бой">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-40"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_DiceRoll('melee')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Range" inherits="OptionsButtonTemplate" text="Дальний бой">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-64"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Magic" inherits="OptionsButtonTemplate" text="Чародейство">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-88"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Religion" inherits="OptionsButtonTemplate" text="Вера">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-112"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Perfomance" inherits="OptionsButtonTemplate" text="Выступление">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-136"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Hands" inherits="OptionsButtonTemplate" text="Ловкость рук">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-160"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+        </Frames>
+      </Frame>
+      <Frame name="$parent_Passive">
+        <Size><AbsDimension x="140" y="210"/></Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="140" y="-20"/></Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Пассивные">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="12"/>
+              <Anchors>
+                <Anchor point="TOP" x="0" y="-20" />
+              </Anchors>
+              <Shadow>
+                <Offset x="-1" y="-1" />
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parent_Stealth" inherits="OptionsButtonTemplate" text="Скрытность">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-40"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Observation" inherits="OptionsButtonTemplate" text="Суждение">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-64"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Controll" inherits="OptionsButtonTemplate" text="Самоконтроль">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-88"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Knowledge" inherits="OptionsButtonTemplate" text="Знание">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-112"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Athletics" inherits="OptionsButtonTemplate" text="Атлетика">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-136"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Acrobats" inherits="OptionsButtonTemplate" text="Акробатика">
+            <Size x = "110" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-160"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+              </OnClick>
+            </Scripts>
+          </Button>
+        </Frames>
       </Frame>
     </Frames>
   </Frame>

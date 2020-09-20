@@ -86,7 +86,8 @@ SS_DrawExprienceProgress = function()
 end;
 
 SS_ResizePlayerMenuOnPlotActivate = function()
-  SS_Player_Menu:SetSize(84, 224);
+  SS_Player_Menu:SetSize(84, 255);
+  SS_Player_Menu_DicesIcon:Show();
   SS_Player_Menu_StatsIcon:Show();
   SS_Player_Menu_SkillsIcon:Show();
   SS_Player_Menu_ArmorIcon:Show();
@@ -96,6 +97,7 @@ end;
 
 SS_ResizePlayerMenuOnPlotDeactivate = function()
   SS_Player_Menu:SetSize(84, 84);
+  SS_Player_Menu_DicesIcon:Hide();
   SS_Player_Menu_StatsIcon:Hide();
   SS_Player_Menu_SkillsIcon:Hide();
   SS_Player_Menu_ArmorIcon:Hide();
@@ -147,6 +149,7 @@ SS_HideAllSubmenus = function()
   SS_Skills_Menu:Hide();
   SS_Controll_Menu:Hide();
   SS_Armor_Menu:Hide();
+  SS_Dices_Menu:Hide();
 end;
 
 SS_UpdatePlayerFrameOnPlotActivate = function()

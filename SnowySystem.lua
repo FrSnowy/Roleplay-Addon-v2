@@ -192,3 +192,90 @@ function SS_SelectArmorType(armorType)
   SS_DrawHealthPoints();
   SS_DrawBarrierPoints();
 end;
+
+function SS_GetAssociatedStatOfSkill(skill)
+  local association = {
+    melee = 'power',
+    range = 'accuracy',
+    magic = 'wisdom',
+    religion = 'morale',
+    perfomance = 'empathy',
+    hands = 'accuracy',
+    stealth = 'mobility',
+    observation = 'empathy',
+    control = 'morale',
+    knowledge = 'wisdom',
+    athletics = 'power',
+    acrobats = 'mobility'
+  };
+
+  return association[skill];
+end;
+
+function SS_GetDicesCount(playerLevel)
+  if (not(playerLevel)) then
+    playerLevel = SS_GetPlayerLevel();
+  end;
+
+  return math.floor(1 + ( SS_GetPlayerLevel() / 10));
+end;
+
+function SS_GetStatToSkillModifier(skillName)
+  local statPoints = SS_GetStatValue(SS_GetAssociatedStatOfSkill(skillName));
+  return math.floor(statPoints / 2.4);
+end;
+
+local function SS_GetMinimumDiceRoll(skillName)
+  local levelModifier = math.floor((SS_GetPlayerLevel() / 5) - SS_GetMaxSkillPointsInSingleSkill(1)) + 5;
+  local skillModifier = (math.floor(SS_GetSkillValue(skillName) / 5) - math.floor(SS_GetSkillValue(skillName) / 8));
+  
+  return levelModifier + skillModifier;
+end;
+
+local function SS_GetMaximumDiceRoll(skillName)
+  local levelModifier = math.floor(SS_GetPlayerLevel() / 8) + 4 + math.floor(0.5 * SS_GetPlayerLevel());
+  local skillModifier = math.floor((SS_GetSkillValue(skillName) / 2) / math.pow(SS_GetPlayerLevel(), 0.3));
+  return levelModifier + skillModifier;
+end;
+
+function SS_DiceRoll(skillName)
+  local diceCount = SS_GetDicesCount();
+  local statModifier = SS_GetStatToSkillModifier(skillName);
+
+  local dice = {
+    from = SS_GetMinimumDiceRoll(skillName),
+    to = SS_GetMaximumDiceRoll(skillName),
+  };
+
+  dice.average = (dice.from + dice.to) / 2;
+
+  local results = { };
+  local maxResult = dice.from;
+
+  for i = 1, diceCount do
+    local result = math.random(dice.from, dice.to);
+    if (result > maxResult) then maxResult = result; end;
+    
+    if (result > (dice.average + dice.average * 0.3)) then
+      table.insert(results, "|cff00FF00"..result.."|r");
+    elseif (result < (dice.average - dice.average * 0.3)) then
+      table.insert(results, "|cffFF0000"..result.."|r");
+    else
+      table.insert(results, result);
+    end;
+  end;
+
+  local finalResult = maxResult + statModifier;
+
+  local outputString = "|cffFFFF00Бросок "..diceCount.."d("..dice.from.."-"..dice.to.."): [|r";
+  for i = 1, diceCount do
+    outputString = outputString..results[i];
+    if (not(i == diceCount)) then
+      outputString = outputString..", "
+    end;
+  end;
+  outputString = outputString.."|cffFFFF00] -> |r"..maxResult;
+  outputString = outputString.."|cff00FF00 + "..statModifier.."|r";
+  outputString = outputString.."|cffFFFF00 = "..finalResult.."|r";
+  print(outputString)
+end;
