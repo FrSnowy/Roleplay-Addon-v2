@@ -225,20 +225,21 @@ function SS_GetStatToSkillModifier(skillName)
   return math.floor(statPoints / 2.4);
 end;
 
-local function SS_GetMinimumDiceRoll(skillName)
+function SS_GetMinimumDiceRoll(skillName)
   local levelModifier = math.floor((SS_GetPlayerLevel() / 5) - SS_GetMaxSkillPointsInSingleSkill(1)) + 5;
   local skillModifier = (math.floor(SS_GetSkillValue(skillName) / 5) - math.floor(SS_GetSkillValue(skillName) / 8));
   
   return levelModifier + skillModifier;
 end;
 
-local function SS_GetMaximumDiceRoll(skillName)
+function SS_GetMaximumDiceRoll(skillName)
   local levelModifier = math.floor(SS_GetPlayerLevel() / 8) + 4 + math.floor(0.5 * SS_GetPlayerLevel());
   local skillModifier = math.floor((SS_GetSkillValue(skillName) / 2) / math.pow(SS_GetPlayerLevel(), 0.3));
   return levelModifier + skillModifier;
 end;
 
 function SS_DiceRoll(skillName)
+  --[[
   local diceCount = SS_GetDicesCount();
   local statModifier = SS_GetStatToSkillModifier(skillName);
 
@@ -278,4 +279,44 @@ function SS_DiceRoll(skillName)
   outputString = outputString.."|cff00FF00 + "..statModifier.."|r";
   outputString = outputString.."|cffFFFF00 = "..finalResult.."|r";
   print(outputString)
+  ]]
+
+  local result = SS_DiceRollConvey(skillName, {
+    beforeAll = function()
+      print('======================');
+      print('|cffFFFF00Бросаем куб проверки навыка |r'..SS_Locale(skillName));
+    end,
+    afterDiceGeneration = function(dices, diceCount)
+      print('|cffFFFF00Бросок от уровня и навыка: |r'..diceCount..'d('..dices.from.."-"..dices.to..')');
+    end,
+    afterDiceRoll = function(results, dices, diceCount)
+      local outputString = '|cffFFFF00Результаты броска куба: [|r';
+      local maxResult = 0;
+      for i = 1, diceCount do
+        local result = 0;
+        if (maxResult < results[i]) then maxResult = results[i]; end;
+        if (results[i] < dices.average - (dices.average * 0.25)) then
+          result = "|cFFFF0000"..results[i].."|r";
+        elseif (results[i] > dices.average + (dices.average * 0.25)) then
+          result = "|cFF00FF00"..results[i].."|r";
+        else
+          result = results[i]
+        end;
+
+        if (not(i == diceCount)) then
+          result = result..", ";
+        end;
+
+        outputString = outputString..result;
+      end;
+      outputString = outputString.."|cffFFFF00]. Итоговое: |r|cff9999FF"..maxResult.."|r";
+      print(outputString);
+    end,
+    afterStatModifierGeneration = function(statModifier)
+      print('|cffFFFF00Бонус от характеристики: |r'..statModifier);
+    end,
+    afterFinalResultGeneration = function(finalResult, statModifier, results, dices, diceCount)
+      print('|cffFFFF00Итоговый результат проверки: |r'..finalResult);
+    end,
+  });  
 end;

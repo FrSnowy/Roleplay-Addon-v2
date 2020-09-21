@@ -3,6 +3,7 @@
   <Include file="Shared.lua"/>
   <Include file="DrawElements.lua"/>
   <Include file="Config.lua"/>
+  <Include file="Conveys.lua"/>
   <Frame name="SS_Player_Menu" parent="UIParent" enableMouse="true">
     <Scripts>
       <OnLoad>
@@ -420,7 +421,7 @@
           </Layer>
         </Layers>
         <Frames>
-          <Button name="$parent_Melee" inherits="OptionsButtonTemplate" text="Ближний бой">
+          <Button name="$parent_Melee" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -428,12 +429,15 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('melee'));
+              </OnShow>
               <OnClick>
                 SS_DiceRoll('melee')
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Range" inherits="OptionsButtonTemplate" text="Дальний бой">
+          <Button name="$parent_Range" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -441,12 +445,15 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('range'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('range')
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Magic" inherits="OptionsButtonTemplate" text="Чародейство">
+          <Button name="$parent_Magic" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -454,12 +461,15 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('magic'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('magic')
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Religion" inherits="OptionsButtonTemplate" text="Вера">
+          <Button name="$parent_Religion" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -467,12 +477,15 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('religion'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('religion')
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Perfomance" inherits="OptionsButtonTemplate" text="Выступление">
+          <Button name="$parent_Perfomance" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -480,8 +493,11 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('perfomance'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('perfomance')
               </OnClick>
             </Scripts>
           </Button>
@@ -493,8 +509,11 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('hands'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('hands')
               </OnClick>
             </Scripts>
           </Button>
@@ -531,8 +550,11 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('stealth'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('stealth')
               </OnClick>
             </Scripts>
           </Button>
@@ -544,12 +566,15 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('observation'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('observation')
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Controll" inherits="OptionsButtonTemplate" text="Самоконтроль">
+          <Button name="$parent_Controll" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -557,12 +582,15 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('controll'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('controll')
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Knowledge" inherits="OptionsButtonTemplate" text="Знание">
+          <Button name="$parent_Knowledge" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -570,12 +598,15 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('knowledge'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('knowledge')
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Athletics" inherits="OptionsButtonTemplate" text="Атлетика">
+          <Button name="$parent_Athletics" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -583,12 +614,15 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('athletics'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('athletics')
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Acrobats" inherits="OptionsButtonTemplate" text="Акробатика">
+          <Button name="$parent_Acrobats" inherits="OptionsButtonTemplate">
             <Size x = "110" y = "22" />
             <Anchors>
               <Anchor point="TOP">
@@ -596,8 +630,11 @@
               </Anchor> 
             </Anchors>
             <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('acrobats'));
+              </OnShow>
               <OnClick>
-                SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power_Value);
+                SS_DiceRoll('acrobats')
               </OnClick>
             </Scripts>
           </Button>

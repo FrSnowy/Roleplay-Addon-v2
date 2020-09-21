@@ -3,6 +3,8 @@
 ## Version: 2.0
 ## DefaultState: Enabled
 ## SavedVariablesPerCharacter: SS_User
+Locale.lua
+Conveys.lua
 SnowySystem.xml
 PlayerInfo.lua
 PlotInfo.lua
