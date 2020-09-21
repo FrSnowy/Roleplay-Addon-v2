@@ -66,3 +66,42 @@ function SS_DiceRollConvey(skillName, params)
 
     return finalResult;
 end;
+
+function SS_EfficencyRollConvey(skillName, params)
+    if (params.beforeAll) then
+        params.beforeAll();
+    end;
+
+    if (params.beforeStatValueGeneration) then
+        params.beforeStatValueGeneration();
+    end;
+
+    local statValue = SS_GetStatValue(SS_GetAssociatedStatOfSkill(skillName));
+
+    if (params.afterStatValueGeneration) then
+        params.afterStatValueGeneration(statValue);
+    end;
+
+    if (params.beforeEfficencyMaxValueGeneration) then
+        params.beforeEfficencyMaxValueGeneration();
+    end;
+
+    local efficencyMaxValue = math.floor(statValue / 2);
+    if (efficencyMaxValue < 1) then efficencyMaxValue = 1; end;
+
+    if (params.afterEfficencyMaxValueGeneration) then
+        params.afterEfficencyMaxValueGeneration(efficencyMaxValue, statValue);
+    end;
+
+    if (params.beforeFinalResultGeneration) then
+        params.beforeFinalResultGeneration();
+    end;
+
+    local finalResult = math.random(1, efficencyMaxValue);
+
+    if (params.afterFinalResultGeneration) then
+        params.afterFinalResultGeneration(finalResult, efficencyMaxValue, statValue);
+    end;
+
+    return finalResult;
+end;

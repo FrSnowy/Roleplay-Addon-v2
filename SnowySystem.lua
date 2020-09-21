@@ -239,48 +239,6 @@ function SS_GetMaximumDiceRoll(skillName)
 end;
 
 function SS_DiceRoll(skillName)
-  --[[
-  local diceCount = SS_GetDicesCount();
-  local statModifier = SS_GetStatToSkillModifier(skillName);
-
-  local dice = {
-    from = SS_GetMinimumDiceRoll(skillName),
-    to = SS_GetMaximumDiceRoll(skillName),
-  };
-
-  dice.average = (dice.from + dice.to) / 2;
-
-  local results = { };
-  local maxResult = dice.from;
-
-  for i = 1, diceCount do
-    local result = math.random(dice.from, dice.to);
-    if (result > maxResult) then maxResult = result; end;
-    
-    if (result > (dice.average + dice.average * 0.3)) then
-      table.insert(results, "|cff00FF00"..result.."|r");
-    elseif (result < (dice.average - dice.average * 0.3)) then
-      table.insert(results, "|cffFF0000"..result.."|r");
-    else
-      table.insert(results, result);
-    end;
-  end;
-
-  local finalResult = maxResult + statModifier;
-
-  local outputString = "|cffFFFF00Бросок "..diceCount.."d("..dice.from.."-"..dice.to.."): [|r";
-  for i = 1, diceCount do
-    outputString = outputString..results[i];
-    if (not(i == diceCount)) then
-      outputString = outputString..", "
-    end;
-  end;
-  outputString = outputString.."|cffFFFF00] -> |r"..maxResult;
-  outputString = outputString.."|cff00FF00 + "..statModifier.."|r";
-  outputString = outputString.."|cffFFFF00 = "..finalResult.."|r";
-  print(outputString)
-  ]]
-
   local result = SS_DiceRollConvey(skillName, {
     beforeAll = function()
       print('======================');
@@ -318,5 +276,14 @@ function SS_DiceRoll(skillName)
     afterFinalResultGeneration = function(finalResult, statModifier, results, dices, diceCount)
       print('|cffFFFF00Итоговый результат проверки: |r'..finalResult);
     end,
-  });  
+  });
+
+  local efficency = SS_EfficencyRollConvey(skillName, {
+    beforeAll = function()
+      print('|cffFFFF00Бросаем куб эффективности навыка |r'..SS_Locale(skillName));
+    end,
+    afterFinalResultGeneration = function(result, maxValue)
+      print('|cffFFFF00Бросок от навыка:|r 1-'..maxValue..'|cffFFFF00. Итоговое: |r|cff9999FF'..result.."|r");
+    end,
+  });
 end;
