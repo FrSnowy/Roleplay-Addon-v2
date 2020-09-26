@@ -647,14 +647,15 @@
       <OnShow>
         SS_Stats_Menu_Stat_Power_Value:SetText(SS_GetStatValue('power'));
         SS_Stats_Menu_Stat_Accuracy_Value:SetText(SS_GetStatValue('accuracy'));
-        SS_Stats_Menu_Stat_Mobility_Value:SetText(SS_GetStatValue('mobility'));
         SS_Stats_Menu_Stat_Wisdom_Value:SetText(SS_GetStatValue('wisdom'));
         SS_Stats_Menu_Stat_Empathy_Value:SetText(SS_GetStatValue('empathy'));
         SS_Stats_Menu_Stat_Morale_Value:SetText(SS_GetStatValue('morale'));
+        SS_Stats_Menu_Stat_Mobility_Value:SetText(SS_GetStatValue('mobility'));
+        SS_Stats_Menu_Stat_Precision_Value:SetText(SS_GetStatValue('precision'));
         SS_Stats_Menu_Points_Value:SetText(SS_GetAvailableStatPoints());
       </OnShow>
     </Scripts>
-    <Size><AbsDimension x="200" y="230"/></Size>
+    <Size><AbsDimension x="220" y="255"/></Size>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Player_Menu">
       <Offset><AbsDimension x="57" y="0"/></Offset>
@@ -700,14 +701,14 @@
             <Anchor point="TOPLEFT" x="20" y="-70" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Mobility_Name" font="Fonts\FRIZQT__.TTF" text="Подвиж.:">
+        <FontString name="$parent_Stat_Wisdom_Name" font="Fonts\FRIZQT__.TTF" text="Мудрость:">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="20" y="-95" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Wisdom_Name" font="Fonts\FRIZQT__.TTF" text="Мудрость:">
+        <FontString name="$parent_Stat_Morale_Name" font="Fonts\FRIZQT__.TTF" text="Мораль:">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -721,11 +722,18 @@
             <Anchor point="TOPLEFT" x="20" y="-145" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Morale_Name" font="Fonts\FRIZQT__.TTF" text="Мораль:">
+        <FontString name="$parent_Stat_Mobility_Name" font="Fonts\FRIZQT__.TTF" text="Подвижность:">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="20" y="-170" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Precision_Name" font="Fonts\FRIZQT__.TTF" text="Аккуратность:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-195" />
           </Anchors>
         </FontString>
       </Layer>
@@ -744,18 +752,18 @@
             <Anchor point="TOPLEFT" x="73" y="-70" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Mobility_Value" font="Fonts\FRIZQT__.TTF">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="70" y="-95" />
-          </Anchors>
-        </FontString>
         <FontString name="$parent_Stat_Wisdom_Value" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="77" y="-120" />
+            <Anchor point="TOPLEFT" x="77" y="-95" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Morale_Value" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="68" y="-120" />
           </Anchors>
         </FontString>
         <FontString name="$parent_Stat_Empathy_Value" font="Fonts\FRIZQT__.TTF">
@@ -765,11 +773,18 @@
             <Anchor point="TOPLEFT" x="70" y="-145" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Stat_Morale_Value" font="Fonts\FRIZQT__.TTF">
+        <FontString name="$parent_Stat_Mobility_Value" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="68" y="-170" />
+            <Anchor point="TOPLEFT" x="97" y="-170" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Precision_Value" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="97" y="-195" />
           </Anchors>
         </FontString>
       </Layer>
@@ -906,70 +921,12 @@
             GameTooltip:Hide()
           </OnLeave>
         </Scripts>
-      </Button>
-      <Button name="$parent_Stat_Mobility_Add" inherits="OptionsButtonTemplate" text="+">
-        <Size x = "14" y = "16" />
-        <Anchors>
-          <Anchor point="TOPRIGHT">
-            <Offset x="-76" y="-93"/>
-          </Anchor> 
-        </Anchors>
-        <Scripts>
-          <OnClick>
-            SS_PointToStat(1, 'mobility', SS_Stats_Menu_Stat_Mobility_Value);
-          </OnClick>
-        </Scripts>
-      </Button>
-      <Button name="$parent_Stat_Mobility_Reduce" inherits="OptionsButtonTemplate" text="-">
-        <Size x = "14" y = "16" />
-        <Anchors>
-          <Anchor point="TOPRIGHT">
-            <Offset x="-56" y="-93"/>
-          </Anchor> 
-        </Anchors>
-        <Scripts>
-          <OnClick>
-            SS_PointToStat(-1, 'mobility', SS_Stats_Menu_Stat_Mobility_Value);
-          </OnClick>
-        </Scripts>
-      </Button>
-      <Button name="$parent_Stat_Mobility_Reset" inherits="OptionsButtonTemplate" text="x">
-        <Size x = "14" y = "16" />
-        <Anchors>
-          <Anchor point="TOPRIGHT">
-            <Offset x="-36" y="-93"/>
-          </Anchor> 
-        </Anchors>
-        <Scripts>
-          <OnClick>
-            SS_PointToStat(-SS_GetStatValue('mobility'), 'mobility', SS_Stats_Menu_Stat_Mobility_Value);
-          </OnClick>
-        </Scripts>
-      </Button>
-      <Button name="$parent_Stat_Mobility_Info" inherits="OptionsButtonTemplate" text="?">
-        <Size x = "14" y = "16" />
-        <Anchors>
-          <Anchor point="TOPRIGHT">
-            <Offset x="-16" y="-93"/>
-          </Anchor> 
-        </Anchors>
-        <Scripts>
-          <OnEnter>
-            GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Подвижность")
-            GameTooltip:AddLine("Облегчает проверки акробатики и скрытности")
-            GameTooltip:Show()
-          </OnEnter>
-          <OnLeave>
-            GameTooltip:Hide()
-          </OnLeave>
-        </Scripts>
-      </Button>
+      </Button>  
       <Button name="$parent_Stat_Wisdom_Add" inherits="OptionsButtonTemplate" text="+">
         <Size x = "14" y = "16" />
         <Anchors>
           <Anchor point="TOPRIGHT">
-            <Offset x="-76" y="-118"/>
+            <Offset x="-76" y="-93"/>
           </Anchor> 
         </Anchors>
         <Scripts>
@@ -982,7 +939,7 @@
         <Size x = "14" y = "16" />
         <Anchors>
           <Anchor point="TOPRIGHT">
-            <Offset x="-56" y="-118"/>
+            <Offset x="-56" y="-93"/>
           </Anchor> 
         </Anchors>
         <Scripts>
@@ -995,7 +952,7 @@
         <Size x = "14" y = "16" />
         <Anchors>
           <Anchor point="TOPRIGHT">
-            <Offset x="-36" y="-118"/>
+            <Offset x="-36" y="-93"/>
           </Anchor> 
         </Anchors>
         <Scripts>
@@ -1008,7 +965,7 @@
         <Size x = "14" y = "16" />
         <Anchors>
           <Anchor point="TOPRIGHT">
-            <Offset x="-16" y="-118"/>
+            <Offset x="-16" y="-93"/>
           </Anchor> 
         </Anchors>
         <Scripts>
@@ -1016,6 +973,64 @@
             GameTooltip:SetOwner(this, "BOTTOM")
             GameTooltip:AddLine("Мудрость")
             GameTooltip:AddLine("Облегчает проверки чародейства и знания")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Morale_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_PointToStat(1, 'morale', SS_Stats_Menu_Stat_Morale_Value);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Morale_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_PointToStat(-1, 'morale', SS_Stats_Menu_Stat_Morale_Value);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Morale_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_PointToStat(-SS_GetStatValue('morale'), 'morale', SS_Stats_Menu_Stat_Morale_Value);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Morale_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Мораль")
+            GameTooltip:AddLine("Облегчает проверки религии и самоконтроля")
             GameTooltip:Show()
           </OnEnter>
           <OnLeave>
@@ -1081,7 +1096,7 @@
           </OnLeave>
         </Scripts>
       </Button>
-      <Button name="$parent_Stat_Morale_Add" inherits="OptionsButtonTemplate" text="+">
+      <Button name="$parent_Stat_Mobility_Add" inherits="OptionsButtonTemplate" text="+">
         <Size x = "14" y = "16" />
         <Anchors>
           <Anchor point="TOPRIGHT">
@@ -1090,11 +1105,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(1, 'morale', SS_Stats_Menu_Stat_Morale_Value);
+            SS_PointToStat(1, 'mobility', SS_Stats_Menu_Stat_Mobility_Value);
           </OnClick>
         </Scripts>
       </Button>
-      <Button name="$parent_Stat_Morale_Reduce" inherits="OptionsButtonTemplate" text="-">
+      <Button name="$parent_Stat_Mobility_Reduce" inherits="OptionsButtonTemplate" text="-">
         <Size x = "14" y = "16" />
         <Anchors>
           <Anchor point="TOPRIGHT">
@@ -1103,11 +1118,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-1, 'morale', SS_Stats_Menu_Stat_Morale_Value);
+            SS_PointToStat(-1, 'mobility', SS_Stats_Menu_Stat_Mobility_Value);
           </OnClick>
         </Scripts>
       </Button>
-      <Button name="$parent_Stat_Morale_Reset" inherits="OptionsButtonTemplate" text="x">
+      <Button name="$parent_Stat_Mobility_Reset" inherits="OptionsButtonTemplate" text="x">
         <Size x = "14" y = "16" />
         <Anchors>
           <Anchor point="TOPRIGHT">
@@ -1116,11 +1131,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-SS_GetStatValue('morale'), 'morale', SS_Stats_Menu_Stat_Morale_Value);
+            SS_PointToStat(-SS_GetStatValue('mobility'), 'mobility', SS_Stats_Menu_Stat_Mobility_Value);
           </OnClick>
         </Scripts>
       </Button>
-      <Button name="$parent_Stat_Morale_Info" inherits="OptionsButtonTemplate" text="?">
+      <Button name="$parent_Stat_Mobility_Info" inherits="OptionsButtonTemplate" text="?">
         <Size x = "14" y = "16" />
         <Anchors>
           <Anchor point="TOPRIGHT">
@@ -1130,8 +1145,66 @@
         <Scripts>
           <OnEnter>
             GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Мораль")
-            GameTooltip:AddLine("Облегчает проверки религии и самоконтроля")
+            GameTooltip:AddLine("Подвижность")
+            GameTooltip:AddLine("Облегчает проверки акробатики и скрытности")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Precision_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-193"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_PointToStat(1, 'precision', SS_Stats_Menu_Stat_Precision_Value);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Precision_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-193"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_PointToStat(-1, 'precision', SS_Stats_Menu_Stat_Precision_Value);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Precision_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-193"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_PointToStat(-SS_GetStatValue('precision'), 'precision', SS_Stats_Menu_Stat_Precision_Value);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Precision_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-193"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Аккуратность")
+            GameTooltip:AddLine("Облегчает проверки ловкости рук и скрытности")
             GameTooltip:Show()
           </OnEnter>
           <OnLeave>
@@ -2260,7 +2333,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Большой штраф на:">
+        <FontString name="$parent_Armor_Light_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Незначительно снижает:">
           <Color r="1" g="0.4" b="0.4" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2271,7 +2344,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="Б. бой, Самоконтроль">
+        <FontString name="$parent_Armor_Light_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="Мощь">
           <Color r="1" g="0.3" b="0.3" a="1"/>
           <FontHeight val="9"/>
           <Anchors>

@@ -38,7 +38,7 @@ function SS_GetSkillValue(skill)
 end;
 
 function SS_GetSummaryStatPoints()
-  return SS_GetStatValue('power') + SS_GetStatValue('accuracy') + SS_GetStatValue('mobility') + SS_GetStatValue('wisdom')  + SS_GetStatValue('empathy') + SS_GetStatValue('morale');
+  return SS_GetStatValue('power') + SS_GetStatValue('accuracy') + SS_GetStatValue('wisdom')  + SS_GetStatValue('empathy') + SS_GetStatValue('morale')+ SS_GetStatValue('mobility') + SS_GetStatValue('precision');
 end;
 
 function SS_GetMaxStatPoints(playerLevel)

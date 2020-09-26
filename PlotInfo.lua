@@ -20,10 +20,11 @@ SS_createPlot = function(plotName, authorName)
     stats = {
       power = 0,
       accuracy = 0,
-      mobility = 0,
       wisdom = 0,
-      empathy = 0,
       morale = 0,
+      empathy = 0,
+      mobility = 0,
+      precision = 0,
     },
     level = 1,
     experience = 0,
