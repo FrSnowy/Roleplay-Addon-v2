@@ -914,7 +914,7 @@
           <OnEnter>
             GameTooltip:SetOwner(this, "BOTTOM")
             GameTooltip:AddLine("Точность")
-            GameTooltip:AddLine("Облегчает проверки дальнего боя и ловкости рук")
+            GameTooltip:AddLine("Облегчает проверки дальнего боя и внимательности")
             GameTooltip:Show()
           </OnEnter>
           <OnLeave>
@@ -1030,7 +1030,7 @@
           <OnEnter>
             GameTooltip:SetOwner(this, "BOTTOM")
             GameTooltip:AddLine("Мораль")
-            GameTooltip:AddLine("Облегчает проверки религии и самоконтроля")
+            GameTooltip:AddLine("Облегчает проверки веры и самоконтроля")
             GameTooltip:Show()
           </OnEnter>
           <OnLeave>
@@ -1146,7 +1146,7 @@
           <OnEnter>
             GameTooltip:SetOwner(this, "BOTTOM")
             GameTooltip:AddLine("Подвижность")
-            GameTooltip:AddLine("Облегчает проверки акробатики и скрытности")
+            GameTooltip:AddLine("Облегчает проверки избегания и акробатики")
             GameTooltip:Show()
           </OnEnter>
           <OnLeave>
