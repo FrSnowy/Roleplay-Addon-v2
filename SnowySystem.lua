@@ -45,12 +45,19 @@ function SS_GetMaxStatPoints(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_GetPlayerLevel();
   end;
+  return 5 * (1 + math.floor(playerLevel / 3.25));
+end;
+
+function SS_GetMaxStatPointsInSingleStat(playerLevel)
+  if (not(playerLevel)) then
+    playerLevel = SS_GetPlayerLevel();
+  end;
   return math.floor(3 + ((playerLevel / 3.25) * 2));
 end;
 
 function SS_GetSummarySkillPoints()
-  local active = SS_GetSkillValue('melee') + SS_GetSkillValue('range') + SS_GetSkillValue('magic') + SS_GetSkillValue('religion') + SS_GetSkillValue('perfomance') + SS_GetSkillValue('hands');
-  local passive = SS_GetSkillValue('stealth') + SS_GetSkillValue('observation') + SS_GetSkillValue('controll') + SS_GetSkillValue('knowledge') + SS_GetSkillValue('athletics') + SS_GetSkillValue('acrobats');
+  local active = SS_GetSkillValue('melee') + SS_GetSkillValue('range') + SS_GetSkillValue('magic') + SS_GetSkillValue('religion') + SS_GetSkillValue('perfomance') + SS_GetSkillValue('hands') + SS_GetSkillValue('missing');
+  local passive = SS_GetSkillValue('stealth') + SS_GetSkillValue('observation') + SS_GetSkillValue('controll') + SS_GetSkillValue('knowledge') + SS_GetSkillValue('athletics') + SS_GetSkillValue('acrobats') + SS_GetSkillValue('judgment');
 
   return active + passive;
 end;
@@ -59,7 +66,7 @@ function SS_GetMaxSkillPoints(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_GetPlayerLevel();
   end;
-  return 5 + playerLevel * 10;
+  return 10 + playerLevel * 10;
 end;
 
 function SS_GetMaxSkillPointsInSingleSkill(playerLevel)
@@ -92,7 +99,7 @@ local function UpdateBarrierOnPointAddtoStat()
 end;
 
 function SS_PointToStat(value, stat, statView)
-  if (SS_GetStatValue(stat) + value < -SS_GetMaxStatPoints(1)) then
+  if (SS_GetStatValue(stat) + value < -SS_GetMaxStatPointsInSingleStat(1)) then
     return 0;
   end;
 
@@ -100,12 +107,12 @@ function SS_PointToStat(value, stat, statView)
     return 0;
   end;
 
-  if (SS_GetStatValue(stat) + value > SS_GetMaxStatPoints()) then
+  if (SS_GetStatValue(stat) + value > SS_GetMaxStatPointsInSingleStat()) then
     return 0;
   end;
 
   SS_User.plots[SS_User.settings.currentPlot].stats[stat] = SS_GetStatValue(stat) + value;
-  statView:SetText(SS_GetStatValue(stat));
+  statView:SetText(SS_Locale(stat)..': '..SS_GetStatValue(stat));
   SS_Stats_Menu_Points_Value:SetText(SS_GetAvailableStatPoints());
   UpdateHPOnPointAddToStat();
   UpdateBarrierOnPointAddtoStat();
@@ -125,7 +132,7 @@ function SS_PointToSkill(value, skill, skillView)
   end;
 
   SS_User.plots[SS_User.settings.currentPlot].skills[skill] = SS_GetSkillValue(skill) + value;
-  skillView:SetText(SS_GetSkillValue(skill));
+  skillView:SetText(SS_Locale(skill)..": "..SS_GetSkillValue(skill));
   SS_Skills_Menu_Points_Value:SetText(SS_GetAvailableSkillPoints());
 end;
 
@@ -200,13 +207,15 @@ function SS_GetAssociatedStatOfSkill(skill)
     magic = 'wisdom',
     religion = 'morale',
     perfomance = 'empathy',
-    hands = 'accuracy',
-    stealth = 'mobility',
-    observation = 'empathy',
-    control = 'morale',
-    knowledge = 'wisdom',
+    missing = 'mobility',
+    hands = 'precision',
     athletics = 'power',
-    acrobats = 'mobility'
+    observation = 'accuracy',
+    knowledge = 'wisdom',
+    controll = 'morale',
+    judgment = 'empathy',
+    acrobats = 'mobility',
+    stealth = 'precision',
   };
 
   return association[skill];
@@ -239,15 +248,14 @@ function SS_GetMaximumDiceRoll(skillName)
 end;
 
 function SS_DiceRoll(skillName)
-  local result = SS_DiceRollConvey(skillName, {
+  local result = SS_DiceRollFlow(skillName, {
     beforeAll = function()
-      print('======================');
-      print('|cffFFFF00Бросаем куб проверки навыка |r'..SS_Locale(skillName));
+      print('-------------');
     end,
-    afterDiceGeneration = function(dices, diceCount)
-      print('|cffFFFF00Бросок от уровня и навыка: |r'..diceCount..'d('..dices.from.."-"..dices.to..')');
+    onDicesGet = function(dices, diceCount)
+      print('|cffFFFF00Проверка наавыка: |r'..SS_Locale(skillName).."|cffFFFF00, от уровня и характеристик: |r"..diceCount..'d('..dices.from.."-"..dices.to..')');
     end,
-    afterDiceRoll = function(results, dices, diceCount)
+    onRollResultGet = function(results, dices, diceCount)
       local outputString = '|cffFFFF00Результаты броска куба: [|r';
       local maxResult = 0;
       for i = 1, diceCount do
@@ -270,20 +278,17 @@ function SS_DiceRoll(skillName)
       outputString = outputString.."|cffFFFF00]. Итоговое: |r|cff9999FF"..maxResult.."|r";
       print(outputString);
     end,
-    afterStatModifierGeneration = function(statModifier)
-      print('|cffFFFF00Бонус от характеристики: |r'..statModifier);
+    onModifierGet = function(statModifier)
+      print('|cffFFFF00Модификатор от |r'..SS_Locale(SS_GetAssociatedStatOfSkill(skillName))..": "..statModifier);
     end,
-    afterFinalResultGeneration = function(finalResult, statModifier, results, dices, diceCount)
+    afterAll = function(finalResult, statModifier, results, dices, diceCount)
       print('|cffFFFF00Итоговый результат проверки: |r'..finalResult);
     end,
   });
 
-  local efficency = SS_EfficencyRollConvey(skillName, {
-    beforeAll = function()
-      print('|cffFFFF00Бросаем куб эффективности навыка |r'..SS_Locale(skillName));
-    end,
-    afterFinalResultGeneration = function(result, maxValue)
-      print('|cffFFFF00Бросок от навыка:|r 1-'..maxValue..'|cffFFFF00. Итоговое: |r|cff9999FF'..result.."|r");
+  local efficency = SS_EfficencyRollFlow(skillName, {
+    afterAll = function(result, maxValue)
+      print('|cffFFFF00Эффективность:|r 1-'..maxValue..'|cffFFFF00. Итоговое: |r|cff9999FF'..result.."|r");
     end,
   });
 end;
