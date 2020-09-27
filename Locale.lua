@@ -20,8 +20,11 @@ local SS_TEXT = {
     empathy = 'Эмпатия',
     mobility = 'Подвижность',
     precision = 'Аккуратность',
+    light = 'Легкая',
+    medium = 'Средняя',
+    heavy = 'Тяжёлая',
 };
 
 function SS_Locale(word)
-    return SS_TEXT[word] or 'NO LOCALE';
+    return SS_TEXT[word] or 'NO LOCALE FOR \''..word..'\'';
 end;

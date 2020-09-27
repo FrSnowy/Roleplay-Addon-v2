@@ -2454,7 +2454,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt7" font="Fonts\FRIZQT__.TTF" text="атлетика, акробатика, скрытность">
+        <FontString name="$parent_Armor_Medium_Description_Pt7" font="Fonts\FRIZQT__.TTF" text="акробатика, скрытность">
           <Color r="1" g="0.3" b="0.3" a="1"/>
           <FontHeight val="9"/>
           <Anchors>
@@ -2533,7 +2533,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt6" font="Fonts\FRIZQT__.TTF" text="ловк. рук, внимательность,">
+        <FontString name="$parent_Armor_Heavy_Description_Pt6" font="Fonts\FRIZQT__.TTF" text="ловкость рук, внимательность,">
           <Color r="1" g="0.3" b="0.3" a="1"/>
           <FontHeight val="9"/>
           <Anchors>

@@ -230,6 +230,38 @@ function SS_GetStatToSkillModifier(skillName)
   return math.floor(statPoints / 2.4);
 end;
 
+function SS_GetArmorModifier(skillName, dices)
+  local armorType = SS_GetArmorType();
+
+  if (armorType == 'light') then return 0; end;
+
+  local penaltyFor = {
+    medium = {
+      magic = -0.1,
+      missing = -0.05,
+      hands = -0.05,
+      acrobats = -0.05,
+      stealth = -0.05,
+    },
+    heavy = {
+      range = -0.12,
+      magic = -0.25,
+      missing = -0.2,
+      hands = -0.3,
+      observation = -0.12,
+      acrobats = -0.25,
+      stealth = -0.3,
+    }
+  }
+
+  if (not(penaltyFor[armorType]) or not(penaltyFor[armorType][skillName])) then
+    return 0;
+  end;
+
+  local modifier = dices.to * penaltyFor[armorType][skillName];
+  return SS_MathRound(modifier);
+end;
+
 function SS_GetMinimumDiceRoll(skillName)
   local levelModifier = math.floor((SS_GetPlayerLevel() / 5) - SS_GetMaxSkillPointsInSingleSkill(1)) + 5;
   local skillModifier = (math.floor(SS_GetSkillValue(skillName) / 5) - math.floor(SS_GetSkillValue(skillName) / 8));
@@ -262,7 +294,7 @@ function SS_DiceRoll(skillName)
         elseif (results[i] > dices.average + (dices.average * 0.25)) then
           result = "|cFF00FF00"..results[i].."|r";
         else
-          result = results[i]
+          result = results[i];
         end;
 
         if (not(i == diceCount)) then
@@ -271,20 +303,60 @@ function SS_DiceRoll(skillName)
 
         outputString = outputString..result;
       end;
-      outputString = outputString.."|cffFFFF00]. Итоговое: |r|cff9999FF"..maxResult.."|r";
+
+      if (diceCount > 1) then
+        outputString = outputString.."|cffFFFF00]. Наибольшее: |r";
+        if (maxResult < dices.average - (dices.average * 0.25)) then
+          outputString = outputString.."|cFFFF0000"..maxResult.."|r";
+        elseif (maxResult > dices.average + (dices.average * 0.25)) then
+          outputString = outputString.."|cFF00FF00"..maxResult.."|r";
+        else
+          outputString = outputString..maxResult;
+        end;
+      else
+        outputString = outputString.."|cffFFFF00]|r";
+      end;
+
       print(outputString);
     end,
-    onModifierGet = function(statModifier)
-      print('|cffFFFF00Модификатор от |r'..SS_Locale(SS_GetAssociatedStatOfSkill(skillName))..": "..statModifier);
+    onStatModifierGet = function(statModifier)
+      if (not(statModifier == 0)) then
+        local outputString = '|cffFFFF00Модификатор от |r'..SS_Locale(SS_GetAssociatedStatOfSkill(skillName))..': ';
+        if (statModifier > 0) then
+          outputString = outputString..'|cff00FF00'..statModifier..'|r';
+        elseif (statModifier < 0) then
+          outputString = outputString..'|cffFF0000'..statModifier..'|r';
+        else
+          outputString = outputString..statModifier;
+        end;
+        print(outputString);
+      end;
     end,
-    afterAll = function(finalResult, statModifier, results, dices, diceCount)
-      print('|cffFFFF00Итоговый результат проверки: |r'..finalResult);
+    onArmorModifierGet = function(armorModifier)
+      if (not(armorModifier == 0)) then
+        local outputString = '|cffFFFF00Модификатор от брони (|r'..SS_Locale(SS_GetArmorType())..'|cffFFFF00): |r';
+        if (armorModifier > 0) then
+          outputString = outputString..'|cff00FF00'..armorModifier..'|r';
+        elseif (armorModifier < 0) then
+          outputString = outputString..'|cffFF0000'..armorModifier..'|r';
+        else
+          outputString = outputString..armorModifier;
+        end;
+        print(outputString);
+      end;
+    end,
+    afterAll = function(finalResult)
+      print('|cffFFFF00Итоговый результат проверки: |r|cff9999FF'..finalResult.."|r");
     end,
   });
 
   local efficency = SS_EfficencyRollFlow(skillName, {
     afterAll = function(result, maxValue)
-      print('|cffFFFF00Эффективность:|r 1-'..maxValue..'|cffFFFF00. Итоговое: |r|cff9999FF'..result.."|r");
+      if (maxValue == 1) then
+        print('|cffFFFF00Эффективность: |r'..result);
+      else
+        print('|cffFFFF00Эффективность:|r 1-'..maxValue..'|cffFFFF00. Итоговое: |r|cff9999FF'..result.."|r");
+      end;
     end,
   });
 end;

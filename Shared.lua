@@ -53,3 +53,17 @@ SS_GetPlotSummary = function(plotType)
 
   return plot;
 end;
+
+SS_MathRound = function(number)
+  if (number == 0) then return 0; end;
+
+  local rounded = 0;
+  
+  if (math.abs(math.ceil(number) - number) > 0.5) then
+    rounded = math.floor(number);
+  else
+    rounded = math.ceil(number);
+  end;
+
+  return rounded;
+end;

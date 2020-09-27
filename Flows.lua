@@ -34,14 +34,21 @@ function SS_DiceRollFlow(skillName, params)
 
     local statModifier = SS_GetStatToSkillModifier(skillName);
 
-    if (params.onModifierGet) then
-        params.onModifierGet(statModifier, results, dices, diceCount);
+    if (params.onStatModifierGet) then
+        params.onStatModifierGet(statModifier, results, dices, diceCount);
     end;
 
-    local finalResult = maxResult + statModifier;
+    local armorModifier = SS_GetArmorModifier(skillName, dices);
+
+    if (params.onArmorModifierGet) then
+        params.onArmorModifierGet(armorModifier, statModifier, results, dices, diceCount);
+    end;
+
+    local finalResult = maxResult + statModifier + armorModifier;
+    if (finalResult < dices.from) then finalResult = dices.from; end;
 
     if (params.afterAll) then
-       params.afterAll(finalResult, statModifier, results, dices, diceCount);
+       params.afterAll(finalResult, armorModifier, statModifier, results, dices, diceCount);
     end;
 
     return finalResult;
