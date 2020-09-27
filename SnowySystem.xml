@@ -2331,7 +2331,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Повседневная одежда,">
+        <FontString name="$parent_Armor_Light_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Повседневная одежда, ряса,">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2342,7 +2342,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="ряса, и другое сопоставимое.">
+        <FontString name="$parent_Armor_Light_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="и другое сопоставимое.">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2364,22 +2364,11 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Незначительно снижает:">
-          <Color r="1" g="0.4" b="0.4" a="1"/>
+        <FontString name="$parent_Armor_Light_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Не накладывает штрафов">
+          <Color r="0.4" g="1" b="0.4" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="14" y="-134" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="Мощь">
-          <Color r="1" g="0.3" b="0.3" a="1"/>
-          <FontHeight val="9"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-150" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -2399,7 +2388,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Кольчужная броня, броня">
+        <FontString name="$parent_Armor_Medium_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Кожаная, кольчужная броня,">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2410,7 +2399,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="из легких металлов и др.,">
+        <FontString name="$parent_Armor_Medium_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="броня из легких металлов и">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2421,7 +2410,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="сопоставимое снаряжение.">
+        <FontString name="$parent_Armor_Medium_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="другое сопоставимое.">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -2432,11 +2421,11 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Добавляет 1 ОЗ за 3 ОБ">
+        <FontString name="$parent_Armor_Medium_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Добавляет 1 ОБ за 2 ОЗ">
           <Color r="0.4" g="1" b="0.4" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-134" />
+            <Anchor point="TOPLEFT" x="190" y="-128" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -2447,29 +2436,29 @@
           <Color r="1" g="0.4" b="0.4" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-154" />
+            <Anchor point="TOPLEFT" x="190" y="-148" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt6" font="Fonts\FRIZQT__.TTF" text="Б. бой, чарод., ловк. рук, скрыт.,">
+        <FontString name="$parent_Armor_Medium_Description_Pt6" font="Fonts\FRIZQT__.TTF" text="Чарод-во, избегание, ловк. рук">
           <Color r="1" g="0.3" b="0.3" a="1"/>
           <FontHeight val="9"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-168" />
+            <Anchor point="TOPLEFT" x="190" y="-162" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt7" font="Fonts\FRIZQT__.TTF" text="самоконтр., атлет., акробат.">
+        <FontString name="$parent_Armor_Medium_Description_Pt7" font="Fonts\FRIZQT__.TTF" text="атлетика, акробатика, скрытность">
           <Color r="1" g="0.3" b="0.3" a="1"/>
           <FontHeight val="9"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-178" />
+            <Anchor point="TOPLEFT" x="190" y="-172" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -2482,7 +2471,7 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="12"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="44" y="-216" />
+            <Anchor point="TOPLEFT" x="44" y="-206" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -2493,7 +2482,7 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-240" />
+            <Anchor point="TOPLEFT" x="14" y="-226" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -2504,18 +2493,18 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-256" />
+            <Anchor point="TOPLEFT" x="14" y="-240" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="Добавляет 1 ОЗ за 2 ОБ">
+        <FontString name="$parent_Armor_Heavy_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="Добавляет 1 ОБ за 1.5 ОЗ">
           <Color r="0.4" g="1" b="0.4" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-276" />
+            <Anchor point="TOPLEFT" x="14" y="-260" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -2526,97 +2515,40 @@
           <Color r="1" g="0.4" b="0.4" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-296" />
+            <Anchor point="TOPLEFT" x="14" y="-280" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="Д. бой, чарод., ловк. рук, скрыт.,">
+        <FontString name="$parent_Armor_Heavy_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="Дальний бой, чарод-во, избегание">
           <Color r="1" g="0.3" b="0.3" a="1"/>
           <FontHeight val="9"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-312" />
+            <Anchor point="TOPLEFT" x="14" y="-294" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="акробатика">
+        <FontString name="$parent_Armor_Heavy_Description_Pt6" font="Fonts\FRIZQT__.TTF" text="ловк. рук, внимательность,">
           <Color r="1" g="0.3" b="0.3" a="1"/>
           <FontHeight val="9"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-322" />
+            <Anchor point="TOPLEFT" x="14" y="-304" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-      </Layer>
-      <Layer>
-        <FontString name="$parent_Armor_Ignore_Name" font="Fonts\FRIZQT__.TTF" text="Без учёта">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
+        <FontString name="$parent_Armor_Heavy_Description_Pt7" font="Fonts\FRIZQT__.TTF" text="акробатика, скрытность">
+          <Color r="1" g="0.3" b="0.3" a="1"/>
+          <FontHeight val="9"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="220" y="-216" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Ignore_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Нет штрафов, кол-во очков">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-240" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Ignore_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="боеспособ. увелич. на 30%">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-256" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Ignore_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="Только по решению мастера">
-          <Color r="0.9" g="0.5" b="0.25" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-276" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Ignore_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="для особых существ, к-рые">
-          <Color r="0.9" g="0.5" b="0.25" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-286" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Ignore_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="не могут носить брони">
-          <Color r="0.9" g="0.5" b="0.25" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-296" />
+            <Anchor point="TOPLEFT" x="14" y="-314" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -2663,25 +2595,50 @@
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
-              <AbsDimension x="14" y="-210"></AbsDimension>
+              <AbsDimension x="14" y="-200"></AbsDimension>
             </Offset>
           </Anchor>
         </Anchors>
       </CheckButton>
-      <CheckButton name="$parent_Armor_Ignore" inherits="OptionsCheckButtonTemplate" checked="false">
-        <Scripts>
-          <OnClick>
-            SS_SelectArmorType('ignore')
-          </OnClick>
-        </Scripts>
+      <Button name="$parent_Armor_Light_Visual" hidden = "true">
         <Anchors>
-          <Anchor point="TOPLEFT">
+          <Anchor point="BOTTOMRIGHT">
             <Offset>
-              <AbsDimension x="190" y="-210"></AbsDimension>
+              <AbsDimension x="-32" y="36"/>
             </Offset>
           </Anchor>
         </Anchors>
-      </CheckButton>
+        <Size>
+          <AbsDimension x="128" y="128" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\armor-light.blp" />
+      </Button>
+      <Button name="$parent_Armor_Medium_Visual" hidden = "true">
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="-32" y="36"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Size>
+          <AbsDimension x="128" y="128" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\armor-medium.blp" />
+      </Button>
+      <Button name="$parent_Armor_Heavy_Visual" hidden = "true">
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="-32" y="36"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Size>
+          <AbsDimension x="128" y="128" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\armor-heavy.blp" />
+      </Button>
     </Frames>
   </Frame>
   <Frame name="SS_Create_Menu" parent = "UIParent" hidden="true">
@@ -3006,7 +2963,7 @@
         <Scripts>
           <OnEnter>
             GameTooltip:SetOwner(this, "CENTER")
-            GameTooltip:AddLine("Очки Боеспособности (ОБ)");
+            GameTooltip:AddLine("Очки Здоровья (ОЗ)");
             GameTooltip:AddLine("Обозначают количество очков урона,")
             GameTooltip:AddLine("которые ваш персонаж может принять");
             GameTooltip:AddLine("до того, как окажется выведен из боя");
@@ -3032,7 +2989,7 @@
         <Scripts>
           <OnEnter>
             GameTooltip:SetOwner(this, "CENTER")
-            GameTooltip:AddLine("Очки Защиты (ОЗ)");
+            GameTooltip:AddLine("Очки брони (ОБ)");
             GameTooltip:AddLine("Обозначают количество очков урона,")
             GameTooltip:AddLine("которые будут поглощены доспехами, не");
             GameTooltip:AddLine("уменьшая при этом очков боеспособности");

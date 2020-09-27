@@ -147,10 +147,6 @@ function SS_GetMaxHealth()
 
   local isFullHP = SS_GetCurrentHealth() == healthPoints;
 
-  if (SS_User.plots[SS_User.settings.currentPlot].armor == 'ignore') then
-    healthPoints = math.floor(healthPoints + (healthPoints) * 0.3) + 1;
-  end;
-
   if (SS_GetCurrentHealth() > healthPoints) then
     SS_User.plots[SS_User.settings.currentPlot].health = healthPoints;
   end;
@@ -173,7 +169,7 @@ function SS_GetMaxBarrier()
   local maxHP = SS_GetMaxHealth();
   local maxBarrier = 0;
 
-  if (armorType == 'light' or armorType =='ignore') then maxBarrier = 0; end;
+  if (armorType == 'light') then maxBarrier = 0; end;
   if (armorType == 'medium') then
     maxBarrier = math.floor(maxHP / 3);
   end;
