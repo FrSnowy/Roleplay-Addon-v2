@@ -354,14 +354,21 @@
           </OnClick>
         </Scripts>
       </Button>
-      <Frame name="SS_Plots_Container">
-        <Size><AbsDimension x="300" y="140"/></Size>
+      <ScrollFrame name="SS_Plots_Container_Scroll" inherits="UIPanelScrollFrameTemplate">
+        <Scripts>
+          <OnShow>
+            self:SetClipsChildren(true)
+          </OnShow>
+        </Scripts>
         <Anchors>
-          <Anchor point="RIGHT" relativeTo="SS_Controll_Menu">
-          <Offset><AbsDimension x="0" y="0"/></Offset>
-          </Anchor>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="214" y="-74"/>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="214" y="56"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent" x="-44"/>
         </Anchors>
-      </Frame>
+        <ScrollChild>
+          <Frame name="SS_Plots_Container" />
+        </ScrollChild>
+      </ScrollFrame>
     </Frames>
   </Frame>
   <Frame name="SS_Dices_Menu" hidden="true">
@@ -2866,6 +2873,10 @@
       <OnShow>
         SS_Exp_Bar:SetWidth(MainMenuExpBar:GetWidth() + 20);
         SS_DrawExprienceProgress();
+
+        if (SS_User[SS_User.settings.currentPlot].level == 20) then
+          self:Hide();
+        end;
       </OnShow>
     </Scripts>
     <Size><AbsDimension x="300" y="30"/></Size>
@@ -3010,6 +3021,53 @@
           <AbsDimension x="16" y="16" />
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\shield.blp" />
+      </Button>
+    </Frames>
+  </Frame>
+  <Frame name="SS_DM_Panel" parent = "UIParent">
+    <Size><AbsDimension x="300" y="300"/></Size>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\create-menu-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="300"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Управление событием">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
       </Button>
     </Frames>
   </Frame>

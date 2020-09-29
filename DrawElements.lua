@@ -12,17 +12,17 @@ SS_DrawPlots = function(categoryName)
     child:Hide();
   end
 
+  local sortedTable = SS_SortTable(SS_User[plotType]);
   local counter = 0;
-  for index, plot in pairs(SS_User[plotType]) do
+  for index, plot in pairs(sortedTable) do
     local panelName = "OpenPlotPanel-"..plotType.."-"..index;
     local PlotPanel = CreateFrame("Button", panelName, SS_Plots_Container);
           PlotPanel:SetToplevel(false);
           PlotPanel:Show();
           PlotPanel:EnableMouse();
-          PlotPanel:SetWidth(200);
-          PlotPanel:SetHeight(16);
+          PlotPanel:SetSize(224, 16);
           PlotPanel:SetBackdropColor(0, 0, 0, 1);
-          PlotPanel:SetPoint("RIGHT", SS_Controll_Menu, "TOPRIGHT", -85, -82 - 30 * counter);
+          PlotPanel:SetPoint("TOPLEFT", SS_Plots_Container, "TOPLEFT", 0, -28 * counter);
           PlotPanel:SetNormalTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
           PlotPanel:SetHighlightTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
 
@@ -63,6 +63,7 @@ SS_DrawPlots = function(categoryName)
 
       counter = counter + 1;
   end;
+  SS_Plots_Container:SetSize(236, 10 * counter);
 end;
 
 SS_HideEmptyPlotsText = function(plotType)
