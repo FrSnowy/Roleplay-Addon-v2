@@ -2561,7 +2561,7 @@
       <CheckButton name="$parent_Armor_Light" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_SelectArmorType('light')
+            SS_SelectArmorType('light', SS_GetArmorType())
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2575,7 +2575,7 @@
       <CheckButton name="$parent_Armor_Medium" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_SelectArmorType('medium')
+            SS_SelectArmorType('medium', SS_GetArmorType())
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2589,7 +2589,7 @@
       <CheckButton name="$parent_Armor_Heavy" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_SelectArmorType('heavy')
+            SS_SelectArmorType('heavy', SS_GetArmorType())
           </OnClick>
         </Scripts>
         <Anchors>

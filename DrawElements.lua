@@ -111,8 +111,8 @@ function SS_DrawHealthPoints()
   SS_PlayerFrame_HP:SetText(currentHP.."/"..maxHP);
 end;
 
-function SS_DrawBarrierPoints()
-  local maxBarrierPoints = SS_GetMaxBarrier();
+function SS_DrawBarrierPoints(previousArmorType)
+  local maxBarrierPoints = SS_GetMaxBarrier(previousArmorType);
   if (maxBarrierPoints == 0 and SS_GetCurrentBarrier() == 0) then
     SS_PlayerFrame_Barrier:Hide();
     SS_PlayerFrame_Barrier_Icon:Hide();

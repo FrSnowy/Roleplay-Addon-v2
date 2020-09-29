@@ -94,7 +94,7 @@ local function UpdateHPOnPointAddToStat()
 end;
 
 local function UpdateBarrierOnPointAddtoStat()
-  SS_User.plots[SS_User.settings.currentPlot].barrier = SS_GetMaxBarrier();
+  SS_User.plots[SS_User.settings.currentPlot].barrier = SS_GetMaxBarrier(SS_GetArmorType());
   SS_DrawBarrierPoints();
 end;
 
@@ -141,7 +141,7 @@ function SS_GetCurrentHealth()
 end;
 
 function SS_GetMaxHealth()
-  local sumOfStats = SS_GetStatValue('power') + SS_GetStatValue('mobility') + SS_GetStatValue('morale');
+  local sumOfStats = SS_GetStatValue('power') + SS_GetStatValue('mobility');
   local healthPoints = 2 + math.floor(sumOfStats / 3);
   if (healthPoints < 1) then healthPoints = 1 end;
 
@@ -163,7 +163,7 @@ function SS_GetCurrentBarrier()
   return SS_User.plots[SS_User.settings.currentPlot].barrier;
 end;
 
-function SS_GetMaxBarrier()
+function SS_GetMaxBarrier(previousArmorType)
   local armorType = SS_GetArmorType();
 
   local maxHP = SS_GetMaxHealth();
@@ -171,14 +171,26 @@ function SS_GetMaxBarrier()
 
   if (armorType == 'light') then maxBarrier = 0; end;
   if (armorType == 'medium') then
-    maxBarrier = math.floor(maxHP / 3);
-  end;
-  if (armorType == 'heavy') then
     maxBarrier = math.floor(maxHP / 2);
   end;
+  if (armorType == 'heavy') then
+    maxBarrier = math.floor(maxHP / 1.5);
+  end;
+
+  local previousMaxBarrier = 0;
+  if (previousArmorType) then
+    if (previousArmorType == 'light') then previousMaxBarrier = 0; end;
+    if (previousArmorType == 'medium') then
+      previousMaxBarrier = math.floor(maxHP / 2);
+    end;
+    if (previousArmorType == 'heavy') then
+      previousMaxBarrier = math.floor(maxHP / 1.5);
+    end;
+  end;
+
 
   -- Ещё флаг, что не в бою
-  if (SS_GetCurrentBarrier() == 0 or SS_GetCurrentBarrier() > maxBarrier) then
+  if (SS_GetCurrentBarrier() == 0 or SS_GetCurrentBarrier() > maxBarrier or (previousArmorType and SS_GetCurrentBarrier() == previousMaxBarrier)) then
     SS_User.plots[SS_User.settings.currentPlot].barrier = maxBarrier;
   end;
 
@@ -186,14 +198,14 @@ function SS_GetMaxBarrier()
 end;
 
 function SS_GetArmorType()
-  return  SS_User.plots[SS_User.settings.currentPlot].armor;
+  return SS_User.plots[SS_User.settings.currentPlot].armor;
 end;
 
-function SS_SelectArmorType(armorType)
+function SS_SelectArmorType(armorType, previousArmorType)
   SS_User.plots[SS_User.settings.currentPlot].armor = armorType;
   SS_DrawCheckmarkOnArmor();
   SS_DrawHealthPoints();
-  SS_DrawBarrierPoints();
+  SS_DrawBarrierPoints(previousArmorType);
 end;
 
 function SS_GetAssociatedStatOfSkill(skill)
