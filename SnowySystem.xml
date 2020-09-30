@@ -277,7 +277,7 @@
             <Anchor point="TOPLEFT" x="40" y="-106" />
           </Anchors>
         </FontString>
-        <FontString name="$parent_Settings_PlotType" font="Fonts\FRIZQT__.TTF" text="Участник">
+        <FontString name="$parent_Settings_PlotType" font="Fonts\FRIZQT__.TTF" text="Все">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -288,13 +288,22 @@
           <Color r="0.6" g="0.6" b="0.6" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPRIGHT" x="-174" y="-76" />
+            <Anchor point="TOPRIGHT" x="-175" y="-76" />
           </Anchors>
         </FontString>
       </Layer>
     </Layers>
     <Frames>
       <CheckButton name="$parent_Settings_DiceCheck" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnShow>
+            self:SetChecked(SS_User.settings.acceptInvites);
+          </OnShow>
+          <OnClick>
+            SS_User.settings.acceptInvites = not SS_User.settings.acceptInvites;
+            self:SetChecked(SS_User.settings.acceptInvites);
+          </OnClick>
+        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
@@ -304,6 +313,15 @@
         </Anchors>
       </CheckButton>
       <CheckButton name="$parent_Settings_InvitesCheck" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnShow>
+            self:SetChecked(SS_User.settings.displayDiceInfo);
+          </OnShow>
+          <OnClick>
+            SS_User.settings.displayDiceInfo = not SS_User.settings.displayDiceInfo;
+            self:SetChecked(SS_User.settings.displayDiceInfo);
+          </OnClick>
+        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
@@ -321,27 +339,25 @@
         </Anchors>
         <Scripts>
           <OnShow>
-            if (SS_Controll_Menu_Settings_PlotType:GetText() == "Участник") then
+            if (SS_Controll_Menu_Settings_PlotType:GetText() == "Все") then
               SS_HideEmptyPlotsText('plots');
             else
               SS_HideEmptyPlotsText('leadingPlots');
             end;
           </OnShow>
           <OnClick>
-            if (SS_Controll_Menu_Settings_PlotType:GetText() == "Участник") then
-              SS_Controll_Menu_Settings_PlotType:SetText("Ведущий");
-              SS_Controll_Menu_Settings_Create_New_Plot:Show();
+            if (SS_Controll_Menu_Settings_PlotType:GetText() == "Все") then
+              SS_Controll_Menu_Settings_PlotType:SetText("Только ведущий");
               SS_HideEmptyPlotsText('leadingPlots');
             else
-              SS_Controll_Menu_Settings_PlotType:SetText("Участник");
-              SS_Controll_Menu_Settings_Create_New_Plot:Hide();
+              SS_Controll_Menu_Settings_PlotType:SetText("Все");
               SS_HideEmptyPlotsText('plots');
             end;
             SS_DrawPlots(SS_Controll_Menu_Settings_PlotType:GetText());
           </OnClick>
         </Scripts>
       </Button>
-      <Button name="$parent_Settings_Create_New_Plot" hidden="true" inherits="OptionsButtonTemplate" text="Создать">
+      <Button name="$parent_Settings_Create_New_Plot" inherits="OptionsButtonTemplate" text="Создать">
         <Anchors>
           <Anchor point="BOTTOMRIGHT">
             <Offset x="-20" y="24"/>
