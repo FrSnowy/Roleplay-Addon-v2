@@ -297,11 +297,11 @@
       <CheckButton name="$parent_Settings_DiceCheck" inherits="OptionsCheckButtonTemplate" checked="true">
         <Scripts>
           <OnShow>
-            self:SetChecked(SS_User.settings.acceptInvites);
+            self:SetChecked(SS_User.settings.displayDiceInfo);
           </OnShow>
           <OnClick>
-            SS_User.settings.acceptInvites = not SS_User.settings.acceptInvites;
-            self:SetChecked(SS_User.settings.acceptInvites);
+            SS_User.settings.displayDiceInfo = not SS_User.settings.displayDiceInfo;
+            self:SetChecked(SS_User.settings.displayDiceInfo);
           </OnClick>
         </Scripts>
         <Anchors>
@@ -315,11 +315,11 @@
       <CheckButton name="$parent_Settings_InvitesCheck" inherits="OptionsCheckButtonTemplate" checked="true">
         <Scripts>
           <OnShow>
-            self:SetChecked(SS_User.settings.displayDiceInfo);
+            self:SetChecked(SS_User.settings.acceptInvites);
           </OnShow>
           <OnClick>
-            SS_User.settings.displayDiceInfo = not SS_User.settings.displayDiceInfo;
-            self:SetChecked(SS_User.settings.displayDiceInfo);
+            SS_User.settings.acceptInvites = not SS_User.settings.acceptInvites;
+            self:SetChecked(SS_User.settings.acceptInvites);
           </OnClick>
         </Scripts>
         <Anchors>
