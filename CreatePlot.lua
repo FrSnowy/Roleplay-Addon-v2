@@ -1,4 +1,4 @@
-SS_createPlot = function(plotName, authorName)
+SS_CreatePlot_All = function(plotName, authorName)
   local plotUniqueName = plotName..'-'..random(1, 1000000)..'-'..random(1, 1000000)..'-'..random(1, 1000000);
 
   SS_User.plots[plotUniqueName] = {

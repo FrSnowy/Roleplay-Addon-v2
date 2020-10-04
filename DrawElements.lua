@@ -1,4 +1,4 @@
-SS_DrawPlots = function(categoryName)
+SS_Draw_Plots = function(categoryName)
   local plotType;
   if (categoryName == nil or categoryName == 'Участник') then
     plotType = 'plots';
@@ -8,7 +8,7 @@ SS_DrawPlots = function(categoryName)
   
   local counter = 0;
 
-  SS_DrawList(SS_Plots_Container, SS_User[plotType], function(plot, index, container)
+  SS_Shared_DrawList(SS_Plots_Container, SS_User[plotType], function(plot, index, container)
     local PlotPanel = CreateFrame("Button", "OpenPlotPanel-"..plotType.."-"..index, container);
           PlotPanel:SetToplevel(false);
           PlotPanel:Show();
@@ -50,7 +50,7 @@ SS_DrawPlots = function(categoryName)
     PlotPanel:SetScript("OnClick", function()
       SS_Controll_Menu:Hide();
       SS_Plot_Activate:Hide();
-      SS_MakePlotSelected(index);
+      SS_Shared_MakePlotSelected(index);
       SS_Plot_Activate:Show();
     end);
 
@@ -60,7 +60,7 @@ SS_DrawPlots = function(categoryName)
   SS_Plots_Container:SetSize(236, 10 * counter);
 end;
 
-SS_DrawPlayersInPlot = function(_plot)
+SS_Draw_PlayersInPlot = function(_plot)
   local plot;
   if (not(_plot)) then plot = SS_User.settings.currentPlot; end;
   if (plot == nil) then return nil end;
@@ -68,7 +68,7 @@ SS_DrawPlayersInPlot = function(_plot)
 
   local counter = 0;
 
-  SS_DrawList(SS_Plot_Controll_List_Players, SS_User.leadingPlots[plot].players, function(player, index, container)
+  SS_Shared_DrawList(SS_Plot_Controll_List_Players, SS_User.leadingPlots[plot].players, function(player, index, container)
     local PlayerPanel = CreateFrame("Button", "PlayerPanel-"..player.."-"..index, container);
           PlayerPanel:SetToplevel(false);
           PlayerPanel:Show();
@@ -92,7 +92,7 @@ SS_DrawPlayersInPlot = function(_plot)
             PlayerRemove:SetPoint("TOPRIGHT")
             PlayerRemove:SetScript("OnClick", function()
               table.remove(SS_User.leadingPlots[plot].players, index)
-              SS_DrawPlayersInPlot(_plot);
+              SS_Draw_PlayersInPlot(_plot);
             end)
     end;
   
@@ -102,12 +102,12 @@ SS_DrawPlayersInPlot = function(_plot)
   SS_Plot_Controll_List_Players:SetSize(236, 12 * counter);
 end;
 
-SS_HideEmptyPlotsText = function(plotType)
+SS_Draw_HideEmptyPlotsText = function(plotType)
   if (not(plotType == 'plots') and not(plotType == 'leadingPlots')) then
     return 0;
   end;
 
-  if (SS_getPlotsCount(plotType) == 0) then
+  if (SS_Shared_GetPlotsCount(plotType) == 0) then
     SS_Controll_Menu_Settings_EmptyPlot:Show();
     SS_Controll_Menu_Settings_EmptyPlot:SetText("Сюжетов не найдено");
   else
@@ -115,14 +115,14 @@ SS_HideEmptyPlotsText = function(plotType)
   end;
 end;
 
-SS_DrawExprienceProgress = function()
+SS_Draw_ExprienceProgress = function()
   local fullWidth = MainMenuExpBar:GetWidth() - 180;
   local progress = (SS_GetPlayerExperience() / SS_GetExperienceForLevelUp())
   SS_Exp_Bar_Progress:SetWidth(fullWidth * progress);
   SS_Exp_Bar_Experience:SetText(SS_GetPlayerExperience().."/"..SS_GetExperienceForLevelUp());
 end;
 
-SS_ResizePlayerMenuOnPlotActivate = function()
+SS_Draw_PlayerMenuOnPlotActivate = function()
   SS_Player_Menu:SetSize(84, 255);
   SS_Player_Menu_DicesIcon:Show();
   SS_Player_Menu_StatsIcon:Show();
@@ -132,7 +132,7 @@ SS_ResizePlayerMenuOnPlotActivate = function()
   SS_Player_Menu_SettingsIcon:SetPoint("BOTTOM", SS_Player_Menu, "BOTTOM", 0, 20);
 end;
 
-SS_ResizePlayerMenuOnPlotDeactivate = function()
+SS_Draw_PlayerMenuOnPlotDeactivate = function()
   SS_Player_Menu:SetSize(84, 84);
   SS_Player_Menu_DicesIcon:Hide();
   SS_Player_Menu_StatsIcon:Hide();
@@ -142,13 +142,13 @@ SS_ResizePlayerMenuOnPlotDeactivate = function()
   SS_Player_Menu_SettingsIcon:SetPoint("CENTER", SS_Player_Menu, "CENTER", 0, 0);
 end;
 
-function SS_DrawHealthPoints()
+SS_Draw_HealthPoints = function()
   local maxHP = SS_GetMaxHealth();
   local currentHP = SS_GetCurrentHealth();
   SS_PlayerFrame_HP:SetText(currentHP.."/"..maxHP);
 end;
 
-function SS_DrawBarrierPoints(previousArmorType)
+SS_Draw_BarrierPoints = function(previousArmorType)
   local maxBarrierPoints = SS_GetMaxBarrier(previousArmorType);
   if (maxBarrierPoints == 0 and SS_GetCurrentBarrier() == 0) then
     SS_PlayerFrame_Barrier:Hide();
@@ -163,7 +163,7 @@ function SS_DrawBarrierPoints(previousArmorType)
   SS_PlayerFrame_Barrier:SetText(currentBarrier.."/"..maxBarrierPoints)
 end;
 
-function SS_DrawCheckmarkOnArmor()
+SS_Draw_CheckOnArmor = function()
   local armorType = SS_User.plots[SS_User.settings.currentPlot].armor;
   SS_Armor_Menu_Armor_Light:SetChecked('false');
   SS_Armor_Menu_Armor_Medium:SetChecked('false');
@@ -184,7 +184,7 @@ function SS_DrawCheckmarkOnArmor()
   end;
 end;
 
-SS_HideAllSubmenus = function()
+SS_Draw_HideSubmenus = function()
   SS_Stats_Menu:Hide();
   SS_Skills_Menu:Hide();
   SS_Controll_Menu:Hide();
@@ -192,18 +192,18 @@ SS_HideAllSubmenus = function()
   SS_Dices_Menu:Hide();
 end;
 
-SS_UpdatePlayerFrameOnPlotActivate = function()
+SS_Draw_PlayerFrameOnPlotActivate = function()
   --https://www.wowinterface.com/forums/showthread.php?t=48319
   PlayerLevelText:SetTextColor(1, 1, 1);
   PlayerLevelText:SetText(SS_GetPlayerLevel());
   PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 11);
   SS_Exp_Bar:Show();
-  SS_DrawExprienceProgress();
+  SS_Draw_ExprienceProgress();
   SS_PlayerFrame:Show();
-  SS_DrawHealthPoints();
+  SS_Draw_HealthPoints();
 end;
 
-SS_UpdatePlayerFrameOnPlotDeactivate = function()
+SS_Draw_PlayerFrameOnPlotDeActivate = function()
   PlayerLevelText:SetText(UnitLevel("player"));
   PlayerLevelText:SetTextColor(0.82, 0.71, 0);
   PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 10);

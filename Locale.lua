@@ -25,6 +25,6 @@ local SS_TEXT = {
     heavy = 'Тяжёлая',
 };
 
-function SS_Locale(word)
+SS_Locale = function(word)
     return SS_TEXT[word] or 'NO LOCALE FOR \''..word..'\'';
 end;

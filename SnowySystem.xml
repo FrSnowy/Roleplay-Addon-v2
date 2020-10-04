@@ -2,7 +2,7 @@
   <Include file="SnowySystem.lua"/>
   <Include file="Shared.lua"/>
   <Include file="DrawElements.lua"/>
-  <Include file="Config.lua"/>
+  <Include file="Load.lua"/>
   <Frame name="SS_Player_Menu" parent="UIParent" enableMouse="true">
     <Scripts>
       <OnLoad>
@@ -12,11 +12,11 @@
         if(event == "PLAYER_ENTERING_WORLD") then
           SS_ApplicationLoad();
           if (SS_User.settings.currentPlot) then
-            SS_ResizePlayerMenuOnPlotActivate();
-            SS_UpdatePlayerFrameOnPlotActivate();
+            SS_Draw_PlayerMenuOnPlotActivate();
+            SS_Draw_PlayerFrameOnPlotActivate();
           else
-            SS_ResizePlayerMenuOnPlotDeactivate();
-            SS_UpdatePlayerFrameOnPlotDeactivate();
+            SS_Draw_PlayerMenuOnPlotDeactivate();
+            SS_Draw_PlayerFrameOnPlotDeActivate();
           end;
         end;
       </OnEvent>
@@ -63,7 +63,7 @@
             if (SS_Dices_Menu:IsVisible()) then
               SS_Dices_Menu:Hide();
             else
-              SS_HideAllSubmenus();
+              SS_Draw_HideSubmenus();
               SS_Dices_Menu:Show();
             end;
           </OnClick>
@@ -96,7 +96,7 @@
             if (SS_Stats_Menu:IsVisible()) then
               SS_Stats_Menu:Hide();
             else
-              SS_HideAllSubmenus();
+              SS_Draw_HideSubmenus();
               SS_Stats_Menu:Show();
             end;
           </OnClick>
@@ -129,7 +129,7 @@
             if (SS_Skills_Menu:IsVisible()) then
               SS_Skills_Menu:Hide();
             else
-              SS_HideAllSubmenus();
+              SS_Draw_HideSubmenus();
               SS_Skills_Menu:Show();
             end;
           </OnClick>
@@ -162,7 +162,7 @@
             if (SS_Armor_Menu:IsVisible()) then
               SS_Armor_Menu:Hide();
             else
-              SS_HideAllSubmenus();
+              SS_Draw_HideSubmenus();
               SS_Armor_Menu:Show();
             end;
           </OnClick>
@@ -195,7 +195,7 @@
             if (SS_Controll_Menu:IsVisible()) then
               SS_Controll_Menu:Hide();
             else
-              SS_HideAllSubmenus();
+              SS_Draw_HideSubmenus();
               SS_Controll_Menu:Show();
             end;
           </OnClick>
@@ -213,7 +213,7 @@
   <Frame name="SS_Controll_Menu" hidden="true">
     <Scripts>
       <OnShow>
-        SS_DrawPlots(SS_Controll_Menu_Settings_PlotType:GetText())
+        SS_Draw_Plots(SS_Controll_Menu_Settings_PlotType:GetText())
       </OnShow>
     </Scripts>
     <Size><AbsDimension x="500" y="250"/></Size>
@@ -337,20 +337,20 @@
         <Scripts>
           <OnShow>
             if (SS_Controll_Menu_Settings_PlotType:GetText() == "Все") then
-              SS_HideEmptyPlotsText('plots');
+              SS_Draw_HideEmptyPlotsText('plots');
             else
-              SS_HideEmptyPlotsText('leadingPlots');
+              SS_Draw_HideEmptyPlotsText('leadingPlots');
             end;
           </OnShow>
           <OnClick>
             if (SS_Controll_Menu_Settings_PlotType:GetText() == "Все") then
               SS_Controll_Menu_Settings_PlotType:SetText("Только ведущий");
-              SS_HideEmptyPlotsText('leadingPlots');
+              SS_Draw_HideEmptyPlotsText('leadingPlots');
             else
               SS_Controll_Menu_Settings_PlotType:SetText("Все");
-              SS_HideEmptyPlotsText('plots');
+              SS_Draw_HideEmptyPlotsText('plots');
             end;
-            SS_DrawPlots(SS_Controll_Menu_Settings_PlotType:GetText());
+            SS_Draw_Plots(SS_Controll_Menu_Settings_PlotType:GetText());
           </OnClick>
         </Scripts>
       </Button>
@@ -2305,7 +2305,7 @@
   <Frame name="SS_Armor_Menu" hidden="true">
     <Scripts>
       <OnShow>
-        SS_DrawCheckmarkOnArmor();
+        SS_Draw_CheckOnArmor();
       </OnShow>
     </Scripts>
     <Size><AbsDimension x="360" y="370"/></Size>
@@ -2741,7 +2741,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_createPlot(SS_Create_Menu_Name_Input:GetText(), UnitName("player"));
+            SS_CreatePlot_All(SS_Create_Menu_Name_Input:GetText(), UnitName("player"));
             self:GetParent():Hide();
           </OnClick>
         </Scripts>
@@ -2752,7 +2752,7 @@
     <Size><AbsDimension x="300" y="200"/></Size>
     <Scripts>
       <OnShow>
-        SS_Plot_Activate_Name:SetText('"'..SS_GetPlotSummary("selected").name..'"');
+        SS_Plot_Activate_Name:SetText('"'..SS_Shared_GetPlotSummary("selected").name..'"');
         if (SS_User.plots[SS_User.settings.selectedPlot] and SS_User.leadingPlots[SS_User.settings.selectedPlot]) then
           SS_Plot_Activate_Role:SetText('Вы - игрок и ведущий сюжета');
         else
@@ -2844,7 +2844,7 @@
             end;
             SS_User.plots[SS_User.settings.selectedPlot] = nil;
             SS_User.leadingPlots[SS_User.settings.selectedPlot] = nil;
-            SS_MakePlotSelected(nil);
+            SS_Shared_MakePlotSelected(nil);
             self:GetParent():Hide()
           </OnClick>
         </Scripts>
@@ -2859,17 +2859,17 @@
         <Scripts>
           <OnClick>
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
-              SS_MakePlotCurrent(nil);
-              SS_ResizePlayerMenuOnPlotDeactivate();
-              SS_UpdatePlayerFrameOnPlotDeactivate();
+              SS_Shared_MakePlotCurrent(nil);
+              SS_Draw_PlayerMenuOnPlotDeactivate();
+              SS_Draw_PlayerFrameOnPlotDeActivate();
               SS_Plot_Controll:Hide();
             else
-              SS_MakePlotCurrent(SS_User.settings.selectedPlot);
-              SS_ResizePlayerMenuOnPlotActivate();
-              SS_UpdatePlayerFrameOnPlotActivate();
+              SS_Shared_MakePlotCurrent(SS_User.settings.selectedPlot);
+              SS_Draw_PlayerMenuOnPlotActivate();
+              SS_Draw_PlayerFrameOnPlotActivate();
               SS_Plot_Controll:Show();
             end;
-            SS_MakePlotSelected(nil);
+            SS_Shared_MakePlotSelected(nil);
             self:GetParent():Hide()
           </OnClick>
           <OnShow>
@@ -2887,7 +2887,7 @@
     <Scripts>
       <OnShow>
         SS_Exp_Bar:SetWidth(MainMenuExpBar:GetWidth() + 20);
-        SS_DrawExprienceProgress();
+        SS_Draw_ExprienceProgress();
 
         if (SS_User[SS_User.settings.currentPlot].level == 20) then
           self:Hide();
@@ -2945,8 +2945,8 @@
       </OnLoad>
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
-          SS_DrawHealthPoints()
-          SS_DrawBarrierPoints()
+          SS_Draw_HealthPoints()
+          SS_Draw_BarrierPoints()
         end;
       </OnEvent>
     </Scripts>
@@ -3053,7 +3053,7 @@
         end;
       </OnEvent>
       <OnShow>
-        SS_DrawPlayersInPlot();
+        SS_Draw_PlayersInPlot();
       </OnShow>
       <OnDragStart>self:StartMoving();</OnDragStart>
       <OnDragStop>self:StopMovingOrSizing();</OnDragStop>

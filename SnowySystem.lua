@@ -1,8 +1,8 @@
-function SS_ApplicationLoad()
-  SS_loadConfiguration();
+SS_ApplicationLoad = function()
+  SS_Load_Configuration();
 end;
 
-function SS_GetPlayerLevel()
+SS_GetPlayerLevel = function()
   if (SS_User.settings.currentPlot) then
     return SS_User.plots[SS_User.settings.currentPlot].level;
   end;
@@ -10,7 +10,7 @@ function SS_GetPlayerLevel()
   return 0;
 end;
 
-function SS_GetPlayerExperience()
+SS_GetPlayerExperience = function()
   if (SS_User.settings.currentPlot) then
     return SS_User.plots[SS_User.settings.currentPlot].experience;
   end;
@@ -18,87 +18,87 @@ function SS_GetPlayerExperience()
   return 0;
 end;
 
-function SS_GetExperienceForLevelUp()
+SS_GetExperienceForLevelUp = function()
   local levelWithPow = math.floor(math.pow(SS_GetPlayerLevel(), 1.566));
   local experienceForEvent = 100;
 
   return levelWithPow * experienceForEvent;
 end;
 
-function SS_GetStatValue(stat)
+SS_GetStatValue = function(stat)
   if (SS_User.settings.currentPlot) then
     return SS_User.plots[SS_User.settings.currentPlot].stats[stat];
   end;
 end;
 
-function SS_GetSkillValue(skill)
+SS_GetSkillValue = function(skill)
   if (SS_User.settings.currentPlot) then
     return SS_User.plots[SS_User.settings.currentPlot].skills[skill];
   end;
 end;
 
-function SS_GetSummaryStatPoints()
+SS_GetSummaryStatPoints = function()
   return SS_GetStatValue('power') + SS_GetStatValue('accuracy') + SS_GetStatValue('wisdom')  + SS_GetStatValue('empathy') + SS_GetStatValue('morale')+ SS_GetStatValue('mobility') + SS_GetStatValue('precision');
 end;
 
-function SS_GetMaxStatPoints(playerLevel)
+SS_GetMaxStatPoints = function(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_GetPlayerLevel();
   end;
   return 5 * (1 + math.floor(playerLevel / 3.25));
 end;
 
-function SS_GetMaxStatPointsInSingleStat(playerLevel)
+SS_GetMaxStatPointsInSingleStat = function(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_GetPlayerLevel();
   end;
   return math.floor(3 + ((playerLevel / 3.25) * 2));
 end;
 
-function SS_GetSummarySkillPoints()
+SS_GetSummarySkillPoints = function()
   local active = SS_GetSkillValue('melee') + SS_GetSkillValue('range') + SS_GetSkillValue('magic') + SS_GetSkillValue('religion') + SS_GetSkillValue('perfomance') + SS_GetSkillValue('hands') + SS_GetSkillValue('missing');
   local passive = SS_GetSkillValue('stealth') + SS_GetSkillValue('observation') + SS_GetSkillValue('controll') + SS_GetSkillValue('knowledge') + SS_GetSkillValue('athletics') + SS_GetSkillValue('acrobats') + SS_GetSkillValue('judgment');
 
   return active + passive;
 end;
 
-function SS_GetMaxSkillPoints(playerLevel)
+SS_GetMaxSkillPoints = function(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_GetPlayerLevel();
   end;
   return 10 + playerLevel * 10;
 end;
 
-function SS_GetMaxSkillPointsInSingleSkill(playerLevel)
+SS_GetMaxSkillPointsInSingleSkill = function(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_GetPlayerLevel();
   end;
   return playerLevel * 5;
 end;
 
-function SS_GetAvailableStatPoints()
+SS_GetAvailableStatPoints = function()
   local baseStatPoints = SS_GetMaxStatPoints();
   local summaryPoints = SS_GetSummaryStatPoints();
   return baseStatPoints - summaryPoints;
 end;
 
-function SS_GetAvailableSkillPoints()
+SS_GetAvailableSkillPoints = function()
   local baseSkillPoints = SS_GetMaxSkillPoints();
   local summaryPoints = SS_GetSummarySkillPoints();
   return baseSkillPoints - summaryPoints;
 end;
 
-local function UpdateHPOnPointAddToStat()
+local UpdateHPOnPointAddToStat = function()
   SS_User.plots[SS_User.settings.currentPlot].health = SS_GetMaxHealth();
-  SS_DrawHealthPoints();
+  SS_Draw_HealthPoints();
 end;
 
-local function UpdateBarrierOnPointAddtoStat()
+local UpdateBarrierOnPointAddtoStat = function()
   SS_User.plots[SS_User.settings.currentPlot].barrier = SS_GetMaxBarrier(SS_GetArmorType());
-  SS_DrawBarrierPoints();
+  SS_Draw_BarrierPoints();
 end;
 
-function SS_PointToStat(value, stat, statView)
+SS_PointToStat = function(value, stat, statView)
   if (SS_GetStatValue(stat) + value < -SS_GetMaxStatPointsInSingleStat(1)) then
     return 0;
   end;
@@ -118,7 +118,7 @@ function SS_PointToStat(value, stat, statView)
   UpdateBarrierOnPointAddtoStat();
 end;
 
-function SS_PointToSkill(value, skill, skillView)
+SS_PointToSkill = function(value, skill, skillView)
   if (SS_GetSkillValue(skill) + value < 0) then
     return 0;
   end;
@@ -136,11 +136,11 @@ function SS_PointToSkill(value, skill, skillView)
   SS_Skills_Menu_Points_Value:SetText(SS_GetAvailableSkillPoints());
 end;
 
-function SS_GetCurrentHealth()
+SS_GetCurrentHealth = function()
   return SS_User.plots[SS_User.settings.currentPlot].health;
 end;
 
-function SS_GetMaxHealth()
+SS_GetMaxHealth = function()
   local sumOfStats = SS_GetStatValue('power') + SS_GetStatValue('mobility');
   local healthPoints = 2 + math.floor(sumOfStats / 3);
   if (healthPoints < 1) then healthPoints = 1 end;
@@ -159,11 +159,11 @@ function SS_GetMaxHealth()
   return healthPoints;
 end;
 
-function SS_GetCurrentBarrier()
+SS_GetCurrentBarrier = function()
   return SS_User.plots[SS_User.settings.currentPlot].barrier;
 end;
 
-function SS_GetMaxBarrier(previousArmorType)
+SS_GetMaxBarrier = function(previousArmorType)
   local armorType = SS_GetArmorType();
 
   local maxHP = SS_GetMaxHealth();
@@ -197,18 +197,18 @@ function SS_GetMaxBarrier(previousArmorType)
   return maxBarrier;
 end;
 
-function SS_GetArmorType()
+SS_GetArmorType = function()
   return SS_User.plots[SS_User.settings.currentPlot].armor;
 end;
 
-function SS_SelectArmorType(armorType, previousArmorType)
+SS_SelectArmorType = function(armorType, previousArmorType)
   SS_User.plots[SS_User.settings.currentPlot].armor = armorType;
-  SS_DrawCheckmarkOnArmor();
-  SS_DrawHealthPoints();
-  SS_DrawBarrierPoints(previousArmorType);
+  SS_Draw_CheckOnArmor();
+  SS_Draw_HealthPoints();
+  SS_Draw_BarrierPoints(previousArmorType);
 end;
 
-function SS_GetAssociatedStatOfSkill(skill)
+SS_GetAssociatedStatOfSkill = function(skill)
   local association = {
     melee = 'power',
     range = 'accuracy',
@@ -229,7 +229,7 @@ function SS_GetAssociatedStatOfSkill(skill)
   return association[skill];
 end;
 
-function SS_GetDicesCount(playerLevel)
+SS_GetDicesCount = function(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_GetPlayerLevel();
   end;
@@ -237,12 +237,12 @@ function SS_GetDicesCount(playerLevel)
   return math.floor(1 + ( SS_GetPlayerLevel() / 10));
 end;
 
-function SS_GetStatToSkillModifier(skillName)
+SS_GetStatToSkillModifier = function(skillName)
   local statPoints = SS_GetStatValue(SS_GetAssociatedStatOfSkill(skillName));
   return math.floor(statPoints / 2.4);
 end;
 
-function SS_GetArmorModifier(skillName, dices)
+SS_GetArmorModifier = function(skillName, dices)
   local armorType = SS_GetArmorType();
 
   if (armorType == 'light') then return 0; end;
@@ -271,23 +271,23 @@ function SS_GetArmorModifier(skillName, dices)
   end;
 
   local modifier = dices.to * penaltyFor[armorType][skillName];
-  return SS_MathRound(modifier);
+  return SS_Shared_MathRound(modifier);
 end;
 
-function SS_GetMinimumDiceRoll(skillName)
+SS_GetMinimumDiceRoll = function(skillName)
   local levelModifier = math.floor((SS_GetPlayerLevel() / 5) - SS_GetMaxSkillPointsInSingleSkill(1)) + 5;
   local skillModifier = (math.floor(SS_GetSkillValue(skillName) / 5) - math.floor(SS_GetSkillValue(skillName) / 8));
   
   return levelModifier + skillModifier;
 end;
 
-function SS_GetMaximumDiceRoll(skillName)
+SS_GetMaximumDiceRoll = function(skillName)
   local levelModifier = math.floor(SS_GetPlayerLevel() / 8) + 4 + math.floor(0.5 * SS_GetPlayerLevel());
   local skillModifier = math.floor((SS_GetSkillValue(skillName) / 2) / math.pow(SS_GetPlayerLevel(), 0.3));
   return levelModifier + skillModifier;
 end;
 
-function SS_DiceRoll(skillName)
+SS_DiceRoll = function(skillName)
   local singleLineOutput;
   local rollFlow = { };
   local efficencyFlow = { };

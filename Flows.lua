@@ -1,4 +1,4 @@
-function SS_DiceRollFlow(skillName, params)
+SS_DiceRollFlow = function(skillName, params)
     if (params.beforeAll) then
         params.beforeAll();
     end;
@@ -54,7 +54,7 @@ function SS_DiceRollFlow(skillName, params)
     return finalResult;
 end;
 
-function SS_EfficencyRollFlow(skillName, params)
+SS_EfficencyRollFlow = function(skillName, params)
     if (params.beforeAll) then
         params.beforeAll();
     end;

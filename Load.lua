@@ -1,4 +1,4 @@
-SS_loadConfiguration = function()
+SS_Load_Configuration = function()
   SS_User = SS_User or {
     plots = { },
     leadingPlots = { },

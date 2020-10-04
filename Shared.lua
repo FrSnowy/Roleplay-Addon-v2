@@ -1,4 +1,4 @@
-SS_getPlotsCount = function(plotType)
+SS_Shared_GetPlotsCount = function(plotType)
   if (not(plotType == 'plots') and not(plotType == 'leadingPlots')) then
     return 0;
   end;
@@ -11,15 +11,15 @@ SS_getPlotsCount = function(plotType)
   return count;
 end;
 
-SS_MakePlotSelected = function(plotIndex)
+SS_Shared_MakePlotSelected = function(plotIndex)
   SS_User.settings.selectedPlot = plotIndex;
 end;
 
-SS_MakePlotCurrent = function(plotIndex)
+SS_Shared_MakePlotCurrent = function(plotIndex)
   SS_User.settings.currentPlot = plotIndex;
 end;
 
-SS_GetPlotSummary = function(plotType)
+SS_Shared_GetPlotSummary = function(plotType)
   if (not(plotType == 'current') and not(plotType == "selected")) then
     return { };
   end;
@@ -54,7 +54,7 @@ SS_GetPlotSummary = function(plotType)
   return plot;
 end;
 
-SS_MathRound = function(number)
+SS_Shared_MathRound = function(number)
   if (number == 0) then return 0; end;
 
   local rounded = 0;
@@ -68,7 +68,7 @@ SS_MathRound = function(number)
   return rounded;
 end;
 
-SS_SortTable = function(dict)
+SS_Shared_SortTable = function(dict)
   local keys = { };
   for key in pairs(dict) do table.insert(keys, key) end;
   table.sort(keys)
@@ -78,7 +78,7 @@ SS_SortTable = function(dict)
   return sortedDict;
 end;
 
-SS_DrawList = function(target, list, drawSingle)
+SS_Shared_DrawList = function(target, list, drawSingle)
   if (not(target) or not(list)) then return nil end;
 
   local childs = { target:GetChildren() };
@@ -86,7 +86,7 @@ SS_DrawList = function(target, list, drawSingle)
     child:Hide();
   end
   
-  local sortedList = SS_SortTable(list);
+  local sortedList = SS_Shared_SortTable(list);
   local counter = 0;
   for index, element in pairs(sortedList) do
       drawSingle(element, index, target);
