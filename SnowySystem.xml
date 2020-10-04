@@ -3,7 +3,6 @@
   <Include file="Shared.lua"/>
   <Include file="DrawElements.lua"/>
   <Include file="Config.lua"/>
-  <Include file="Conveys.lua"/>
   <Frame name="SS_Player_Menu" parent="UIParent" enableMouse="true">
     <Scripts>
       <OnLoad>
@@ -21,8 +20,6 @@
           end;
         end;
       </OnEvent>
-      <OnUpdate>
-      </OnUpdate>
       <OnEnter>
         self:SetPoint("LEFT", -12, 0);
       </OnEnter>
@@ -2865,10 +2862,12 @@
               SS_MakePlotCurrent(nil);
               SS_ResizePlayerMenuOnPlotDeactivate();
               SS_UpdatePlayerFrameOnPlotDeactivate();
+              SS_Plot_Controll:Hide();
             else
               SS_MakePlotCurrent(SS_User.settings.selectedPlot);
               SS_ResizePlayerMenuOnPlotActivate();
               SS_UpdatePlayerFrameOnPlotActivate();
+              SS_Plot_Controll:Show();
             end;
             SS_MakePlotSelected(nil);
             self:GetParent():Hide()
@@ -3040,7 +3039,25 @@
       </Button>
     </Frames>
   </Frame>
-  <Frame name="SS_DM_Panel" parent = "UIParent">
+  <Frame name="SS_Plot_Controll" parent = "UIParent" movable="true" hidden = "true">
+    <Scripts>
+      <OnLoad>
+        self:RegisterForDrag("LeftButton");
+        self:RegisterEvent("PLAYER_ENTERING_WORLD");
+      </OnLoad>
+			<OnEvent>
+        if(event == "PLAYER_ENTERING_WORLD") then
+          if (SS_User.settings.currentPlot and SS_User.leadingPlots[SS_User.settings.currentPlot]) then
+            self:Show();
+          end;
+        end;
+      </OnEvent>
+      <OnShow>
+        SS_DrawPlayersInPlot();
+      </OnShow>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
     <Size><AbsDimension x="300" y="300"/></Size>
     <Anchors>
       <Anchor point="CENTER" />
@@ -3058,7 +3075,7 @@
     </Backdrop>
     <Layers>
       <Layer>
-        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Управление событием">
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Управление сюжетом">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="14"/>
           <Anchors>
@@ -3085,6 +3102,33 @@
           </OnClick>
         </Scripts>
       </Button>
+      <Button name="$parent_Invite_Button" inherits="OptionsButtonTemplate" text="Пригласить">
+        <Size x = "90" y = "28" />
+        <Anchors>
+          <Anchor point="BOTTOMLEFT">
+            <Offset x="20" y="20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+          </OnClick>
+        </Scripts>
+      </Button>
+      <ScrollFrame name="$parent_List" inherits="UIPanelScrollFrameTemplate">
+        <Scripts>
+          <OnShow>
+            self:SetClipsChildren(true)
+          </OnShow>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="32" y="-54"/>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="32" y="56"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent" x="-44"/>
+        </Anchors>
+        <ScrollChild>
+          <Frame name="$parent_Players" />
+        </ScrollChild>
+      </ScrollFrame>
     </Frames>
   </Frame>
 </Ui>

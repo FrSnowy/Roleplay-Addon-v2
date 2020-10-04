@@ -77,3 +77,18 @@ SS_SortTable = function(dict)
   for _, key in ipairs(keys) do sortedDict[key] = dict[key] end;
   return sortedDict;
 end;
+
+SS_DrawList = function(target, list, drawSingle)
+  if (not(target) or not(list)) then return nil end;
+
+  local childs = { target:GetChildren() };
+  for _, child in pairs(childs) do
+    child:Hide();
+  end
+  
+  local sortedList = SS_SortTable(list);
+  local counter = 0;
+  for index, element in pairs(sortedList) do
+      drawSingle(element, index, target);
+  end;
+end;

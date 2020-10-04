@@ -3,6 +3,7 @@
 ## Version: 2.0
 ## DefaultState: Enabled
 ## SavedVariablesPerCharacter: SS_User
+DrawList.lua
 Locale.lua
 Flows.lua
 SnowySystem.xml
