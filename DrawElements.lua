@@ -50,7 +50,7 @@ SS_Draw_Plots = function(categoryName)
     PlotPanel:SetScript("OnClick", function()
       SS_Controll_Menu:Hide();
       SS_Plot_Activate:Hide();
-      SS_Shared_MakePlotSelected(index);
+      SS_PlotController_Select(index);
       SS_Plot_Activate:Show();
     end);
 
@@ -107,19 +107,12 @@ SS_Draw_HideEmptyPlotsText = function(plotType)
     return 0;
   end;
 
-  if (SS_Shared_GetPlotsCount(plotType) == 0) then
+  if (SS_PlotController_GetCountOf(plotType) == 0) then
     SS_Controll_Menu_Settings_EmptyPlot:Show();
     SS_Controll_Menu_Settings_EmptyPlot:SetText("Сюжетов не найдено");
   else
     SS_Controll_Menu_Settings_EmptyPlot:Hide();
   end;
-end;
-
-SS_Draw_ExprienceProgress = function()
-  local fullWidth = MainMenuExpBar:GetWidth() - 180;
-  local progress = (SS_GetPlayerExperience() / SS_GetExperienceForLevelUp())
-  SS_Exp_Bar_Progress:SetWidth(fullWidth * progress);
-  SS_Exp_Bar_Experience:SetText(SS_GetPlayerExperience().."/"..SS_GetExperienceForLevelUp());
 end;
 
 SS_Draw_PlayerMenuOnPlotActivate = function()
@@ -142,48 +135,6 @@ SS_Draw_PlayerMenuOnPlotDeactivate = function()
   SS_Player_Menu_SettingsIcon:SetPoint("CENTER", SS_Player_Menu, "CENTER", 0, 0);
 end;
 
-SS_Draw_HealthPoints = function()
-  local maxHP = SS_GetMaxHealth();
-  local currentHP = SS_GetCurrentHealth();
-  SS_PlayerFrame_HP:SetText(currentHP.."/"..maxHP);
-end;
-
-SS_Draw_BarrierPoints = function(previousArmorType)
-  local maxBarrierPoints = SS_GetMaxBarrier(previousArmorType);
-  if (maxBarrierPoints == 0 and SS_GetCurrentBarrier() == 0) then
-    SS_PlayerFrame_Barrier:Hide();
-    SS_PlayerFrame_Barrier_Icon:Hide();
-    return;
-  end;
-
-  SS_PlayerFrame_Barrier:Show();
-  SS_PlayerFrame_Barrier_Icon:Show();
-
-  local currentBarrier = SS_GetCurrentBarrier();
-  SS_PlayerFrame_Barrier:SetText(currentBarrier.."/"..maxBarrierPoints)
-end;
-
-SS_Draw_CheckOnArmor = function()
-  local armorType = SS_User.plots[SS_User.settings.currentPlot].armor;
-  SS_Armor_Menu_Armor_Light:SetChecked('false');
-  SS_Armor_Menu_Armor_Medium:SetChecked('false');
-  SS_Armor_Menu_Armor_Heavy:SetChecked('false');
-  SS_Armor_Menu_Armor_Light_Visual:Hide();
-  SS_Armor_Menu_Armor_Medium_Visual:Hide();
-  SS_Armor_Menu_Armor_Heavy_Visual:Hide();
-
-  if (armorType == 'light') then
-    SS_Armor_Menu_Armor_Light:SetChecked('true')
-    SS_Armor_Menu_Armor_Light_Visual:Show();
-  elseif (armorType == 'medium') then
-    SS_Armor_Menu_Armor_Medium:SetChecked('true')
-    SS_Armor_Menu_Armor_Medium_Visual:Show();
-  elseif (armorType == 'heavy') then
-    SS_Armor_Menu_Armor_Heavy:SetChecked('true')
-    SS_Armor_Menu_Armor_Heavy_Visual:Show();
-  end;
-end;
-
 SS_Draw_HideSubmenus = function()
   SS_Stats_Menu:Hide();
   SS_Skills_Menu:Hide();
@@ -194,19 +145,14 @@ end;
 
 SS_Draw_PlayerFrameOnPlotActivate = function()
   --https://www.wowinterface.com/forums/showthread.php?t=48319
-  PlayerLevelText:SetTextColor(1, 1, 1);
-  PlayerLevelText:SetText(SS_GetPlayerLevel());
-  PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 11);
-  SS_Exp_Bar:Show();
-  SS_Draw_ExprienceProgress();
+  SS_Progress_DrawAddonLevel();
+  SS_Progress_ShowExpBar();
   SS_PlayerFrame:Show();
-  SS_Draw_HealthPoints();
+  SS_Params_DrawHealth();
 end;
 
 SS_Draw_PlayerFrameOnPlotDeActivate = function()
-  PlayerLevelText:SetText(UnitLevel("player"));
-  PlayerLevelText:SetTextColor(0.82, 0.71, 0);
-  PlayerLevelText:SetFont("Fonts\\FRIZQT__.TTF", 10);
-  SS_Exp_Bar:Hide();
+  SS_Progress_DrawDefaultLevel();
+  SS_Progress_HideExpBar();
   SS_PlayerFrame:Hide();
 end;

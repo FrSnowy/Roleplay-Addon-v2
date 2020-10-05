@@ -59,7 +59,7 @@ SS_EfficencyRollFlow = function(skillName, params)
         params.beforeAll();
     end;
 
-    local statValue = SS_GetStatValue(SS_GetAssociatedStatOfSkill(skillName));
+    local statValue = SS_Stats_GetValue(SS_Skills_GetStatOf(skillName));
 
     if (params.onStatValueGet) then
         params.onStatValueGet(statValue);

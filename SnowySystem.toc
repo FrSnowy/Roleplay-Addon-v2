@@ -3,13 +3,20 @@
 ## Version: 2.0
 ## DefaultState: Enabled
 ## SavedVariablesPerCharacter: SS_User
-DrawList.lua
 Locale.lua
+DrawList.lua
+Shared.lua
+Armor.lua
+Progress.lua
+Stats.lua
+Skills.lua
+Params.lua
+LeadingPlots.lua
+Plots.lua
+PlotController.lua
 Flows.lua
 SnowySystem.xml
 PlayerInfo.lua
-CreatePlot.lua
 DrawElements.lua
-Shared.lua
 SnowySystem.lua
 Load.lua

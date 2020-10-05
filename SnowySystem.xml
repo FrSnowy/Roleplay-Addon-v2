@@ -368,11 +368,6 @@
         </Scripts>
       </Button>
       <ScrollFrame name="SS_Plots_Container_Scroll" inherits="UIPanelScrollFrameTemplate">
-        <Scripts>
-          <OnShow>
-            self:SetClipsChildren(true)
-          </OnShow>
-        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="214" y="-74"/>
           <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="214" y="56"/>
@@ -697,14 +692,14 @@
   <Frame name="SS_Stats_Menu" hidden="true">
     <Scripts>
       <OnShow>
-        SS_Stats_Menu_Stat_Power:SetText(SS_Locale('power')..': '..SS_GetStatValue('power'));
-        SS_Stats_Menu_Stat_Accuracy:SetText(SS_Locale('accuracy')..': '..SS_GetStatValue('accuracy'));
-        SS_Stats_Menu_Stat_Wisdom:SetText(SS_Locale('wisdom')..': '..SS_GetStatValue('wisdom'));
-        SS_Stats_Menu_Stat_Empathy:SetText(SS_Locale('empathy')..': '..SS_GetStatValue('empathy'));
-        SS_Stats_Menu_Stat_Morale:SetText(SS_Locale('morale')..': '..SS_GetStatValue('morale'));
-        SS_Stats_Menu_Stat_Mobility:SetText(SS_Locale('mobility')..': '..SS_GetStatValue('mobility'));
-        SS_Stats_Menu_Stat_Precision:SetText(SS_Locale('precision')..': '..SS_GetStatValue('precision'));
-        SS_Stats_Menu_Points_Value:SetText(SS_GetAvailableStatPoints());
+        SS_Stats_Menu_Stat_Power:SetText(SS_Locale('power')..': '..SS_Stats_GetValue('power'));
+        SS_Stats_Menu_Stat_Accuracy:SetText(SS_Locale('accuracy')..': '..SS_Stats_GetValue('accuracy'));
+        SS_Stats_Menu_Stat_Wisdom:SetText(SS_Locale('wisdom')..': '..SS_Stats_GetValue('wisdom'));
+        SS_Stats_Menu_Stat_Empathy:SetText(SS_Locale('empathy')..': '..SS_Stats_GetValue('empathy'));
+        SS_Stats_Menu_Stat_Morale:SetText(SS_Locale('morale')..': '..SS_Stats_GetValue('morale'));
+        SS_Stats_Menu_Stat_Mobility:SetText(SS_Locale('mobility')..': '..SS_Stats_GetValue('mobility'));
+        SS_Stats_Menu_Stat_Precision:SetText(SS_Locale('precision')..': '..SS_Stats_GetValue('precision'));
+        SS_Stats_Menu_Points_Value:SetText(SS_Stats_GetAvaliablePoints());
       </OnShow>
     </Scripts>
     <Size><AbsDimension x="220" y="255"/></Size>
@@ -816,7 +811,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(1, 'power', SS_Stats_Menu_Stat_Power);
+            SS_Stats_AddPoint(1, 'power', SS_Stats_Menu_Stat_Power);
           </OnClick>
         </Scripts>
       </Button>
@@ -829,7 +824,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-1, 'power', SS_Stats_Menu_Stat_Power);
+            SS_Stats_AddPoint(-1, 'power', SS_Stats_Menu_Stat_Power);
           </OnClick>
         </Scripts>
       </Button>
@@ -842,7 +837,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-SS_GetStatValue('power'), 'power', SS_Stats_Menu_Stat_Power);
+            SS_Stats_AddPoint(-SS_Stats_GetValue('power'), 'power', SS_Stats_Menu_Stat_Power);
           </OnClick>
         </Scripts>
       </Button>
@@ -874,7 +869,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(1, 'accuracy', SS_Stats_Menu_Stat_Accuracy);
+            SS_Stats_AddPoint(1, 'accuracy', SS_Stats_Menu_Stat_Accuracy);
           </OnClick>
         </Scripts>
       </Button>
@@ -887,7 +882,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-1, 'accuracy', SS_Stats_Menu_Stat_Accuracy);
+            SS_Stats_AddPoint(-1, 'accuracy', SS_Stats_Menu_Stat_Accuracy);
           </OnClick>
         </Scripts>
       </Button>
@@ -900,7 +895,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-SS_GetStatValue('accuracy'), 'accuracy', SS_Stats_Menu_Stat_Accuracy);
+            SS_Stats_AddPoint(-SS_Stats_GetValue('accuracy'), 'accuracy', SS_Stats_Menu_Stat_Accuracy);
           </OnClick>
         </Scripts>
       </Button>
@@ -932,7 +927,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(1, 'wisdom', SS_Stats_Menu_Stat_Wisdom);
+            SS_Stats_AddPoint(1, 'wisdom', SS_Stats_Menu_Stat_Wisdom);
           </OnClick>
         </Scripts>
       </Button>
@@ -945,7 +940,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-1, 'wisdom', SS_Stats_Menu_Stat_Wisdom);
+            SS_Stats_AddPoint(-1, 'wisdom', SS_Stats_Menu_Stat_Wisdom);
           </OnClick>
         </Scripts>
       </Button>
@@ -958,7 +953,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-SS_GetStatValue('wisdom'), 'wisdom', SS_Stats_Menu_Stat_Wisdom);
+            SS_Stats_AddPoint(-SS_Stats_GetValue('wisdom'), 'wisdom', SS_Stats_Menu_Stat_Wisdom);
           </OnClick>
         </Scripts>
       </Button>
@@ -990,7 +985,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(1, 'morale', SS_Stats_Menu_Stat_Morale);
+            SS_Stats_AddPoint(1, 'morale', SS_Stats_Menu_Stat_Morale);
           </OnClick>
         </Scripts>
       </Button>
@@ -1003,7 +998,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-1, 'morale', SS_Stats_Menu_Stat_Morale);
+            SS_Stats_AddPoint(-1, 'morale', SS_Stats_Menu_Stat_Morale);
           </OnClick>
         </Scripts>
       </Button>
@@ -1016,7 +1011,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-SS_GetStatValue('morale'), 'morale', SS_Stats_Menu_Stat_Morale);
+            SS_Stats_AddPoint(-SS_Stats_GetValue('morale'), 'morale', SS_Stats_Menu_Stat_Morale);
           </OnClick>
         </Scripts>
       </Button>
@@ -1048,7 +1043,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(1, 'empathy', SS_Stats_Menu_Stat_Empathy);
+            SS_Stats_AddPoint(1, 'empathy', SS_Stats_Menu_Stat_Empathy);
           </OnClick>
         </Scripts>
       </Button>
@@ -1061,7 +1056,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-1, 'empathy', SS_Stats_Menu_Stat_Empathy);
+            SS_Stats_AddPoint(-1, 'empathy', SS_Stats_Menu_Stat_Empathy);
           </OnClick>
         </Scripts>
       </Button>
@@ -1074,7 +1069,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-SS_GetStatValue('empathy'), 'empathy', SS_Stats_Menu_Stat_Empathy);
+            SS_Stats_AddPoint(-SS_Stats_GetValue('empathy'), 'empathy', SS_Stats_Menu_Stat_Empathy);
           </OnClick>
         </Scripts>
       </Button>
@@ -1106,7 +1101,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(1, 'mobility', SS_Stats_Menu_Stat_Mobility);
+            SS_Stats_AddPoint(1, 'mobility', SS_Stats_Menu_Stat_Mobility);
           </OnClick>
         </Scripts>
       </Button>
@@ -1119,7 +1114,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-1, 'mobility', SS_Stats_Menu_Stat_Mobility);
+            SS_Stats_AddPoint(-1, 'mobility', SS_Stats_Menu_Stat_Mobility);
           </OnClick>
         </Scripts>
       </Button>
@@ -1132,7 +1127,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-SS_GetStatValue('mobility'), 'mobility', SS_Stats_Menu_Stat_Mobility);
+            SS_Stats_AddPoint(-SS_Stats_GetValue('mobility'), 'mobility', SS_Stats_Menu_Stat_Mobility);
           </OnClick>
         </Scripts>
       </Button>
@@ -1164,7 +1159,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(1, 'precision', SS_Stats_Menu_Stat_Precision);
+            SS_Stats_AddPoint(1, 'precision', SS_Stats_Menu_Stat_Precision);
           </OnClick>
         </Scripts>
       </Button>
@@ -1177,7 +1172,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-1, 'precision', SS_Stats_Menu_Stat_Precision);
+            SS_Stats_AddPoint(-1, 'precision', SS_Stats_Menu_Stat_Precision);
           </OnClick>
         </Scripts>
       </Button>
@@ -1190,7 +1185,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_PointToStat(-SS_GetStatValue('precision'), 'precision', SS_Stats_Menu_Stat_Precision);
+            SS_Stats_AddPoint(-SS_Stats_GetValue('precision'), 'precision', SS_Stats_Menu_Stat_Precision);
           </OnClick>
         </Scripts>
       </Button>
@@ -1218,7 +1213,7 @@
   <Frame name="SS_Skills_Menu" hidden="true">
     <Scripts>
       <OnShow>
-        SS_Skills_Menu_Points_Value:SetText(SS_GetAvailableSkillPoints());
+        SS_Skills_Menu_Points_Value:SetText(SS_Skills_GetAvaliablePoints());
       </OnShow>
     </Scripts>
     <Size><AbsDimension x="430" y="275"/></Size>
@@ -1273,13 +1268,13 @@
       <Frame name="$parent_Active">
         <Scripts>
           <OnShow>
-            SS_Skills_Menu_Active_Skill_Melee:SetText(SS_Locale('melee')..": "..SS_GetSkillValue('melee'));
-            SS_Skills_Menu_Active_Skill_Range:SetText(SS_Locale('range')..": "..SS_GetSkillValue('range'));
-            SS_Skills_Menu_Active_Skill_Magic:SetText(SS_Locale('magic')..": "..SS_GetSkillValue('magic'));
-            SS_Skills_Menu_Active_Skill_Religion:SetText(SS_Locale('religion')..": "..SS_GetSkillValue('religion'));
-            SS_Skills_Menu_Active_Skill_Perfomance:SetText(SS_Locale('perfomance')..": "..SS_GetSkillValue('perfomance'));
-            SS_Skills_Menu_Active_Skill_Missing:SetText(SS_Locale('missing')..": "..SS_GetSkillValue('missing'));
-            SS_Skills_Menu_Active_Skill_Hands:SetText(SS_Locale('hands')..": "..SS_GetSkillValue('hands'));
+            SS_Skills_Menu_Active_Skill_Melee:SetText(SS_Locale('melee')..": "..SS_Skills_GetValue('melee'));
+            SS_Skills_Menu_Active_Skill_Range:SetText(SS_Locale('range')..": "..SS_Skills_GetValue('range'));
+            SS_Skills_Menu_Active_Skill_Magic:SetText(SS_Locale('magic')..": "..SS_Skills_GetValue('magic'));
+            SS_Skills_Menu_Active_Skill_Religion:SetText(SS_Locale('religion')..": "..SS_Skills_GetValue('religion'));
+            SS_Skills_Menu_Active_Skill_Perfomance:SetText(SS_Locale('perfomance')..": "..SS_Skills_GetValue('perfomance'));
+            SS_Skills_Menu_Active_Skill_Missing:SetText(SS_Locale('missing')..": "..SS_Skills_GetValue('missing'));
+            SS_Skills_Menu_Active_Skill_Hands:SetText(SS_Locale('hands')..": "..SS_Skills_GetValue('hands'));
           </OnShow>
         </Scripts>
         <Size><AbsDimension x="220" y="210"/></Size>
@@ -1364,7 +1359,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'melee', SS_Skills_Menu_Active_Skill_Melee);
+                SS_Skills_AddPoint(1, 'melee', SS_Skills_Menu_Active_Skill_Melee);
               </OnClick>
             </Scripts>
           </Button>
@@ -1377,7 +1372,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'melee', SS_Skills_Menu_Active_Skill_Melee);
+                SS_Skills_AddPoint(-1, 'melee', SS_Skills_Menu_Active_Skill_Melee);
               </OnClick>
             </Scripts>
           </Button>
@@ -1390,7 +1385,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('melee'), 'melee', SS_Skills_Menu_Active_Skill_Melee);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('melee'), 'melee', SS_Skills_Menu_Active_Skill_Melee);
               </OnClick>
             </Scripts>
           </Button>
@@ -1425,7 +1420,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'range', SS_Skills_Menu_Active_Skill_Range);
+                SS_Skills_AddPoint(1, 'range', SS_Skills_Menu_Active_Skill_Range);
               </OnClick>
             </Scripts>
           </Button>
@@ -1438,7 +1433,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'range', SS_Skills_Menu_Active_Skill_Range);
+                SS_Skills_AddPoint(-1, 'range', SS_Skills_Menu_Active_Skill_Range);
               </OnClick>
             </Scripts>
           </Button>
@@ -1451,7 +1446,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('range'), 'range', SS_Skills_Menu_Active_Skill_Range);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('range'), 'range', SS_Skills_Menu_Active_Skill_Range);
               </OnClick>
             </Scripts>
           </Button>
@@ -1486,7 +1481,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'magic', SS_Skills_Menu_Active_Skill_Magic);
+                SS_Skills_AddPoint(1, 'magic', SS_Skills_Menu_Active_Skill_Magic);
               </OnClick>
             </Scripts>
           </Button>
@@ -1499,7 +1494,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'magic', SS_Skills_Menu_Active_Skill_Magic);
+                SS_Skills_AddPoint(-1, 'magic', SS_Skills_Menu_Active_Skill_Magic);
               </OnClick>
             </Scripts>
           </Button>
@@ -1512,7 +1507,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('magic'), 'magic', SS_Skills_Menu_Active_Skill_Magic);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('magic'), 'magic', SS_Skills_Menu_Active_Skill_Magic);
               </OnClick>
             </Scripts>
           </Button>
@@ -1547,7 +1542,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'religion', SS_Skills_Menu_Active_Skill_Religion);
+                SS_Skills_AddPoint(1, 'religion', SS_Skills_Menu_Active_Skill_Religion);
               </OnClick>
             </Scripts>
           </Button>
@@ -1560,7 +1555,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'religion', SS_Skills_Menu_Active_Skill_Religion);
+                SS_Skills_AddPoint(-1, 'religion', SS_Skills_Menu_Active_Skill_Religion);
               </OnClick>
             </Scripts>
           </Button>
@@ -1573,7 +1568,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('religion'), 'religion', SS_Skills_Menu_Active_Skill_Religion);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('religion'), 'religion', SS_Skills_Menu_Active_Skill_Religion);
               </OnClick>
             </Scripts>
           </Button>
@@ -1608,7 +1603,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+                SS_Skills_AddPoint(1, 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
               </OnClick>
             </Scripts>
           </Button>
@@ -1621,7 +1616,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+                SS_Skills_AddPoint(-1, 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
               </OnClick>
             </Scripts>
           </Button>
@@ -1634,7 +1629,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('perfomance'), 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('perfomance'), 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
               </OnClick>
             </Scripts>
           </Button>
@@ -1670,7 +1665,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'missing', SS_Skills_Menu_Active_Skill_Missing);
+                SS_Skills_AddPoint(1, 'missing', SS_Skills_Menu_Active_Skill_Missing);
               </OnClick>
             </Scripts>
           </Button>
@@ -1683,7 +1678,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'missing', SS_Skills_Menu_Active_Skill_Missing);
+                SS_Skills_AddPoint(-1, 'missing', SS_Skills_Menu_Active_Skill_Missing);
               </OnClick>
             </Scripts>
           </Button>
@@ -1696,7 +1691,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('missing'), 'missing', SS_Skills_Menu_Active_Skill_Missing);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('missing'), 'missing', SS_Skills_Menu_Active_Skill_Missing);
               </OnClick>
             </Scripts>
           </Button>
@@ -1731,7 +1726,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'hands', SS_Skills_Menu_Active_Skill_Hands);
+                SS_Skills_AddPoint(1, 'hands', SS_Skills_Menu_Active_Skill_Hands);
               </OnClick>
             </Scripts>
           </Button>
@@ -1744,7 +1739,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'hands', SS_Skills_Menu_Active_Skill_Hands);
+                SS_Skills_AddPoint(-1, 'hands', SS_Skills_Menu_Active_Skill_Hands);
               </OnClick>
             </Scripts>
           </Button>
@@ -1757,7 +1752,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('hands'), 'hands', SS_Skills_Menu_Active_Skill_Hands);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('hands'), 'hands', SS_Skills_Menu_Active_Skill_Hands);
               </OnClick>
             </Scripts>
           </Button>
@@ -1788,13 +1783,13 @@
       <Frame name="$parent_Passive">
         <Scripts>
           <OnShow>
-            SS_Skills_Menu_Passive_Skill_Stealth:SetText(SS_Locale('stealth')..": "..SS_GetSkillValue('stealth'));
-            SS_Skills_Menu_Passive_Skill_Observation:SetText(SS_Locale('observation')..": "..SS_GetSkillValue('observation'));
-            SS_Skills_Menu_Passive_Skill_Knowledge:SetText(SS_Locale('knowledge')..": "..SS_GetSkillValue('knowledge'));
-            SS_Skills_Menu_Passive_Skill_Controll:SetText(SS_Locale('controll')..": "..SS_GetSkillValue('controll'));
-            SS_Skills_Menu_Passive_Skill_Judgment:SetText(SS_Locale('judgment')..": "..SS_GetSkillValue('judgment'));
-            SS_Skills_Menu_Passive_Skill_Athletics:SetText(SS_Locale('athletics')..": "..SS_GetSkillValue('athletics'));
-            SS_Skills_Menu_Passive_Skill_Acrobats:SetText(SS_Locale('acrobats')..": "..SS_GetSkillValue('acrobats'));
+            SS_Skills_Menu_Passive_Skill_Stealth:SetText(SS_Locale('stealth')..": "..SS_Skills_GetValue('stealth'));
+            SS_Skills_Menu_Passive_Skill_Observation:SetText(SS_Locale('observation')..": "..SS_Skills_GetValue('observation'));
+            SS_Skills_Menu_Passive_Skill_Knowledge:SetText(SS_Locale('knowledge')..": "..SS_Skills_GetValue('knowledge'));
+            SS_Skills_Menu_Passive_Skill_Controll:SetText(SS_Locale('controll')..": "..SS_Skills_GetValue('controll'));
+            SS_Skills_Menu_Passive_Skill_Judgment:SetText(SS_Locale('judgment')..": "..SS_Skills_GetValue('judgment'));
+            SS_Skills_Menu_Passive_Skill_Athletics:SetText(SS_Locale('athletics')..": "..SS_Skills_GetValue('athletics'));
+            SS_Skills_Menu_Passive_Skill_Acrobats:SetText(SS_Locale('acrobats')..": "..SS_Skills_GetValue('acrobats'));
           </OnShow>
         </Scripts>
         <Size><AbsDimension x="220" y="210"/></Size>
@@ -1879,7 +1874,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
+                SS_Skills_AddPoint(1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
               </OnClick>
             </Scripts>
           </Button>
@@ -1892,7 +1887,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
+                SS_Skills_AddPoint(-1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
               </OnClick>
             </Scripts>
           </Button>
@@ -1905,7 +1900,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('athletics'), 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('athletics'), 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
               </OnClick>
             </Scripts>
           </Button>
@@ -1940,7 +1935,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'observation', SS_Skills_Menu_Passive_Skill_Observation);
+                SS_Skills_AddPoint(1, 'observation', SS_Skills_Menu_Passive_Skill_Observation);
               </OnClick>
             </Scripts>
           </Button>
@@ -1953,7 +1948,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'observation', SS_Skills_Menu_Passive_Skill_Observation);
+                SS_Skills_AddPoint(-1, 'observation', SS_Skills_Menu_Passive_Skill_Observation);
               </OnClick>
             </Scripts>
           </Button>
@@ -1966,7 +1961,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('observation'), 'observation', SS_Skills_Menu_Passive_Skill_Observation);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('observation'), 'observation', SS_Skills_Menu_Passive_Skill_Observation);
               </OnClick>
             </Scripts>
           </Button>
@@ -2001,7 +1996,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
+                SS_Skills_AddPoint(1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
               </OnClick>
             </Scripts>
           </Button>
@@ -2014,7 +2009,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
+                SS_Skills_AddPoint(-1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
               </OnClick>
             </Scripts>
           </Button>
@@ -2027,7 +2022,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('knowledge'), 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('knowledge'), 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
               </OnClick>
             </Scripts>
           </Button>
@@ -2062,7 +2057,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'controll', SS_Skills_Menu_Passive_Skill_Controll);
+                SS_Skills_AddPoint(1, 'controll', SS_Skills_Menu_Passive_Skill_Controll);
               </OnClick>
             </Scripts>
           </Button>
@@ -2075,7 +2070,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'controll', SS_Skills_Menu_Passive_Skill_Controll);
+                SS_Skills_AddPoint(-1, 'controll', SS_Skills_Menu_Passive_Skill_Controll);
               </OnClick>
             </Scripts>
           </Button>
@@ -2088,7 +2083,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('controll'), 'controll', SS_Skills_Menu_Passive_Skill_Controll);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('controll'), 'controll', SS_Skills_Menu_Passive_Skill_Controll);
               </OnClick>
             </Scripts>
           </Button>
@@ -2123,7 +2118,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
+                SS_Skills_AddPoint(1, 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
               </OnClick>
             </Scripts>
           </Button>
@@ -2136,7 +2131,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
+                SS_Skills_AddPoint(-1, 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
               </OnClick>
             </Scripts>
           </Button>
@@ -2149,7 +2144,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('judgment'), 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('judgment'), 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
               </OnClick>
             </Scripts>
           </Button>
@@ -2185,7 +2180,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
+                SS_Skills_AddPoint(1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
               </OnClick>
             </Scripts>
           </Button>
@@ -2198,7 +2193,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
+                SS_Skills_AddPoint(-1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
               </OnClick>
             </Scripts>
           </Button>
@@ -2211,7 +2206,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('acrobats'), 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('acrobats'), 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
               </OnClick>
             </Scripts>
           </Button>
@@ -2246,7 +2241,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
+                SS_Skills_AddPoint(1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
               </OnClick>
             </Scripts>
           </Button>
@@ -2259,7 +2254,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
+                SS_Skills_AddPoint(-1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
               </OnClick>
             </Scripts>
           </Button>
@@ -2272,7 +2267,7 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_PointToSkill(-SS_GetSkillValue('stealth'), 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
+                SS_Skills_AddPoint(-SS_Skills_GetValue('stealth'), 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
               </OnClick>
             </Scripts>
           </Button>
@@ -2305,7 +2300,7 @@
   <Frame name="SS_Armor_Menu" hidden="true">
     <Scripts>
       <OnShow>
-        SS_Draw_CheckOnArmor();
+        SS_Armor_DrawCheck();
       </OnShow>
     </Scripts>
     <Size><AbsDimension x="360" y="370"/></Size>
@@ -2581,7 +2576,7 @@
       <CheckButton name="$parent_Armor_Light" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_SelectArmorType('light', SS_GetArmorType())
+            SS_Armor_SelectType('light', SS_Armor_GetType())
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2595,7 +2590,7 @@
       <CheckButton name="$parent_Armor_Medium" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_SelectArmorType('medium', SS_GetArmorType())
+            SS_Armor_SelectType('medium', SS_Armor_GetType())
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2609,7 +2604,7 @@
       <CheckButton name="$parent_Armor_Heavy" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>
-            SS_SelectArmorType('heavy', SS_GetArmorType())
+            SS_Armor_SelectType('heavy', SS_Armor_GetType())
           </OnClick>
         </Scripts>
         <Anchors>
@@ -2741,7 +2736,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_CreatePlot_All(SS_Create_Menu_Name_Input:GetText(), UnitName("player"));
+            SS_PlotController_CreateBoth(SS_Create_Menu_Name_Input:GetText(), UnitName("player"));
             self:GetParent():Hide();
           </OnClick>
         </Scripts>
@@ -2752,7 +2747,7 @@
     <Size><AbsDimension x="300" y="200"/></Size>
     <Scripts>
       <OnShow>
-        SS_Plot_Activate_Name:SetText('"'..SS_Shared_GetPlotSummary("selected").name..'"');
+        SS_Plot_Activate_Name:SetText('"'..SS_PlotController_GetSummaryOf("selected").name..'"');
         if (SS_User.plots[SS_User.settings.selectedPlot] and SS_User.leadingPlots[SS_User.settings.selectedPlot]) then
           SS_Plot_Activate_Role:SetText('Вы - игрок и ведущий сюжета');
         else
@@ -2844,7 +2839,7 @@
             end;
             SS_User.plots[SS_User.settings.selectedPlot] = nil;
             SS_User.leadingPlots[SS_User.settings.selectedPlot] = nil;
-            SS_Shared_MakePlotSelected(nil);
+            SS_PlotController_Select(nil);
             self:GetParent():Hide()
           </OnClick>
         </Scripts>
@@ -2859,17 +2854,17 @@
         <Scripts>
           <OnClick>
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
-              SS_Shared_MakePlotCurrent(nil);
+              SS_PlotController_MakeCurrent(nil);
               SS_Draw_PlayerMenuOnPlotDeactivate();
               SS_Draw_PlayerFrameOnPlotDeActivate();
               SS_Plot_Controll:Hide();
             else
-              SS_Shared_MakePlotCurrent(SS_User.settings.selectedPlot);
+              SS_PlotController_MakeCurrent(SS_User.settings.selectedPlot);
               SS_Draw_PlayerMenuOnPlotActivate();
               SS_Draw_PlayerFrameOnPlotActivate();
               SS_Plot_Controll:Show();
             end;
-            SS_Shared_MakePlotSelected(nil);
+            SS_PlotController_Select(nil);
             self:GetParent():Hide()
           </OnClick>
           <OnShow>
@@ -2886,10 +2881,11 @@
   <Frame name="SS_Exp_Bar" parent = "UIParent" hidden = "true">
     <Scripts>
       <OnShow>
+        if (not (SS_Plots_Current())) then return; end;
         SS_Exp_Bar:SetWidth(MainMenuExpBar:GetWidth() + 20);
-        SS_Draw_ExprienceProgress();
+        SS_Progress_DrawExp();
 
-        if (SS_User[SS_User.settings.currentPlot].level == 20) then
+        if (SS_Plots_Current().progress.level == 20) then
           self:Hide();
         end;
       </OnShow>
@@ -2945,8 +2941,8 @@
       </OnLoad>
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
-          SS_Draw_HealthPoints()
-          SS_Draw_BarrierPoints()
+          SS_Params_DrawHealth()
+          SS_Params_DrawBarrier()
         end;
       </OnEvent>
     </Scripts>
@@ -3115,11 +3111,6 @@
         </Scripts>
       </Button>
       <ScrollFrame name="$parent_List" inherits="UIPanelScrollFrameTemplate">
-        <Scripts>
-          <OnShow>
-            self:SetClipsChildren(true)
-          </OnShow>
-        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="32" y="-54"/>
           <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="32" y="56"/>
