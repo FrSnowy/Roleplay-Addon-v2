@@ -4,6 +4,7 @@
 ## DefaultState: Enabled
 ## SavedVariablesPerCharacter: SS_User
 Locale.lua
+Log.lua
 DrawList.lua
 Shared.lua
 Armor.lua
@@ -14,9 +15,7 @@ Params.lua
 LeadingPlots.lua
 Plots.lua
 PlotController.lua
-Flows.lua
+Roll.lua
 SnowySystem.xml
-PlayerInfo.lua
 DrawElements.lua
 SnowySystem.lua
-Load.lua

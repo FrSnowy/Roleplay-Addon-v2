@@ -34,3 +34,35 @@ SS_Armor_DrawCheck = function()
     SS_Armor_Menu_Armor_Heavy_Visual:Show();
   end;
 end;
+
+SS_Armor_GetModifierFor = function(skillName, dices)
+  local armorType = SS_Armor_GetType();
+
+  if (armorType == 'light') then return 0; end;
+
+  local penaltyFor = {
+    medium = {
+      magic = -0.1,
+      missing = -0.05,
+      hands = -0.05,
+      acrobats = -0.05,
+      stealth = -0.05,
+    },
+    heavy = {
+      range = -0.12,
+      magic = -0.25,
+      missing = -0.2,
+      hands = -0.3,
+      observation = -0.12,
+      acrobats = -0.25,
+      stealth = -0.3,
+    }
+  }
+
+  if (not(penaltyFor[armorType]) or not(penaltyFor[armorType][skillName])) then
+    return 0;
+  end;
+
+  local modifier = dices.to * penaltyFor[armorType][skillName];
+  return SS_Shared_MathRound(modifier);
+end;

@@ -1,0 +1,91 @@
+SS_Log_SkillRoll = function(finalResult, armorModifier, statModifier, results, dices, diceCount, skillName)
+  print('-------------');
+  print('|cffFFFF00Проверка навыка: |r'..SS_Locale(skillName).."|cffFFFF00: |r"..diceCount..'d('..dices.from.."-"..dices.to..')');
+  local outputString = '|cffFFFF00Результаты броска куба: [|r';
+  local maxResult = 0;
+  for i = 1, diceCount do
+    local result = 0;
+    if (maxResult < results[i]) then maxResult = results[i]; end;
+    if (results[i] < dices.average - (dices.average * 0.25)) then
+      result = "|cFFFF0000"..results[i].."|r";
+    elseif (results[i] > dices.average + (dices.average * 0.25)) then
+      result = "|cFF00FF00"..results[i].."|r";
+    else
+      result = results[i];
+    end;
+
+    if (not(i == diceCount)) then
+      result = result..", ";
+    end;
+
+    outputString = outputString..result;
+  end;
+  
+  if (diceCount > 1) then
+    outputString = outputString.."|cffFFFF00]. Наибольшее: |r";
+    if (maxResult < dices.average - (dices.average * 0.25)) then
+      outputString = outputString.."|cFFFF0000"..maxResult.."|r";
+    elseif (maxResult > dices.average + (dices.average * 0.25)) then
+      outputString = outputString.."|cFF00FF00"..maxResult.."|r";
+    else
+      outputString = outputString..maxResult;
+    end;
+  else
+    outputString = outputString.."|cffFFFF00]|r";
+  end;
+
+  print(outputString);
+
+  outputString = '';
+
+  if (not(statModifier == 0)) then
+    outputString = '|cffFFFF00Модификатор от |r'..SS_Locale(SS_Skills_GetStatOf(skillName))..': ';
+    if (statModifier > 0) then
+      outputString = outputString..'|cff00FF00'..statModifier..'|r';
+    elseif (statModifier < 0) then
+      outputString = outputString..'|cffFF0000'..statModifier..'|r';
+    else
+      outputString = outputString..statModifier;
+    end;
+    print(outputString);
+  end;
+
+  outputString = '';
+
+  if (not(armorModifier == 0)) then
+    local outputString = '|cffFFFF00Модификатор от брони (|r'..SS_Locale(SS_Armor_GetType())..'|cffFFFF00): |r';
+    if (armorModifier > 0) then
+      outputString = outputString..'|cff00FF00'..armorModifier..'|r';
+    elseif (armorModifier < 0) then
+      outputString = outputString..'|cffFF0000'..armorModifier..'|r';
+    else
+      outputString = outputString..armorModifier;
+    end;
+    print(outputString);
+  end;
+
+  print('|cffFFFF00Итоговый результат проверки: |r|cff9999FF'..finalResult.."|r");
+end;
+
+SS_Log_EfficencyRoll = function(result, maxValue)
+  if (maxValue == 1) then
+    print('|cffFFFF00Эффективность: |r'..result);
+  else
+    print('|cffFFFF00Эффективность:|r 1-'..maxValue..'|cffFFFF00. Итоговое: |r|cff9999FF'..result.."|r");
+  end;
+end;
+
+SS_Log_DiceInfoShort = function(skillResult, efficencyResult, dices, skillName)
+  local output = '|cffFFFF00'..UnitName('player')..' выбрасывает |r';
+
+  if (skillResult < dices.average - (dices.average * 0.25)) then
+    output = output.."|cFFFF0000"..skillResult.."|r";
+  elseif (skillResult > dices.average + (dices.average * 0.25)) then
+    output = output.."|cFF00FF00"..skillResult.."|r";
+  else
+    output = output..skillResult;
+  end;
+  
+  output = output..' ('..SS_Locale(skillName)..').|cffFFFF00 Эффективность: |r'..efficencyResult;
+  print(output);
+end;

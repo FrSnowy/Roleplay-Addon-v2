@@ -12,11 +12,9 @@
         if(event == "PLAYER_ENTERING_WORLD") then
           SS_ApplicationLoad();
           if (SS_User.settings.currentPlot) then
-            SS_Draw_PlayerMenuOnPlotActivate();
-            SS_Draw_PlayerFrameOnPlotActivate();
+            SS_PlotController_OnActivate();
           else
-            SS_Draw_PlayerMenuOnPlotDeactivate();
-            SS_Draw_PlayerFrameOnPlotDeActivate();
+            SS_PlotController_OnDeactivate();
           end;
         end;
       </OnEvent>
@@ -213,7 +211,7 @@
   <Frame name="SS_Controll_Menu" hidden="true">
     <Scripts>
       <OnShow>
-        SS_Draw_Plots(SS_Controll_Menu_Settings_PlotType:GetText())
+        SS_PlotController_Draw(SS_Controll_Menu_Settings_PlotType:GetText())
       </OnShow>
     </Scripts>
     <Size><AbsDimension x="500" y="250"/></Size>
@@ -350,7 +348,7 @@
               SS_Controll_Menu_Settings_PlotType:SetText("Все");
               SS_Draw_HideEmptyPlotsText('plots');
             end;
-            SS_Draw_Plots(SS_Controll_Menu_Settings_PlotType:GetText());
+            SS_PlotController_Draw(SS_Controll_Menu_Settings_PlotType:GetText());
           </OnClick>
         </Scripts>
       </Button>
@@ -448,7 +446,7 @@
                 self:SetText(SS_Locale('melee'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('melee')
+                SS_Roll('melee')
               </OnClick>
             </Scripts>
           </Button>
@@ -464,7 +462,7 @@
                 self:SetText(SS_Locale('range'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('range')
+                SS_Roll('range')
               </OnClick>
             </Scripts>
           </Button>
@@ -480,7 +478,7 @@
                 self:SetText(SS_Locale('magic'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('magic')
+                SS_Roll('magic')
               </OnClick>
             </Scripts>
           </Button>
@@ -496,7 +494,7 @@
                 self:SetText(SS_Locale('religion'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('religion')
+                SS_Roll('religion')
               </OnClick>
             </Scripts>
           </Button>
@@ -512,7 +510,7 @@
                 self:SetText(SS_Locale('perfomance'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('perfomance')
+                SS_Roll('perfomance')
               </OnClick>
             </Scripts>
           </Button>
@@ -528,7 +526,7 @@
                 self:SetText(SS_Locale('missing'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('missing')
+                SS_Roll('missing')
               </OnClick>
             </Scripts>
           </Button>
@@ -544,7 +542,7 @@
                 self:SetText(SS_Locale('hands'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('hands')
+                SS_Roll('hands')
               </OnClick>
             </Scripts>
           </Button>
@@ -585,7 +583,7 @@
                 self:SetText(SS_Locale('athletics'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('athletics')
+                SS_Roll('athletics')
               </OnClick>
             </Scripts>
           </Button>
@@ -601,7 +599,7 @@
                 self:SetText(SS_Locale('observation'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('observation')
+                SS_Roll('observation')
               </OnClick>
             </Scripts>
           </Button>
@@ -617,7 +615,7 @@
                 self:SetText(SS_Locale('knowledge'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('knowledge')
+                SS_Roll('knowledge')
               </OnClick>
             </Scripts>
           </Button>
@@ -633,7 +631,7 @@
                 self:SetText(SS_Locale('controll'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('controll')
+                SS_Roll('controll')
               </OnClick>
             </Scripts>
           </Button>
@@ -649,7 +647,7 @@
                 self:SetText(SS_Locale('judgment'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('judgment')
+                SS_Roll('judgment')
               </OnClick>
             </Scripts>
           </Button>
@@ -665,7 +663,7 @@
                 self:SetText(SS_Locale('acrobats'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('acrobats')
+                SS_Roll('acrobats')
               </OnClick>
             </Scripts>
           </Button>
@@ -681,7 +679,7 @@
                 self:SetText(SS_Locale('stealth'));
               </OnShow>
               <OnClick>
-                SS_DiceRoll('stealth')
+                SS_Roll('stealth')
               </OnClick>
             </Scripts>
           </Button>
@@ -2855,13 +2853,11 @@
           <OnClick>
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
               SS_PlotController_MakeCurrent(nil);
-              SS_Draw_PlayerMenuOnPlotDeactivate();
-              SS_Draw_PlayerFrameOnPlotDeActivate();
+              SS_PlotController_OnDeactivate();
               SS_Plot_Controll:Hide();
             else
               SS_PlotController_MakeCurrent(SS_User.settings.selectedPlot);
-              SS_Draw_PlayerMenuOnPlotActivate();
-              SS_Draw_PlayerFrameOnPlotActivate();
+              SS_PlotController_OnActivate();
               SS_Plot_Controll:Show();
             end;
             SS_PlotController_Select(nil);
@@ -3049,7 +3045,7 @@
         end;
       </OnEvent>
       <OnShow>
-        SS_Draw_PlayersInPlot();
+        SS_PlotController_DrawPlayers();
       </OnShow>
       <OnDragStart>self:StartMoving();</OnDragStart>
       <OnDragStop>self:StopMovingOrSizing();</OnDragStop>

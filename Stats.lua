@@ -78,3 +78,8 @@ SS_Stats_AddPoint = function(value, stat, statView)
   UpdateHPOnPointAddToStat();
   UpdateBarrierOnPointAddtoStat();
 end;
+
+SS_Stats_GetModifierFor = function(skillName)
+  local statPoints = SS_Stats_GetValue(SS_Skills_GetStatOf(skillName));
+  return math.floor(statPoints / 2.4);
+end;
