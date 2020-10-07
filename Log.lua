@@ -1,4 +1,4 @@
-SS_Log_SkillRoll = function(finalResult, armorModifier, statModifier, results, dices, diceCount, skillName)
+SS_Log_SkillRoll = function(finalResult, otherModifiers, armorModifier, statModifier, results, dices, diceCount, skillName)
   print('-------------');
   print('|cffFFFF00Проверка навыка: |r'..SS_Locale(skillName).."|cffFFFF00: |r"..diceCount..'d('..dices.from.."-"..dices.to..')');
   local outputString = '|cffFFFF00Результаты броска куба: [|r';
@@ -64,14 +64,46 @@ SS_Log_SkillRoll = function(finalResult, armorModifier, statModifier, results, d
     print(outputString);
   end;
 
+  if (not(otherModifiers == 0)) then
+    local outputString = '|cffFFFF00От сторонник модификаторов: |r';
+    if (otherModifiers > 0) then
+      outputString = outputString..'|cff00FF00'..otherModifiers..'|r';
+    elseif (otherModifiers < 0) then
+      outputString = outputString..'|cffFF0000'..otherModifiers..'|r';
+    else
+      outputString = outputString..otherModifiers;
+    end;
+    print(outputString);
+  end;
+
   print('|cffFFFF00Итоговый результат проверки: |r|cff9999FF'..finalResult.."|r");
 end;
 
-SS_Log_EfficencyRoll = function(result, maxValue)
-  if (maxValue == 1) then
-    print('|cffFFFF00Эффективность: |r'..result);
+SS_Log_EfficencyRoll = function(result, otherModifiers, maxValue)
+  if (maxValue == 1 and result == 1) then
+    return nil;
   else
-    print('|cffFFFF00Эффективность:|r 1-'..maxValue..'|cffFFFF00. Итоговое: |r|cff9999FF'..result.."|r");
+    local outputString = '|cffFFFF00Эффективность: |r';
+    if (maxValue == 1) then
+      outputString = outputString..'1. ';
+    else
+      outputString = outputString..'1d(1-'..maxValue..'). '
+    end;
+
+    if (not(otherModifiers == 0)) then
+      outputString = outputString..'|cffFFFF00От модиф.: |r';
+      if (otherModifiers > 0) then
+        outputString = outputString..'|cff00FF00'..otherModifiers..'. |r';
+      elseif (otherModifiers < 0) then
+        outputString = outputString..'|cffFF0000'..otherModifiers..'. |r';
+      else
+        outputString = outputString..otherModifiers..'. ';
+      end;
+    end;
+
+    outputString = outputString..'|cffFFFF00Итоговое: |r|cff9999FF'..result.."|r";
+  
+    print(outputString);
   end;
 end;
 
@@ -86,6 +118,10 @@ SS_Log_DiceInfoShort = function(skillResult, efficencyResult, dices, skillName)
     output = output..skillResult;
   end;
   
-  output = output..' ('..SS_Locale(skillName)..').|cffFFFF00 Эффективность: |r'..efficencyResult;
+  output = output..' ('..SS_Locale(skillName)..').';
+  if (efficencyResult > 1) then
+    output = output..'|cffFFFF00 Эффективность: |r'..efficencyResult;
+  end;
+
   print(output);
 end;

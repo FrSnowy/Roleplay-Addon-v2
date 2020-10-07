@@ -1,11 +1,67 @@
-SS_Roll_Listeners = { }
+SS_Roll_SkillModifiers = {
+  {
+    name = 'Бонус ништяка',
+    value = 1,
+    target = 'melee',
+    onlyOnce = false,
+    onFire = nil,
+  },
+};
+
+SS_Roll_EfficencyModifiers = {
+  {
+    name = 'Test',
+    value = 1,
+    target = 'melee',
+    onlyOnce = false,
+    onFire = nil,
+  },
+};
+
+SS_Roll_RegisterModifier_NecessaryCheck = function(params)
+  if (not(params)) then
+    print('|cffFF0000Ошибка: Не получены нужные параметры при регистрации модификатора броска|r');
+    return false;
+  end;
+
+  if (not(params.name)) then
+    print('|cffFF0000Не найдено имя модификатора броска|r');
+    return false;
+  end;
+
+  if (not(params.value)) then
+    print('|cffFF0000Не найдено значение модификатора|r');
+    return false;
+  end;
+
+  if (not(params.target)) then
+    print('|cffFF0000Нет цели модификатора|r');
+    return false;
+  end;
+
+  return true;
+end;
+
+SS_Roll_RegisterSkillModifier = function(params)
+  if (not(SS_Roll_RegisterModifier_NecessaryCheck(params))) then return false; end;
+
+  table.insert(SS_Roll_SkillModifiers, params);
+  return true;
+end;
+
+SS_Roll_RegisterEfficencyModifier = function(params)
+  if (not(SS_Roll_RegisterModifier_NecessaryCheck(params))) then return false; end;
+
+  table.insert(SS_Roll_EfficencyModifiers, params);
+  return true;
+end;
 
 SS_Roll_GetDicesCount = function(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_Progress_GetLevel();
   end;
 
-  return math.floor(1 + ( SS_Progress_GetLevel() / 10));
+  return math.floor(1 + (SS_Progress_GetLevel() / 10));
 end;
 
 SS_Roll_GetMinimum = function(skillName)
@@ -32,6 +88,28 @@ SS_Roll_GetDices = function(skillName)
   return dices;
 end;
 
+SS_Roll_GetOtherModifersSummary = function(modifiersList, skillName)
+  local otherModifiers = 0;
+
+  SS_Shared_ForEach(modifiersList)(function(modifier, index)
+    local isForAny = modifier.target == 'any';
+    local isForSame = modifier.target == skillName;
+
+    if (isForAny or isForSame) then
+      otherModifiers = otherModifiers + modifier.value;
+      if (modifier.onFire) then
+        modifier.onFire();
+      end;
+    
+      if (modifier.onlyOnce) then
+        table.remove(modifiersList, index);
+      end;
+    end;
+  end)
+
+  return otherModifiers;
+end;
+
 SS_Roll_Skill = function(skillName)
   local diceCount = SS_Roll_GetDicesCount();
   local dices = SS_Roll_GetDices(skillName);
@@ -50,8 +128,12 @@ SS_Roll_Skill = function(skillName)
   local finalResult = maxResult + statModifier + armorModifier;
   if (finalResult < dices.from) then finalResult = dices.from; end;
 
+  local otherModifiers = SS_Roll_GetOtherModifersSummary(SS_Roll_SkillModifiers, skillName);
+
+  finalResult = finalResult + otherModifiers;
+
   if (SS_User.settings.displayDiceInfo) then
-    SS_Log_SkillRoll(finalResult, armorModifier, statModifier, results, dices, diceCount, skillName);
+    SS_Log_SkillRoll(finalResult, otherModifiers, armorModifier, statModifier, results, dices, diceCount, skillName);
   end;
 
   return finalResult;
@@ -64,8 +146,12 @@ SS_Roll_Efficency = function(skillName)
 
   local finalResult = math.random(1, efficencyMaxValue);
 
+  local otherModifiers = SS_Roll_GetOtherModifersSummary(SS_Roll_EfficencyModifiers, skillName);
+
+  finalResult = finalResult + otherModifiers;
+
   if (SS_User.settings.displayDiceInfo) then
-    SS_Log_EfficencyRoll(finalResult, efficencyMaxValue);
+    SS_Log_EfficencyRoll(finalResult, otherModifiers, efficencyMaxValue);
   end;
 
   return finalResult;
@@ -79,6 +165,4 @@ SS_Roll = function(skillName)
   if (not(SS_User.settings.displayDiceInfo)) then
     SS_Log_DiceInfoShort(skillResult, efficencyResult, dices, skillName);
   end;
-
-  local finalResult = math.random(1, efficencyMaxValue);
 end;

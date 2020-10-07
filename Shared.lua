@@ -22,6 +22,14 @@ SS_Shared_SortTable = function(dict)
   return sortedDict;
 end;
 
+SS_Shared_ForEach = function(list)
+  return function(callback)
+    for index, element in pairs(list) do
+      callback(element, index, list);
+    end;
+  end;
+end;
+
 SS_Shared_DrawList = function(target, list, drawSingle)
   if (not(target) or not(list)) then return nil end;
 
@@ -32,7 +40,7 @@ SS_Shared_DrawList = function(target, list, drawSingle)
   
   local sortedList = SS_Shared_SortTable(list);
   local counter = 0;
-  for index, element in pairs(sortedList) do
-      drawSingle(element, index, target);
-  end;
+  SS_Shared_ForEach(sortedList)(function(element, index)
+    drawSingle(element, index, target);
+  end);
 end;
