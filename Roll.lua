@@ -4,10 +4,10 @@ SS_Roll_SkillModifiers = {
     name = 'Бонус ништяка',
     value = 1,
     target = { 'range' },
-    onlyOnce = false,
+    countOfRolls = 2,
     onFire = nil,
   },
-  ]]--
+  ]]
 };
 
 SS_Roll_EfficencyModifiers = {
@@ -16,7 +16,7 @@ SS_Roll_EfficencyModifiers = {
     name = 'Test',
     value = 1,
     target = 'melee',
-    onlyOnce = false,
+    countOfRolls = 1,
     onFire = nil,
   },
   ]]--
@@ -95,35 +95,30 @@ end;
 SS_Roll_GetOtherModifersSummary = function(modifiersList, skillName)
   local otherModifiers = 0;
 
+  local applyModifier = function(modifier, index)
+    otherModifiers = otherModifiers + modifier.value;
+    modifier.countOfRolls = modifier.countOfRolls - 1;
+
+    if (modifier.onFire) then
+      modifier.onFire(modifier);
+    end;
+    
+    if (modifier.countOfRolls <= 0) then
+      table.remove(modifiersList, index);
+    end;
+  end;
+
   SS_Shared_ForEach(modifiersList)(function(modifier, index)
     local isForAny = modifier.target == 'any';
     local isForSame = modifier.target == skillName;
     local isTargetTable = type(modifier.target) == 'table';
 
-    if (isForAny or isForSame) then
-      otherModifiers = otherModifiers + modifier.value;
-      if (modifier.onFire) then
-        modifier.onFire();
-      end;
-    
-      if (modifier.onlyOnce) then
-        table.remove(modifiersList, index);
-      end;
+    if (isForAny or isForSame) then applyModifier(modifier, index);
     elseif (isTargetTable) then
       local isCurrentSkillInTable = SS_Shared_Includes(modifier.target)(function(target)
         return target == skillName;
       end);
-
-      if (isCurrentSkillInTable) then
-        otherModifiers = otherModifiers + modifier.value;
-        if (modifier.onFire) then
-          modifier.onFire();
-        end;
-    
-        if (modifier.onlyOnce) then
-          table.remove(modifiersList, index);
-        end;
-      end;
+      if (isCurrentSkillInTable) then applyModifier(modifier, index); end;
     end;
   end)
 
