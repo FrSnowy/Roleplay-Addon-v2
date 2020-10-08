@@ -1,14 +1,17 @@
 SS_Roll_SkillModifiers = {
+  --[[
   {
     name = 'Бонус ништяка',
     value = 1,
-    target = 'melee',
+    target = { 'range' },
     onlyOnce = false,
     onFire = nil,
   },
+  ]]--
 };
 
 SS_Roll_EfficencyModifiers = {
+  --[[
   {
     name = 'Test',
     value = 1,
@@ -16,6 +19,7 @@ SS_Roll_EfficencyModifiers = {
     onlyOnce = false,
     onFire = nil,
   },
+  ]]--
 };
 
 SS_Roll_RegisterModifier_NecessaryCheck = function(params)
@@ -94,6 +98,7 @@ SS_Roll_GetOtherModifersSummary = function(modifiersList, skillName)
   SS_Shared_ForEach(modifiersList)(function(modifier, index)
     local isForAny = modifier.target == 'any';
     local isForSame = modifier.target == skillName;
+    local isTargetTable = type(modifier.target) == 'table';
 
     if (isForAny or isForSame) then
       otherModifiers = otherModifiers + modifier.value;
@@ -103,6 +108,21 @@ SS_Roll_GetOtherModifersSummary = function(modifiersList, skillName)
     
       if (modifier.onlyOnce) then
         table.remove(modifiersList, index);
+      end;
+    elseif (isTargetTable) then
+      local isCurrentSkillInTable = SS_Shared_Includes(modifier.target)(function(target)
+        return target == skillName;
+      end);
+
+      if (isCurrentSkillInTable) then
+        otherModifiers = otherModifiers + modifier.value;
+        if (modifier.onFire) then
+          modifier.onFire();
+        end;
+    
+        if (modifier.onlyOnce) then
+          table.remove(modifiersList, index);
+        end;
       end;
     end;
   end)
