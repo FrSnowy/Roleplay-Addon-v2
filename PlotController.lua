@@ -178,6 +178,10 @@ SS_PlotController_OnActivate = function()
   SS_Progress_ShowExpBar();
   SS_PlayerFrame:Show();
   SS_Params_DrawHealth();
+
+  if (SS_LeadingPlots_Includes(SS_User.settings.currentPlot)) then
+    SS_Plot_Controll:Show();
+  end;
 end;
 
 SS_PlotController_OnDeactivate = function()
@@ -191,4 +195,6 @@ SS_PlotController_OnDeactivate = function()
   SS_Progress_DrawDefaultLevel();
   SS_Progress_HideExpBar();
   SS_PlayerFrame:Hide();
+
+  SS_Plot_Controll:Hide();
 end;

@@ -2854,11 +2854,9 @@
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
               SS_PlotController_MakeCurrent(nil);
               SS_PlotController_OnDeactivate();
-              SS_Plot_Controll:Hide();
             else
               SS_PlotController_MakeCurrent(SS_User.settings.selectedPlot);
               SS_PlotController_OnActivate();
-              SS_Plot_Controll:Show();
             end;
             SS_PlotController_Select(nil);
             self:GetParent():Hide()
@@ -3067,7 +3065,7 @@
     </Backdrop>
     <Layers>
       <Layer>
-        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Управление сюжетом">
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Участники сюжета">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="14"/>
           <Anchors>
