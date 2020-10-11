@@ -1,12 +1,9 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Include file="SnowySystem.lua"/>
-  <Include file="Shared.lua"/>
-  <Include file="DrawElements.lua"/>
-  <Include file="Load.lua"/>
   <Frame name="SS_Player_Menu" parent="UIParent" enableMouse="true">
     <Scripts>
       <OnLoad>
         self:RegisterEvent("PLAYER_ENTERING_WORLD");
+        self:RegisterEvent("CHAT_MSG_ADDON");
       </OnLoad>
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
@@ -16,6 +13,10 @@
           else
             SS_PlotController_OnDeactivate();
           end;
+        end;
+
+        if (event == "CHAT_MSG_ADDON") then
+          SS_MsgListener_Controller(arg1, arg2, arg3, arg4);
         end;
       </OnEvent>
       <OnEnter>
@@ -3093,16 +3094,17 @@
         </Scripts>
       </Button>
       <Button name="$parent_Invite_Button" inherits="OptionsButtonTemplate" text="Пригласить">
+        <Scripts>
+          <OnClick>
+            SS_DMtP_InviteToPlot();
+          </OnClick>
+        </Scripts>
         <Size x = "90" y = "28" />
         <Anchors>
           <Anchor point="BOTTOMLEFT">
             <Offset x="20" y="20"/>
           </Anchor> 
         </Anchors>
-        <Scripts>
-          <OnClick>
-          </OnClick>
-        </Scripts>
       </Button>
       <ScrollFrame name="$parent_List" inherits="UIPanelScrollFrameTemplate">
         <Anchors>
@@ -3116,7 +3118,7 @@
       </ScrollFrame>
     </Frames>
   </Frame>
-  <Frame name="SS_Modal_Invite" parent = "UIParent" >
+  <Frame name="SS_Modal_Invite" parent = "UIParent" hidden="true">
     <Size><AbsDimension x="340" y="240"/></Size>
     <Anchors>
       <Anchor point="CENTER" />
@@ -3147,7 +3149,7 @@
         </FontString>
       </Layer>
       <Layer>
-        <FontString name="$parent_Inviter" font="Fonts\FRIZQT__.TTF" text="Ведущий История">
+        <FontString name="$parent_Inviter" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="18"/>
           <Anchors>
@@ -3158,7 +3160,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Inviter" font="Fonts\FRIZQT__.TTF" text="предлагает вам вступить в сюжет">
+        <FontString font="Fonts\FRIZQT__.TTF" text="предлагает вам вступить в сюжет">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="16"/>
           <Anchors>
@@ -3169,7 +3171,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Inviter" font="Fonts\FRIZQT__.TTF" text="Большая маленькая ложь">
+        <FontString name="$parent_PlotName" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="0.6" b="0" a="1"/>
           <FontHeight val="18"/>
           <Anchors>
@@ -3190,24 +3192,14 @@
             <Offset x="20" y="20"/>
           </Anchor> 
         </Anchors>
-        <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
-        </Scripts>
       </Button>
-      <Button name="$parent_Decline_Button" inherits="OptionsButtonTemplate" text="Принять">
+      <Button name="$parent_Accept_Button" inherits="OptionsButtonTemplate" text="Принять">
         <Size x = "96" y = "32" />
         <Anchors>
           <Anchor point="BOTTOMRIGHT">
             <Offset x="-20" y="20"/>
           </Anchor> 
         </Anchors>
-        <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
-        </Scripts>
       </Button>
     </Frames>
   </Frame>

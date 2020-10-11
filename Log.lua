@@ -125,3 +125,39 @@ SS_Log_DiceInfoShort = function(skillResult, efficencyResult, dices, skillName)
 
   print(output);
 end;
+
+SS_Log_NoTarget = function()
+  print('|cffFF0000Ошибка: нет цели|r');
+end;
+
+SS_Log_NoCurrentPlot = function()
+  print('|cffFF0000Ошибка: нет текущего сюжета|r');
+end;
+
+SS_Log_InviteSendedTo = function(player, plot)
+  print('|cffFFFF00Приглашение в сюжет "|r'..plot..'"|cffFFFF00 отправлено игроку |r'..player);
+end;
+
+SS_Log_PlotAlreadyExistsFor = function(player, plot)
+  if (UnitName("player") == player) then
+    print('|cffFFFF00Вы не можете повторно пригласить себя в сюжет');
+  else
+    print('|cffFFFF00'..player..' уже принимает участие в сюжете |r"'..plot..'"');
+  end;
+end;
+
+SS_Log_PlotInviteDeclinedBy = function(player, plot)
+  if (UnitName("player") == player) then
+    print('|cffFFFF00Вы отказались от участия в сюжете |r"'..plot..'"');
+  else
+    print('|cffFFFF00'..player..' отказался от участия в сюжете |r"'..plot..'"');
+  end;
+end;
+
+SS_Log_PlotInviteAcceptedBy = function(player, plot)
+  if (UnitName("player") == player) then
+    print('|cffFFFF00Вы согласились на участие в сюжете |r"'..plot..'"');
+  else
+    print('|cffFFFF00'..player..' согласился на участия в сюжете |r"'..plot..'"');
+  end;
+end;
