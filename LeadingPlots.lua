@@ -12,7 +12,13 @@ SS_LeadingPlots_Current = function()
   return SS_User.leadingPlots[SS_User.settings.currentPlot];
 end;
 
+SS_LeadingPlots_Selected = function()
+  if (not (SS_User) or not(SS_User.leadingPlots) or not(SS_User.settings) or not (SS_User.settings.selectedPlot)) then return nil end;
+  return SS_User.leadingPlots[SS_User.settings.selectedPlot];
+end;
+
 SS_LeadingPlots_Includes = function(plotIndex)
+  if (not(SS_User) or not(SS_User.leadingPlots)) then return false; end;
   return not(not(SS_User.leadingPlots[plotIndex]))
 end;
 

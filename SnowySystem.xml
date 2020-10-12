@@ -2746,7 +2746,7 @@
     <Size><AbsDimension x="300" y="200"/></Size>
     <Scripts>
       <OnShow>
-        SS_Plot_Activate_Name:SetText('"'..SS_PlotController_GetSummaryOf("selected").name..'"');
+        SS_Plot_Activate_Name:SetText('"'..SS_User.plots[SS_User.settings.selectedPlot].name..'"');
         if (SS_User.plots[SS_User.settings.selectedPlot] and SS_User.leadingPlots[SS_User.settings.selectedPlot]) then
           SS_Plot_Activate_Role:SetText('Вы - игрок и ведущий сюжета');
         else
@@ -2835,9 +2835,17 @@
           <OnClick>
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
               SS_User.settings.currentPlot = nil;
+              SS_PlotController_OnDeactivate();
             end;
-            SS_User.plots[SS_User.settings.selectedPlot] = nil;
-            SS_User.leadingPlots[SS_User.settings.selectedPlot] = nil;
+            if (SS_Plots_Selected()) then
+              SS_PtDM_DeletePlot(SS_Plots_Selected().name, SS_Plots_Selected().author);
+              SS_User.plots[SS_User.settings.selectedPlot] = nil;
+            end;
+
+            if (SS_LeadingPlots_Selected()) then
+              SS_User.leadingPlots[SS_User.settings.selectedPlot] = nil;
+            end;
+
             SS_PlotController_Select(nil);
             self:GetParent():Hide()
           </OnClick>

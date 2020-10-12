@@ -42,6 +42,18 @@ SS_Shared_Includes = function(list)
   end;
 end;
 
+SS_Shared_RemoveFrom = function(list)
+  return function(checkFn)
+    for index, element in pairs(list) do
+      if (checkFn(element, index, list)) then
+        list[index] = nil;
+      end;
+    end;
+
+    return false;
+  end;
+end;
+
 SS_Shared_DrawList = function(target, list, drawSingle)
   if (not(target) or not(list)) then return nil end;
 

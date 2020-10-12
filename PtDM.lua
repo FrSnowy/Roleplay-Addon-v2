@@ -13,3 +13,7 @@ end;
 SS_PtDM_AcceptInvite = function(plotName, plotAuthor)
   SS_PtDM_Direct('acceptPlotInvite', plotName, plotAuthor);
 end;
+
+SS_PtDM_DeletePlot = function(plotName, plotAuthor)
+  SS_PtDM_Direct('playerDeletePlot', plotName, plotAuthor);
+end;

@@ -13,12 +13,18 @@ SS_Plots_Create = function(plotUniqueName, plotName, authorName)
 end;
 
 SS_Plots_Includes = function(plotIndex)
+  if (not(SS_User) or not(SS_User.plots)) then return false; end;
   return not(not(SS_User.plots[plotIndex]))
 end;
 
 SS_Plots_Current = function()
   if (not (SS_User) or not(SS_User.plots) or not(SS_User.settings) or not (SS_User.settings.currentPlot)) then return nil end;
   return SS_User.plots[SS_User.settings.currentPlot];
+end;
+
+SS_Plots_Selected = function()
+  if (not (SS_User) or not(SS_User.plots) or not(SS_User.settings) or not (SS_User.settings.selectedPlot)) then return nil end;
+  return SS_User.plots[SS_User.settings.selectedPlot];
 end;
 
 SS_Plots_Count = function()

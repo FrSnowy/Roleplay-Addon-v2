@@ -8,13 +8,13 @@ end;
 
 SS_PlotController_Select = function(plotIndex)
   if (plotIndex == nil) then SS_User.settings.selectedPlot = nil; return; end;
-  if (not(SS_Plots_Includes(plotIndex)) or not(SS_LeadingPlots_Includes(plotIndex))) then return false; end;
+  if (not(SS_Plots_Includes(plotIndex)) and not(SS_LeadingPlots_Includes(plotIndex))) then return false; end;
   SS_User.settings.selectedPlot = plotIndex;
 end;
 
 SS_PlotController_MakeCurrent = function(plotIndex)
   if (plotIndex == nil) then SS_User.settings.currentPlot = nil; return; end;
-  if (not(SS_Plots_Includes(plotIndex)) or not(SS_LeadingPlots_Includes(plotIndex))) then return false; end;
+  if (not(SS_Plots_Includes(plotIndex)) and not(SS_LeadingPlots_Includes(plotIndex))) then return false; end;
   SS_User.settings.currentPlot = plotIndex;
 end;
 
@@ -27,44 +27,9 @@ SS_PlotController_GetCountOf = function(plotType)
   if (plotType == 'leadingPlots') then return SS_LeadingPlots_Count(); end;
 end;
 
-SS_PlotController_GetSummaryOf = function(plotType)
-  if (not(plotType == 'current') and not(plotType == "selected")) then
-    return { };
-  end;
- 
-  local plot = { };
-
-  local lookFor = nil;
-  if (plotType == 'current') then
-    lookFor = 'currentPlot';
-  else
-    lookFor = 'selectedPlot';
-  end;
-
-  if (SS_User.settings[lookFor] == nil) then
-    return nil;
-  end;
-
-  if (SS_User.plots[SS_User.settings[lookFor]]) then
-    plot.name = SS_User.plots[SS_User.settings[lookFor]].name;
-    plot.playerInfo = {
-      skills = SS_User.plots[SS_User.settings[lookFor]].skills,
-    };
-  end;
-
-  if (SS_User.leadingPlots[SS_User.settings[lookFor]]) then
-    plot.name = SS_User.leadingPlots[SS_User.settings[lookFor]].name;
-    plot.leaderInfo = {
-      players = SS_User.leadingPlots[SS_User.settings[lookFor]].players;
-    };
-  end;
-
-  return plot;
-end;
-
 SS_PlotController_Draw = function(categoryName)
   local plotType;
-  if (categoryName == nil or categoryName == 'Участник') then
+  if (categoryName == nil or categoryName == 'Все') then
     plotType = 'plots';
   else
     plotType = 'leadingPlots';
@@ -133,32 +98,26 @@ SS_PlotController_DrawPlayers = function(_plot)
   local counter = 0;
 
   SS_Shared_DrawList(SS_Plot_Controll_List_Players, SS_User.leadingPlots[plot].players, function(player, index, container)
-    local PlayerPanel = CreateFrame("Button", "PlayerPanel-"..player.."-"..index, container);
+    local PlayerPanel = CreateFrame("Button", "SS_PlayerPanel-"..player.."-"..index, container);
           PlayerPanel:SetToplevel(false);
           PlayerPanel:Show();
           PlayerPanel:EnableMouse();
           PlayerPanel:SetSize(224, 27);
           PlayerPanel:SetBackdropColor(0, 0, 0, 1);
-          PlayerPanel:SetPoint("TOPLEFT", container, "TOPLEFT", 0, -28 * counter);
+          PlayerPanel:SetPoint("TOPLEFT", container, "TOPLEFT", 0, -36 * counter);
           PlayerPanel:SetNormalTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
           PlayerPanel:SetHighlightTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
 
+    local name = player;
+    if (name == UnitName("player")) then
+      name = name..' (Вы)';
+    end;
+
     local PlayerName = PlayerPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
           PlayerName:SetPoint("LEFT", PlayerPanel, "LEFT", 0, 4);
-          PlayerName:SetText(player);
+          PlayerName:SetText(name);
           PlayerName:SetFont("Fonts\\FRIZQT__.TTF", 12);
           PlayerName:Show();
-
-    if (not (player == UnitName("player"))) then
-      local PlayerRemove = CreateFrame("Button", nil, PlayerPanel, "UIPanelButtonTemplate")
-            PlayerRemove:SetSize(20, 20)
-            PlayerRemove:SetText("x")
-            PlayerRemove:SetPoint("TOPRIGHT")
-            PlayerRemove:SetScript("OnClick", function()
-              table.remove(SS_User.leadingPlots[plot].players, index)
-              SS_PlotController_DrawPlayers(_plot);
-            end)
-    end;
   
     counter = counter + 1;
   end);

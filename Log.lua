@@ -161,3 +161,7 @@ SS_Log_PlotInviteAcceptedBy = function(player, plot)
     print('|cffFFFF00'..player..' согласился на участия в сюжете |r"'..plot..'"');
   end;
 end;
+
+SS_Log_PlotRemovedBy = function(player, plot)
+  print('|cffFFFF00'..player..' удалил сюжет |r"'..plot..'"|cffFFFF00 из сохрененных|r');
+end;
