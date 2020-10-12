@@ -167,5 +167,13 @@ SS_Log_PlotRemovedBy = function(player, plot)
 end;
 
 SS_Log_PlotRemovedByDM = function(player, plot)
-  print('|cffFFFF00Ведущий '..player..' удалил сюжет |r"'..plot);
+  print('|cffFFFF00Ведущий '..player..' удалил сюжет |r"'..plot..'"');
+end;
+
+SS_Log_KickedByDM = function(player, plot)
+  print('|cffFFFF00Ведущий '..player..' исключил вас из сюжета |r"'..plot..'"');
+end;
+
+SS_Log_PlayerKickedSuccessfully = function(player)
+  print('|cffFFFF00Игрок '..player..' успешно исключен.|r');
 end;

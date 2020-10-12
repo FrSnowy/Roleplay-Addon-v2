@@ -27,6 +27,17 @@ SS_PlotController_GetCountOf = function(plotType)
   if (plotType == 'leadingPlots') then return SS_LeadingPlots_Count(); end;
 end;
 
+SS_PlotController_Remove = function(plotID)
+  SS_PlotController_Select(nil);
+  if (SS_User.settings.currentPlot == plotID) then
+    SS_PlotController_MakeCurrent(nil);
+    SS_PlotController_OnDeactivate();
+  end;
+
+  SS_User.plots[plotID] = nil;
+  SS_Plot_Activate:Hide();
+end;
+
 SS_PlotController_Draw = function(categoryName)
   local plotType;
   if (categoryName == nil or categoryName == 'Все') then
@@ -39,14 +50,13 @@ SS_PlotController_Draw = function(categoryName)
 
   SS_Shared_DrawList(SS_Plots_Container, SS_User[plotType], function(plot, index, container)
     local PlotPanel = CreateFrame("Button", "OpenPlotPanel-"..plotType.."-"..index, container);
-          PlotPanel:SetToplevel(false);
           PlotPanel:Show();
           PlotPanel:EnableMouse();
           PlotPanel:SetSize(224, 16);
           PlotPanel:SetBackdropColor(0, 0, 0, 1);
           PlotPanel:SetPoint("TOPLEFT", container, "TOPLEFT", 0, -28 * counter);
-          PlotPanel:SetNormalTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
-          PlotPanel:SetHighlightTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
+          PlotPanel:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\plot-background.blp");
+          PlotPanel:SetHighlightTexture("Interface\\AddOns\\SnowySystem\\IMG\\plot-background.blp");
 
     local PlotName = PlotPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
           PlotName:SetPoint("LEFT", PlotPanel, "LEFT", 0, 4);
@@ -89,6 +99,34 @@ SS_PlotController_Draw = function(categoryName)
   SS_Plots_Container:SetSize(236, 10 * counter);
 end;
 
+SS_PlotController_DrawSinglePlayer = function(plot, player)
+  SS_Plot_Controll_PlayerInfo:Hide();
+
+  local role = '';
+  if (SS_User.plots[plot].author == player) then
+    role = 'Ведущий';
+  else
+    role = 'Игрок';
+  end;
+
+  SS_Plot_Controll_PlayerInfo_Role:SetText(role);
+  SS_Plot_Controll_PlayerInfo_Name:SetText(player);
+
+  if (role == 'Ведущий') then
+    SS_Plot_Controll_PlayerInfo_NoActions:Show();
+    SS_Plot_Controll_PlayerInfo_Kick_Button:Hide();
+  else
+    SS_Plot_Controll_PlayerInfo_NoActions:Hide();
+    SS_Plot_Controll_PlayerInfo_Kick_Button:Show();
+
+    SS_Plot_Controll_PlayerInfo_Kick_Button:SetScript("OnClick", function()
+      SS_DMtP_KickFromPlot(player, plot);
+    end);
+  end;
+
+  SS_Plot_Controll_PlayerInfo:Show();
+end;
+
 SS_PlotController_DrawPlayers = function(_plot)
   local plot;
   if (not(_plot)) then plot = SS_User.settings.currentPlot; end;
@@ -99,14 +137,16 @@ SS_PlotController_DrawPlayers = function(_plot)
 
   SS_Shared_DrawList(SS_Plot_Controll_List_Players, SS_User.leadingPlots[plot].players, function(player, index, container)
     local PlayerPanel = CreateFrame("Button", "SS_PlayerPanel-"..player.."-"..index, container);
-          PlayerPanel:SetToplevel(false);
           PlayerPanel:Show();
           PlayerPanel:EnableMouse();
           PlayerPanel:SetSize(224, 27);
           PlayerPanel:SetBackdropColor(0, 0, 0, 1);
           PlayerPanel:SetPoint("TOPLEFT", container, "TOPLEFT", 0, -36 * counter);
-          PlayerPanel:SetNormalTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
-          PlayerPanel:SetHighlightTexture("Interface\\AddOns\\STIK_DM\\IMG\\plot-background.blp");
+          PlayerPanel:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\plot-background.blp");
+          PlayerPanel:SetHighlightTexture("Interface\\AddOns\\SnowySystem\\IMG\\plot-background.blp");
+          PlayerPanel:SetScript("OnClick", function()
+            SS_PlotController_DrawSinglePlayer(plot, player)
+          end);
 
     local name = player;
     if (name == UnitName("player")) then

@@ -17,3 +17,7 @@ end;
 SS_PtDM_DeletePlot = function(plotName, plotAuthor)
   SS_PtDM_Direct('playerDeletePlot', plotName, plotAuthor);
 end;
+
+SS_PtDM_KickAllright = function(plotID, plotAuthor)
+  SS_PtDM_Direct('kickAllright', plotID, plotAuthor);
+end;

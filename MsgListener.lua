@@ -51,28 +51,42 @@ local onPlayerDeletePlot = function(plotName, player)
     SS_PlotController_DrawPlayers();
     SS_Log_PlotRemovedBy(player, plotName);
   end;
-
-  print(SS_Plots_Current().name);
 end;
 
 local onDMDeletePlot = function(plotID, plotAuthor)
-  if (not(SS_Plots_Includes(plotID))) then return; end;
+  if (not(plotID) or not(SS_Plots_Includes(plotID))) then return; end;
   
   local plot = SS_User.plots[plotID];
   local name = plot.name;
   local author = plot.author;
 
   if (not(plotAuthor == author)) then return; end;
-  
-  SS_PlotController_Select(nil);
-  if (SS_User.settings.currentPlot == plotID) then
-    SS_PlotController_MakeCurrent(nil);
-    SS_PlotController_OnDeactivate();
-  end;
-
-  SS_User.plots[plotID] = nil;
+  SS_PlotController_Remove(plotID);
   SS_Log_PlotRemovedByDM(plotAuthor, name);
-  SS_Plot_Activate:Hide();
+end;
+
+local onDMKickFromPlot = function(plotID, plotAuthor)
+  if (not(plotID) or not(SS_Plots_Includes(plotID))) then return; end;
+
+  local plot = SS_User.plots[plotID];
+  local name = plot.name;
+  local author = plot.author;
+
+  if (not(plotAuthor == author)) then return; end;
+  SS_PlotController_Remove(plotID);
+  SS_Log_KickedByDM(plotAuthor, name);
+  SS_PtDM_KickAllright(plotID, plotAuthor);
+end;
+
+local onKickAllright = function(plotID, player)
+  if (plotID == SS_User.settings.currentPlot) then
+    SS_Shared_RemoveFrom(SS_LeadingPlots_Current().players)(function(playerName)
+      return player == playerName;
+    end);
+    SS_PlotController_DrawPlayers();
+  end;
+  SS_Plot_Controll_PlayerInfo:Hide();
+  SS_Log_PlayerKickedSuccessfully(player);
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
@@ -89,6 +103,8 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     declinePlotInvite = onDeclinePlotInvite,
     playerDeletePlot = onPlayerDeletePlot,
     dmDeletePlot = onDMDeletePlot,
+    dmKickFromPlot = onDMKickFromPlot,
+    kickAllright = onKickAllright,
   };
 
   if (not(actions[action])) then

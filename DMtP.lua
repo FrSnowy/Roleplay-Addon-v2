@@ -37,3 +37,12 @@ SS_DMtP_DeletePlot = function(plotID)
     end;
   end);
 end;
+
+SS_DMtP_KickFromPlot = function(player, plotID)
+  if (not(plotID) or not(player)) then return; end;
+
+  local leadingPlot = SS_User.leadingPlots[plotID];
+  if (not(leadingPlot)) then return; end;
+
+  SS_DMtP_Direct('dmKickFromPlot', plotID, player);
+end;

@@ -6,7 +6,7 @@ SS_Progress_GetList = function()
 end;
 
 SS_Progress_GetLevel = function()
-  if (SS_User.settings.currentPlot) then
+  if (SS_Plots_Current() and SS_Plots_Current().progress and SS_Plots_Current().progress.level) then
     return SS_Plots_Current().progress.level;
   end;
 
@@ -14,7 +14,7 @@ SS_Progress_GetLevel = function()
 end;
 
 SS_Progress_GetExp = function()
-  if (SS_User.settings.currentPlot) then
+  if (SS_Plots_Current() and SS_Plots_Current().progress and SS_Plots_Current().progress.experience) then
     return SS_Plots_Current().progress.experience;
   end;
 
