@@ -158,7 +158,7 @@ SS_Log_PlotInviteAcceptedBy = function(player, plot)
   if (UnitName("player") == player) then
     print('|cffFFFF00Вы согласились на участие в сюжете |r"'..plot..'"');
   else
-    print('|cffFFFF00'..player..' согласился на участия в сюжете |r"'..plot..'"');
+    print('|cffFFFF00'..player..' согласился на участие в сюжете |r"'..plot..'"');
   end;
 end;
 
