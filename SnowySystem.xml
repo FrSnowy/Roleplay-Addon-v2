@@ -2834,15 +2834,18 @@
         <Scripts>
           <OnClick>
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
-              SS_User.settings.currentPlot = nil;
+              SS_PlotController_MakeCurrent(nil);
               SS_PlotController_OnDeactivate();
             end;
             if (SS_Plots_Selected()) then
-              SS_PtDM_DeletePlot(SS_Plots_Selected().name, SS_Plots_Selected().author);
+              if (not(SS_Plots_Selected().author == UnitName("player"))) then
+                SS_PtDM_DeletePlot(SS_Plots_Selected().name, SS_Plots_Selected().author);
+              end;
               SS_User.plots[SS_User.settings.selectedPlot] = nil;
             end;
 
             if (SS_LeadingPlots_Selected()) then
+              SS_DMtP_DeletePlot(SS_User.settings.selectedPlot);
               SS_User.leadingPlots[SS_User.settings.selectedPlot] = nil;
             end;
 

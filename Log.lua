@@ -165,3 +165,7 @@ end;
 SS_Log_PlotRemovedBy = function(player, plot)
   print('|cffFFFF00'..player..' удалил сюжет |r"'..plot..'"|cffFFFF00 из сохрененных|r');
 end;
+
+SS_Log_PlotRemovedByDM = function(player, plot)
+  print('|cffFFFF00Ведущий '..player..' удалил сюжет |r"'..plot);
+end;

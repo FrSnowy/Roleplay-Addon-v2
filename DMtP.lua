@@ -21,3 +21,19 @@ SS_DMtP_InviteToPlot = function(playerName)
   SS_Log_InviteSendedTo(playerName, plot.name);
   SS_DMtP_Direct('invite', SS_User.settings.currentPlot..'+'..plot.name, playerName);
 end;
+
+SS_DMtP_DeletePlot = function(plotID)
+  if (not(plotID)) then return; end;
+
+  local leadingPlot = SS_User.leadingPlots[plotID];
+  if (not(leadingPlot)) then return; end;
+
+  local players = leadingPlot.players;
+  if (not(players)) then return end;
+
+  SS_Shared_ForEach(players)(function(player)
+    if (not(player == UnitName("player"))) then
+      SS_DMtP_Direct('dmDeletePlot', plotID, player);
+    end;
+  end);
+end;

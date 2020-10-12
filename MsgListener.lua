@@ -55,6 +55,26 @@ local onPlayerDeletePlot = function(plotName, player)
   print(SS_Plots_Current().name);
 end;
 
+local onDMDeletePlot = function(plotID, plotAuthor)
+  if (not(SS_Plots_Includes(plotID))) then return; end;
+  
+  local plot = SS_User.plots[plotID];
+  local name = plot.name;
+  local author = plot.author;
+
+  if (not(plotAuthor == author)) then return; end;
+  
+  SS_PlotController_Select(nil);
+  if (SS_User.settings.currentPlot == plotID) then
+    SS_PlotController_MakeCurrent(nil);
+    SS_PlotController_OnDeactivate();
+  end;
+
+  SS_User.plots[plotID] = nil;
+  SS_Log_PlotRemovedByDM(plotAuthor, name);
+  SS_Plot_Activate:Hide();
+end;
+
 SS_MsgListener_Controller = function(prefix, text, channel, author)
   if (not(prefix == 'SS-DMtP') and not(prefix == 'SS-PtDM')) then
     return false;
@@ -68,6 +88,7 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     acceptPlotInvite = onAcceptPlotInvite,
     declinePlotInvite = onDeclinePlotInvite,
     playerDeletePlot = onPlayerDeletePlot,
+    dmDeletePlot = onDMDeletePlot,
   };
 
   if (not(actions[action])) then

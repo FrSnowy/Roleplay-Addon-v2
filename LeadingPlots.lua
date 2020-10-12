@@ -3,7 +3,10 @@ SS_LeadingPlots_Create = function(plotUniqueName, plotName, authorName)
 
   SS_User.leadingPlots[plotUniqueName] = {
     name = plotName,
-    players = { authorName }
+    players = { authorName },
+    settings = {
+      isEventOngoing = false,
+    }
   };
 end;
 
