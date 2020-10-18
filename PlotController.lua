@@ -145,7 +145,11 @@ SS_PlotController_DrawPlayers = function(_plot)
           PlayerPanel:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\plot-background.blp");
           PlayerPanel:SetHighlightTexture("Interface\\AddOns\\SnowySystem\\IMG\\plot-background.blp");
           PlayerPanel:SetScript("OnClick", function()
-            SS_PlotController_DrawSinglePlayer(plot, player)
+            if (SS_Plot_Controll_PlayerInfo_Name:GetText() == player and SS_Plot_Controll_PlayerInfo:IsVisible()) then
+              SS_Plot_Controll_PlayerInfo:Hide();
+            else
+              SS_PlotController_DrawSinglePlayer(plot, player)
+            end;
           end);
 
     local name = player;

@@ -3117,6 +3117,23 @@
           </Anchor> 
         </Anchors>
       </Button>
+      <Button name="$parent_Invite_Button" inherits="OptionsButtonTemplate" text="Начать событие">
+        <Scripts>
+          <OnClick>
+            if (SS_Plot_Controll_EventStart:IsVisible()) then
+              SS_Plot_Controll_EventStart:Hide();
+            else
+              SS_Plot_Controll_EventStart:Show();
+            end;
+          </OnClick>
+        </Scripts>
+        <Size x = "120" y = "28" />
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset x="-20" y="20"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
       <ScrollFrame name="$parent_List" inherits="UIPanelScrollFrameTemplate">
         <Anchors>
           <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="32" y="-54"/>
@@ -3151,7 +3168,7 @@
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="14"/>
               <Anchors>
-                <Anchor point="TOP" x="0" y="-20" />
+                <Anchor point="TOP" x="0" y="-24" />
               </Anchors>
               <Shadow>
                 <Offset x="-1" y="-1" />
@@ -3162,7 +3179,7 @@
               <Color r="1" g="0.6" b="0" a="1"/>
               <FontHeight val="16"/>
               <Anchors>
-                <Anchor point="TOP" x="0" y="-50" />
+                <Anchor point="TOP" x="0" y="-54" />
               </Anchors>
               <Shadow>
                 <Offset x="-1" y="-1" />
@@ -3173,7 +3190,7 @@
               <Color r="0.5" g="0.5" b="0.5" a="1"/>
               <FontHeight val="14"/>
               <Anchors>
-                <Anchor point="TOP" x="0" y="-85" />
+                <Anchor point="TOP" x="0" y="-89" />
               </Anchors>
               <Shadow>
                 <Offset x="-1" y="-1" />
@@ -3197,6 +3214,88 @@
             </Scripts>
           </Button>
           <Button name="$parent_Kick_Button" inherits="OptionsButtonTemplate" text="Исключить">
+            <Size x = "110" y = "32" />
+            <Anchors>
+              <Anchor point="BOTTOM">
+                <Offset x="0" y="20"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                self:GetParent():Hide()
+              </OnClick>
+            </Scripts>
+          </Button>
+        </Frames>
+      </Frame>
+      <Frame name="$parent_EventStart" hidden="true">
+        <Size><AbsDimension x="220" y="170"/></Size>
+        <Anchors>
+          <Anchor point="RIGHT">
+            <Offset x="240" y="0"/>
+          </Anchor>
+        </Anchors>
+        <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\event-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+          <BackgroundInsets>
+            <AbsInset left="8" right="8" top="8" bottom="8"/>
+          </BackgroundInsets>
+          <TileSize>
+            <AbsValue val="300"/>
+          </TileSize>
+          <EdgeSize>
+            <AbsValue val="32"/>
+          </EdgeSize>
+        </Backdrop>
+        <Layers>
+          <Layer>
+            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Начать событие">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="14"/>
+              <Anchors>
+                <Anchor point="TOP" x="0" y="-24" />
+              </Anchors>
+              <Shadow>
+                <Offset x="-1" y="-1" />
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+            <FontString name="$parent_ShouldResetAll_Text" font="Fonts\FRIZQT__.TTF" text="Восстановить ОЗ и ОБ">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="12"/>
+              <Anchors>
+                <Anchor point="TOP" x="10" y="-60" />
+              </Anchors>
+              <Shadow>
+                <Offset x="-1" y="-1" />
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
+            <Size x = "20" y = "20" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-20"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                self:GetParent():Hide()
+              </OnClick>
+            </Scripts>
+          </Button>        
+          <CheckButton name="$parent_ShouldResetAll" inherits="OptionsCheckButtonTemplate" checked="true">
+            <Anchors>
+              <Anchor point="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="24" y="-54"></AbsDimension>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          <Button name="$parent_Start_Button" inherits="OptionsButtonTemplate" text="Начать">
             <Size x = "110" y = "32" />
             <Anchors>
               <Anchor point="BOTTOM">
