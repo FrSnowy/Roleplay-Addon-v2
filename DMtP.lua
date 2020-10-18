@@ -56,3 +56,17 @@ SS_DMtP_KickFromPlot = function(player, plotID)
 
   SS_DMtP_Direct('dmKickFromPlot', plotID, player);
 end;
+
+SS_DMtP_StartEvent = function(plotID)
+  if (not(plotID)) then
+    if (not(SS_User.settings.currentPlot)) then return; end;
+    plotID = SS_User.settings.currentPlot
+  end;
+
+  local plot = SS_User.leadingPlots[plotID];
+  if (not(plot)) then return; end;
+
+  SS_Log_EventStarting(plot.name);
+  SS_DMtP_Every('dmStartEvent', plotID)(plotID);
+  PlaySound("LEVELUPSOUND", "SFX");
+end;

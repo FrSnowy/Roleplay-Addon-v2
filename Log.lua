@@ -177,3 +177,7 @@ end;
 SS_Log_PlayerKickedSuccessfully = function(player)
   print('|cffFFFF00Игрок '..player..' успешно исключен.|r');
 end;
+
+SS_Log_EventStarting = function(plot)
+  print('|cffFFFF00Начинается событие сюжета "|r'..plot..'"|cffFFFF00. Приглашение выслано участникам.|r');
+end;

@@ -1,4 +1,5 @@
 local onInvite = function(data, author)
+  SS_Modal_Invite:Hide();
   local id, plotName = strsplit('+', data);
 
   if (SS_Plots_Includes(id)) then
@@ -89,6 +90,18 @@ local onKickAllright = function(plotID, player)
   SS_Log_PlayerKickedSuccessfully(player);
 end;
 
+local onDMStartEvent = function(plotID, plotAuthor)
+  SS_Modal_EventStart:Hide();
+  if (not(plotID) or not(SS_Plots_Includes(plotID))) then return; end;
+
+  local plot = SS_User.plots[plotID];
+  if (not(plot.author == plotAuthor)) then return; end;
+
+  SS_Modal_EventStart_Leader:SetText('Ведущий '..plot.author);
+  SS_Modal_EventStart_PlotName:SetText(plot.name);
+  SS_Modal_EventStart:Show();
+end;
+
 SS_MsgListener_Controller = function(prefix, text, channel, author)
   if (not(prefix == 'SS-DMtP') and not(prefix == 'SS-PtDM')) then
     return false;
@@ -105,6 +118,7 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     dmDeletePlot = onDMDeletePlot,
     dmKickFromPlot = onDMKickFromPlot,
     kickAllright = onKickAllright,
+    dmStartEvent = onDMStartEvent,
   };
 
   if (not(actions[action])) then
