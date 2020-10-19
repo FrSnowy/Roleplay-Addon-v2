@@ -68,3 +68,17 @@ SS_Shared_DrawList = function(target, list, drawSingle)
     drawSingle(element, index, target);
   end);
 end;
+
+SS_Shared_IgnoreOfflineMsgFilter = function(self, event, msg)
+  return msg:find("в игре не найден");
+end;
+
+SS_Shared_IfOnline = function(target, callback)
+  if (not(SS_Shared_IfOnlineCallback)) then
+    SS_Shared_IfOnlineCallback = { };
+  end;
+
+  SS_Shared_IfOnlineCallback[target] = callback;
+  ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", SS_Shared_IgnoreOfflineMsgFilter);
+  SS_PtP_IsOnline(target);
+end;

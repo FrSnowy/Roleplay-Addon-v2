@@ -16,9 +16,11 @@ SS_DMtP_Every = function(action, data)
     if (not(players)) then return end;
 
     SS_Shared_ForEach(players)(function(player)
-      if (not(player == UnitName("player"))) then
-        SS_DMtP_Direct(action, data, player);
-      end;
+      SS_Shared_IfOnline(player, function()
+        if (not(player == UnitName("player"))) then
+          SS_DMtP_Direct(action, data, player);
+        end;
+      end);
     end);
   end;
 end;

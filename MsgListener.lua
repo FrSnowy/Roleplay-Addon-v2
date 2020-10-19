@@ -1,3 +1,16 @@
+local onIsOnline = function(data, author)
+  SS_PtP_ImOnline(author);
+end;
+
+local onIAmOnline = function(data, author)
+  if (not(SS_Shared_IfOnlineCallback)) then return; end;
+  if (not(SS_Shared_IfOnlineCallback[author])) then return; end;
+
+  SS_Shared_IfOnlineCallback[author]();
+  SS_Shared_IfOnlineCallback[author] = nil;
+  ChatFrame_RemoveMessageEventFilter("CHAT_MSG_SYSTEM", SS_Shared_IgnoreOfflineMsgFilter);
+end;
+
 local onInvite = function(data, author)
   SS_Modal_Invite:Hide();
   local id, plotName = strsplit('+', data);
@@ -131,13 +144,15 @@ local onPlayerAcceptEventInvite = function(plot, player)
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
-  if (not(prefix == 'SS-DMtP') and not(prefix == 'SS-PtDM')) then
+  if (not(prefix == 'SS-DMtP') and not(prefix == 'SS-PtDM') and not(prefix == 'SS-PtP')) then
     return false;
   end;
 
   local action, data = strsplit('|', text);
 
   local actions = {
+    isOnline = onIsOnline,
+    iAmOnline = onIAmOnline,
     invite = onInvite,
     plotExists = onPlotExistsAnswer,
     acceptPlotInvite = onAcceptPlotInvite,
