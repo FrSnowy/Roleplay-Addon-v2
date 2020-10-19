@@ -110,6 +110,7 @@ local onDMStartEvent = function(plotID, plotAuthor)
   SS_Modal_EventStart_Accept_Button:SetScript('OnClick', function()
     SS_PlotController_MakeCurrent(plotID);
     SS_PlotController_OnActivate();
+    SS_PlotController_MakeOngoing(plotID);
     SS_Log_AcceptEventStart(plot.name);
     SS_PtDM_AcceptEventStart(plot.name, plot.author);
     SS_Modal_EventStart:Hide();
