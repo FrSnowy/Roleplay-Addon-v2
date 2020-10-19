@@ -4,6 +4,8 @@
       <OnLoad>
         self:RegisterEvent("PLAYER_ENTERING_WORLD");
         self:RegisterEvent("CHAT_MSG_ADDON");
+        self:RegisterEvent("PARTY_INVITE_REQUEST");
+        self:RegisterEvent("PARTY_MEMBERS_CHANGED");
       </OnLoad>
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
@@ -17,6 +19,21 @@
 
         if (event == "CHAT_MSG_ADDON") then
           SS_MsgListener_Controller(arg1, arg2, arg3, arg4);
+        end;
+
+        if (event == "PARTY_INVITE_REQUEST") then
+          if (SS_User.settings.acceptNextPartyInvite) then
+            AcceptGroup();
+            StaticPopup_Hide("PARTY_INVITE");
+            SS_User.settings.acceptNextPartyInvite = false;
+          end;
+        end;
+
+        if (event == "PARTY_MEMBERS_CHANGED") then
+          if (SS_User.settings.convertToRaid) then
+            ConvertToRaid();
+            SS_User.settings.convertToRaid = false;
+          end;
         end;
       </OnEvent>
       <OnEnter>

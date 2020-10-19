@@ -100,6 +100,33 @@ local onDMStartEvent = function(plotID, plotAuthor)
   SS_Modal_EventStart_Leader:SetText('Ведущий '..plot.author);
   SS_Modal_EventStart_PlotName:SetText(plot.name);
   SS_Modal_EventStart:Show();
+  
+  SS_Modal_EventStart_Decline_Button:SetScript('OnClick', function()
+    SS_PtDM_DeclineEventStart(plot.name, plot.author);
+    SS_Log_DeclineEventStart(plot.name);
+    SS_Modal_EventStart:Hide();
+  end);
+  
+  SS_Modal_EventStart_Accept_Button:SetScript('OnClick', function()
+    SS_PlotController_MakeCurrent(plotID);
+    SS_PlotController_OnActivate();
+    SS_Log_AcceptEventStart(plot.name);
+    SS_PtDM_AcceptEventStart(plot.name, plot.author);
+    SS_Modal_EventStart:Hide();
+
+    SS_User.settings.acceptNextPartyInvite = true;
+  end);
+end;
+
+local onPlayerDeclineEventInvite = function(plot, player)
+  SS_Log_PlayerDeclinedEventInvite(player, plot);
+end;
+
+local onPlayerAcceptEventInvite = function(plot, player)
+  SS_Log_PlayerAcceptedEventInvite(player, plot);
+  if (UnitInParty(player)) then return; end;
+  InviteUnit(player);
+  SS_User.settings.convertToRaid = true;
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
@@ -119,6 +146,8 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     dmKickFromPlot = onDMKickFromPlot,
     kickAllright = onKickAllright,
     dmStartEvent = onDMStartEvent,
+    declineEventStart = onPlayerDeclineEventInvite,
+    acceptEventStart = onPlayerAcceptEventInvite,
   };
 
   if (not(actions[action])) then

@@ -181,3 +181,19 @@ end;
 SS_Log_EventStarting = function(plot)
   print('|cffFFFF00Начинается событие сюжета "|r'..plot..'"|cffFFFF00. Приглашение выслано участникам.|r');
 end;
+
+SS_Log_DeclineEventStart = function(plot)
+  print('|cffFFFF00Вы отказались от участия в событии сюжета |r"'..plot..'"');
+end;
+
+SS_Log_AcceptEventStart = function(plot)
+  print('|cffFFFF00Вы согласились на участие в событии сюжете |r"'..plot..'"');
+end;
+
+SS_Log_PlayerDeclinedEventInvite = function(player, plot)
+  print(player..'|cffFFFF00 отказался от участия в событии сюжета |r"'..plot..'"');
+end;
+
+SS_Log_PlayerAcceptedEventInvite = function(player, plot)
+  print(player..'|cffFFFF00 согласился на участие в событии сюжета |r"'..plot..'"');
+end;
