@@ -72,3 +72,20 @@ SS_DMtP_StartEvent = function(plotID)
   SS_DMtP_Every('dmStartEvent', plotID)(plotID);
   PlaySound("LEVELUPSOUND", "SFX");
 end;
+
+SS_DMtP_DisplayTargetInfo = function()
+  if (not(SS_User) or not(SS_LeadingPlots_Current())) then return nil; end;
+
+  local player = UnitName("target");
+  if (player == UnitName("player")) then return nil; end;
+
+  local isPlayerInCurrentPlot = SS_Shared_Includes(SS_LeadingPlots_Current().players)(function(playerInPlot)
+    return playerInPlot == player
+  end);
+
+  if (not(isPlayerInCurrentPlot)) then return nil; end;
+
+  SS_Shared_IfOnline(player, function()
+    SS_DMtP_Direct('dmGetTargetInfo', SS_User.settings.currentPlot, player);
+  end)
+end;

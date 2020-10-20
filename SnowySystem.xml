@@ -6,6 +6,7 @@
         self:RegisterEvent("CHAT_MSG_ADDON");
         self:RegisterEvent("PARTY_INVITE_REQUEST");
         self:RegisterEvent("PARTY_MEMBERS_CHANGED");
+        self:RegisterEvent("PLAYER_TARGET_CHANGED");
       </OnLoad>
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
@@ -34,6 +35,10 @@
             ConvertToRaid();
             SS_User.settings.convertToRaid = false;
           end;
+        end;
+
+        if (event == "PLAYER_TARGET_CHANGED") then
+          SS_DMtP_DisplayTargetInfo();
         end;
       </OnEvent>
       <OnEnter>
