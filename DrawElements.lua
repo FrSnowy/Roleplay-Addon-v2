@@ -36,6 +36,14 @@ SS_Draw_HidePlayerInfoPlates = function()
     SS_TargetBarrierPanel:Hide();
   end;
 
+  if (SS_TargetBarrierIcon) then
+    SS_TargetBarrierIcon:Hide()
+  end;
+
+  if (SS_TargetBarrierText) then
+    SS_TargetBarrierText:Hide();
+  end;
+
   if (SS_TargetSettingsPanel) then
     SS_TargetSettingsPanel:Hide();
   end;
