@@ -24,12 +24,28 @@ SS_Draw_HidePlayerInfoPlates = function()
     SS_TargetHealthPanel:Hide();
   end;
 
+  if (SS_TargetHealthIcon) then
+    SS_TargetHealthIcon:Hide();
+  end;
+
+  if (SS_TargetHealthText) then
+    SS_TargetHealthText:Hide();
+  end;
+
   if (SS_TargetBarrierPanel) then
     SS_TargetBarrierPanel:Hide();
   end;
 
   if (SS_TargetSettingsPanel) then
     SS_TargetSettingsPanel:Hide();
+  end;
+
+  if (SS_TargetSettingsIcon) then
+    SS_TargetSettingsIcon:Hide();
+  end;
+
+  if (SS_TargetSettingsText) then
+    SS_TargetSettingsText:Hide();
   end;
 end;
 
@@ -49,18 +65,22 @@ SS_Draw_InfoAboutPlayer = function(params)
     SS_TargetHealthPanel:Show();
   end;
 
-  local TargetHealthIcon = CreateFrame("Button", "TargetHealthIcon", SS_TargetHealthPanel);
-        TargetHealthIcon:Show();
-        TargetHealthIcon:EnableMouse(false);
-        TargetHealthIcon:SetSize(12, 12);
-        TargetHealthIcon:SetPoint("TOPLEFT", SS_TargetHealthPanel, "TOPLEFT", 0, 0);
-        TargetHealthIcon:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\hp.blp");
+  if (not(SS_TargetHealthIcon)) then
+    SS_TargetHealthIcon = CreateFrame("Button", "TargetHealthIcon", SS_TargetHealthPanel);
+    SS_TargetHealthIcon:EnableMouse(false);
+    SS_TargetHealthIcon:SetSize(12, 12);
+    SS_TargetHealthIcon:SetPoint("TOPLEFT", SS_TargetHealthPanel, "TOPLEFT", 0, 0);
+    SS_TargetHealthIcon:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\hp.blp");
+  end;
+  SS_TargetHealthIcon:Show();
 
-  local TargetHealthText = SS_TargetHealthPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-        TargetHealthText:SetPoint("LEFT", SS_TargetHealthPanel, "LEFT", 16, 8);
-        TargetHealthText:SetText(params.health..'/'..params.maxHealth);
-        TargetHealthText:SetFont("Fonts\\FRIZQT__.TTF", 11);
-        TargetHealthText:Show();
+  if (not(SS_TargetHealthText)) then
+    SS_TargetHealthText = SS_TargetHealthPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
+    SS_TargetHealthText:SetPoint("LEFT", SS_TargetHealthPanel, "LEFT", 16, 8);
+    SS_TargetHealthText:SetFont("Fonts\\FRIZQT__.TTF", 11);
+  end;
+  SS_TargetHealthText:SetText(params.health..'/'..params.maxHealth);
+  SS_TargetHealthText:Show();
 
   if (tonumber(params.maxBarrier) > 0) then
     if (not(SS_TargetBarrierPanel)) then
@@ -74,18 +94,22 @@ SS_Draw_InfoAboutPlayer = function(params)
       SS_TargetBarrierPanel:Show();
     end;
       
-    local TargetBarrierIcon = CreateFrame("Button", "TargetBarrierIcon", SS_TargetBarrierPanel);
-          TargetBarrierIcon:Show();
-          TargetBarrierIcon:EnableMouse(false);
-          TargetBarrierIcon:SetSize(12, 12);
-          TargetBarrierIcon:SetPoint("TOPLEFT", SS_TargetBarrierPanel, "TOPLEFT", 0, 0);
-          TargetBarrierIcon:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\shield.blp");
+    if (not(SS_TargetBarrierIcon)) then
+      SS_TargetBarrierIcon = CreateFrame("Button", "TargetBarrierIcon", SS_TargetBarrierPanel);
+      SS_TargetBarrierIcon:EnableMouse(false);
+      SS_TargetBarrierIcon:SetSize(12, 12);
+      SS_TargetBarrierIcon:SetPoint("TOPLEFT", SS_TargetBarrierPanel, "TOPLEFT", 0, 0);
+      SS_TargetBarrierIcon:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\shield.blp");
+    end;
+    SS_TargetBarrierIcon:Show();
 
-    local TargetBarrierText = SS_TargetBarrierPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-          TargetBarrierText:SetPoint("LEFT", SS_TargetBarrierPanel, "LEFT", 16, 7);
-          TargetBarrierText:SetText(params.barrier..'/'..params.maxBarrier);
-          TargetBarrierText:SetFont("Fonts\\FRIZQT__.TTF", 11);
-          TargetBarrierText:Show();
+    if (not(SS_TargetBarrierText)) then
+      SS_TargetBarrierText = SS_TargetBarrierPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
+      SS_TargetBarrierText:SetPoint("LEFT", SS_TargetBarrierPanel, "LEFT", 16, 7);
+      SS_TargetBarrierText:SetFont("Fonts\\FRIZQT__.TTF", 11);
+    end;
+    SS_TargetBarrierText:SetText(params.barrier..'/'..params.maxBarrier);
+    SS_TargetBarrierText:Show();
   end;
 
   if (not(SS_TargetSettingsPanel)) then
@@ -104,17 +128,21 @@ SS_Draw_InfoAboutPlayer = function(params)
     SS_TargetSettingsPanel:Show();
   end;
   
-  local TargetSettingsIcon = CreateFrame("Button", "TargetSettingsIcon", SS_TargetSettingsPanel);
-        TargetSettingsIcon:Show();
-        TargetSettingsIcon:EnableMouse(false);
-        TargetSettingsIcon:SetSize(12, 12);
-        TargetSettingsIcon:SetPoint("TOPLEFT", SS_TargetSettingsPanel, "TOPLEFT", 0, 0);
-        TargetSettingsIcon:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\settings_normal.blp");
-        TargetSettingsIcon:SetHighlightTexture("Interface\\AddOns\\SnowySystem\\IMG\\settings_hover.blp");
+  if (not(SS_TargetSettingsIcon)) then
+    SS_TargetSettingsIcon = CreateFrame("Button", "TargetSettingsIcon", SS_TargetSettingsPanel);
+    SS_TargetSettingsIcon:EnableMouse(false);
+    SS_TargetSettingsIcon:SetSize(12, 12);
+    SS_TargetSettingsIcon:SetPoint("TOPLEFT", SS_TargetSettingsPanel, "TOPLEFT", 0, 0);
+    SS_TargetSettingsIcon:SetNormalTexture("Interface\\AddOns\\SnowySystem\\IMG\\settings_normal.blp");
+    SS_TargetSettingsIcon:SetHighlightTexture("Interface\\AddOns\\SnowySystem\\IMG\\settings_hover.blp");
+  end;
+  SS_TargetSettingsIcon:Show();
 
-  local TargetSettingsText = SS_TargetSettingsPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-        TargetSettingsText:SetPoint("LEFT", SS_TargetSettingsPanel, "LEFT", 16, 7);
-        TargetSettingsText:SetText("Управление");
-        TargetSettingsText:SetFont("Fonts\\FRIZQT__.TTF", 11);
-        TargetSettingsText:Show();
+  if(not(SS_TargetSettingsText)) then
+    SS_TargetSettingsText = SS_TargetSettingsPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
+    SS_TargetSettingsText:SetPoint("LEFT", SS_TargetSettingsPanel, "LEFT", 16, 7);
+    SS_TargetSettingsText:SetFont("Fonts\\FRIZQT__.TTF", 11);
+    SS_TargetSettingsText:SetText("Управление");
+  end;
+  SS_TargetSettingsText:Show();
 end;
