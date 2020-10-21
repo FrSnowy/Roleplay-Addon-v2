@@ -18,6 +18,10 @@ SS_PtDM_DeletePlot = function(plotName, plotAuthor)
   SS_PtDM_Direct('playerDeletePlot', plotName, plotAuthor);
 end;
 
+SS_PtDM_DeactivePlot = function(plotID, plotAuthor)
+  SS_PtDM_Direct('playerDeactivatePlot', plotID, plotAuthor);
+end;
+
 SS_PtDM_KickAllright = function(plotID, plotAuthor)
   SS_PtDM_Direct('kickAllright', plotID, plotAuthor);
 end;
@@ -26,8 +30,8 @@ SS_PtDM_DeclineEventStart = function(plotName, plotAuthor)
   SS_PtDM_Direct('declineEventStart', plotName, plotAuthor);
 end;
 
-SS_PtDM_AcceptEventStart = function(plotName, plotAuthor)
-  SS_PtDM_Direct('acceptEventStart', plotName, plotAuthor);
+SS_PtDM_JoinToEvent = function(plotID, plotAuthor)
+  SS_PtDM_Direct('joinToEvent', plotID, plotAuthor);
 end;
 
 SS_PtDM_Params = function(params, plotAuthor)

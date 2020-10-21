@@ -18,21 +18,6 @@ SS_PlotController_MakeCurrent = function(plotIndex)
   SS_User.settings.currentPlot = plotIndex;
 end;
 
-SS_PlotController_MakeOngoing = function(plotIndex)
-  if (not(SS_Plots_Includes(plotIndex))) then return false; end;
-  SS_User.plots[plotIndex].isOngoing = true;
-end;
-
-SS_PlotController_IsOngoing = function(plotIndex)
-  if (not(SS_Plots_Includes(plotIndex))) then return false; end;
-  return SS_User.plots[plotIndex].isOngoing;
-end;
-
-SS_PlotController_StopOngoing = function(plotIndex)
-  if (not(SS_Plots_Includes(plotIndex))) then return false; end;
-  SS_User.plots[plotIndex].isOngoing = false;
-end;
-
 SS_PlotController_GetCountOf = function(plotType)
   if (not(plotType == 'plots') and not(plotType == 'leadingPlots')) then
     return 0;
@@ -197,12 +182,27 @@ SS_PlotController_OnActivate = function()
   SS_PlayerFrame:Show();
   SS_Params_DrawHealth();
 
-  if (SS_LeadingPlots_Includes(SS_User.settings.currentPlot)) then
+  if (SS_LeadingPlots_Current()) then
     SS_Plot_Controll:Show();
   end;
+
+  local plot = SS_Plots_Current();
+  local id = SS_User.settings.currentPlot;
+
+  SS_Shared_IfOnline(plot.author, function()
+    SS_PtDM_JoinToEvent(id, plot.author);
+  end);
 end;
 
 SS_PlotController_OnDeactivate = function()
+  if (SS_Plots_Selected()) then
+    local plot = SS_Plots_Selected();
+    local id = SS_User.settings.selectedPlot;
+    SS_Shared_IfOnline(plot.author, function()
+      SS_PtDM_DeactivePlot(id, plot.author);
+    end);
+  end;
+
   SS_Player_Menu:SetSize(84, 84);
   SS_Player_Menu_DicesIcon:Hide();
   SS_Player_Menu_StatsIcon:Hide();

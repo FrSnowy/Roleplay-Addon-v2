@@ -74,6 +74,15 @@ local onPlayerDeletePlot = function(plotName, player)
   end;
 end;
 
+local onPlayerDeactivatePlot = function(plotID, player)
+  -- У: Мастер, от: игрок, когда: игрок деактивирует текущий сюжет
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
+
+  local plotName = SS_LeadingPlots_Current().name;
+  SS_Log_PlotDeactivatedBy(player, plotName);
+end;
+
 local onDMDeletePlot = function(plotID, master)
   -- У: Игрок, от: мастер, когда: мастер удаляет сюжет
   if (not(plotID) or not(SS_Plots_Includes(plotID))) then return; end;
@@ -134,9 +143,7 @@ local onDMStartEvent = function(plotID, master)
   SS_Modal_EventStart_Accept_Button:SetScript('OnClick', function()
     SS_PlotController_MakeCurrent(plotID);
     SS_PlotController_OnActivate();
-    SS_PlotController_MakeOngoing(plotID);
     SS_Log_AcceptEventStart(plot.name);
-    SS_PtDM_AcceptEventStart(plot.name, master);
     SS_Modal_EventStart:Hide();
 
     SS_User.settings.acceptNextPartyInvite = true;
@@ -148,9 +155,15 @@ local onPlayerDeclineEventInvite = function(plot, player)
   SS_Log_PlayerDeclinedEventInvite(player, plot);
 end;
 
-local onPlayerAcceptEventInvite = function(plot, player)
+local onPlayerJoinToEvent = function(plotID, player)
   -- У: Мастер, от: игрок, когда: игрок принял приглашение на событие
-  SS_Log_PlayerAcceptedEventInvite(player, plot);
+  if (player == UnitName("player")) then return nil; end;
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (not(SS_User.settings.currentPlot == plotID)) then return nil; end;
+
+  local plot = SS_Plots_Current();
+
+  SS_Log_PlayerJoinedToEvent(player, plot.name);
   if (UnitInParty(player)) then return; end;
   InviteUnit(player);
   SS_User.settings.convertToRaid = true;
@@ -158,7 +171,7 @@ end;
 
 local onDMGetTargetInfo = function(plotID, master)
   -- У: Игрок, от: мастер, когда: мастер берет игрока текущего события в цель
-  if (not(SS_User) or not(SS_Plots_Includes(plotID)) or not(SS_PlotController_IsOngoing(plotID))) then return false; end;
+  if (not(SS_User) or not(SS_Plots_Includes(plotID))) then return false; end;
   if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
   if(not(SS_Plots_Current().author == master)) then return false; end;
 
@@ -202,12 +215,13 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     acceptPlotInvite = onAcceptPlotInvite,
     declinePlotInvite = onDeclinePlotInvite,
     playerDeletePlot = onPlayerDeletePlot,
+    playerDeactivatePlot = onPlayerDeactivatePlot,
     dmDeletePlot = onDMDeletePlot,
     dmKickFromPlot = onDMKickFromPlot,
     kickAllright = onKickAllright,
     dmStartEvent = onDMStartEvent,
     declineEventStart = onPlayerDeclineEventInvite,
-    acceptEventStart = onPlayerAcceptEventInvite,
+    joinToEvent = onPlayerJoinToEvent,
     dmGetTargetInfo = onDMGetTargetInfo,
     sendParams = onSendParams,
   };

@@ -166,6 +166,10 @@ SS_Log_PlotRemovedBy = function(player, plot)
   print('|cffFFFF00'..player..' удалил сюжет |r"'..plot..'"|cffFFFF00 из сохрененных|r');
 end;
 
+SS_Log_PlotDeactivatedBy = function(player, plot)
+  print('|cffFFFF00'..player..' покинул событие сюжета |r"'..plot..'"|r');
+end;
+
 SS_Log_PlotRemovedByDM = function(player, plot)
   print('|cffFFFF00Ведущий '..player..' удалил сюжет |r"'..plot..'"');
 end;
@@ -187,7 +191,12 @@ SS_Log_DeclineEventStart = function(plot)
 end;
 
 SS_Log_AcceptEventStart = function(plot)
-  print('|cffFFFF00Вы согласились на участие в событии сюжете |r"'..plot..'"');
+  print('|cffFFFF00Вы согласились на участие в событии сюжета |r"'..plot..'"');
+end;
+
+SS_Log_PlayerJoinedToEvent = function(player, plot)
+  if (player == UnitName("player")) then return nil; end;
+  print('|cffFFFF00Игрок |r'..player..'|cffFFFF00 присоединился к событию сюжета |r"'..plot..'"');
 end;
 
 SS_Log_PlayerDeclinedEventInvite = function(player, plot)

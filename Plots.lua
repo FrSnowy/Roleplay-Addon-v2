@@ -22,11 +22,6 @@ SS_Plots_Current = function()
   return SS_User.plots[SS_User.settings.currentPlot];
 end;
 
-SS_Plots_IsCurrentOngoing = function()
-  if (not (SS_User) or not(SS_User.plots) or not (SS_User.settings.currentPlot)) then return nil end;
-  return SS_User.plots[SS_User.settings.currentPlot].isOngoing;
-end;
-
 SS_Plots_Selected = function()
   if (not (SS_User) or not(SS_User.plots) or not(SS_User.settings) or not (SS_User.settings.selectedPlot)) then return nil end;
   return SS_User.plots[SS_User.settings.selectedPlot];

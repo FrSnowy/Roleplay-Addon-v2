@@ -34,6 +34,7 @@ SS_LeadingPlots_Count = function()
 end;
 
 SS_LeadingPlots_AddPlayer = function(playerName)
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
   local isPlayerOnPlot = SS_Shared_Includes(SS_LeadingPlots_Current().players)(function(player)
     return player == playerName;
   end);
