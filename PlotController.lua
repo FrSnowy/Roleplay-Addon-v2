@@ -23,6 +23,11 @@ SS_PlotController_MakeOngoing = function(plotIndex)
   SS_User.plots[plotIndex].isOngoing = true;
 end;
 
+SS_PlotController_IsOngoing = function(plotIndex)
+  if (not(SS_Plots_Includes(plotIndex))) then return false; end;
+  return SS_User.plots[plotIndex].isOngoing;
+end;
+
 SS_PlotController_StopOngoing = function(plotIndex)
   if (not(SS_Plots_Includes(plotIndex))) then return false; end;
   SS_User.plots[plotIndex].isOngoing = false;

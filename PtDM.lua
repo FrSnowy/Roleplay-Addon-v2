@@ -29,3 +29,8 @@ end;
 SS_PtDM_AcceptEventStart = function(plotName, plotAuthor)
   SS_PtDM_Direct('acceptEventStart', plotName, plotAuthor);
 end;
+
+SS_PtDM_Params = function(params, plotAuthor)
+  local paramsString = params.health.."+"..params.maxHealth.."+"..params.barrier.."+"..params.maxBarrier.."+"..params.level;
+  SS_PtDM_Direct('sendParams', paramsString, plotAuthor);
+end;

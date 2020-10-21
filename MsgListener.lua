@@ -158,6 +158,33 @@ end;
 
 local onDMGetTargetInfo = function(plotID, master)
   -- У: Игрок, от: мастер, когда: мастер берет игрока текущего события в цель
+  if (not(SS_User) or not(SS_Plots_Includes(plotID)) or not(SS_PlotController_IsOngoing(plotID))) then return false; end;
+  if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
+  if(not(SS_Plots_Current().author == master)) then return false; end;
+
+  local params = {
+    health = SS_Params_GetHealth(),
+    maxHealth = SS_Params_GetMaxHealth(),
+    barrier = SS_Params_GetBarrier(),
+    maxBarrier = SS_Params_GetMaxBarrier(),
+    level = SS_Progress_GetLevel(),
+  };
+
+  SS_PtDM_Params(params, master);
+end;
+
+local onSendParams = function(params, player)
+  if (not(params) or not(player)) then return nil; end;
+  -- У: Мастер, от: игрок, когда: игрок активного сюжета взят в таргет и отвечает на соообщение о своих статах
+  local health, maxHealth, barrier, maxBarrier, level = strsplit('+', params);
+  local params = {
+    health = health,
+    maxHealth = maxHealth,
+    barrier = barrier,
+    maxBarrier = maxBarrier,
+    level = level,
+  };
+  SS_Draw_InfoAboutPlayer(params);
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
@@ -182,6 +209,7 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     declineEventStart = onPlayerDeclineEventInvite,
     acceptEventStart = onPlayerAcceptEventInvite,
     dmGetTargetInfo = onDMGetTargetInfo,
+    sendParams = onSendParams,
   };
 
   if (not(actions[action])) then
