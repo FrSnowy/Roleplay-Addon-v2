@@ -2862,7 +2862,7 @@
             end;
             if (SS_Plots_Selected()) then
               if (not(SS_Plots_Selected().author == UnitName("player"))) then
-                SS_PtDM_DeletePlot(SS_Plots_Selected().name, SS_Plots_Selected().author);
+                SS_PtDM_DeletePlot(SS_User.settings.selectedPlot, SS_Plots_Selected().author);
               end;
               SS_User.plots[SS_User.settings.selectedPlot] = nil;
             end;
@@ -3064,6 +3064,86 @@
       </Button>
     </Frames>
   </Frame>
+  <Frame name = "SS_TargetFrame" parent = "TargetFrame">
+    <Size><AbsDimension x="90" y="60"/></Size>
+    <Anchors>
+      <Anchor point="TOPRIGHT">
+        <Offset x="60" y="-12" />
+      </Anchor>
+    </Anchors>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_HP_Text" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-1" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Barrier_Text" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-27" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Settings_Text" font="Fonts\FRIZQT__.TTF" text = "Осмотр">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-52" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_HP_Icon">
+        <Anchors>
+          <Anchor point="TOPLEFT" />
+        </Anchors>
+        <Size>
+          <AbsDimension x="16" y="16" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\hp.blp" />
+      </Button>
+      <Button name="$parent_Barrier_Icon">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="0" y="-25" />
+        </Anchors>
+        <Size>
+          <AbsDimension x="16" y="16" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\shield.blp" />
+      </Button>
+      <Button name="$parent_Settings_Icon">
+        <Scripts>
+          <OnClick>
+            SS_Player_Controll:Hide();
+            SS_DMtP_DisplayInspectInfo();
+          </OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="0" y="-50" />
+        </Anchors>
+        <Size>
+          <AbsDimension x="16" y="16" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\settings_normal.blp" />
+      </Button>
+    </Frames>
+  </Frame>
   <Frame name="SS_Plot_Controll" parent = "UIParent" movable="true" hidden = "true">
     <Scripts>
       <OnLoad>
@@ -3072,7 +3152,7 @@
       </OnLoad>
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
-          if (SS_User.settings.currentPlot and SS_User.leadingPlots[SS_User.settings.currentPlot]) then
+          if (SS_User.settings.currentPlot and SS_LeadingPlots_Current() and not SS_LeadingPlots_Current().isEventOngoing) then
             self:Show();
           end;
         end;
@@ -3114,19 +3194,6 @@
       </Layer>
     </Layers>
     <Frames>
-      <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
-        <Size x = "20" y = "20" />
-        <Anchors>
-          <Anchor point="TOPRIGHT">
-            <Offset x="-20" y="-20"/>
-          </Anchor> 
-        </Anchors>
-        <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-          </OnClick>
-        </Scripts>
-      </Button>
       <Button name="$parent_Invite_Button" inherits="OptionsButtonTemplate" text="Пригласить">
         <Scripts>
           <OnClick>
@@ -3328,11 +3395,243 @@
             <Scripts>
               <OnClick>
                 SS_DMtP_StartEvent(SS_User.settings.currentPlot);
+                SS_LeadingPlots_Current().isEventOngoing = true;
               </OnClick>
             </Scripts>
           </Button>
         </Frames>
       </Frame>
+    </Frames>
+  </Frame>
+  <Frame name="SS_Event_Controll" parent = "UIParent" movable="true" hidden = "true">
+    <Scripts>
+      <OnLoad>
+        self:RegisterForDrag("LeftButton");
+        self:RegisterEvent("PLAYER_ENTERING_WORLD");
+      </OnLoad>
+			<OnEvent>
+        if(event == "PLAYER_ENTERING_WORLD") then
+          if (SS_User.settings.currentPlot and SS_LeadingPlots_Current() and SS_LeadingPlots_Current().isEventOngoing) then
+            self:Show();
+          end;
+        end;
+      </OnEvent>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
+    <Size><AbsDimension x="300" y="300"/></Size>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\create-menu-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="300"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Управление событием">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_Invite_Button" inherits="OptionsButtonTemplate" text="Завершить событие">
+        <Scripts>
+          <OnClick>
+            SS_DMtP_StopEvent();
+          </OnClick>
+        </Scripts>
+        <Size x = "150" y = "28" />
+        <Anchors>
+          <Anchor point="BOTTOM">
+            <Offset x="0" y="20"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+    </Frames>
+  </Frame>
+  <Frame name="SS_Player_Controll" parent = "UIParent" movable="true" hidden = "true">
+    <Scripts>
+      <OnLoad>
+        self:RegisterForDrag("LeftButton");
+        self:RegisterEvent("PLAYER_ENTERING_WORLD");
+      </OnLoad>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
+    <Size><AbsDimension x="300" y="220"/></Size>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\player-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="300"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text = "Осмотр игрока">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Name" font="Fonts\FRIZQT__.TTF">
+          <Color r="0.82" g="0.71" b="0" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-40" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString name="$parent_HP_Text" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="50" y="135" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Barrier_Text" font="Fonts\FRIZQT__.TTF" text = "2/2, стандартное">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="138" y="135" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Level_Text" font="Fonts\FRIZQT__.TTF" text = "Уровень: 1">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="20" y="100" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Level_Text" font="Fonts\FRIZQT__.TTF" text = "Опыт: 900/1100">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="110" y="100" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_HP_Icon">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" x="20" y="130" />
+        </Anchors>
+        <Size>
+          <AbsDimension x="24" y="24" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\hp.blp" />
+      </Button>
+      <Button name="$parent_Barrier_Icon">
+        <Anchors>
+          <Anchor point="BOTTOM" x="-30" y="130" />
+        </Anchors>
+        <Size>
+          <AbsDimension x="24" y="24" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\shield.blp" />
+      </Button>
+      <Button name="$parent_Stats_Button" inherits="OptionsButtonTemplate" text="Хар-ки">
+        <Size x = "80" y = "30" />
+        <Anchors>
+          <Anchor point="BOTTOMLEFT">
+            <Offset x="20" y="50"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Skills_Button" inherits="OptionsButtonTemplate" text="Навыки">
+        <Size x = "80" y = "30" />
+        <Anchors>
+          <Anchor point="BOTTOM">
+            <Offset x="0" y="50"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Skills_Button" inherits="OptionsButtonTemplate" text="Проверки">
+        <Size x = "80" y = "30" />
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset x="-20" y="50"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
     </Frames>
   </Frame>
   <Frame name="SS_Modal_Invite" parent = "UIParent" hidden="true">

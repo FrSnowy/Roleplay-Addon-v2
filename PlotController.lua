@@ -183,15 +183,19 @@ SS_PlotController_OnActivate = function()
   SS_Params_DrawHealth();
 
   if (SS_LeadingPlots_Current()) then
-    SS_Plot_Controll:Show();
+    if (SS_LeadingPlots_Current().isEventOngoing) then
+      
+    else
+      SS_Plot_Controll:Show();
+
+      local plot = SS_Plots_Current();
+      local id = SS_User.settings.currentPlot;
+    
+      SS_Shared_IfOnline(plot.author, function()
+        SS_PtDM_JoinToEvent(id, plot.author);
+      end);
+    end;
   end;
-
-  local plot = SS_Plots_Current();
-  local id = SS_User.settings.currentPlot;
-
-  SS_Shared_IfOnline(plot.author, function()
-    SS_PtDM_JoinToEvent(id, plot.author);
-  end);
 end;
 
 SS_PlotController_OnDeactivate = function()

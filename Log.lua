@@ -53,7 +53,7 @@ SS_Log_SkillRoll = function(finalResult, otherModifiers, armorModifier, statModi
   outputString = '';
 
   if (not(armorModifier == 0)) then
-    local outputString = '|cffFFFF00Модификатор от брони (|r'..SS_Locale(SS_Armor_GetType())..'|cffFFFF00): |r';
+    local outputString = '|cffFFFF00Модификатор от снаряжения (|r'..SS_Locale(SS_Armor_GetType())..'|cffFFFF00): |r';
     if (armorModifier > 0) then
       outputString = outputString..'|cff00FF00'..armorModifier..'|r';
     elseif (armorModifier < 0) then
@@ -205,4 +205,8 @@ end;
 
 SS_Log_PlayerAcceptedEventInvite = function(player, plot)
   print(player..'|cffFFFF00 согласился на участие в событии сюжета |r"'..plot..'"');
+end;
+
+SS_Log_EventEnd = function(plot)
+  print('|cffFFFF00Вы завершили событие сюжета |r"'..plot..'"');
 end;

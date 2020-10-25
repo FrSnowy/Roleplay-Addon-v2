@@ -63,14 +63,18 @@ local onAcceptPlotInvite = function(plotName, player)
   SS_LeadingPlots_AddPlayer(player);
 end;
 
-local onPlayerDeletePlot = function(plotName, player)
+local onPlayerDeletePlot = function(plotID, player)
   -- У: Мастер, от: игрок, когда: игрок удаляет текущий сюжет мастера
-  if (plotName == SS_Plots_Current().name) then
-    SS_Shared_RemoveFrom(SS_LeadingPlots_Current().players)(function(playerName)
-      return player == playerName;
-    end);
-    SS_PlotController_DrawPlayers();
-    SS_Log_PlotRemovedBy(player, plotName);
+  if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
+
+  SS_Shared_RemoveFrom(SS_LeadingPlots_Current().players)(function(playerName)
+    return player == playerName;
+  end);
+  SS_PlotController_DrawPlayers();
+  SS_Log_PlotRemovedBy(player, plotName);
+
+  if (player == UnitName("target")) then
+    SS_Draw_HideCurrentTargetVisual()
   end;
 end;
 
@@ -81,6 +85,10 @@ local onPlayerDeactivatePlot = function(plotID, player)
 
   local plotName = SS_LeadingPlots_Current().name;
   SS_Log_PlotDeactivatedBy(player, plotName);
+
+  if (player == UnitName("target")) then
+    SS_Draw_HideCurrentTargetVisual()
+  end;
 end;
 
 local onDMDeletePlot = function(plotID, master)
@@ -119,6 +127,11 @@ local onKickAllright = function(plotID, player)
     SS_PlotController_DrawPlayers();
   end;
   SS_Plot_Controll_PlayerInfo:Hide();
+
+  if (player == UnitName("target")) then
+    SS_Draw_HideCurrentTargetVisual()
+  end;
+
   SS_Log_PlayerKickedSuccessfully(player);
 end;
 
@@ -135,18 +148,25 @@ local onDMStartEvent = function(plotID, master)
   SS_Modal_EventStart:Show();
   
   SS_Modal_EventStart_Decline_Button:SetScript('OnClick', function()
-    SS_PtDM_DeclineEventStart(plot.name, master);
-    SS_Log_DeclineEventStart(plot.name);
     SS_Modal_EventStart:Hide();
+    SS_Log_DeclineEventStart(plot.name);
+    SS_PtDM_DeclineEventStart(plot.name, master);
   end);
   
   SS_Modal_EventStart_Accept_Button:SetScript('OnClick', function()
     SS_PlotController_MakeCurrent(plotID);
     SS_PlotController_OnActivate();
-    SS_Log_AcceptEventStart(plot.name);
     SS_Modal_EventStart:Hide();
 
     SS_User.settings.acceptNextPartyInvite = true;
+    SS_Log_AcceptEventStart(plot.name);
+    if (plotID == SS_User.settings.currentPlot) then
+      SS_Shared_IfOnline(plot.author, function()
+        SS_PtDM_JoinToEvent(plotID, plot.author);
+      end);
+  
+      return nil;
+    end;
   end);
 end;
 
@@ -164,9 +184,17 @@ local onPlayerJoinToEvent = function(plotID, player)
   local plot = SS_Plots_Current();
 
   SS_Log_PlayerJoinedToEvent(player, plot.name);
-  if (UnitInParty(player)) then return; end;
-  InviteUnit(player);
-  SS_User.settings.convertToRaid = true;
+  if (not(UnitInParty(player))) then
+    InviteUnit(player);
+  end;
+  
+  if (not(SS_User.settings.convertToRaid)) then
+    SS_User.settings.convertToRaid = true;
+  end;
+
+  if (UnitName("target") == player) then
+    SS_DMtP_DisplayTargetInfo(player);
+  end;
 end;
 
 local onDMGetTargetInfo = function(plotID, master)
@@ -187,8 +215,9 @@ local onDMGetTargetInfo = function(plotID, master)
 end;
 
 local onSendParams = function(params, player)
-  if (not(params) or not(player)) then return nil; end;
   -- У: Мастер, от: игрок, когда: игрок активного сюжета взят в таргет и отвечает на соообщение о своих статах
+  if (not(params) or not(player)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   local health, maxHealth, barrier, maxBarrier, level = strsplit('+', params);
   local params = {
     health = health,
@@ -198,6 +227,54 @@ local onSendParams = function(params, player)
     level = level,
   };
   SS_Draw_InfoAboutPlayer(params);
+end;
+
+local onDMStopEvent = function(plotID, master)
+  -- У: Игрок, от: Мастер, когда: мастер нажал кнопку "завершить событие"
+  if (not(plotID) or not(master)) then return nil; end;
+  if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
+  if (not(SS_Plots_Current().author == master)) then return false; end;
+
+  SS_User.settings.currentPlot = nil;
+  SS_PlotController_OnDeactivate();
+end;
+
+local onDMGetInspectInfo = function(plotID, master)
+  -- У: Игрок, от: Мастер, когда: мастер нажал кнопку "Подробнее" во фрейме цели
+  if (not(plotID) or not(master)) then return nil; end;
+  if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
+  if (not(SS_Plots_Current().author == master)) then return false; end;
+
+  local params = {
+    health = SS_Params_GetHealth(),
+    maxHealth = SS_Params_GetMaxHealth(),
+    barrier = SS_Params_GetBarrier(),
+    maxBarrier = SS_Params_GetMaxBarrier(),
+    level = SS_Progress_GetLevel(),
+    experience = SS_Progress_GetExp(),
+    experienceForUp = SS_Progress_GetExpForUp(),
+    armorType = SS_Armor_GetType(),
+  };
+
+  SS_PtDM_InspectInfo(params, master);
+end;
+
+local onSendInspectInfo = function(params, player)
+  if (not(params) or not(player)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType = strsplit('+', params);
+  local params = {
+    health = health,
+    maxHealth = maxHealth,
+    barrier = barrier,
+    maxBarrier = maxBarrier,
+    level = level,
+    experience = experience,
+    experienceForUp = experienceForUp,
+    armorType = armorType,
+  };
+
+  SS_Draw_PlayerControll(params, player);
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
@@ -224,6 +301,9 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     joinToEvent = onPlayerJoinToEvent,
     dmGetTargetInfo = onDMGetTargetInfo,
     sendParams = onSendParams,
+    dmStopEvent = onDMStopEvent,
+    dmGetInspectInfo = onDMGetInspectInfo,
+    sendInspectInfo = onSendInspectInfo,
   };
 
   if (not(actions[action])) then

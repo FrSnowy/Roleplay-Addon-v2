@@ -20,9 +20,9 @@ local SS_TEXT = {
     empathy = 'Эмпатия',
     mobility = 'Подвижность',
     precision = 'Аккуратность',
-    light = 'Легкая',
-    medium = 'Средняя',
-    heavy = 'Тяжёлая',
+    light = 'Легкое',
+    medium = 'Стандартное',
+    heavy = 'Тяжёлое',
 };
 
 SS_Locale = function(word)
