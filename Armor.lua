@@ -35,8 +35,10 @@ SS_Armor_DrawCheck = function()
   end;
 end;
 
-SS_Armor_GetModifierFor = function(skillName, dices)
-  local armorType = SS_Armor_GetType();
+SS_Armor_GetModifierFor = function(skillName, dices, armorType)
+  if (not(armorType)) then
+    armorType = SS_Armor_GetType();
+  end;
 
   if (armorType == 'light') then return 0; end;
 

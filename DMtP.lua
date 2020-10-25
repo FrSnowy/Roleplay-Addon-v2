@@ -121,5 +121,7 @@ SS_DMtP_DisplayInspectInfo = function()
 
   SS_Shared_IfOnline(player, function()
     SS_DMtP_Direct('dmGetInspectInfo', SS_User.settings.currentPlot, player);
+    SS_DMtP_Direct('dmGetInspectStats', SS_User.settings.currentPlot, player);
+    SS_DMtP_Direct('dmGetInspectSkills', SS_User.settings.currentPlot, player);
   end)
 end;

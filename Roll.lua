@@ -68,16 +68,32 @@ SS_Roll_GetDicesCount = function(playerLevel)
   return math.floor(1 + (SS_Progress_GetLevel() / 10));
 end;
 
-SS_Roll_GetMinimum = function(skillName)
-  local levelModifier = math.floor((SS_Progress_GetLevel() / 5) - SS_Skills_GetMaxPointsInSingle(1)) + 5;
-  local skillModifier = (math.floor(SS_Skills_GetValue(skillName) / 5) - math.floor(SS_Skills_GetValue(skillName) / 8));
+SS_Roll_GetMinimum = function(skillName, params)
+  -- params: чтобы считать для других игроков, опционально
+  if (not(params)) then
+    params = {
+      level = SS_Progress_GetLevel(),
+      skill = SS_Skills_GetValue(skillName),
+    }
+  end;
+
+  local levelModifier = math.floor((params.level / 5) - SS_Skills_GetMaxPointsInSingle(1)) + 5;
+  local skillModifier = math.floor(params.skill / 5) - math.floor(params.skill / 8);
   
   return levelModifier + skillModifier;
 end;
 
-SS_Roll_GetMaximum = function(skillName)
-  local levelModifier = math.floor(SS_Progress_GetLevel() / 8) + 4 + math.floor(0.5 * SS_Progress_GetLevel());
-  local skillModifier = math.floor((SS_Skills_GetValue(skillName) / 2) / math.pow(SS_Progress_GetLevel(), 0.3));
+SS_Roll_GetMaximum = function(skillName, params)
+  -- params: чтобы считать для других игроков, опционально
+  if (not(params)) then
+    params = {
+      level = SS_Progress_GetLevel(),
+      skill = SS_Skills_GetValue(skillName),
+    }
+  end;
+
+  local levelModifier = math.floor(params.level / 8) + 4 + math.floor(0.5 * params.level);
+  local skillModifier = math.floor((params.skill / 2) / math.pow(params.level, 0.3));
   return levelModifier + skillModifier;
 end;
 

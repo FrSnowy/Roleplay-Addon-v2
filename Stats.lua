@@ -79,7 +79,9 @@ SS_Stats_AddPoint = function(value, stat, statView)
   UpdateBarrierOnPointAddtoStat();
 end;
 
-SS_Stats_GetModifierFor = function(skillName)
-  local statPoints = SS_Stats_GetValue(SS_Skills_GetStatOf(skillName));
+SS_Stats_GetModifierFor = function(skillName, statPoints)
+  if (not(statPoints)) then
+    statPoints = SS_Stats_GetValue(SS_Skills_GetStatOf(skillName))
+  end;
   return math.floor(statPoints / 2.4);
 end;

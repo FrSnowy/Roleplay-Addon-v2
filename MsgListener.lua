@@ -203,15 +203,13 @@ local onDMGetTargetInfo = function(plotID, master)
   if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
   if(not(SS_Plots_Current().author == master)) then return false; end;
 
-  local params = {
+  SS_PtDM_Params({
     health = SS_Params_GetHealth(),
     maxHealth = SS_Params_GetMaxHealth(),
     barrier = SS_Params_GetBarrier(),
     maxBarrier = SS_Params_GetMaxBarrier(),
     level = SS_Progress_GetLevel(),
-  };
-
-  SS_PtDM_Params(params, master);
+  }, master);
 end;
 
 local onSendParams = function(params, player)
@@ -219,14 +217,13 @@ local onSendParams = function(params, player)
   if (not(params) or not(player)) then return nil; end;
   if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   local health, maxHealth, barrier, maxBarrier, level = strsplit('+', params);
-  local params = {
+  SS_Draw_InfoAboutPlayer({
     health = health,
     maxHealth = maxHealth,
     barrier = barrier,
     maxBarrier = maxBarrier,
     level = level,
-  };
-  SS_Draw_InfoAboutPlayer(params);
+  });
 end;
 
 local onDMStopEvent = function(plotID, master)
@@ -245,7 +242,7 @@ local onDMGetInspectInfo = function(plotID, master)
   if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
   if (not(SS_Plots_Current().author == master)) then return false; end;
 
-  local params = {
+  SS_PtDM_InspectInfo({
     health = SS_Params_GetHealth(),
     maxHealth = SS_Params_GetMaxHealth(),
     barrier = SS_Params_GetBarrier(),
@@ -254,16 +251,32 @@ local onDMGetInspectInfo = function(plotID, master)
     experience = SS_Progress_GetExp(),
     experienceForUp = SS_Progress_GetExpForUp(),
     armorType = SS_Armor_GetType(),
-  };
-
-  SS_PtDM_InspectInfo(params, master);
+    power = SS_Stats_GetValue('power'),
+    accuracy = SS_Stats_GetValue('accuracy'),
+    wisdom = SS_Stats_GetValue('wisdom'),
+    morale = SS_Stats_GetValue('morale'),
+    empathy = SS_Stats_GetValue('empathy'),
+    mobility = SS_Stats_GetValue('mobility'),
+    precision = SS_Stats_GetValue('precision'),
+    melee = SS_Skills_GetValue('melee'),
+    range = SS_Skills_GetValue('range'),
+    magic = SS_Skills_GetValue('magic'),
+    religion = SS_Skills_GetValue('religion'),
+    perfomance = SS_Skills_GetValue('perfomance'),
+    missing = SS_Skills_GetValue('missing'),
+    hands = SS_Skills_GetValue('hands'),
+  }, master);
 end;
 
 local onSendInspectInfo = function(params, player)
+  -- У: Мастер, от: Игрок, когда: игрок отдает свои характеристики для панели осмотра
   if (not(params) or not(player)) then return nil; end;
-  if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
-  local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType = strsplit('+', params);
-  local params = {
+  if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;  
+  -- Извините
+  -- много параметров сплитом разделяем в правильном порядке
+  local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType, power, accuracy, wisdom, morale, empathy, mobility, precision, melee, range, magic, religion, perfomance, missing, hands = strsplit('+', params);
+
+  SS_Target_TMPData = {
     health = health,
     maxHealth = maxHealth,
     barrier = barrier,
@@ -272,9 +285,27 @@ local onSendInspectInfo = function(params, player)
     experience = experience,
     experienceForUp = experienceForUp,
     armorType = armorType,
-  };
+    stats = {
+      power = power,
+      accuracy = accuracy,
+      wisdom = wisdom,
+      morale = morale,
+      empathy = empathy,
+      mobility = mobility,
+      precision =precision,
+    },
+    skills = {
+      melee = melee,
+      range = range,
+      magic = magic,
+      religion = religion,
+      perfomance = perfomance,
+      missing = missing,
+      hands = hands,
+    },
+  }
 
-  SS_Draw_PlayerControll(params, player);
+  SS_Draw_PlayerControll(player);
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
