@@ -132,20 +132,3 @@ SS_Draw_PlayerControll = function(player)
 
   SS_Player_Controll:Show();
 end;
-
-SS_Draw_PlayerControllSkills = function(skills, player)
-  if (not(SS_Player_Controll_TemporalData) or not(SS_Player_Controll_TemporalData.name == player)) then return nil; end;
-
-  SS_Player_Controll_TemporalData.skills = {
-    melee = skills.melee,
-    range = skills.range,
-    magic = skills.magic,
-    religion = skills.religion,
-    perfomance = skills.perfomance,
-    missing = skills.missing,
-    hands = skills.hands,
-  };
-
-
-  SS_Player_Controll_Skills:Show();
-end;
