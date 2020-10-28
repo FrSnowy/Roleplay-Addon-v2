@@ -106,6 +106,7 @@ SS_Draw_PlayerControll = function(player)
   
     return rollString;
   end;
+
   SS_Player_Controll_Skills_Melee_DiceInfo:SetText(getDiceStr('melee'));
   SS_Player_Controll_Skills_Range_DiceInfo:SetText(getDiceStr('range'));
   SS_Player_Controll_Skills_Magic_DiceInfo:SetText(getDiceStr('magic'));
@@ -114,21 +115,10 @@ SS_Draw_PlayerControll = function(player)
   SS_Player_Controll_Skills_Missing_DiceInfo:SetText(getDiceStr('missing'));
   SS_Player_Controll_Skills_Hands_DiceInfo:SetText(getDiceStr('hands'));
 
-  SS_Player_Controll_Stats_Button:SetScript("OnClick", function()
-    if (SS_Player_Controll_Stats:IsVisible()) then
-      SS_Player_Controll_Stats:Hide();
-    else
-      SS_Player_Controll_Stats:Show();
-    end;
-  end);
-
-  SS_Player_Controll_Skills_Button:SetScript("OnClick", function()
-    if (SS_Player_Controll_Skills:IsVisible()) then
-      SS_Player_Controll_Skills:Hide();
-    else
-      SS_Player_Controll_Skills:Show();
-    end;
-  end);
-
   SS_Player_Controll:Show();
+end;
+
+SS_Draw_HideTargetSubmenus = function()
+  SS_Player_Controll_Stats:Hide();
+  SS_Player_Controll_Skills:Hide();
 end;

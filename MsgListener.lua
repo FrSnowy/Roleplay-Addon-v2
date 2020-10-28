@@ -308,8 +308,32 @@ local onSendInspectInfo = function(params, player)
   SS_Draw_PlayerControll(player);
 end;
 
+local onAddStatModifier = function(data, author, prefix)
+  -- У: Игрок, от: Мастер/GHI, когда: создается новый модификатор
+  local allowModifier = false;
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  if (prefix == 'SS-GHItP') then
+    allowModifier = author == UnitName('player');
+  else
+    allowModifier = author == SS_Plots_Current().author;
+  end;
+
+  if (not(allowModifier)) then return nil; end;
+
+  local id, name, stat, value, count = strsplit('+', data);
+
+  SS_Modifiers_Register('stats', {
+    id = id,
+    name = name,
+    stat = stat,
+    value = value,
+    count = count,
+  })
+end;
+
 SS_MsgListener_Controller = function(prefix, text, channel, author)
-  if (not(prefix == 'SS-DMtP') and not(prefix == 'SS-PtDM') and not(prefix == 'SS-PtP')) then
+  if (not(prefix == 'SS-DMtP') and not(prefix == 'SS-PtDM') and not(prefix == 'SS-PtP') and not(prefix == 'SS-GHItP')) then
     return false;
   end;
 
@@ -335,11 +359,12 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     dmStopEvent = onDMStopEvent,
     dmGetInspectInfo = onDMGetInspectInfo,
     sendInspectInfo = onSendInspectInfo,
+    addStatModifier = onAddStatModifier,
   };
 
   if (not(actions[action])) then
     return;
   end;
 
-  actions[action](data, author);
+  actions[action](data, author, prefix);
 end;

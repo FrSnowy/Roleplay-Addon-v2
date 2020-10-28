@@ -22,44 +22,6 @@ SS_Roll_EfficencyModifiers = {
   ]]--
 };
 
-SS_Roll_RegisterModifier_NecessaryCheck = function(params)
-  if (not(params)) then
-    print('|cffFF0000Ошибка: Не получены нужные параметры при регистрации модификатора броска|r');
-    return false;
-  end;
-
-  if (not(params.name)) then
-    print('|cffFF0000Не найдено имя модификатора броска|r');
-    return false;
-  end;
-
-  if (not(params.value)) then
-    print('|cffFF0000Не найдено значение модификатора|r');
-    return false;
-  end;
-
-  if (not(params.target)) then
-    print('|cffFF0000Нет цели модификатора|r');
-    return false;
-  end;
-
-  return true;
-end;
-
-SS_Roll_RegisterSkillModifier = function(params)
-  if (not(SS_Roll_RegisterModifier_NecessaryCheck(params))) then return false; end;
-
-  table.insert(SS_Roll_SkillModifiers, params);
-  return true;
-end;
-
-SS_Roll_RegisterEfficencyModifier = function(params)
-  if (not(SS_Roll_RegisterModifier_NecessaryCheck(params))) then return false; end;
-
-  table.insert(SS_Roll_EfficencyModifiers, params);
-  return true;
-end;
-
 SS_Roll_GetDicesCount = function(playerLevel)
   if (not(playerLevel)) then
     playerLevel = SS_Progress_GetLevel();
@@ -177,12 +139,8 @@ SS_Roll_Efficency = function(skillName)
 
   local finalResult = math.random(1, efficencyMaxValue);
 
-  local otherModifiers = SS_Roll_GetOtherModifersSummary(SS_Roll_EfficencyModifiers, skillName);
-
-  finalResult = finalResult + otherModifiers;
-
   if (SS_User.settings.displayDiceInfo) then
-    SS_Log_EfficencyRoll(finalResult, otherModifiers, efficencyMaxValue);
+    SS_Log_EfficencyRoll(finalResult, efficencyMaxValue);
   end;
 
   return finalResult;

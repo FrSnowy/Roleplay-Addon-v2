@@ -48,10 +48,12 @@ SS_Progress_DrawExp = function()
 end;
 
 SS_Progress_ShowExpBar = function()
+  MainMenuExpBar:Hide();
   SS_Exp_Bar:Show();
   SS_Progress_DrawExp();
 end;
 
 SS_Progress_HideExpBar = function()
+  MainMenuExpBar:Show();
   SS_Exp_Bar:Hide();
 end;

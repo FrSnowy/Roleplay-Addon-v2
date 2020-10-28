@@ -79,7 +79,7 @@ SS_Log_SkillRoll = function(finalResult, otherModifiers, armorModifier, statModi
   print('|cffFFFF00Итоговый результат проверки: |r|cff9999FF'..finalResult.."|r");
 end;
 
-SS_Log_EfficencyRoll = function(result, otherModifiers, maxValue)
+SS_Log_EfficencyRoll = function(result, maxValue)
   if (maxValue == 1 and result == 1) then
     return nil;
   else
@@ -88,17 +88,6 @@ SS_Log_EfficencyRoll = function(result, otherModifiers, maxValue)
       outputString = outputString..'1. ';
     else
       outputString = outputString..'1d(1-'..maxValue..'). '
-    end;
-
-    if (not(otherModifiers == 0)) then
-      outputString = outputString..'|cffFFFF00От модиф.: |r';
-      if (otherModifiers > 0) then
-        outputString = outputString..'|cff00FF00'..otherModifiers..'. |r';
-      elseif (otherModifiers < 0) then
-        outputString = outputString..'|cffFF0000'..otherModifiers..'. |r';
-      else
-        outputString = outputString..otherModifiers..'. ';
-      end;
     end;
 
     outputString = outputString..'|cffFFFF00Итоговое: |r|cff9999FF'..result.."|r";

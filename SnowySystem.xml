@@ -3593,6 +3593,16 @@
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\shield.blp" />
       </Button>
       <Button name="$parent_Stats_Button" inherits="OptionsButtonTemplate" text="Характеристики">
+        <Scripts>
+          <OnClick>
+            if (not(SS_Player_Controll_Stats:IsVisible())) then
+              SS_Draw_HideTargetSubmenus();
+              SS_Player_Controll_Stats:Show();
+            else
+              SS_Player_Controll_Stats:Hide();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "116" y = "30" />
         <Anchors>
           <Anchor point="BOTTOMLEFT">
@@ -3601,6 +3611,16 @@
         </Anchors>
       </Button>
       <Button name="$parent_Skills_Button" inherits="OptionsButtonTemplate" text="Навыки и проверки">
+        <Scripts>
+          <OnClick>
+            if (not(SS_Player_Controll_Skills:IsVisible())) then
+              SS_Draw_HideTargetSubmenus();
+              SS_Player_Controll_Skills:Show();
+            else
+              SS_Player_Controll_Skills:Hide();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "136" y = "30" />
         <Anchors>
           <Anchor point="BOTTOMRIGHT">
@@ -3608,10 +3628,23 @@
           </Anchor> 
         </Anchors>
       </Button>
+      <Button name="$parent_Modifiers_Button" inherits="OptionsButtonTemplate" text="Модификаторы">
+        <Scripts>
+          <OnClick>
+
+          </OnClick>
+        </Scripts>
+        <Size x = "116" y = "30" />
+        <Anchors>
+          <Anchor point="BOTTOMLEFT">
+            <Offset x="20" y="20"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
       <Frame name="$parent_Stats" hidden="true">
         <Size><AbsDimension x="280" y="180"/></Size>
         <Anchors>
-          <Anchor point="TOP" x="0" y="-220" />
+          <Anchor point="TOP" x="-300" y="0" />
         </Anchors> 
         <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
           <BackgroundInsets>
@@ -3709,7 +3742,7 @@
       <Frame name="$parent_Skills" hidden="true">
         <Size><AbsDimension x="280" y="240"/></Size>
         <Anchors>
-          <Anchor point="TOP" x="0" y="-220" />
+          <Anchor point="TOP" x="300" y="0" />
         </Anchors> 
         <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
           <BackgroundInsets>

@@ -8,6 +8,7 @@ SS_Plots_Create = function(plotUniqueName, plotName, authorName)
     stats = SS_Stats_GetList(),
     params = SS_Params_GetList(),
     progress = SS_Progress_GetList(),
+    modifiers = SS_Modifiers_GetList(),
     author = authorName,
   };
 end;
