@@ -24,3 +24,16 @@ MsgListener.lua
 DrawElements.lua
 SnowySystem.lua
 SnowySystem.xml
+View\Controll_Menu.xml
+View\Dices_Menu.xml
+View\Stats_Menu.xml
+View\Skills_Menu.xml
+View\Armor_Menu.xml
+View\Create_Form.xml
+View\Plot_Activate_Modal.xml
+View\System_Frames.xml
+View\Plot_Controll.xml
+View\Event_Controll.xml
+View\Player_Controll.xml
+View\Invite_Modal.xml
+View\Event_Start_Modal.xml

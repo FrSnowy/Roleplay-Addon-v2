@@ -1,0 +1,542 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_Stats_Menu" hidden="true">
+    <Scripts>
+      <OnShow>
+        SS_Stats_DrawStatInfo('power', SS_Stats_Menu_Stat_Power);
+        SS_Stats_DrawStatInfo('accuracy', SS_Stats_Menu_Stat_Accuracy);
+        SS_Stats_DrawStatInfo('wisdom', SS_Stats_Menu_Stat_Wisdom);
+        SS_Stats_DrawStatInfo('empathy', SS_Stats_Menu_Stat_Empathy);
+        SS_Stats_DrawStatInfo('morale', SS_Stats_Menu_Stat_Morale);
+        SS_Stats_DrawStatInfo('mobility', SS_Stats_Menu_Stat_Mobility);
+        SS_Stats_DrawStatInfo('precision', SS_Stats_Menu_Stat_Precision);
+        SS_Stats_Menu_Points_Value:SetText(SS_Stats_GetAvaliablePoints());
+      </OnShow>
+    </Scripts>
+    <Size><AbsDimension x="220" y="255"/></Size>
+    <Anchors>
+      <Anchor point="LEFT" relativeTo="SS_Player_Menu">
+      <Offset><AbsDimension x="57" y="0"/></Offset>
+      </Anchor>
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="32"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Характеристики">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString name="$parent_Stat_Power" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Accuracy" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-70" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Wisdom" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-95" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Morale" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-120" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Empathy" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-145" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Mobility" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-170" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Stat_Precision" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-195" />
+          </Anchors>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString name="$parent_Points_Name" font="Fonts\FRIZQT__.TTF" text="Доступно:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="20" y="20" />
+          </Anchors>
+        </FontString>
+        <FontString name="$parent_Points_Value" font="Fonts\FRIZQT__.TTF" text="0">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="76" y="20" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_Stat_Power_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-43"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(1, 'power', SS_Stats_Menu_Stat_Power);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Power_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-43"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-1, 'power', SS_Stats_Menu_Stat_Power);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Power_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-43"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-SS_Stats_GetValueWithoutModifier('power'), 'power', SS_Stats_Menu_Stat_Power);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Power_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-43"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Мощь")
+            GameTooltip:AddLine("Облегчает проверки ближнего боя и атлетики")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Accuracy_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-68"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(1, 'accuracy', SS_Stats_Menu_Stat_Accuracy);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Accuracy_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-68"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-1, 'accuracy', SS_Stats_Menu_Stat_Accuracy);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Accuracy_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-68"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-SS_Stats_GetValueWithoutModifier('accuracy'), 'accuracy', SS_Stats_Menu_Stat_Accuracy);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Accuracy_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-68"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Точность")
+            GameTooltip:AddLine("Облегчает проверки дальнего боя и внимательности")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>  
+      <Button name="$parent_Stat_Wisdom_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-93"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(1, 'wisdom', SS_Stats_Menu_Stat_Wisdom);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Wisdom_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-93"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-1, 'wisdom', SS_Stats_Menu_Stat_Wisdom);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Wisdom_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-93"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-SS_Stats_GetValueWithoutModifier('wisdom'), 'wisdom', SS_Stats_Menu_Stat_Wisdom);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Wisdom_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-93"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Мудрость")
+            GameTooltip:AddLine("Облегчает проверки чародейства и знания")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Morale_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(1, 'morale', SS_Stats_Menu_Stat_Morale);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Morale_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-1, 'morale', SS_Stats_Menu_Stat_Morale);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Morale_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-SS_Stats_GetValueWithoutModifier('morale'), 'morale', SS_Stats_Menu_Stat_Morale);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Morale_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-118"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Мораль")
+            GameTooltip:AddLine("Облегчает проверки веры и самоконтроля")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Empathy_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-143"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(1, 'empathy', SS_Stats_Menu_Stat_Empathy);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Empathy_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-143"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-1, 'empathy', SS_Stats_Menu_Stat_Empathy);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Empathy_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-143"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-SS_Stats_GetValueWithoutModifier('empathy'), 'empathy', SS_Stats_Menu_Stat_Empathy);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Empathy_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-143"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Эмпатия")
+            GameTooltip:AddLine("Облегчает проверки выступления и суждения")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Mobility_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-168"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(1, 'mobility', SS_Stats_Menu_Stat_Mobility);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Mobility_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-168"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-1, 'mobility', SS_Stats_Menu_Stat_Mobility);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Mobility_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-168"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-SS_Stats_GetValueWithoutModifier('mobility'), 'mobility', SS_Stats_Menu_Stat_Mobility);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Mobility_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-168"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Подвижность")
+            GameTooltip:AddLine("Облегчает проверки избегания и акробатики")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Precision_Add" inherits="OptionsButtonTemplate" text="+">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-76" y="-193"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(1, 'precision', SS_Stats_Menu_Stat_Precision);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Precision_Reduce" inherits="OptionsButtonTemplate" text="-">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-56" y="-193"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-1, 'precision', SS_Stats_Menu_Stat_Precision);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Precision_Reset" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-36" y="-193"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_Stats_AddPoint(-SS_Stats_GetValueWithoutModifier('precision'), 'precision', SS_Stats_Menu_Stat_Precision);
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Stat_Precision_Info" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "14" y = "16" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-16" y="-193"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "BOTTOM")
+            GameTooltip:AddLine("Аккуратность")
+            GameTooltip:AddLine("Облегчает проверки ловкости рук и скрытности")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+      </Button>
+      <Frame name="$parent_Info">
+        <Size><AbsDimension x="220" y="200"/></Size>
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="$parent">
+            <Offset><AbsDimension x="206" y="0"/></Offset>
+          </Anchor>
+        </Anchors>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+          <BackgroundInsets>
+            <AbsInset left="8" right="8" top="8" bottom="8"/>
+          </BackgroundInsets>
+          <TileSize>
+            <AbsValue val="32"/>
+          </TileSize>
+          <EdgeSize>
+            <AbsValue val="32"/>
+          </EdgeSize>
+        </Backdrop>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

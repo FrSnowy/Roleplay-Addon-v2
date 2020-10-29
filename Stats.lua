@@ -11,11 +11,16 @@ SS_Stats_GetList = function()
 end;
 
 SS_Stats_GetValue = function(stat)
-  if (SS_User.settings.currentPlot) then
-    return SS_Plots_Current().stats[stat];
-  end;
+  if (not(SS_Plots_Current())) then return 0; end;
+  local statValue = SS_Plots_Current().stats[stat];
+  local modifierOfStat = SS_Modifiers_ReadModifiersValue('stats')(stat);
 
-  return 0;
+  return statValue + modifierOfStat;
+end;
+
+SS_Stats_GetValueWithoutModifier = function(stat)
+  if (not(SS_Plots_Current())) then return 0; end;
+  return SS_Plots_Current().stats[stat];
 end;
 
 SS_Stats_GetSpentedPoints = function()
@@ -23,7 +28,7 @@ SS_Stats_GetSpentedPoints = function()
 
   local accum = 0;
   for name in pairs(statList) do
-    accum = accum + SS_Stats_GetValue(name);
+    accum = accum + SS_Stats_GetValueWithoutModifier(name);
   end;
 
   return accum;
@@ -60,7 +65,7 @@ local UpdateBarrierOnPointAddtoStat = function()
 end;
 
 SS_Stats_AddPoint = function(value, stat, statView)
-  if (SS_Stats_GetValue(stat) + value < -SS_Stats_GetMaxPointsInSingle(1)) then
+  if (SS_Stats_GetValueWithoutModifier(stat) + value < -SS_Stats_GetMaxPointsInSingle(1)) then
     return 0;
   end;
 
@@ -68,11 +73,11 @@ SS_Stats_AddPoint = function(value, stat, statView)
     return 0;
   end;
 
-  if (SS_Stats_GetValue(stat) + value > SS_Stats_GetMaxPointsInSingle()) then
+  if (SS_Stats_GetValueWithoutModifier(stat) + value > SS_Stats_GetMaxPointsInSingle()) then
     return 0;
   end;
 
-  SS_Plots_Current().stats[stat] = SS_Stats_GetValue(stat) + value;
+  SS_Plots_Current().stats[stat] = SS_Stats_GetValueWithoutModifier(stat) + value;
   statView:SetText(SS_Locale(stat)..': '..SS_Stats_GetValue(stat));
   SS_Stats_Menu_Points_Value:SetText(SS_Stats_GetAvaliablePoints());
   UpdateHPOnPointAddToStat();
@@ -84,4 +89,14 @@ SS_Stats_GetModifierFor = function(skillName, statPoints)
     statPoints = SS_Stats_GetValue(SS_Skills_GetStatOf(skillName))
   end;
   return math.floor(statPoints / 2.4);
+end;
+
+SS_Stats_DrawStatInfo = function(stat, view)
+  view:SetText(SS_Locale(stat)..': '..SS_Stats_GetValue(stat));
+
+  if (SS_Stats_GetValue(stat) - SS_Stats_GetValueWithoutModifier(stat) > 0) then
+    view:SetTextColor(0.25, 0.75, 0.25);
+  elseif (SS_Stats_GetValue(stat) - SS_Stats_GetValueWithoutModifier(stat) < 0) then
+    view:SetTextColor(0.75, 0.15, 0.15);
+  end;
 end;

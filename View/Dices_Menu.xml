@@ -1,0 +1,312 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_Dices_Menu" hidden="true">
+    <Size><AbsDimension x="280" y="256"/></Size>
+    <Anchors>
+      <Anchor point="LEFT" relativeTo="SS_Player_Menu">
+        <Offset><AbsDimension x="57" y="0"/></Offset>
+      </Anchor>
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="32"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Проверки">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Frame name="$parent_Active">
+        <Size><AbsDimension x="140" y="210"/></Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="5" y="-20"/></Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Активные">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="12"/>
+              <Anchors>
+                <Anchor point="TOP" x="0" y="-20" />
+              </Anchors>
+              <Shadow>
+                <Offset x="-1" y="-1" />
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parent_Melee" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-40"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('melee'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('melee')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Range" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-64"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('range'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('range')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Magic" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-88"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('magic'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('magic')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Religion" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-112"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('religion'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('religion')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Perfomance" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-136"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('perfomance'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('perfomance')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Missing" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-160"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('missing'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('missing')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Hands" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-184"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('hands'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('hands')
+              </OnClick>
+            </Scripts>
+          </Button>
+        </Frames>
+      </Frame>
+      <Frame name="$parent_Passive">
+        <Size><AbsDimension x="140" y="210"/></Size>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset><AbsDimension x="-5" y="-20"/></Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Пассивные">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="12"/>
+              <Anchors>
+                <Anchor point="TOP" x="0" y="-20" />
+              </Anchors>
+              <Shadow>
+                <Offset x="-1" y="-1" />
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parent_Athletics" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-40"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('athletics'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('athletics')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Observation" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-64"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('observation'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('observation')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Knowledge" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-88"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('knowledge'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('knowledge')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Controll" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-112"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('controll'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('controll')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Judgment" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-136"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('judgment'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('judgment')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Acrobats" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-160"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('acrobats'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('acrobats')
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parent_Stealth" inherits="OptionsButtonTemplate">
+            <Size x = "115" y = "22" />
+            <Anchors>
+              <Anchor point="TOP">
+                <Offset x="0" y="-184"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnShow>
+                self:SetText(SS_Locale('stealth'));
+              </OnShow>
+              <OnClick>
+                SS_Roll('stealth')
+              </OnClick>
+            </Scripts>
+          </Button>
+        </Frames>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

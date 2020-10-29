@@ -35,7 +35,7 @@ SS_PlotController_Remove = function(plotID)
   end;
 
   SS_User.plots[plotID] = nil;
-  SS_Plot_Activate:Hide();
+  SS_Modal_Plot_Activate:Hide();
 end;
 
 SS_PlotController_Draw = function(categoryName)
@@ -88,9 +88,9 @@ SS_PlotController_Draw = function(categoryName)
 
     PlotPanel:SetScript("OnClick", function()
       SS_Controll_Menu:Hide();
-      SS_Plot_Activate:Hide();
+      SS_Modal_Plot_Activate:Hide();
       SS_PlotController_Select(index);
-      SS_Plot_Activate:Show();
+      SS_Modal_Plot_Activate:Show();
     end);
 
     counter = counter + 1;

@@ -1,0 +1,89 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_Create_Form" parent = "UIParent" hidden="true">
+    <Size><AbsDimension x="300" y="164"/></Size>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\create-menu-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="300"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Новый сюжет">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Name_Input_Title" font="Fonts\FRIZQT__.TTF" text="Название:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="LEFT" x="52" y="36" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <EditBox name="$parent_Name_Input" letters="36" autoFocus="false">
+        <Size x="200" y="36" />
+        <Anchors>
+          <Anchor point="CENTER">
+            <Offset><AbsDimension x="0" y="8"/></Offset>
+          </Anchor>
+        </Anchors>
+        <TextInsets top="4" bottom="4" left="8" right="8" />
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+          <EdgeSize>
+            <AbsValue val="12"/>
+          </EdgeSize>
+        </Backdrop>
+        <FontString inherits="ChatFontNormal" />
+      </EditBox>
+      <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="Создать">
+        <Size x = "140" y = "36" />
+        <Anchors>
+          <Anchor point="BOTTOM">
+            <Offset x="0" y="20"/>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_PlotController_CreateBoth(SS_Create_Form_Name_Input:GetText(), UnitName("player"));
+            self:GetParent():Hide();
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

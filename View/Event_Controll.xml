@@ -1,0 +1,64 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_Event_Controll" parent = "UIParent" movable="true" hidden = "true">
+    <Scripts>
+      <OnLoad>
+        self:RegisterForDrag("LeftButton");
+        self:RegisterEvent("PLAYER_ENTERING_WORLD");
+      </OnLoad>
+			<OnEvent>
+        if(event == "PLAYER_ENTERING_WORLD") then
+          if (SS_User.settings.currentPlot and SS_LeadingPlots_Current() and SS_LeadingPlots_Current().isEventOngoing) then
+            self:Show();
+          end;
+        end;
+      </OnEvent>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
+    <Size><AbsDimension x="300" y="300"/></Size>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\create-menu-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="300"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Управление событием">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_Stop_Button" inherits="OptionsButtonTemplate" text="Завершить событие">
+        <Scripts>
+          <OnClick>
+            SS_DMtP_StopEvent();
+          </OnClick>
+        </Scripts>
+        <Size x = "150" y = "28" />
+        <Anchors>
+          <Anchor point="BOTTOM">
+            <Offset x="0" y="20"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

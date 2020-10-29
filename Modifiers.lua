@@ -1,26 +1,3 @@
-local IconsForBuff = {
-  power = 'Interface\\Icons\\Spell_Nature_Strength',
-  accuracy = 'Interface\\Icons\\Ability_Hunter_SniperShot',
-  wisdom = 'Interface\\Icons\\Spell_Shadow_ManaFeed',
-  morale = 'Interface\\Icons\\INV_Relics_TotemofRage',
-  empathy = 'Interface\\Icons\\Spell_Misc_EmotionHappy',
-  mobility = 'Interface\\Icons\\Rogue_BurstofSpeed',
-  precision = 'Interface\\Icons\\Ability_Seal',
-  melee = 'Interface\\Icons\\Ability_DualWield',
-  range = 'Interface\\Icons\\Ability_Hunter_LockAndLoad',
-  magic = 'Interface\\Icons\\Spell_Arcane_FocusedPower',
-  religion = 'Interface\\Icons\\Spell_Holy_SealOfWisdom',
-  perfomance = 'Interface\\Icons\\Spell_Shadow_PsychicScream',
-  missing = 'Interface\\Icons\\Ability_Vanish',
-  hands = 'Interface\\Icons\\INV_Misc_Desecrated_ClothGlove',
-  athletics = 'Interface\\Icons\\Spell_Holy_FistOfJustice',
-  observation = 'Interface\\Icons\\Ability_EyeOfTheOwl',
-  knowledge = 'Interface\\Icons\\INV_Misc_Book_05',
-  controll = 'Interface\\Icons\\Spell_Holy_DivineSpirit',
-  judgment = 'Interface\\Icons\\INV_Mask_01',
-  acrobats = 'Interface\\Icons\\Achievement_BG_captureflag_WSG',
-};
-
 SS_Modifiers_GetList = function()
 	return {
 		stats = {
@@ -92,21 +69,6 @@ SS_Modifiers_Register = function(modifierType, modifier)
       value = modifier.value,
       count = modifier.count,
     }
-
-    --[[
-    GHI_ActionAPI().GetAPI().GHI_ApplyBuff(
-      modifier.name,
-      'Описание',
-      IconsForBuff[modifier.stat],
-      true,
-      'Helpful',
-      '',
-      30,
-      false,
-      true,
-      tonumber(modifier.count)
-    );
-    ]]--
 
   elseif (modifierType == 'skills') then
     SS_Plots_Current().modifiers.skills[modifier.id] = {

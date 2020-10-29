@@ -1,0 +1,144 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_Modal_Plot_Activate" parent = "UIParent" hidden="true">
+    <Size><AbsDimension x="300" y="200"/></Size>
+    <Scripts>
+      <OnShow>
+        SS_Modal_Plot_Activate_Name:SetText('"'..SS_User.plots[SS_User.settings.selectedPlot].name..'"');
+        if (SS_User.plots[SS_User.settings.selectedPlot] and SS_User.leadingPlots[SS_User.settings.selectedPlot]) then
+          SS_Modal_Plot_Activate_Role:SetText('Вы - игрок и ведущий сюжета');
+        else
+          if (SS_User.plots[SS_User.settings.selectedPlot]) then
+            SS_Modal_Plot_Activate_Role:SetText('Вы - участник сюжета');
+          elseif (SS_User.leadingPlots[SS_User.settings.selectedPlot]) then
+            SS_Modal_Plot_Activate_Role:SetText('Вы - ведущий сюжета');
+          end;
+        end;
+      </OnShow>
+    </Scripts>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\player-activate" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="8" right="8" top="8" bottom="8"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="300"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_PreName" font="Fonts\FRIZQT__.TTF" text = "Сюжет">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="16"/>
+          <Anchors>
+            <Anchor point="CENTER" x="0" y="50" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Name" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="0.6" b="0" a="1"/>
+          <FontHeight val="20"/>
+          <Anchors>
+            <Anchor point="CENTER" x="0" y="20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_Role" font="Fonts\FRIZQT__.TTF" text="">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="CENTER" x="0" y="-10" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+            SS_User.settings.selectedPlot = nil;
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Remove_Button" inherits="OptionsButtonTemplate" text="Удалить">
+        <Size x = "80" y = "30" />
+        <Anchors>
+          <Anchor point="BOTTOMLEFT">
+            <Offset x="20" y="20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
+              SS_PlotController_MakeCurrent(nil);
+              SS_PlotController_OnDeactivate();
+            end;
+            if (SS_Plots_Selected()) then
+              if (not(SS_Plots_Selected().author == UnitName("player"))) then
+                SS_PtDM_DeletePlot(SS_User.settings.selectedPlot, SS_Plots_Selected().author);
+              end;
+              SS_User.plots[SS_User.settings.selectedPlot] = nil;
+            end;
+
+            if (SS_LeadingPlots_Selected()) then
+              SS_DMtP_DeletePlot(SS_User.settings.selectedPlot);
+              SS_User.leadingPlots[SS_User.settings.selectedPlot] = nil;
+            end;
+
+            SS_PlotController_Select(nil);
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Activate_Button" inherits="OptionsButtonTemplate">
+        <Size x = "110" y = "30" />
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset x="-20" y="20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
+              SS_PlotController_MakeCurrent(nil);
+              SS_PlotController_OnDeactivate();
+            else
+              SS_PlotController_MakeCurrent(SS_User.settings.selectedPlot);
+              SS_PlotController_OnActivate();
+            end;
+            SS_PlotController_Select(nil);
+            self:GetParent():Hide()
+          </OnClick>
+          <OnShow>
+            if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
+              SS_Modal_Plot_Activate_Activate_Button:SetText("Деактивировать");
+            else
+              SS_Modal_Plot_Activate_Activate_Button:SetText("Активировать");
+            end;
+          </OnShow>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>
