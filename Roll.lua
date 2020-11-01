@@ -1,15 +1,3 @@
-SS_Roll_SkillModifiers = {
-  --[[
-  {
-    name = 'Бонус ништяка',
-    value = 1,
-    target = { 'range' },
-    countOfRolls = 2,
-    onFire = nil,
-  },
-  ]]
-};
-
 SS_Roll_EfficencyModifiers = {
   --[[
   {
@@ -70,39 +58,6 @@ SS_Roll_GetDices = function(skillName)
   return dices;
 end;
 
-SS_Roll_GetOtherModifersSummary = function(modifiersList, skillName)
-  local otherModifiers = 0;
-
-  local applyModifier = function(modifier, index)
-    otherModifiers = otherModifiers + modifier.value;
-    modifier.countOfRolls = modifier.countOfRolls - 1;
-
-    if (modifier.onFire) then
-      modifier.onFire(modifier);
-    end;
-    
-    if (modifier.countOfRolls <= 0) then
-      table.remove(modifiersList, index);
-    end;
-  end;
-
-  SS_Shared_ForEach(modifiersList)(function(modifier, index)
-    local isForAny = modifier.target == 'any';
-    local isForSame = modifier.target == skillName;
-    local isTargetTable = type(modifier.target) == 'table';
-
-    if (isForAny or isForSame) then applyModifier(modifier, index);
-    elseif (isTargetTable) then
-      local isCurrentSkillInTable = SS_Shared_Includes(modifier.target)(function(target)
-        return target == skillName;
-      end);
-      if (isCurrentSkillInTable) then applyModifier(modifier, index); end;
-    end;
-  end)
-
-  return otherModifiers;
-end;
-
 SS_Roll_Skill = function(skillName)
   local diceCount = SS_Roll_GetDicesCount();
   local dices = SS_Roll_GetDices(skillName);
@@ -121,12 +76,8 @@ SS_Roll_Skill = function(skillName)
   local finalResult = maxResult + statModifier + armorModifier;
   if (finalResult < dices.from) then finalResult = dices.from; end;
 
-  local otherModifiers = SS_Roll_GetOtherModifersSummary(SS_Roll_SkillModifiers, skillName);
-
-  finalResult = finalResult + otherModifiers;
-
   if (SS_User.settings.displayDiceInfo) then
-    SS_Log_SkillRoll(finalResult, otherModifiers, armorModifier, statModifier, results, dices, diceCount, skillName);
+    SS_Log_SkillRoll(finalResult, armorModifier, statModifier, results, dices, diceCount, skillName);
   end;
 
   return finalResult;
@@ -154,4 +105,6 @@ SS_Roll = function(skillName)
   if (not(SS_User.settings.displayDiceInfo)) then
     SS_Log_DiceInfoShort(skillResult, efficencyResult, dices, skillName);
   end;
+  
+  SS_Modifiers_Fire('stats')(SS_Skills_GetStatOf(skillName));
 end;

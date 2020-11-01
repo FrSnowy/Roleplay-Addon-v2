@@ -117,6 +117,7 @@
           <OnClick>
             if (SS_Stats_Menu:IsVisible()) then
               SS_Stats_Menu:Hide();
+              SS_Stats_Menu_Info:Hide();
             else
               SS_Draw_HideSubmenus();
               SS_Stats_Menu:Show();

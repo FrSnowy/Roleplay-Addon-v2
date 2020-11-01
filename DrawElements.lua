@@ -13,6 +13,7 @@ end;
 
 SS_Draw_HideSubmenus = function()
   SS_Stats_Menu:Hide();
+  SS_Stats_Menu_Info:Hide();
   SS_Skills_Menu:Hide();
   SS_Controll_Menu:Hide();
   SS_Armor_Menu:Hide();
@@ -121,4 +122,67 @@ end;
 SS_Draw_HideTargetSubmenus = function()
   SS_Player_Controll_Stats:Hide();
   SS_Player_Controll_Skills:Hide();
+end;
+
+SS_Draw_StatInfo = function(stat, content)
+  local childs = { SS_Stats_Menu_Info_Inner_Content:GetChildren() };
+  for _, child in pairs(childs) do
+    child:Hide();
+  end
+
+  SS_Stats_Menu_Info_Title:SetText(SS_Locale(stat));
+  SS_Stats_Menu_Info_Inner_Content_Description:SetText(content);
+
+  local modifiers = SS_Modifiers_GetModifiersOf('stats')(stat);
+
+  if (modifiers == nil) then
+    SS_Stats_Menu_Info_Inner_Content_Modifiers:Hide();
+  else
+    SS_Stats_Menu_Info_Inner_Content_Modifiers:Show();
+    local counter = 0;
+
+    SS_Shared_ForEach(modifiers)(function(modifier, id)
+      local ModifierPanel = CreateFrame("Frame", nil, SS_Stats_Menu_Info_Inner_Content);
+            ModifierPanel:Show();
+            ModifierPanel:EnableMouse();
+            ModifierPanel:SetSize(180, 23);
+            ModifierPanel:SetPoint("TOPLEFT", SS_Stats_Menu_Info_Inner_Content, "TOPLEFT", 8, -55 - 30 * counter);
+
+      local modifierTitleStr = modifier.name..' (';
+      if (tonumber(modifier.value) >= 0) then
+        modifierTitleStr = modifierTitleStr..'+'..modifier.value
+      else
+        modifierTitleStr = modifierTitleStr..modifier.value
+      end;
+      modifierTitleStr = modifierTitleStr..')';
+
+      local ModifierName = ModifierPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
+            ModifierName:SetPoint("TOPLEFT", ModifierPanel, "TOPLEFT", 0, 0);
+            ModifierName:SetText(modifierTitleStr);
+            ModifierName:SetFont("Fonts\\FRIZQT__.TTF", 11);
+            ModifierName:Show();
+
+      if (tonumber(modifier.value) >= 0) then
+        ModifierName:SetTextColor(0.25, 0.75, 0.25);
+      else
+        ModifierName:SetTextColor(0.75, 0.15, 0.15);
+      end;
+
+      local ModifierCount = ModifierPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
+            ModifierCount:SetPoint("TOPLEFT", ModifierPanel, "TOPLEFT", 0, -14);
+            ModifierCount:SetFont("Fonts\\FRIZQT__.TTF", 9);
+            ModifierCount:Show();
+
+      if (tonumber(modifier.count) > 0) then
+        ModifierCount:SetText('ещё '..modifier.count..' бросков');
+      else
+        ModifierCount:SetText('до отмены мастером');
+      end;
+
+      counter = counter + 1;
+    end);
+  end;
+
+  SS_Stats_Menu_Info:Show();
+
 end;

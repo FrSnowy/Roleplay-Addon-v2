@@ -1,4 +1,4 @@
-SS_Log_SkillRoll = function(finalResult, otherModifiers, armorModifier, statModifier, results, dices, diceCount, skillName)
+SS_Log_SkillRoll = function(finalResult, armorModifier, statModifier, results, dices, diceCount, skillName)
   print('-------------');
   print('|cffFFFF00Проверка навыка: |r'..SS_Locale(skillName).."|cffFFFF00: |r"..diceCount..'d('..dices.from.."-"..dices.to..')');
   local outputString = '|cffFFFF00Результаты броска куба: [|r';
@@ -60,18 +60,6 @@ SS_Log_SkillRoll = function(finalResult, otherModifiers, armorModifier, statModi
       outputString = outputString..'|cffFF0000'..armorModifier..'|r';
     else
       outputString = outputString..armorModifier;
-    end;
-    print(outputString);
-  end;
-
-  if (not(otherModifiers == 0)) then
-    local outputString = '|cffFFFF00От сторонник модификаторов: |r';
-    if (otherModifiers > 0) then
-      outputString = outputString..'|cff00FF00'..otherModifiers..'|r';
-    elseif (otherModifiers < 0) then
-      outputString = outputString..'|cffFF0000'..otherModifiers..'|r';
-    else
-      outputString = outputString..otherModifiers;
     end;
     print(outputString);
   end;
@@ -198,4 +186,32 @@ end;
 
 SS_Log_EventEnd = function(plot)
   print('|cffFFFF00Вы завершили событие сюжета |r"'..plot..'"');
+end;
+
+SS_Log_StatModifierAdded = function(name, stat, value, count)
+  local outputString = '|cffFFFF00Добавлен модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+
+  outputString = outputString..'|cffFFFF00 для характеристики |r'..SS_Locale(stat);
+  if (tonumber(count) > 0) then
+    outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
+  else
+    outputString = outputString..'|cffFFFF00 до отмены|r';
+  end;
+  print(outputString);
+end;
+
+SS_Log_StatModifierRemoved = function(name, stat, value)
+  local outputString = '|cffFFFF00Потерян модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+  outputString = outputString..'|cffFFFF00 для характеристики |r'..SS_Locale(stat);
+  print(outputString);
 end;

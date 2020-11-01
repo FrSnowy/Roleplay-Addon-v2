@@ -99,8 +99,57 @@ SS_Modifiers_ReadModifiersValue = function(modifierType)
 
     return summary;
   end;
-end; 
+end;
 
+SS_Modifiers_GetModifiersOf = function(modifierType)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (not(modifierType == 'stats') and not(modifierType == 'skills')) then return nil; end;
+
+  local modifiers = SS_Plots_Current().modifiers[modifierType];
+
+  return function(stat)
+    if (not(stat)) then return nil; end;
+    local output = nil;
+
+    SS_Shared_ForEach(modifiers)(function(modifier, id)
+      if (modifier.stat == stat) then
+        if (output == nil) then output = { }; end;
+        output[id] = modifier;
+      end;
+    end);
+
+    return output;
+  end;
+end;
+
+SS_Modifiers_Fire = function(modifierType)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (not(modifierType == 'stats') and not(modifierType == 'skills')) then return nil; end;
+
+  local modifiers = SS_Plots_Current().modifiers[modifierType];
+
+  return function(stat)
+    if (not(stat)) then return nil; end;
+    SS_Shared_ForEach(modifiers)(function(modifier, id)
+      if (modifier.stat == stat) then
+        if (tonumber(modifier.count) > 0) then
+          modifier.count = modifier.count - 1;
+          if (modifier.count <= 0) then
+            SS_Log_StatModifierRemoved(modifier.name, modifier.stat, modifier.value)
+            modifiers[id] = nil;
+          end;
+        end;
+      end;
+    end);
+  
+  end;
+end;
+
+SS_Modifiers_Clear = function()
+  SS_Plots_Current().modifiers = SS_Modifiers_GetList();
+end;
+
+--[[
 SS_Modifiers_RecieveModifiersValue = function(modifierType)
   if (not(SS_Plots_Current())) then return 0; end;
   if (not(modifierType == 'stats') and not(modifierType == 'skills')) then return 0; end;
@@ -126,3 +175,4 @@ SS_Modifiers_RecieveModifiersValue = function(modifierType)
     return summary;
   end;
 end;
+--]]

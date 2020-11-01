@@ -329,7 +329,23 @@ local onAddStatModifier = function(data, author, prefix)
     stat = stat,
     value = value,
     count = count,
-  })
+  });
+
+  if (SS_Stats_Menu:IsVisible()) then
+    SS_Stats_DrawStatInfo('power', SS_Stats_Menu_Stat_Power);
+    SS_Stats_DrawStatInfo('accuracy', SS_Stats_Menu_Stat_Accuracy);
+    SS_Stats_DrawStatInfo('wisdom', SS_Stats_Menu_Stat_Wisdom);
+    SS_Stats_DrawStatInfo('empathy', SS_Stats_Menu_Stat_Empathy);
+    SS_Stats_DrawStatInfo('morale', SS_Stats_Menu_Stat_Morale);
+    SS_Stats_DrawStatInfo('mobility', SS_Stats_Menu_Stat_Mobility);
+    SS_Stats_DrawStatInfo('precision', SS_Stats_Menu_Stat_Precision);
+
+    if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale(stat)) then
+      SS_Draw_StatInfo(stat, SS_Stats_Menu_Info_Inner_Content_Description:GetText());
+    end;
+  end;
+
+  SS_Log_StatModifierAdded(name, stat, value, count);
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)

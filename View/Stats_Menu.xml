@@ -159,15 +159,9 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnEnter>
-            GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Мощь")
-            GameTooltip:AddLine("Облегчает проверки ближнего боя и атлетики")
-            GameTooltip:Show()
-          </OnEnter>
-          <OnLeave>
-            GameTooltip:Hide()
-          </OnLeave>
+          <OnClick>
+            SS_Draw_StatInfo('power', 'Облегчает проверки ближнего боя и атлетики');
+          </OnClick>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Accuracy_Add" inherits="OptionsButtonTemplate" text="+">
@@ -217,15 +211,9 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnEnter>
-            GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Точность")
-            GameTooltip:AddLine("Облегчает проверки дальнего боя и внимательности")
-            GameTooltip:Show()
-          </OnEnter>
-          <OnLeave>
-            GameTooltip:Hide()
-          </OnLeave>
+          <OnClick>
+            SS_Draw_StatInfo('accuracy', 'Облегчает проверки дальнего боя и внимательности');
+          </OnClick>
         </Scripts>
       </Button>  
       <Button name="$parent_Stat_Wisdom_Add" inherits="OptionsButtonTemplate" text="+">
@@ -275,15 +263,9 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnEnter>
-            GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Мудрость")
-            GameTooltip:AddLine("Облегчает проверки чародейства и знания")
-            GameTooltip:Show()
-          </OnEnter>
-          <OnLeave>
-            GameTooltip:Hide()
-          </OnLeave>
+          <OnClick>
+            SS_Draw_StatInfo('wisdom', 'Облегчает проверки чародейства и знания');
+          </OnClick>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Morale_Add" inherits="OptionsButtonTemplate" text="+">
@@ -333,15 +315,9 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnEnter>
-            GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Мораль")
-            GameTooltip:AddLine("Облегчает проверки веры и самоконтроля")
-            GameTooltip:Show()
-          </OnEnter>
-          <OnLeave>
-            GameTooltip:Hide()
-          </OnLeave>
+          <OnClick>
+            SS_Draw_StatInfo('morale', 'Облегчает проверки веры и самоконтроля');
+          </OnClick>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Empathy_Add" inherits="OptionsButtonTemplate" text="+">
@@ -391,15 +367,9 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnEnter>
-            GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Эмпатия")
-            GameTooltip:AddLine("Облегчает проверки выступления и суждения")
-            GameTooltip:Show()
-          </OnEnter>
-          <OnLeave>
-            GameTooltip:Hide()
-          </OnLeave>
+          <OnClick>
+            SS_Draw_StatInfo('empathy', 'Облегчает проверки выступления и суждения');
+          </OnClick>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Mobility_Add" inherits="OptionsButtonTemplate" text="+">
@@ -449,15 +419,9 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnEnter>
-            GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Подвижность")
-            GameTooltip:AddLine("Облегчает проверки избегания и акробатики")
-            GameTooltip:Show()
-          </OnEnter>
-          <OnLeave>
-            GameTooltip:Hide()
-          </OnLeave>
+          <OnClick>
+            SS_Draw_StatInfo('mobility', 'Облегчает проверки избегания и акробатики');
+          </OnClick>
         </Scripts>
       </Button>
       <Button name="$parent_Stat_Precision_Add" inherits="OptionsButtonTemplate" text="+">
@@ -507,19 +471,13 @@
           </Anchor> 
         </Anchors>
         <Scripts>
-          <OnEnter>
-            GameTooltip:SetOwner(this, "BOTTOM")
-            GameTooltip:AddLine("Аккуратность")
-            GameTooltip:AddLine("Облегчает проверки ловкости рук и скрытности")
-            GameTooltip:Show()
-          </OnEnter>
-          <OnLeave>
-            GameTooltip:Hide()
-          </OnLeave>
+          <OnClick>
+            SS_Draw_StatInfo('precision', 'Облегчает проверки ловкости рук и скрытности');
+          </OnClick>
         </Scripts>
       </Button>
-      <Frame name="$parent_Info">
-        <Size><AbsDimension x="220" y="200"/></Size>
+      <Frame name="$parent_Info" hidden="true">
+        <Size><AbsDimension x="227" y="200"/></Size>
         <Anchors>
           <Anchor point="LEFT" relativeTo="$parent">
             <Offset><AbsDimension x="206" y="0"/></Offset>
@@ -536,6 +494,84 @@
             <AbsValue val="32"/>
           </EdgeSize>
         </Backdrop>
+        <Layers>
+          <Layer>
+            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="12"/>
+              <Anchors>
+                <Anchor point="TOP" x="0" y="-24" />
+              </Anchors>
+              <Shadow>
+                <Offset x="-1" y="-1" />
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
+            <Size x = "20" y = "20" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-20"/>
+              </Anchor> 
+            </Anchors>
+            <Scripts>
+              <OnClick>
+                self:GetParent():Hide()
+              </OnClick>
+            </Scripts>
+          </Button>
+          <ScrollFrame name="$parent_Inner" inherits="UIPanelScrollFrameTemplate">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="10" y="-48"/>
+              <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="10" y="20"/>
+              <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent" x="-44"/>
+            </Anchors>
+            <ScrollChild>
+              <Frame name="$parent_Content">
+                <Size x = "177" y = "50" />
+                <Anchors>
+                  <Anchor point="TOPLEFT" />
+                </Anchors>
+                <Layers>
+                  <Layer>
+                    <FontString name="$parent_Description" justifyH="LEFT" justifyV="TOP" maxLines="20" wordwrap="true" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <Size x = "170" y = "40" />
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="8" />
+                        <Anchor point="TOPRIGHT" />
+                      </Anchors>
+                      <Shadow>
+                        <Offset x="-1" y="-1" />
+                        <Color r="0" g="0" b="0"/>
+                      </Shadow>
+                    </FontString>
+                  </Layer>
+                  <Layer>
+                    <FontString name="$parent_Modifiers" justifyH="LEFT" justifyV="TOP" maxLines="20" wordwrap="true" font="Fonts\FRIZQT__.TTF" text = "Модификаторы">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <Size x = "170" y = "40" />
+                      <FontHeight val="12"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT">
+                          <Offset x="8" y="-35"/>
+                        </Anchor> 
+                      </Anchors>
+                      <Shadow>
+                        <Offset x="-1" y="-1" />
+                        <Color r="0" g="0" b="0"/>
+                      </Shadow>
+                    </FontString>
+                  </Layer>
+                </Layers>
+              </Frame>
+            </ScrollChild>
+          </ScrollFrame>
+        </Frames>
       </Frame>
     </Frames>
   </Frame>

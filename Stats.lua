@@ -98,5 +98,7 @@ SS_Stats_DrawStatInfo = function(stat, view)
     view:SetTextColor(0.25, 0.75, 0.25);
   elseif (SS_Stats_GetValue(stat) - SS_Stats_GetValueWithoutModifier(stat) < 0) then
     view:SetTextColor(0.75, 0.15, 0.15);
+  else
+    view:SetTextColor(1, 1, 1);
   end;
 end;
