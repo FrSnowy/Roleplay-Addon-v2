@@ -18,11 +18,16 @@ SS_Skills_GetList = function()
 end;
 
 SS_Skills_GetValue = function(skill)
-  if (SS_User.settings.currentPlot) then
-    return SS_Plots_Current().skills[skill];
-  end;
+  if (not(SS_Plots_Current())) then return 0; end;
+  local skillValue = SS_Plots_Current().skills[skill];
+  local modifier = SS_Modifiers_ReadModifiersValue('skills')(skill);
 
-  return 0;
+  return skillValue + modifier;
+end;
+
+SS_Skills_GetValueWithoutModifier = function(skill)
+  if (not(SS_Plots_Current())) then return 0; end;
+  return SS_Plots_Current().skills[skill];
 end;
 
 SS_Skills_GetSpentedPoints = function()
@@ -30,7 +35,7 @@ SS_Skills_GetSpentedPoints = function()
 
   local accum = 0;
   for name in pairs(skillList) do
-    accum = accum + SS_Skills_GetValue(name);
+    accum = accum + SS_Skills_GetValueWithoutModifier(name);
   end;
 
   return accum;
@@ -57,7 +62,7 @@ SS_Skills_GetAvaliablePoints = function()
 end;
 
 SS_Skills_AddPoint = function(value, skill, skillView)
-  if (SS_Skills_GetValue(skill) + value < 0) then
+  if (SS_Skills_GetValueWithoutModifier(skill) + value < 0) then
     return 0;
   end;
 
@@ -65,11 +70,11 @@ SS_Skills_AddPoint = function(value, skill, skillView)
     return 0;
   end;
 
-  if (SS_Skills_GetValue(skill) + value > SS_Skills_GetMaxPointsInSingle()) then
+  if (SS_Skills_GetValueWithoutModifier(skill) + value > SS_Skills_GetMaxPointsInSingle()) then
     return 0;
   end;
 
-  SS_Plots_Current().skills[skill] = SS_Skills_GetValue(skill) + value;
+  SS_Plots_Current().skills[skill] = SS_Skills_GetValueWithoutModifier(skill) + value;
   skillView:SetText(SS_Locale(skill)..": "..SS_Skills_GetValue(skill));
   SS_Skills_Menu_Points_Value:SetText(SS_Skills_GetAvaliablePoints());
 end;
@@ -93,4 +98,16 @@ SS_Skills_GetStatOf = function(skill)
   };
 
   return association[skill];
+end;
+
+SS_Skills_DrawValue = function(skill, view)
+  view:SetText(SS_Locale(skill)..': '..SS_Skills_GetValue(skill));
+
+  if (SS_Skills_GetValue(skill) - SS_Skills_GetValueWithoutModifier(skill) > 0) then
+    view:SetTextColor(0.25, 0.75, 0.25);
+  elseif (SS_Skills_GetValue(skill) - SS_Skills_GetValueWithoutModifier(skill) < 0) then
+    view:SetTextColor(0.75, 0.15, 0.15);
+  else
+    view:SetTextColor(1, 1, 1);
+  end;
 end;

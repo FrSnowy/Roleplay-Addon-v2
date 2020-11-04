@@ -29,6 +29,8 @@ SS_Roll_GetMinimum = function(skillName, params)
 
   local levelModifier = math.floor((params.level / 5) - SS_Skills_GetMaxPointsInSingle(1)) + 5;
   local skillModifier = math.floor(params.skill / 5) - math.floor(params.skill / 8);
+
+  if (levelModifier + skillModifier < 0) then return 0; end;
   
   return levelModifier + skillModifier;
 end;
@@ -44,6 +46,8 @@ SS_Roll_GetMaximum = function(skillName, params)
 
   local levelModifier = math.floor(params.level / 8) + 4 + math.floor(0.5 * params.level);
   local skillModifier = math.floor((params.skill / 2) / math.pow(params.level, 0.3));
+  if (levelModifier + skillModifier < 1) then return 1; end;
+
   return levelModifier + skillModifier;
 end;
 
@@ -107,4 +111,5 @@ SS_Roll = function(skillName)
   end;
   
   SS_Modifiers_Fire('stats')(SS_Skills_GetStatOf(skillName));
+  SS_Modifiers_Fire('skills')(skillName);
 end;

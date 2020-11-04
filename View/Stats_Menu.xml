@@ -2,13 +2,13 @@
   <Frame name="SS_Stats_Menu" hidden="true">
     <Scripts>
       <OnShow>
-        SS_Stats_DrawStatInfo('power', SS_Stats_Menu_Stat_Power);
-        SS_Stats_DrawStatInfo('accuracy', SS_Stats_Menu_Stat_Accuracy);
-        SS_Stats_DrawStatInfo('wisdom', SS_Stats_Menu_Stat_Wisdom);
-        SS_Stats_DrawStatInfo('empathy', SS_Stats_Menu_Stat_Empathy);
-        SS_Stats_DrawStatInfo('morale', SS_Stats_Menu_Stat_Morale);
-        SS_Stats_DrawStatInfo('mobility', SS_Stats_Menu_Stat_Mobility);
-        SS_Stats_DrawStatInfo('precision', SS_Stats_Menu_Stat_Precision);
+        SS_Stats_DrawValue('power', SS_Stats_Menu_Stat_Power);
+        SS_Stats_DrawValue('accuracy', SS_Stats_Menu_Stat_Accuracy);
+        SS_Stats_DrawValue('wisdom', SS_Stats_Menu_Stat_Wisdom);
+        SS_Stats_DrawValue('empathy', SS_Stats_Menu_Stat_Empathy);
+        SS_Stats_DrawValue('morale', SS_Stats_Menu_Stat_Morale);
+        SS_Stats_DrawValue('mobility', SS_Stats_Menu_Stat_Mobility);
+        SS_Stats_DrawValue('precision', SS_Stats_Menu_Stat_Precision);
         SS_Stats_Menu_Points_Value:SetText(SS_Stats_GetAvaliablePoints());
       </OnShow>
     </Scripts>
@@ -160,7 +160,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_Draw_StatInfo('power', 'Облегчает проверки ближнего боя и атлетики');
+            if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale('power')) then
+              SS_Stats_Menu_Info:Hide();
+            else
+              SS_Draw_StatInfo('power', 'Облегчает проверки ближнего боя и атлетики.');
+            end;
           </OnClick>
         </Scripts>
       </Button>
@@ -212,7 +216,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_Draw_StatInfo('accuracy', 'Облегчает проверки дальнего боя и внимательности');
+            if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale('accuracy')) then
+              SS_Stats_Menu_Info:Hide();
+            else
+              SS_Draw_StatInfo('accuracy', 'Облегчает проверки дальнего боя и внимательности.');
+            end;
           </OnClick>
         </Scripts>
       </Button>  
@@ -264,7 +272,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_Draw_StatInfo('wisdom', 'Облегчает проверки чародейства и знания');
+            if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale('wisdom')) then
+              SS_Stats_Menu_Info:Hide();
+            else
+              SS_Draw_StatInfo('wisdom', 'Облегчает проверки чародейства и знания.');
+            end;
           </OnClick>
         </Scripts>
       </Button>
@@ -316,7 +328,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_Draw_StatInfo('morale', 'Облегчает проверки веры и самоконтроля');
+            if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale('morale')) then
+              SS_Stats_Menu_Info:Hide();
+            else
+              SS_Draw_StatInfo('morale', 'Облегчает проверки веры и самоконтроля.');
+            end;
           </OnClick>
         </Scripts>
       </Button>
@@ -368,7 +384,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_Draw_StatInfo('empathy', 'Облегчает проверки выступления и суждения');
+            if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale('empathy')) then
+              SS_Stats_Menu_Info:Hide();
+            else
+              SS_Draw_StatInfo('empathy', 'Облегчает проверки выступления и суждения.');
+            end;
           </OnClick>
         </Scripts>
       </Button>
@@ -420,7 +440,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_Draw_StatInfo('mobility', 'Облегчает проверки избегания и акробатики');
+            if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale('mobility')) then
+              SS_Stats_Menu_Info:Hide();
+            else
+              SS_Draw_StatInfo('mobility', 'Облегчает проверки избегания и акробатики.');
+            end;
           </OnClick>
         </Scripts>
       </Button>
@@ -472,7 +496,11 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_Draw_StatInfo('precision', 'Облегчает проверки ловкости рук и скрытности');
+            if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale('precision')) then
+              SS_Stats_Menu_Info:Hide();
+            else
+              SS_Draw_StatInfo('precision', 'Облегчает проверки ловкости рук и скрытности.');
+            end;
           </OnClick>
         </Scripts>
       </Button>

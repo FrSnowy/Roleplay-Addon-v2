@@ -309,7 +309,7 @@ local onSendInspectInfo = function(params, player)
 end;
 
 local onAddStatModifier = function(data, author, prefix)
-  -- У: Игрок, от: Мастер/GHI, когда: создается новый модификатор
+  -- У: Игрок, от: Мастер/GHI, когда: создается новый модификатор хар-ки
   local allowModifier = false;
   if (not(SS_Plots_Current())) then return nil; end;
 
@@ -332,13 +332,13 @@ local onAddStatModifier = function(data, author, prefix)
   });
 
   if (SS_Stats_Menu:IsVisible()) then
-    SS_Stats_DrawStatInfo('power', SS_Stats_Menu_Stat_Power);
-    SS_Stats_DrawStatInfo('accuracy', SS_Stats_Menu_Stat_Accuracy);
-    SS_Stats_DrawStatInfo('wisdom', SS_Stats_Menu_Stat_Wisdom);
-    SS_Stats_DrawStatInfo('empathy', SS_Stats_Menu_Stat_Empathy);
-    SS_Stats_DrawStatInfo('morale', SS_Stats_Menu_Stat_Morale);
-    SS_Stats_DrawStatInfo('mobility', SS_Stats_Menu_Stat_Mobility);
-    SS_Stats_DrawStatInfo('precision', SS_Stats_Menu_Stat_Precision);
+    SS_Stats_DrawValue('power', SS_Stats_Menu_Stat_Power);
+    SS_Stats_DrawValue('accuracy', SS_Stats_Menu_Stat_Accuracy);
+    SS_Stats_DrawValue('wisdom', SS_Stats_Menu_Stat_Wisdom);
+    SS_Stats_DrawValue('empathy', SS_Stats_Menu_Stat_Empathy);
+    SS_Stats_DrawValue('morale', SS_Stats_Menu_Stat_Morale);
+    SS_Stats_DrawValue('mobility', SS_Stats_Menu_Stat_Mobility);
+    SS_Stats_DrawValue('precision', SS_Stats_Menu_Stat_Precision);
 
     if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale(stat)) then
       SS_Draw_StatInfo(stat, SS_Stats_Menu_Info_Inner_Content_Description:GetText());
@@ -346,6 +346,46 @@ local onAddStatModifier = function(data, author, prefix)
   end;
 
   SS_Log_StatModifierAdded(name, stat, value, count);
+end;
+
+local onAddSkillModifier = function(data, author, prefix)
+  -- У: Игрок, от: Мастер/GHI, когда: создается новый модификатор навыыка
+  local allowModifier = false;
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  if (prefix == 'SS-GHItP') then
+    allowModifier = author == UnitName('player');
+  else
+    allowModifier = author == SS_Plots_Current().author;
+  end;
+
+  if (not(allowModifier)) then return nil; end;
+
+  local id, name, stat, value, count = strsplit('+', data);
+
+  SS_Modifiers_Register('skills', {
+    id = id,
+    name = name,
+    stat = stat,
+    value = value,
+    count = count,
+  });
+
+  if (SS_Skills_Menu:IsVisible()) then
+    SS_Skills_DrawValue('melee', SS_Skills_Menu_Active_Skill_Melee);
+    SS_Skills_DrawValue('range', SS_Skills_Menu_Active_Skill_Range);
+    SS_Skills_DrawValue('magic', SS_Skills_Menu_Active_Skill_Magic);
+    SS_Skills_DrawValue('religion', SS_Skills_Menu_Active_Skill_Religion);
+    SS_Skills_DrawValue('perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+    SS_Skills_DrawValue('missing', SS_Skills_Menu_Active_Skill_Missing);
+    SS_Skills_DrawValue('hands', SS_Skills_Menu_Active_Skill_Hands);
+
+    if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale(stat)) then
+      SS_Draw_SkillInfo(stat, SS_Skills_Menu_Info_Inner_Content_Description:GetText(), SS_Skills_Menu_Info_Inner_Content_Examples:GetText());
+    end;
+  end;
+
+  SS_Log_SkillModifierAdded(name, stat, value, count);
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
@@ -376,6 +416,7 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     dmGetInspectInfo = onDMGetInspectInfo,
     sendInspectInfo = onSendInspectInfo,
     addStatModifier = onAddStatModifier,
+    addSkillModifier = onAddSkillModifier,
   };
 
   if (not(actions[action])) then

@@ -91,7 +91,7 @@ SS_Stats_GetModifierFor = function(skillName, statPoints)
   return math.floor(statPoints / 2.4);
 end;
 
-SS_Stats_DrawStatInfo = function(stat, view)
+SS_Stats_DrawValue = function(stat, view)
   view:SetText(SS_Locale(stat)..': '..SS_Stats_GetValue(stat));
 
   if (SS_Stats_GetValue(stat) - SS_Stats_GetValueWithoutModifier(stat) > 0) then

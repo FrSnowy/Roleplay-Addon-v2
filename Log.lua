@@ -215,3 +215,20 @@ SS_Log_StatModifierRemoved = function(name, stat, value)
   outputString = outputString..'|cffFFFF00 для характеристики |r'..SS_Locale(stat);
   print(outputString);
 end;
+
+SS_Log_SkillModifierAdded = function(name, stat, value, count)
+  local outputString = '|cffFFFF00Добавлен модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+
+  outputString = outputString..'|cffFFFF00 для навыка |r'..SS_Locale(stat);
+  if (tonumber(count) > 0) then
+    outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
+  else
+    outputString = outputString..'|cffFFFF00 до отмены|r';
+  end;
+  print(outputString);
+end;

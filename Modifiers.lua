@@ -91,7 +91,7 @@ SS_Modifiers_ReadModifiersValue = function(modifierType)
 
     local summary = 0;
 
-    SS_Shared_ForEach(SS_Plots_Current().modifiers.stats)(function(modifier, id)
+    SS_Shared_ForEach(SS_Plots_Current().modifiers[modifierType])(function(modifier, id)
       if (modifier.stat == stat) then
         summary = summary + modifier.value;
       end;
