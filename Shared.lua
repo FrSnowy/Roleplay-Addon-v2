@@ -9,6 +9,7 @@ SS_Shared_MathRound = function(number)
     rounded = math.ceil(number);
   end;
 
+  if (rounded == 0) then return 0; end;
   return rounded;
 end;
 

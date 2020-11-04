@@ -1032,7 +1032,7 @@
                     </FontString>
                   </Layer>
                   <Layer>
-                    <FontString name="$parent_Examples" justifyH="LEFT" justifyV="TOP" maxLines="20" wordwrap="true" font="Fonts\FRIZQT__.TTF" text = "Пример:">
+                    <FontString name="$parent_Examples" justifyH="LEFT" justifyV="TOP" maxLines="20" wordwrap="true" font="Fonts\FRIZQT__.TTF">
                       <Color r="1" g="1" b="1" a="1"/>
                       <Size x = "170" y = "40" />
                       <FontHeight val="11"/>
@@ -1046,13 +1046,27 @@
                         <Color r="0" g="0" b="0"/>
                       </Shadow>
                     </FontString>
-                    <FontString name="$parent_Bonus" justifyH="LEFT" justifyV="TOP" maxLines="20" wordwrap="true" font="Fonts\FRIZQT__.TTF" text = "Бонус:">
+                    <FontString name="$parent_Char_Bonus" justifyH="LEFT" justifyV="TOP" maxLines="20" wordwrap="true" font="Fonts\FRIZQT__.TTF">
                       <Color r="1" g="1" b="1" a="1"/>
                       <Size x = "170" y = "40" />
                       <FontHeight val="11"/>
                       <Anchors>
                         <Anchor point="TOPLEFT">
                           <Offset x="8" y="-80"/>
+                        </Anchor> 
+                      </Anchors>
+                      <Shadow>
+                        <Offset x="-1" y="-1" />
+                        <Color r="0" g="0" b="0"/>
+                      </Shadow>
+                    </FontString>
+                    <FontString name="$parent_Armor_Bonus" justifyH="LEFT" justifyV="TOP" maxLines="20" wordwrap="true" font="Fonts\FRIZQT__.TTF" text = "От снаряж.:">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <Size x = "170" y = "40" />
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT">
+                          <Offset x="8" y="-95"/>
                         </Anchor> 
                       </Anchors>
                       <Shadow>
@@ -1068,7 +1082,7 @@
                       <FontHeight val="12"/>
                       <Anchors>
                         <Anchor point="TOPLEFT">
-                          <Offset x="8" y="-100"/>
+                          <Offset x="8" y="-120"/>
                         </Anchor> 
                       </Anchors>
                       <Shadow>

@@ -197,25 +197,46 @@ SS_Draw_SkillInfo = function(skill, content, examples, bonusFrom)
   SS_Skills_Menu_Info_Inner_Content_Description:SetText(content);
   SS_Skills_Menu_Info_Inner_Content_Examples:SetText(examples)
 
-  local bonusStr = 'Бонус от '..SS_Locale(SS_Skills_GetStatOf(skill));
-  if (SS_Stats_GetModifierFor(skill) > 0) then
-    bonusStr = bonusStr..' (+';
+  -- Текст бонус от хар-ки
+  local charBonus = 'От хар-ки: '..SS_Locale(SS_Skills_GetStatOf(skill));
+  if (SS_Stats_GetModifierFor(skill) >= 0) then
+    charBonus = charBonus..' (+';
   else
-    bonusStr = bonusStr..' (';
+    charBonus = charBonus..' (';
   end;
-  bonusStr = bonusStr..SS_Stats_GetModifierFor(skill)..')';
+  charBonus = charBonus..SS_Stats_GetModifierFor(skill)..')';
+  SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetText(charBonus);
 
-  SS_Skills_Menu_Info_Inner_Content_Bonus:SetText(bonusStr);
   if (SS_Stats_GetModifierFor(skill) > 0) then
-    SS_Skills_Menu_Info_Inner_Content_Bonus:SetTextColor(0.25, 0.75, 0.25);
+    SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(0.25, 0.75, 0.25);
   elseif (SS_Stats_GetModifierFor(skill) < 0) then
-    SS_Skills_Menu_Info_Inner_Content_Bonus:SetTextColor(0.75, 0.15, 0.15);
+    SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(0.75, 0.15, 0.15);
   else
-    SS_Skills_Menu_Info_Inner_Content_Bonus:SetTextColor(1, 1, 1);
+    SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(1, 1, 1);
   end;
 
-  local modifiers = SS_Modifiers_GetModifiersOf('skills')(skill);
+  --Текст бонус от снаряжения
+  local armorBonus = 'От снар.: '..SS_Locale(SS_Armor_GetType())
+  local dices = SS_Roll_GetDices(skill);
+  local armorModifier = SS_Armor_GetModifierFor(skill, dices);
+  if (armorModifier >= 0) then
+    armorBonus = armorBonus..' (+';
+  else
+    armorBonus = armorBonus..' (';
+  end;
+  armorBonus = armorBonus..armorModifier..')';
+  SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetText(armorBonus);
 
+  if (armorModifier > 0) then
+    SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(0.25, 0.75, 0.25);
+  elseif (armorModifier < 0) then
+    SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(0.75, 0.15, 0.15);
+  else
+    SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(1, 1, 1);
+  end;
+
+  -- Модификаторы
+  local modifiers = SS_Modifiers_GetModifiersOf('skills')(skill);
   if (modifiers == nil) then
     SS_Skills_Menu_Info_Inner_Content_Modifiers:Hide();
   else
@@ -227,7 +248,7 @@ SS_Draw_SkillInfo = function(skill, content, examples, bonusFrom)
             ModifierPanel:Show();
             ModifierPanel:EnableMouse();
             ModifierPanel:SetSize(180, 23);
-            ModifierPanel:SetPoint("TOPLEFT", SS_Skills_Menu_Info_Inner_Content, "TOPLEFT", 8, -120 - 30 * counter);
+            ModifierPanel:SetPoint("TOPLEFT", SS_Skills_Menu_Info_Inner_Content, "TOPLEFT", 8, -140 - 30 * counter);
 
       local modifierTitleStr = modifier.name..' (';
       if (tonumber(modifier.value) >= 0) then
