@@ -187,7 +187,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('melee', 'Применяется для всех атак, проводимых в ближнем бою.', 'Пример: Ударить дубиной, парировать атаку.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('melee')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('melee', 'Применяется для всех атак, проводимых в ближнем бою.', 'Пример: Ударить дубиной, парировать атаку.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -239,7 +243,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('range', 'Применяется для всех атак, проводимых в дальнем бою.', 'Пример: Выстрел из оружия д. боя, метнуть предмет.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('range')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('range', 'Применяется для всех атак, проводимых в дальнем бою.', 'Пример: Выстрел из оружия д. боя, метнуть предмет.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -291,7 +299,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('magic', 'Применяется для атак с использованием магии.', 'Пример: Заклинания колдунов, магов.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('magic')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('magic', 'Применяется для атак с использованием магии.', 'Пример: Заклинания колдунов, магов.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -343,7 +355,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('religion', 'Применяется для атак, основанных на веровании персонажа.', 'Пример: Свет, шаманизм, друидизм.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('religion')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('religion', 'Применяется для атак, основанных на веровании персонажа.', 'Пример: Свет, шаманизм, друидизм.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -395,7 +411,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('perfomance', 'Применяется для действий связанных с психологическим воздействием на других персонажей.', 'Пример: Обман, убеждение, привлечение внимания.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('perfomance')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('perfomance', 'Применяется для действий связанных с психологическим воздействием на других персонажей.', 'Пример: Обман, убеждение, привлечение внимания.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -447,7 +467,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('missing', 'Применяется для проверок побега и отклонения от урона по области.', 'Пример: Избегание атаки, урона от ловуки, побег.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('missing')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('missing', 'Применяется для проверок побега и отклонения от урона по области.', 'Пример: Избегание атаки, урона от ловуки, побег.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -499,7 +523,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('hands', 'Применяется для действий, требующих мелкой моторики.', 'Пример: Карманная кража, взлом замков.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('hands')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('hands', 'Применяется для действий, требующих мелкой моторики.', 'Пример: Карманная кража, взлом замков.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -638,7 +666,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('athletics', 'Используется для проверок силового взаимодействия персонажа и окружения.', 'Пример: Удержать крупный камень, залезть на выступ.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('athletics')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('athletics', 'Используется для проверок силового взаимодействия персонажа и окружения.', 'Пример: Удержать крупный камень, залезть на выступ.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -690,7 +722,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('observation', 'Применяется для проверок, основанных на умении отмечать мелкие детали.', 'Пример: Обнаружить тайный рычаг, спрятанный предмет.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('observation')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('observation', 'Применяется для проверок, основанных на умении отмечать мелкие детали.', 'Пример: Обнаружить тайный рычаг, спрятанный предмет.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -742,7 +778,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('knowledge', 'Применяется для проверок знания о мире, существах или истории.', 'Пример: Опознать существо, прочесть древний текст.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('knowledge')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('knowledge', 'Применяется для проверок знания о мире, существах или истории.', 'Пример: Опознать существо, прочесть древний текст.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -794,7 +834,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('controll', 'Применяется для противодействию ментальному и псих. воздействиям.', 'Пример: Сопротивление испугу, очарованию.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('controll')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('controll', 'Применяется для противодействию ментальному и псих. воздействиям.', 'Пример: Сопротивление испугу, очарованию.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -846,7 +890,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('judgment', 'Применяется для формирования корректных выводов на основе имеющейся информации.', 'Пример: Распознать истинные намерения собеседника.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('judgment')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('judgment', 'Применяется для формирования корректных выводов на основе имеющейся информации.', 'Пример: Распознать истинные намерения собеседника.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -898,7 +946,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('acrobats', 'Используется для проверок ловких взаимодействий игрока с миром.', 'Пример: Баланс на узком уступе, прыжок в длину.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('acrobats')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('acrobats', 'Используется для проверок ловких взаимодействий игрока с миром.', 'Пример: Баланс на узком уступе, прыжок в длину.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
@@ -950,7 +1002,11 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_Draw_SkillInfo('stealth', 'Применяется для действий, которые требуется совершить незаметно.', 'Пример: Красться, Прятаться от противника.')
+                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('stealth')) then
+                  SS_Skills_Menu_Info:Hide();
+                else
+                  SS_Draw_SkillInfo('stealth', 'Применяется для действий, которые требуется совершить незаметно.', 'Пример: Красться, Прятаться от противника.')
+                end;
               </OnClick>
             </Scripts>
           </Button>
