@@ -177,9 +177,9 @@
         </Anchors>
       </Button>
       <Frame name="$parent_Stats" hidden="true">
-        <Size><AbsDimension x="280" y="180"/></Size>
+        <Size><AbsDimension x="200" y="240"/></Size>
         <Anchors>
-          <Anchor point="TOP" x="-300" y="0" />
+          <Anchor point="TOPLEFT" x="-200" y="0" />
         </Anchors> 
         <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
           <BackgroundInsets>
@@ -198,7 +198,7 @@
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="14"/>
               <Anchors>
-                <Anchor point="TOP" x="0" y="-20" />
+                <Anchor point="TOPLEFT" x="20" y="-23" />
               </Anchors>
               <Shadow>
                 <Offset x="-1" y="-1" />
@@ -218,42 +218,42 @@
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="145" y="-50" />
+                <Anchor point="TOPLEFT" x="20" y="-75" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Wisdom" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-80" />
+                <Anchor point="TOPLEFT" x="20" y="-100" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Morale" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="145" y="-80" />
+                <Anchor point="TOPLEFT" x="20" y="-125" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Empathy" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-110" />
+                <Anchor point="TOPLEFT" x="20" y="-150" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Mobility" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="145" y="-110" />
+                <Anchor point="TOPLEFT" x="20" y="-175" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Precision" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-140" />
+                <Anchor point="TOPLEFT" x="20" y="-200" />
               </Anchors>
             </FontString>
           </Layer>
@@ -275,9 +275,9 @@
         </Frames>
       </Frame>
       <Frame name="$parent_Skills" hidden="true">
-        <Size><AbsDimension x="280" y="240"/></Size>
+        <Size><AbsDimension x="240" y="240"/></Size>
         <Anchors>
-          <Anchor point="TOP" x="300" y="0" />
+          <Anchor point="TOPRIGHT" x="240" y="0" />
         </Anchors> 
         <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
           <BackgroundInsets>
@@ -296,7 +296,7 @@
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="14"/>
               <Anchors>
-                <Anchor point="TOP" x="0" y="-20" />
+                <Anchor point="TOPLEFT" x="20" y="-23" />
               </Anchors>
               <Shadow>
                 <Offset x="-1" y="-1" />
@@ -309,98 +309,98 @@
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-45" />
+                <Anchor point="TOPLEFT" x="20" y="-50" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Melee_DiceInfo" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-45" />
+                <Anchor point="TOPLEFT" x="170" y="-50" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Range" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-70" />
+                <Anchor point="TOPLEFT" x="20" y="-75" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Range_DiceInfo" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-70" />
+                <Anchor point="TOPLEFT" x="170" y="-75" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Magic" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-95" />
+                <Anchor point="TOPLEFT" x="20" y="-100" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Magic_DiceInfo" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-95" />
+                <Anchor point="TOPLEFT" x="170" y="-100" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Religion" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-120" />
+                <Anchor point="TOPLEFT" x="20" y="-125" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Religion_DiceInfo" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-120" />
+                <Anchor point="TOPLEFT" x="170" y="-125" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Perfomance" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-145" />
+                <Anchor point="TOPLEFT" x="20" y="-150" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Perfomance_DiceInfo" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-145" />
+                <Anchor point="TOPLEFT" x="170" y="-150" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Missing" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-170" />
+                <Anchor point="TOPLEFT" x="20" y="-175" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Missing_DiceInfo" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-170" />
+                <Anchor point="TOPLEFT" x="170" y="-175" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Hands" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-195" />
+                <Anchor point="TOPLEFT" x="20" y="-200" />
               </Anchors>
             </FontString>
             <FontString name="$parent_Hands_DiceInfo" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-195" />
+                <Anchor point="TOPLEFT" x="170" y="-200" />
               </Anchors>
             </FontString>
           </Layer>
@@ -431,7 +431,7 @@
               </OnLeave>
             </Scripts>
             <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-41" />
+              <Anchor point="TOPLEFT" x="140" y="-46" />
             </Anchors>
             <Size>
               <AbsDimension x="20" y="20" />
@@ -450,7 +450,7 @@
               </OnLeave>
             </Scripts>
             <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-66" />
+              <Anchor point="TOPLEFT" x="140" y="-71" />
             </Anchors>
             <Size>
               <AbsDimension x="20" y="20" />
@@ -469,7 +469,7 @@
               </OnLeave>
             </Scripts>
             <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-91" />
+              <Anchor point="TOPLEFT" x="140" y="-96" />
             </Anchors>
             <Size>
               <AbsDimension x="20" y="20" />
@@ -488,7 +488,7 @@
               </OnLeave>
             </Scripts>
             <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-116" />
+              <Anchor point="TOPLEFT" x="140" y="-121" />
             </Anchors>
             <Size>
               <AbsDimension x="20" y="20" />
@@ -507,7 +507,7 @@
               </OnLeave>
             </Scripts>
             <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-141" />
+              <Anchor point="TOPLEFT" x="140" y="-146" />
             </Anchors>
             <Size>
               <AbsDimension x="20" y="20" />
@@ -526,7 +526,7 @@
               </OnLeave>
             </Scripts>
             <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-166" />
+              <Anchor point="TOPLEFT" x="140" y="-171" />
             </Anchors>
             <Size>
               <AbsDimension x="20" y="20" />
@@ -545,7 +545,7 @@
               </OnLeave>
             </Scripts>
             <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-191" />
+              <Anchor point="TOPLEFT" x="140" y="-196" />
             </Anchors>
             <Size>
               <AbsDimension x="20" y="20" />
