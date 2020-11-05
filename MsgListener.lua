@@ -251,7 +251,7 @@ local onDMGetInspectInfo = function(plotID, master)
     experience = SS_Progress_GetExp(),
     experienceForUp = SS_Progress_GetExpForUp(),
     armorType = SS_Armor_GetType(),
-    power = SS_Stats_GetValue('power'),
+    power = SS_Stats_GetValueWithModifierFlag('power'),
     accuracy = SS_Stats_GetValue('accuracy'),
     wisdom = SS_Stats_GetValue('wisdom'),
     morale = SS_Stats_GetValue('morale'),
@@ -276,6 +276,13 @@ local onSendInspectInfo = function(params, player)
   -- много параметров сплитом разделяем в правильном порядке
   local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType, power, accuracy, wisdom, morale, empathy, mobility, precision, melee, range, magic, religion, perfomance, missing, hands = strsplit('+', params);
 
+  local modifierDirection = function(statStr)
+    if (not(strfind(power, 'mUP') == nil)) then return 'up';
+    elseif (not(strfind(power, 'mDOWN') == nil)) then return 'down';
+    else return false;
+    end;
+  end;
+
   SS_Target_TMPData = {
     health = health,
     maxHealth = maxHealth,
@@ -286,13 +293,20 @@ local onSendInspectInfo = function(params, player)
     experienceForUp = experienceForUp,
     armorType = armorType,
     stats = {
-      power = power,
-      accuracy = accuracy,
-      wisdom = wisdom,
-      morale = morale,
-      empathy = empathy,
-      mobility = mobility,
-      precision =precision,
+      power = SS_Shared_NumFromStr(power),
+      powerModified = modifierDirection(power),
+      accuracy = SS_Shared_NumFromStr(accuracy),
+      accuracyModified = modifierDirection(accuracy),
+      wisdom = SS_Shared_NumFromStr(wisdom),
+      wisdomModified = modifierDirection(wisdom),
+      morale = SS_Shared_NumFromStr(morale),
+      moraleModified = modifierDirection(morale),
+      empathy = SS_Shared_NumFromStr(empathy),
+      empathyModified = modifierDirection(empathy),
+      mobility = SS_Shared_NumFromStr(mobility),
+      mobilityModified = modifierDirection(mobility),
+      precision = SS_Shared_NumFromStr(precision),
+      precisionModified = modifierDirection(precision),
     },
     skills = {
       melee = melee,

@@ -83,3 +83,7 @@ SS_Shared_IfOnline = function(target, callback)
   ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", SS_Shared_IgnoreOfflineMsgFilter);
   SS_PtP_IsOnline(target);
 end;
+
+SS_Shared_NumFromStr = function(strWithNum)
+  return tonumber(string.match(strWithNum, "%d+"));
+end;

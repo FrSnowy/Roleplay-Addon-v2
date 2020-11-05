@@ -71,8 +71,20 @@ SS_Draw_PlayerControll = function(player)
   SS_Player_Controll_Level_Text:SetText("Уровень: "..SS_Target_TMPData.level);
   SS_Player_Controll_Exp_Text:SetText("Опыт: "..SS_Target_TMPData.experience..'/'..SS_Target_TMPData.experienceForUp);
 
+  local drawTargetStat = function(stat, modified, view)
+    print(modified);
+    view:SetText(SS_Locale(stat)..': '..SS_Target_TMPData.stats[stat]);
+    if (modified == 'up') then
+      view:SetTextColor(0.25, 0.75, 0.25);
+    elseif (modified == 'down') then
+      view:SetTextColor(0.75, 0.15, 0.15);
+    else
+      view:SetTextColor(1, 1, 1);
+    end;
+  end;
+
   -- Статы в меню статов
-  SS_Player_Controll_Stats_Power:SetText(SS_Locale('power')..': '..SS_Target_TMPData.stats.power);
+  drawTargetStat('power', SS_Target_TMPData.stats.powerModified, SS_Player_Controll_Stats_Power);
   SS_Player_Controll_Stats_Accuracy:SetText(SS_Locale('accuracy')..': '..SS_Target_TMPData.stats.accuracy);
   SS_Player_Controll_Stats_Wisdom:SetText(SS_Locale('wisdom')..': '..SS_Target_TMPData.stats.wisdom);
   SS_Player_Controll_Stats_Morale:SetText(SS_Locale('morale')..': '..SS_Target_TMPData.stats.morale);
