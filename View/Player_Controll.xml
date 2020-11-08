@@ -3,7 +3,6 @@
     <Scripts>
       <OnLoad>
         self:RegisterForDrag("LeftButton");
-        self:RegisterEvent("PLAYER_ENTERING_WORLD");
       </OnLoad>
       <OnDragStart>self:StartMoving();</OnDragStart>
       <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
