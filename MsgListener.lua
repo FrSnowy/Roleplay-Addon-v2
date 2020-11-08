@@ -252,12 +252,12 @@ local onDMGetInspectInfo = function(plotID, master)
     experienceForUp = SS_Progress_GetExpForUp(),
     armorType = SS_Armor_GetType(),
     power = SS_Stats_GetValueWithModifierFlag('power'),
-    accuracy = SS_Stats_GetValue('accuracy'),
-    wisdom = SS_Stats_GetValue('wisdom'),
-    morale = SS_Stats_GetValue('morale'),
-    empathy = SS_Stats_GetValue('empathy'),
-    mobility = SS_Stats_GetValue('mobility'),
-    precision = SS_Stats_GetValue('precision'),
+    accuracy = SS_Stats_GetValueWithModifierFlag('accuracy'),
+    wisdom = SS_Stats_GetValueWithModifierFlag('wisdom'),
+    morale = SS_Stats_GetValueWithModifierFlag('morale'),
+    empathy = SS_Stats_GetValueWithModifierFlag('empathy'),
+    mobility = SS_Stats_GetValueWithModifierFlag('mobility'),
+    precision = SS_Stats_GetValueWithModifierFlag('precision'),
     melee = SS_Skills_GetValue('melee'),
     range = SS_Skills_GetValue('range'),
     magic = SS_Skills_GetValue('magic'),
@@ -265,6 +265,13 @@ local onDMGetInspectInfo = function(plotID, master)
     perfomance = SS_Skills_GetValue('perfomance'),
     missing = SS_Skills_GetValue('missing'),
     hands = SS_Skills_GetValue('hands'),
+    athletics = SS_Skills_GetValue('athletics'),
+    observation = SS_Skills_GetValue('observation'),
+    knowledge = SS_Skills_GetValue('knowledge'),
+    controll = SS_Skills_GetValue('controll'),
+    judgment = SS_Skills_GetValue('judgment'),
+    acrobats = SS_Skills_GetValue('acrobats'),
+    stealth = SS_Skills_GetValue('stealth'),
   }, master);
 end;
 
@@ -274,11 +281,11 @@ local onSendInspectInfo = function(params, player)
   if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;  
   -- Извините
   -- много параметров сплитом разделяем в правильном порядке
-  local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType, power, accuracy, wisdom, morale, empathy, mobility, precision, melee, range, magic, religion, perfomance, missing, hands = strsplit('+', params);
+  local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType, power, accuracy, wisdom, morale, empathy, mobility, precision, melee, range, magic, religion, perfomance, missing, hands, athletics, observation, knowledge, controll, judgment, acrobats, stealth = strsplit('+', params);
 
   local modifierDirection = function(statStr)
-    if (not(strfind(power, 'mUP') == nil)) then return 'up';
-    elseif (not(strfind(power, 'mDOWN') == nil)) then return 'down';
+    if (not(strfind(statStr, 'mUP') == nil)) then return 'up';
+    elseif (not(strfind(statStr, 'mDOWN') == nil)) then return 'down';
     else return false;
     end;
   end;
@@ -316,6 +323,13 @@ local onSendInspectInfo = function(params, player)
       perfomance = perfomance,
       missing = missing,
       hands = hands,
+      athletics = athletics,
+      observation = observation,
+      knowledge = knowledge,
+      controll = controll,
+      judgment = judgment,
+      acrobats = acrobats,
+      stealth = stealth,
     },
   }
 

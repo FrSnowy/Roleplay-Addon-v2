@@ -85,5 +85,5 @@ SS_Shared_IfOnline = function(target, callback)
 end;
 
 SS_Shared_NumFromStr = function(strWithNum)
-  return tonumber(string.match(strWithNum, "%d+"));
+  return tonumber(string.match(strWithNum, "%-?%d+"));
 end;

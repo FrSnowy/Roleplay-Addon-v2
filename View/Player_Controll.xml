@@ -275,9 +275,9 @@
         </Frames>
       </Frame>
       <Frame name="$parent_Skills" hidden="true">
-        <Size><AbsDimension x="240" y="240"/></Size>
+        <Size><AbsDimension x="300" y="240"/></Size>
         <Anchors>
-          <Anchor point="TOPRIGHT" x="240" y="0" />
+          <Anchor point="TOPRIGHT" x="300" y="0" />
         </Anchors> 
         <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
           <BackgroundInsets>
@@ -304,106 +304,6 @@
               </Shadow>
             </FontString>
           </Layer>
-          <Layer>
-            <FontString name="$parent_Melee" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-50" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Melee_DiceInfo" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-50" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Range" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-75" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Range_DiceInfo" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-75" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Magic" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-100" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Magic_DiceInfo" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-100" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Religion" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-125" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Religion_DiceInfo" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-125" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Perfomance" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-150" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Perfomance_DiceInfo" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-150" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Missing" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-175" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Missing_DiceInfo" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-175" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Hands" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="20" y="-200" />
-              </Anchors>
-            </FontString>
-            <FontString name="$parent_Hands_DiceInfo" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="11"/>
-              <Anchors>
-                <Anchor point="TOPLEFT" x="170" y="-200" />
-              </Anchors>
-            </FontString>
-          </Layer>
         </Layers>
         <Frames>
           <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
@@ -419,139 +319,491 @@
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parent_Melee_Roll">
-            <Scripts>
-              <OnEnter>
-                GameTooltip:SetOwner(this, "TOPLEFT")
-                GameTooltip:AddLine("Бросок: Ближний бой")
-                GameTooltip:Show()
-              </OnEnter>
-              <OnLeave>
-                GameTooltip:Hide()
-              </OnLeave>
-            </Scripts>
+          <ScrollFrame name="$parent_Scroll" inherits="UIPanelScrollFrameTemplate">
             <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-46" />
+              <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="0" y="-50"/>
+              <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="0" y="20"/>
+              <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent" x="-44"/>
             </Anchors>
-            <Size>
-              <AbsDimension x="20" y="20" />
-            </Size>
-            <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
-          </Button>
-          <Button name="$parent_Range_Roll">
-            <Scripts>
-              <OnEnter>
-                GameTooltip:SetOwner(this, "TOPLEFT")
-                GameTooltip:AddLine("Бросок: Дальний бой")
-                GameTooltip:Show()
-              </OnEnter>
-              <OnLeave>
-                GameTooltip:Hide()
-              </OnLeave>
-            </Scripts>
-            <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-71" />
-            </Anchors>
-            <Size>
-              <AbsDimension x="20" y="20" />
-            </Size>
-            <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
-          </Button>
-          <Button name="$parent_Magic_Roll">
-            <Scripts>
-              <OnEnter>
-                GameTooltip:SetOwner(this, "TOPLEFT")
-                GameTooltip:AddLine("Бросок: Чародейство")
-                GameTooltip:Show()
-              </OnEnter>
-              <OnLeave>
-                GameTooltip:Hide()
-              </OnLeave>
-            </Scripts>
-            <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-96" />
-            </Anchors>
-            <Size>
-              <AbsDimension x="20" y="20" />
-            </Size>
-            <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
-          </Button>
-          <Button name="$parent_Religion_Roll">
-            <Scripts>
-              <OnEnter>
-                GameTooltip:SetOwner(this, "TOPLEFT")
-                GameTooltip:AddLine("Бросок: Вера")
-                GameTooltip:Show()
-              </OnEnter>
-              <OnLeave>
-                GameTooltip:Hide()
-              </OnLeave>
-            </Scripts>
-            <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-121" />
-            </Anchors>
-            <Size>
-              <AbsDimension x="20" y="20" />
-            </Size>
-            <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
-          </Button>
-          <Button name="$parent_Perfomance_Roll">
-            <Scripts>
-              <OnEnter>
-                GameTooltip:SetOwner(this, "TOPLEFT")
-                GameTooltip:AddLine("Бросок: Выступление")
-                GameTooltip:Show()
-              </OnEnter>
-              <OnLeave>
-                GameTooltip:Hide()
-              </OnLeave>
-            </Scripts>
-            <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-146" />
-            </Anchors>
-            <Size>
-              <AbsDimension x="20" y="20" />
-            </Size>
-            <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
-          </Button>
-          <Button name="$parent_Missing_Roll">
-            <Scripts>
-              <OnEnter>
-                GameTooltip:SetOwner(this, "TOPLEFT")
-                GameTooltip:AddLine("Бросок: Избегание")
-                GameTooltip:Show()
-              </OnEnter>
-              <OnLeave>
-                GameTooltip:Hide()
-              </OnLeave>
-            </Scripts>
-            <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-171" />
-            </Anchors>
-            <Size>
-              <AbsDimension x="20" y="20" />
-            </Size>
-            <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
-          </Button>
-          <Button name="$parent_Hands_Roll">
-            <Scripts>
-              <OnEnter>
-                GameTooltip:SetOwner(this, "TOPLEFT")
-                GameTooltip:AddLine("Бросок: Ловкость рук")
-                GameTooltip:Show()
-              </OnEnter>
-              <OnLeave>
-                GameTooltip:Hide()
-              </OnLeave>
-            </Scripts>
-            <Anchors>
-              <Anchor point="TOPLEFT" x="140" y="-196" />
-            </Anchors>
-            <Size>
-              <AbsDimension x="20" y="20" />
-            </Size>
-            <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
-          </Button>
+            <ScrollChild name = "$parent_Content">
+              <Frame name="$parent_Inner">
+                <Anchors>
+                  <Anchor point="TOPLEFT" />
+                </Anchors>
+                <Size>
+                  <AbsDimension x="280" y = "1"/>
+                </Size>
+                <Layers>
+                  <Layer>
+                    <FontString name="$parent_Melee" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="0" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Melee_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="0" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Range" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-25" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Range_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-25" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Magic" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-50" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Magic_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-50" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Religion" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-75" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Religion_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-75" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Perfomance" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-100" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Perfomance_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-100" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Missing" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-125" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Missing_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-125" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Hands" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-150" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Hands_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-150" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Athletics" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-175" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Athletics_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-175" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Observation" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-200" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Observation_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-200" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Knowledge" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-225" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Knowledge_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-225" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Controll" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-250" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Controll_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-250" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Judgment" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-275" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Judgment_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-275" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Acrobats" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-300" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Acrobats_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-300" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Stealth" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="20" y="-325" />
+                      </Anchors>
+                    </FontString>
+                    <FontString name="$parent_Stealth_DiceInfo" font="Fonts\FRIZQT__.TTF">
+                      <Color r="1" g="1" b="1" a="1"/>
+                      <FontHeight val="11"/>
+                      <Anchors>
+                        <Anchor point="TOPLEFT" x="190" y="-325" />
+                      </Anchors>
+                    </FontString>
+                  </Layer>
+                </Layers>
+                <Frames>
+                  <Button name="$parent_Melee_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Ближний бой")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="4" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Range_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Дальний бой")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-20" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Magic_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Чародейство")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-45" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Religion_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Вера")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-70" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Perfomance_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Выступление")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-95" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Missing_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Избегание")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-120" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Hands_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Ловкость рук")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-145" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Athletics_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Атлетика")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-170" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Observation_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Внимательность")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-195" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Knowledge_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Знание")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-220" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Controll_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Самоконтроль")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-245" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Judgment_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Суждение")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-270" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Acrobats_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Акробатика")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-295" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                  <Button name="$parent_Stealth_Roll">
+                    <Scripts>
+                      <OnEnter>
+                        GameTooltip:SetOwner(this, "TOPLEFT")
+                        GameTooltip:AddLine("Бросок: Скрытность")
+                        GameTooltip:Show()
+                      </OnEnter>
+                      <OnLeave>
+                        GameTooltip:Hide()
+                      </OnLeave>
+                    </Scripts>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" x="165" y="-320" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="20" y="20" />
+                    </Size>
+                    <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+                  </Button>
+                </Frames>
+              </Frame>
+            </ScrollChild>
+          </ScrollFrame>
         </Frames>
       </Frame>
     </Frames>

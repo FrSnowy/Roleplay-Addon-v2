@@ -47,6 +47,7 @@ SS_PtDM_InspectInfo = function(params, plotAuthor)
   local paramsString = params.health.."+"..params.maxHealth.."+"..params.barrier.."+"..params.maxBarrier.."+"..params.level.."+"..params.experience.."+"..params.experienceForUp.."+"..params.armorType;
   local statsString =  params.power.."+"..params.accuracy.."+"..params.wisdom.."+"..params.morale.."+"..params.empathy.."+"..params.mobility.."+"..params.precision;
   local activeSkillsString = params.melee.."+"..params.range.."+"..params.magic.."+"..params.religion.."+"..params.perfomance.."+"..params.missing.."+"..params.hands;
+  local passiveSkillsString = params.athletics.."+"..params.observation.."+"..params.knowledge.."+"..params.controll.."+"..params.judgment.."+"..params.acrobats.."+"..params.stealth;
 
-  SS_PtDM_Direct('sendInspectInfo', paramsString.."+"..statsString.."+"..activeSkillsString, plotAuthor);
+  SS_PtDM_Direct('sendInspectInfo', paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString, plotAuthor);
 end;

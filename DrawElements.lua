@@ -72,7 +72,6 @@ SS_Draw_PlayerControll = function(player)
   SS_Player_Controll_Exp_Text:SetText("Опыт: "..SS_Target_TMPData.experience..'/'..SS_Target_TMPData.experienceForUp);
 
   local drawTargetStat = function(stat, modified, view)
-    print(modified);
     view:SetText(SS_Locale(stat)..': '..SS_Target_TMPData.stats[stat]);
     if (modified == 'up') then
       view:SetTextColor(0.25, 0.75, 0.25);
@@ -85,21 +84,28 @@ SS_Draw_PlayerControll = function(player)
 
   -- Статы в меню статов
   drawTargetStat('power', SS_Target_TMPData.stats.powerModified, SS_Player_Controll_Stats_Power);
-  SS_Player_Controll_Stats_Accuracy:SetText(SS_Locale('accuracy')..': '..SS_Target_TMPData.stats.accuracy);
-  SS_Player_Controll_Stats_Wisdom:SetText(SS_Locale('wisdom')..': '..SS_Target_TMPData.stats.wisdom);
-  SS_Player_Controll_Stats_Morale:SetText(SS_Locale('morale')..': '..SS_Target_TMPData.stats.morale);
-  SS_Player_Controll_Stats_Empathy:SetText(SS_Locale('empathy')..': '..SS_Target_TMPData.stats.empathy);
-  SS_Player_Controll_Stats_Mobility:SetText(SS_Locale('mobility')..': '..SS_Target_TMPData.stats.mobility);
-  SS_Player_Controll_Stats_Precision:SetText(SS_Locale('precision')..': '..SS_Target_TMPData.stats.precision);
+  drawTargetStat('accuracy', SS_Target_TMPData.stats.accuracyModified, SS_Player_Controll_Stats_Accuracy);
+  drawTargetStat('morale', SS_Target_TMPData.stats.wisdomModified, SS_Player_Controll_Stats_Wisdom);
+  drawTargetStat('wisdom', SS_Target_TMPData.stats.moraleModified, SS_Player_Controll_Stats_Morale);
+  drawTargetStat('empathy', SS_Target_TMPData.stats.empathyModified, SS_Player_Controll_Stats_Empathy);
+  drawTargetStat('mobility', SS_Target_TMPData.stats.mobilityModified, SS_Player_Controll_Stats_Mobility);
+  drawTargetStat('precision', SS_Target_TMPData.stats.precisionModified, SS_Player_Controll_Stats_Precision);
 
   -- Скиллы в меню скиллов
-  SS_Player_Controll_Skills_Melee:SetText(SS_Locale('melee')..': '..SS_Target_TMPData.skills.melee);
-  SS_Player_Controll_Skills_Range:SetText(SS_Locale('range')..': '..SS_Target_TMPData.skills.range);
-  SS_Player_Controll_Skills_Magic:SetText(SS_Locale('magic')..': '..SS_Target_TMPData.skills.magic);
-  SS_Player_Controll_Skills_Religion:SetText(SS_Locale('religion')..': '..SS_Target_TMPData.skills.religion);
-  SS_Player_Controll_Skills_Perfomance:SetText(SS_Locale('perfomance')..': '..SS_Target_TMPData.skills.perfomance);
-  SS_Player_Controll_Skills_Missing:SetText(SS_Locale('missing')..': '..SS_Target_TMPData.skills.missing);
-  SS_Player_Controll_Skills_Hands:SetText(SS_Locale('hands')..': '..SS_Target_TMPData.skills.hands);
+  SS_Player_Controll_Skills_Scroll_Inner_Melee:SetText(SS_Locale('melee')..': '..SS_Target_TMPData.skills.melee);
+  SS_Player_Controll_Skills_Scroll_Inner_Range:SetText(SS_Locale('range')..': '..SS_Target_TMPData.skills.range);
+  SS_Player_Controll_Skills_Scroll_Inner_Magic:SetText(SS_Locale('magic')..': '..SS_Target_TMPData.skills.magic);
+  SS_Player_Controll_Skills_Scroll_Inner_Religion:SetText(SS_Locale('religion')..': '..SS_Target_TMPData.skills.religion);
+  SS_Player_Controll_Skills_Scroll_Inner_Perfomance:SetText(SS_Locale('perfomance')..': '..SS_Target_TMPData.skills.perfomance);
+  SS_Player_Controll_Skills_Scroll_Inner_Missing:SetText(SS_Locale('missing')..': '..SS_Target_TMPData.skills.missing);
+  SS_Player_Controll_Skills_Scroll_Inner_Hands:SetText(SS_Locale('hands')..': '..SS_Target_TMPData.skills.hands);
+  SS_Player_Controll_Skills_Scroll_Inner_Athletics:SetText(SS_Locale('athletics')..': '..SS_Target_TMPData.skills.athletics);
+  SS_Player_Controll_Skills_Scroll_Inner_Observation:SetText(SS_Locale('observation')..': '..SS_Target_TMPData.skills.observation);
+  SS_Player_Controll_Skills_Scroll_Inner_Knowledge:SetText(SS_Locale('knowledge')..': '..SS_Target_TMPData.skills.knowledge);
+  SS_Player_Controll_Skills_Scroll_Inner_Controll:SetText(SS_Locale('controll')..': '..SS_Target_TMPData.skills.controll);
+  SS_Player_Controll_Skills_Scroll_Inner_Judgment:SetText(SS_Locale('judgment')..': '..SS_Target_TMPData.skills.judgment);
+  SS_Player_Controll_Skills_Scroll_Inner_Acrobats:SetText(SS_Locale('acrobats')..': '..SS_Target_TMPData.skills.acrobats);
+  SS_Player_Controll_Skills_Scroll_Inner_Stealth:SetText(SS_Locale('stealth')..': '..SS_Target_TMPData.skills.stealth);
 
   -- Дайсы возле скиллов
   local diceCount = SS_Roll_GetDicesCount(SS_Target_TMPData.level);
@@ -121,13 +127,20 @@ SS_Draw_PlayerControll = function(player)
     return rollString;
   end;
 
-  SS_Player_Controll_Skills_Melee_DiceInfo:SetText(getDiceStr('melee'));
-  SS_Player_Controll_Skills_Range_DiceInfo:SetText(getDiceStr('range'));
-  SS_Player_Controll_Skills_Magic_DiceInfo:SetText(getDiceStr('magic'));
-  SS_Player_Controll_Skills_Religion_DiceInfo:SetText(getDiceStr('religion'));
-  SS_Player_Controll_Skills_Perfomance_DiceInfo:SetText(getDiceStr('perfomance'));
-  SS_Player_Controll_Skills_Missing_DiceInfo:SetText(getDiceStr('missing'));
-  SS_Player_Controll_Skills_Hands_DiceInfo:SetText(getDiceStr('hands'));
+  SS_Player_Controll_Skills_Scroll_Inner_Melee_DiceInfo:SetText(getDiceStr('melee'));
+  SS_Player_Controll_Skills_Scroll_Inner_Range_DiceInfo:SetText(getDiceStr('range'));
+  SS_Player_Controll_Skills_Scroll_Inner_Magic_DiceInfo:SetText(getDiceStr('magic'));
+  SS_Player_Controll_Skills_Scroll_Inner_Religion_DiceInfo:SetText(getDiceStr('religion'));
+  SS_Player_Controll_Skills_Scroll_Inner_Perfomance_DiceInfo:SetText(getDiceStr('perfomance'));
+  SS_Player_Controll_Skills_Scroll_Inner_Missing_DiceInfo:SetText(getDiceStr('missing'));
+  SS_Player_Controll_Skills_Scroll_Inner_Hands_DiceInfo:SetText(getDiceStr('hands'));
+  SS_Player_Controll_Skills_Scroll_Inner_Athletics_DiceInfo:SetText(getDiceStr('athletics'));
+  SS_Player_Controll_Skills_Scroll_Inner_Observation_DiceInfo:SetText(getDiceStr('observation'));
+  SS_Player_Controll_Skills_Scroll_Inner_Knowledge_DiceInfo:SetText(getDiceStr('knowledge'));
+  SS_Player_Controll_Skills_Scroll_Inner_Controll_DiceInfo:SetText(getDiceStr('controll'));
+  SS_Player_Controll_Skills_Scroll_Inner_Judgment_DiceInfo:SetText(getDiceStr('judgment'));
+  SS_Player_Controll_Skills_Scroll_Inner_Acrobats_DiceInfo:SetText(getDiceStr('acrobats'));
+  SS_Player_Controll_Skills_Scroll_Inner_Stealth_DiceInfo:SetText(getDiceStr('stealth'));
 
   SS_Player_Controll:Show();
 end;
