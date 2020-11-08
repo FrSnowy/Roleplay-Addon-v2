@@ -71,11 +71,11 @@ SS_Draw_PlayerControll = function(player)
   SS_Player_Controll_Level_Text:SetText("Уровень: "..SS_Target_TMPData.level);
   SS_Player_Controll_Exp_Text:SetText("Опыт: "..SS_Target_TMPData.experience..'/'..SS_Target_TMPData.experienceForUp);
 
-  local drawTargetStat = function(stat, modified, view)
+  local drawTargetStat = function(stat, view)
     view:SetText(SS_Locale(stat)..': '..SS_Target_TMPData.stats[stat]);
-    if (modified == 'up') then
+    if (SS_Target_TMPData.statsModified[stat] == 'up') then
       view:SetTextColor(0.25, 0.75, 0.25);
-    elseif (modified == 'down') then
+    elseif (SS_Target_TMPData.statsModified[stat] == 'down') then
       view:SetTextColor(0.75, 0.15, 0.15);
     else
       view:SetTextColor(1, 1, 1);
@@ -113,10 +113,10 @@ SS_Draw_PlayerControll = function(player)
     return rollString;
   end;
 
-  local drawTargetSkill = function(skill, modified, skillView, skillDiceView)
-    if (modified == 'up') then
+  local drawTargetSkill = function(skill, skillView, skillDiceView)
+    if (SS_Target_TMPData.skillsModified[skill] == 'up') then
       skillView:SetTextColor(0.25, 0.75, 0.25);
-    elseif (modified == 'down') then
+    elseif (SS_Target_TMPData.skillsModified[skill] == 'down') then
       skillView:SetTextColor(0.75, 0.15, 0.15);
     else
       skillView:SetTextColor(1, 1, 1);
@@ -137,29 +137,29 @@ SS_Draw_PlayerControll = function(player)
   end;
 
   -- Статы в меню статов
-  drawTargetStat('power', SS_Target_TMPData.stats.powerModified, SS_Player_Controll_Stats_Power);
-  drawTargetStat('accuracy', SS_Target_TMPData.stats.accuracyModified, SS_Player_Controll_Stats_Accuracy);
-  drawTargetStat('morale', SS_Target_TMPData.stats.wisdomModified, SS_Player_Controll_Stats_Wisdom);
-  drawTargetStat('wisdom', SS_Target_TMPData.stats.moraleModified, SS_Player_Controll_Stats_Morale);
-  drawTargetStat('empathy', SS_Target_TMPData.stats.empathyModified, SS_Player_Controll_Stats_Empathy);
-  drawTargetStat('mobility', SS_Target_TMPData.stats.mobilityModified, SS_Player_Controll_Stats_Mobility);
-  drawTargetStat('precision', SS_Target_TMPData.stats.precisionModified, SS_Player_Controll_Stats_Precision);
+  drawTargetStat('power', SS_Player_Controll_Stats_Power);
+  drawTargetStat('accuracy', SS_Player_Controll_Stats_Accuracy);
+  drawTargetStat('morale', SS_Player_Controll_Stats_Wisdom);
+  drawTargetStat('wisdom', SS_Player_Controll_Stats_Morale);
+  drawTargetStat('empathy', SS_Player_Controll_Stats_Empathy);
+  drawTargetStat('mobility', SS_Player_Controll_Stats_Mobility);
+  drawTargetStat('precision', SS_Player_Controll_Stats_Precision);
 
   -- Скиллы в меню скиллов
-  drawTargetSkill('melee', SS_Target_TMPData.skills.meleeModified, SS_Player_Controll_Skills_Scroll_Inner_Melee, SS_Player_Controll_Skills_Scroll_Inner_Melee_DiceInfo);
-  drawTargetSkill('range', SS_Target_TMPData.skills.rangeModified, SS_Player_Controll_Skills_Scroll_Inner_Range, SS_Player_Controll_Skills_Scroll_Inner_Range_DiceInfo);
-  drawTargetSkill('magic', SS_Target_TMPData.skills.magicModified, SS_Player_Controll_Skills_Scroll_Inner_Magic, SS_Player_Controll_Skills_Scroll_Inner_Magic_DiceInfo);
-  drawTargetSkill('religion', SS_Target_TMPData.skills.religionModified, SS_Player_Controll_Skills_Scroll_Inner_Religion, SS_Player_Controll_Skills_Scroll_Inner_Religion_DiceInfo);
-  drawTargetSkill('perfomance', SS_Target_TMPData.skills.perfomanceModified, SS_Player_Controll_Skills_Scroll_Inner_Perfomance, SS_Player_Controll_Skills_Scroll_Inner_Perfomance_DiceInfo);
-  drawTargetSkill('missing', SS_Target_TMPData.skills.missingModified, SS_Player_Controll_Skills_Scroll_Inner_Missing, SS_Player_Controll_Skills_Scroll_Inner_Missing_DiceInfo);
-  drawTargetSkill('hands', SS_Target_TMPData.skills.handsModified, SS_Player_Controll_Skills_Scroll_Inner_Hands, SS_Player_Controll_Skills_Scroll_Inner_Hands_DiceInfo);
-  drawTargetSkill('athletics', SS_Target_TMPData.skills.athleticsModified, SS_Player_Controll_Skills_Scroll_Inner_Athletics, SS_Player_Controll_Skills_Scroll_Inner_Athletics_DiceInfo);
-  drawTargetSkill('observation', SS_Target_TMPData.skills.observationModified, SS_Player_Controll_Skills_Scroll_Inner_Observation, SS_Player_Controll_Skills_Scroll_Inner_Observation_DiceInfo);
-  drawTargetSkill('knowledge', SS_Target_TMPData.skills.knowledgeModified, SS_Player_Controll_Skills_Scroll_Inner_Knowledge, SS_Player_Controll_Skills_Scroll_Inner_Knowledge_DiceInfo);
-  drawTargetSkill('controll', SS_Target_TMPData.skills.controllModified, SS_Player_Controll_Skills_Scroll_Inner_Controll, SS_Player_Controll_Skills_Scroll_Inner_Controll_DiceInfo);
-  drawTargetSkill('judgment', SS_Target_TMPData.skills.judgmentModified, SS_Player_Controll_Skills_Scroll_Inner_Judgment, SS_Player_Controll_Skills_Scroll_Inner_Judgment_DiceInfo);
-  drawTargetSkill('acrobats', SS_Target_TMPData.skills.acrobatsModified, SS_Player_Controll_Skills_Scroll_Inner_Acrobats, SS_Player_Controll_Skills_Scroll_Inner_Acrobats_DiceInfo);
-  drawTargetSkill('stealth', SS_Target_TMPData.skills.stealthModified, SS_Player_Controll_Skills_Scroll_Inner_Stealth, SS_Player_Controll_Skills_Scroll_Inner_Stealth_DiceInfo);
+  drawTargetSkill('melee', SS_Player_Controll_Skills_Scroll_Inner_Melee, SS_Player_Controll_Skills_Scroll_Inner_Melee_DiceInfo);
+  drawTargetSkill('range', SS_Player_Controll_Skills_Scroll_Inner_Range, SS_Player_Controll_Skills_Scroll_Inner_Range_DiceInfo);
+  drawTargetSkill('magic', SS_Player_Controll_Skills_Scroll_Inner_Magic, SS_Player_Controll_Skills_Scroll_Inner_Magic_DiceInfo);
+  drawTargetSkill('religion', SS_Player_Controll_Skills_Scroll_Inner_Religion, SS_Player_Controll_Skills_Scroll_Inner_Religion_DiceInfo);
+  drawTargetSkill('perfomance', SS_Player_Controll_Skills_Scroll_Inner_Perfomance, SS_Player_Controll_Skills_Scroll_Inner_Perfomance_DiceInfo);
+  drawTargetSkill('missing', SS_Player_Controll_Skills_Scroll_Inner_Missing, SS_Player_Controll_Skills_Scroll_Inner_Missing_DiceInfo);
+  drawTargetSkill('hands', SS_Player_Controll_Skills_Scroll_Inner_Hands, SS_Player_Controll_Skills_Scroll_Inner_Hands_DiceInfo);
+  drawTargetSkill('athletics', SS_Player_Controll_Skills_Scroll_Inner_Athletics, SS_Player_Controll_Skills_Scroll_Inner_Athletics_DiceInfo);
+  drawTargetSkill('observation', SS_Player_Controll_Skills_Scroll_Inner_Observation, SS_Player_Controll_Skills_Scroll_Inner_Observation_DiceInfo);
+  drawTargetSkill('knowledge', SS_Player_Controll_Skills_Scroll_Inner_Knowledge, SS_Player_Controll_Skills_Scroll_Inner_Knowledge_DiceInfo);
+  drawTargetSkill('controll', SS_Player_Controll_Skills_Scroll_Inner_Controll, SS_Player_Controll_Skills_Scroll_Inner_Controll_DiceInfo);
+  drawTargetSkill('judgment', SS_Player_Controll_Skills_Scroll_Inner_Judgment, SS_Player_Controll_Skills_Scroll_Inner_Judgment_DiceInfo);
+  drawTargetSkill('acrobats', SS_Player_Controll_Skills_Scroll_Inner_Acrobats, SS_Player_Controll_Skills_Scroll_Inner_Acrobats_DiceInfo);
+  drawTargetSkill('stealth', SS_Player_Controll_Skills_Scroll_Inner_Stealth, SS_Player_Controll_Skills_Scroll_Inner_Stealth_DiceInfo);
 
   SS_Player_Controll:Show();
 end;
@@ -175,7 +175,7 @@ SS_Draw_StatInfo = function(stat, content)
     child:Hide();
   end
 
-  SS_Stats_Menu_Info_Title:SetText(SS_Locale(stat));
+  SS_Stats_Menu_Info.title:SetText(SS_Locale(stat));
   SS_Stats_Menu_Info_Inner_Content_Description:SetText(content);
 
   local modifiers = SS_Modifiers_GetModifiersOf('stats')(stat);
@@ -237,7 +237,7 @@ SS_Draw_SkillInfo = function(skill, content, examples, bonusFrom)
     child:Hide();
   end
 
-  SS_Skills_Menu_Info_Title:SetText(SS_Locale(skill));
+  SS_Skills_Menu_Info.title:SetText(SS_Locale(skill));
   SS_Skills_Menu_Info_Inner_Content_Description:SetText(content);
   SS_Skills_Menu_Info_Inner_Content_Examples:SetText(examples)
 

@@ -1,41 +1,20 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Armor_Menu" hidden="true">
+  <Frame name="SS_Armor_Menu" inherits="SS_FrameWithoutBG_Template" hidden="true">
     <Scripts>
+      <OnLoad>
+        self.title:SetText('Снаряжение');
+        self:SetSize(360, 370);
+      </OnLoad>
       <OnShow>
         SS_Armor_DrawCheck();
       </OnShow>
     </Scripts>
-    <Size><AbsDimension x="360" y="370"/></Size>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Player_Menu">
       <Offset><AbsDimension x="57" y="0"/></Offset>
       </Anchor>
     </Anchors>
-    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-      <BackgroundInsets>
-        <AbsInset left="8" right="8" top="8" bottom="8"/>
-      </BackgroundInsets>
-      <TileSize>
-        <AbsValue val="32"/>
-      </TileSize>
-      <EdgeSize>
-        <AbsValue val="32"/>
-      </EdgeSize>
-    </Backdrop>
     <Layers>
-      <Layer>
-        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Снаряжение">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
-          <Anchors>
-            <Anchor point="TOP" x="0" y="-20" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
       <Layer>
         <FontString name="$parent_Armor_Light_Name" font="Fonts\FRIZQT__.TTF" text="Легкое">
           <Color r="1" g="1" b="1" a="1"/>

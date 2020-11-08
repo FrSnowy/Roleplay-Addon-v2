@@ -3,6 +3,8 @@
 ## Version: 2.0
 ## DefaultState: Enabled
 ## SavedVariablesPerCharacter: SS_User
+Templates\Frames.xml
+Templates\Buttons.xml
 GHI.lua
 Locale.lua
 Log.lua

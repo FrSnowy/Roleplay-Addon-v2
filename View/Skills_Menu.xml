@@ -1,41 +1,20 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Skills_Menu" hidden="true">
+  <Frame name="SS_Skills_Menu"  inherits="SS_FrameWithoutBG_Template" hidden="true">
     <Scripts>
+      <OnLoad>
+        self.title:SetText('Навыки');
+        self:SetSize(430, 275);
+      </OnLoad>
       <OnShow>
         SS_Skills_Menu_Points_Value:SetText(SS_Skills_GetAvaliablePoints());
       </OnShow>
     </Scripts>
-    <Size><AbsDimension x="430" y="275"/></Size>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Player_Menu">
       <Offset><AbsDimension x="57" y="0"/></Offset>
       </Anchor>
     </Anchors>
-    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-      <BackgroundInsets>
-        <AbsInset left="8" right="8" top="8" bottom="8"/>
-      </BackgroundInsets>
-      <TileSize>
-        <AbsValue val="32"/>
-      </TileSize>
-      <EdgeSize>
-        <AbsValue val="32"/>
-      </EdgeSize>
-    </Backdrop>
     <Layers>
-      <Layer>
-        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Навыки">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
-          <Anchors>
-            <Anchor point="TOP" x="0" y="-20" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
       <Layer>
         <FontString name="$parent_Points_Name" font="Fonts\FRIZQT__.TTF" text="Доступно:">
           <Color r="1" g="1" b="1" a="1"/>
@@ -54,8 +33,12 @@
       </Layer>
     </Layers>
     <Frames>
-      <Frame name="$parent_Active">
+      <Frame name="$parent_Active" inherits="SS_ClearFrame_Template">
         <Scripts>
+          <OnLoad>
+            self:SetSize(220, 210);
+            self.title:SetText("Активные");
+          </OnLoad>
           <OnShow>
             SS_Skills_DrawValue('melee', SS_Skills_Menu_Active_Skill_Melee);
             SS_Skills_DrawValue('range', SS_Skills_Menu_Active_Skill_Range);
@@ -66,26 +49,12 @@
             SS_Skills_DrawValue('hands', SS_Skills_Menu_Active_Skill_Hands);
           </OnShow>
         </Scripts>
-        <Size><AbsDimension x="220" y="210"/></Size>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset><AbsDimension x="0" y="-20"/></Offset>
           </Anchor>
         </Anchors>
         <Layers>
-          <Layer>
-            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Активные">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="12"/>
-              <Anchors>
-                <Anchor point="TOP" x="0" y="-20" />
-              </Anchors>
-              <Shadow>
-                <Offset x="-1" y="-1" />
-                <Color r="0" g="0" b="0"/>
-              </Shadow>
-            </FontString>
-          </Layer>
           <Layer>
             <FontString name="$parent_Skill_Melee" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
@@ -139,402 +108,189 @@
           </Layer>
         </Layers>
         <Frames>
-          <Button name="$parent_Skill_Melee_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-72" y="-41"/>
-              </Anchor> 
-            </Anchors>
+          <Frame name="$parent_Controll_Melee" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'melee', SS_Skills_Menu_Active_Skill_Melee);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'melee', SS_Skills_Menu_Active_Skill_Melee);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'melee', SS_Skills_Menu_Active_Skill_Melee);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('melee'), 'melee', SS_Skills_Menu_Active_Skill_Melee);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('melee')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('melee', 'Применяется для всех атак, проводимых в ближнем бою.', 'Пример: Ударить дубиной, парировать атаку.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Melee_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-56" y="-41"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-43"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Range" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'melee', SS_Skills_Menu_Active_Skill_Melee);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'range', SS_Skills_Menu_Active_Skill_Range);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'range', SS_Skills_Menu_Active_Skill_Range);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('range'), 'range', SS_Skills_Menu_Active_Skill_Range);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('range')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('range', 'Применяется для всех атак, проводимых в дальнем бою.', 'Пример: Выстрел из оружия д. боя, метнуть предмет.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Melee_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-40" y="-41"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-68"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Magic" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('melee'), 'melee', SS_Skills_Menu_Active_Skill_Melee);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'magic', SS_Skills_Menu_Active_Skill_Magic);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'magic', SS_Skills_Menu_Active_Skill_Magic);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('magic'), 'magic', SS_Skills_Menu_Active_Skill_Magic);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('magic')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('magic', 'Применяется для атак с использованием магии.', 'Пример: Заклинания колдунов, магов.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Melee_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-24" y="-41"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-93"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Religion" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('melee')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('melee', 'Применяется для всех атак, проводимых в ближнем бою.', 'Пример: Ударить дубиной, парировать атаку.')
-                end;
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'religion', SS_Skills_Menu_Active_Skill_Religion);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'religion', SS_Skills_Menu_Active_Skill_Religion);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('religion'), 'religion', SS_Skills_Menu_Active_Skill_Religion);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('religion')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('religion', 'Применяется для атак, основанных на веровании персонажа.', 'Пример: Свет, шаманизм, друидизм.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Range_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-72" y="-66"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-118"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Perfomance" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'range', SS_Skills_Menu_Active_Skill_Range);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('perfomance'), 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('perfomance')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('perfomance', 'Применяется для действий связанных с психологическим воздействием на других персонажей.', 'Пример: Обман, убеждение, привлечение внимания.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Range_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-56" y="-66"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-141"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Missing" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'range', SS_Skills_Menu_Active_Skill_Range);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'missing', SS_Skills_Menu_Active_Skill_Missing);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'missing', SS_Skills_Menu_Active_Skill_Missing);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('missing'), 'missing', SS_Skills_Menu_Active_Skill_Missing);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('missing')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('missing', 'Применяется для проверок побега и отклонения от урона по области.', 'Пример: Избегание атаки, урона от ловуки, побег.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Range_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-40" y="-66"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-167"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Hands" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('range'), 'range', SS_Skills_Menu_Active_Skill_Range);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'hands', SS_Skills_Menu_Active_Skill_Hands);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'hands', SS_Skills_Menu_Active_Skill_Hands);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('hands'), 'hands', SS_Skills_Menu_Active_Skill_Hands);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('hands')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('hands', 'Применяется для действий, требующих мелкой моторики.', 'Пример: Карманная кража, взлом замков.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Range_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-24" y="-66"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-192"/> </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('range')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('range', 'Применяется для всех атак, проводимых в дальнем бою.', 'Пример: Выстрел из оружия д. боя, метнуть предмет.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Magic_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-72" y="-91"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'magic', SS_Skills_Menu_Active_Skill_Magic);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Magic_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-56" y="-91"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'magic', SS_Skills_Menu_Active_Skill_Magic);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Magic_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-40" y="-91"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('magic'), 'magic', SS_Skills_Menu_Active_Skill_Magic);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Magic_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-24" y="-91"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('magic')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('magic', 'Применяется для атак с использованием магии.', 'Пример: Заклинания колдунов, магов.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Religion_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-72" y="-116"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'religion', SS_Skills_Menu_Active_Skill_Religion);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Religion_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-56" y="-116"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'religion', SS_Skills_Menu_Active_Skill_Religion);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Religion_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-40" y="-116"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('religion'), 'religion', SS_Skills_Menu_Active_Skill_Religion);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Religion_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-24" y="-116"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('religion')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('religion', 'Применяется для атак, основанных на веровании персонажа.', 'Пример: Свет, шаманизм, друидизм.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Perfomance_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-72" y="-141"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Perfomance_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-56" y="-141"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Perfomance_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-40" y="-141"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('perfomance'), 'perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Perfomance_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-24" y="-141"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('perfomance')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('perfomance', 'Применяется для действий связанных с психологическим воздействием на других персонажей.', 'Пример: Обман, убеждение, привлечение внимания.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Missing_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-72" y="-167"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'missing', SS_Skills_Menu_Active_Skill_Missing);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Missing_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-56" y="-167"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'missing', SS_Skills_Menu_Active_Skill_Missing);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Missing_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-40" y="-167"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('missing'), 'missing', SS_Skills_Menu_Active_Skill_Missing);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Missing_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-24" y="-167"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('missing')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('missing', 'Применяется для проверок побега и отклонения от урона по области.', 'Пример: Избегание атаки, урона от ловуки, побег.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Hands_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-72" y="-192"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'hands', SS_Skills_Menu_Active_Skill_Hands);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Hands_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-56" y="-192"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'hands', SS_Skills_Menu_Active_Skill_Hands);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Hands_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-40" y="-192"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('hands'), 'hands', SS_Skills_Menu_Active_Skill_Hands);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Hands_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-24" y="-192"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('hands')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('hands', 'Применяется для действий, требующих мелкой моторики.', 'Пример: Карманная кража, взлом замков.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
+          </Frame>
         </Frames>
       </Frame>
-      <Frame name="$parent_Passive">
+      <Frame name="$parent_Passive" inherits="SS_ClearFrame_Template">
         <Scripts>
+          <OnLoad>
+            self:SetSize(220, 210);
+            self.title:SetText("Пассивные");
+          </OnLoad>
           <OnShow>
             SS_Skills_DrawValue('stealth', SS_Skills_Menu_Passive_Skill_Stealth);
             SS_Skills_DrawValue('observation', SS_Skills_Menu_Passive_Skill_Observation);
@@ -545,26 +301,12 @@
             SS_Skills_DrawValue('acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
           </OnShow>
         </Scripts>
-        <Size><AbsDimension x="220" y="210"/></Size>
         <Anchors>
           <Anchor point="TOPRIGHT">
             <Offset><AbsDimension x="0" y="-20"/></Offset>
           </Anchor>
         </Anchors>
         <Layers>
-          <Layer>
-            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Пассивные">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="12"/>
-              <Anchors>
-                <Anchor point="TOP" x="0" y="-20" />
-              </Anchors>
-              <Shadow>
-                <Offset x="-1" y="-1" />
-                <Color r="0" g="0" b="0"/>
-              </Shadow>
-            </FontString>
-          </Layer>
           <Layer>
             <FontString name="$parent_Skill_Athletics" font="Fonts\FRIZQT__.TTF">
               <Color r="1" g="1" b="1" a="1"/>
@@ -618,433 +360,190 @@
           </Layer>
         </Layers>
         <Frames>
-          <Button name="$parent_Skill_Athletics_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-68" y="-41"/>
-              </Anchor> 
-            </Anchors>
+          <Frame name="$parent_Controll_Athletics" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('athletics'), 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('athletics')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('athletics', 'Используется для проверок силового взаимодействия персонажа и окружения.', 'Пример: Удержать крупный камень, залезть на выступ.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Athletics_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-52" y="-41"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-43"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Observation" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'observation', SS_Skills_Menu_Passive_Skill_Observation);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'observation', SS_Skills_Menu_Passive_Skill_Observation);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('observation'), 'observation', SS_Skills_Menu_Passive_Skill_Observation);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('observation')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('observation', 'Применяется для проверок, основанных на умении отмечать мелкие детали.', 'Пример: Обнаружить тайный рычаг, спрятанный предмет.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Athletics_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-36" y="-41"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-68"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Knowledge" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('athletics'), 'athletics', SS_Skills_Menu_Passive_Skill_Athletics);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('knowledge'), 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('knowledge')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('knowledge', 'Применяется для проверок знания о мире, существах или истории.', 'Пример: Опознать существо, прочесть древний текст.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Athletics_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-20" y="-41"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-93"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Controll" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('athletics')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('athletics', 'Используется для проверок силового взаимодействия персонажа и окружения.', 'Пример: Удержать крупный камень, залезть на выступ.')
-                end;
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'controll', SS_Skills_Menu_Passive_Skill_Controll);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'controll', SS_Skills_Menu_Passive_Skill_Controll);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('controll'), 'controll', SS_Skills_Menu_Passive_Skill_Controll);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('controll')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('controll', 'Применяется для противодействию ментальному и псих. воздействиям.', 'Пример: Сопротивление испугу, очарованию.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Observation_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-68" y="-66"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-118"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Judgment" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'observation', SS_Skills_Menu_Passive_Skill_Observation);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('judgment'), 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('judgment')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('judgment', 'Применяется для формирования корректных выводов на основе имеющейся информации.', 'Пример: Распознать истинные намерения собеседника.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Observation_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-52" y="-66"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-141"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Acrobats" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'observation', SS_Skills_Menu_Passive_Skill_Observation);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('acrobats'), 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('acrobats')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('acrobats', 'Используется для проверок ловких взаимодействий игрока с миром.', 'Пример: Баланс на узком уступе, прыжок в длину.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Observation_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-36" y="-66"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-167"/> </Anchor> 
             </Anchors>
+          </Frame>
+          <Frame name="$parent_Controll_Acrobats" inherits="SS_Stats_ButtonControlls_Template">
             <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('observation'), 'observation', SS_Skills_Menu_Passive_Skill_Observation);
-              </OnClick>
+              <OnShow>
+                self.addBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
+                end);
+                self.reduceBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
+                end);
+                self.removeBtn:SetScript("OnClick", function()
+                  SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('stealth'), 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
+                end);
+                self.infoBtn:SetScript("OnClick", function()
+                  if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale('stealth')) then
+                    SS_Skills_Menu_Info:Hide();
+                  else
+                    SS_Draw_SkillInfo('stealth', 'Применяется для действий, которые требуется совершить незаметно.', 'Пример: Красться, Прятаться от противника.')
+                  end;
+                end);
+              </OnShow>
             </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Observation_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
             <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-20" y="-66"/>
-              </Anchor> 
+              <Anchor point="TOPRIGHT"> <Offset x="-16" y="-192"/> </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('observation')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('observation', 'Применяется для проверок, основанных на умении отмечать мелкие детали.', 'Пример: Обнаружить тайный рычаг, спрятанный предмет.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Knowledge_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-68" y="-91"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Knowledge_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-52" y="-91"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Knowledge_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-36" y="-91"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('knowledge'), 'knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Knowledge_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-20" y="-91"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('knowledge')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('knowledge', 'Применяется для проверок знания о мире, существах или истории.', 'Пример: Опознать существо, прочесть древний текст.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Controll_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-68" y="-116"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'controll', SS_Skills_Menu_Passive_Skill_Controll);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Controll_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-52" y="-116"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'controll', SS_Skills_Menu_Passive_Skill_Controll);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Controll_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-36" y="-116"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('controll'), 'controll', SS_Skills_Menu_Passive_Skill_Controll);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Controll_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-20" y="-116"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('controll')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('controll', 'Применяется для противодействию ментальному и псих. воздействиям.', 'Пример: Сопротивление испугу, очарованию.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Judgment_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-68" y="-142"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Judgment_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-52" y="-142"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Judgment_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-36" y="-142"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('judgment'), 'judgment', SS_Skills_Menu_Passive_Skill_Judgment);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Judgment_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-20" y="-142"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('judgment')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('judgment', 'Применяется для формирования корректных выводов на основе имеющейся информации.', 'Пример: Распознать истинные намерения собеседника.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Acrobats_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-68" y="-167"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Acrobats_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-52" y="-167"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Acrobats_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-36" y="-167"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('acrobats'), 'acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Acrobats_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-20" y="-167"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('acrobats')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('acrobats', 'Используется для проверок ловких взаимодействий игрока с миром.', 'Пример: Баланс на узком уступе, прыжок в длину.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Stealth_Add" inherits="OptionsButtonTemplate" text="+">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-68" y="-191"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Stealth_Reduce" inherits="OptionsButtonTemplate" text="-">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-52" y="-191"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-1, 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Stealth_Reset" inherits="OptionsButtonTemplate" text="x">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-36" y="-191"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier('stealth'), 'stealth', SS_Skills_Menu_Passive_Skill_Stealth);
-              </OnClick>
-            </Scripts>
-          </Button>
-          <Button name="$parent_Skill_Stealth_Info" inherits="OptionsButtonTemplate" text="?">
-            <Size x = "14" y = "16" />
-            <Anchors>
-              <Anchor point="TOPRIGHT">
-                <Offset x="-20" y="-191"/>
-              </Anchor> 
-            </Anchors>
-            <Scripts>
-              <OnClick>
-                if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale('stealth')) then
-                  SS_Skills_Menu_Info:Hide();
-                else
-                  SS_Draw_SkillInfo('stealth', 'Применяется для действий, которые требуется совершить незаметно.', 'Пример: Красться, Прятаться от противника.')
-                end;
-              </OnClick>
-            </Scripts>
-          </Button>
+          </Frame>
         </Frames>
       </Frame>
-      <Frame name="$parent_Info">
+      <Frame name="$parent_Info" inherits="SS_CloseableFrameWithoutBG_Template" >
         <Size><AbsDimension x="227" y="200"/></Size>
         <Anchors>
           <Anchor point="LEFT" relativeTo="$parent">
             <Offset><AbsDimension x="418" y="0"/></Offset>
           </Anchor>
         </Anchors>
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-          <BackgroundInsets>
-            <AbsInset left="8" right="8" top="8" bottom="8"/>
-          </BackgroundInsets>
-          <TileSize>
-            <AbsValue val="32"/>
-          </TileSize>
-          <EdgeSize>
-            <AbsValue val="32"/>
-          </EdgeSize>
-        </Backdrop>
-        <Layers>
-          <Layer>
-            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="12"/>
-              <Anchors>
-                <Anchor point="TOP" x="0" y="-24" />
-              </Anchors>
-              <Shadow>
-                <Offset x="-1" y="-1" />
-                <Color r="0" g="0" b="0"/>
-              </Shadow>
-            </FontString>
-          </Layer>
-        </Layers>
         <Frames>
           <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
             <Size x = "20" y = "20" />

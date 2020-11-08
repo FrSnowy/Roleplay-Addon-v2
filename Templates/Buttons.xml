@@ -1,0 +1,26 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Button name="SS_AddButton_Template" virtual = "true" inherits="OptionsButtonTemplate" text="+">
+    <Size x = "16" y = "16" />
+    <Anchors>
+      <Anchor point="TOPRIGHT"> <Offset x="-54" y="0"/> </Anchor> 
+    </Anchors>
+  </Button>
+  <Button name="SS_ReduceButton_Template" virtual = "true" inherits="OptionsButtonTemplate" text="-">
+    <Size x = "16" y = "16" />
+    <Anchors>
+      <Anchor point="TOPRIGHT"> <Offset x="-36" y="0"/> </Anchor> 
+    </Anchors>
+  </Button>
+  <Button name="SS_RemoveButton_Template" virtual = "true" inherits="OptionsButtonTemplate" text="x">
+    <Size x = "16" y = "16" />
+    <Anchors>
+      <Anchor point="TOPRIGHT"> <Offset x="-18" y="0"/> </Anchor> 
+    </Anchors>
+  </Button>
+  <Button name="SS_InfoButton_Template" virtual = "true" inherits="OptionsButtonTemplate" text="?">
+    <Size x = "16" y = "16" />
+    <Anchors>
+      <Anchor point="TOPRIGHT"> <Offset x="0" y="0"/> </Anchor> 
+    </Anchors>
+  </Button>
+</Ui>
