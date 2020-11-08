@@ -274,9 +274,9 @@
         </Frames>
       </Frame>
       <Frame name="$parent_Skills" hidden="true">
-        <Size><AbsDimension x="300" y="240"/></Size>
+        <Size><AbsDimension x="310" y="240"/></Size>
         <Anchors>
-          <Anchor point="TOPRIGHT" x="300" y="0" />
+          <Anchor point="TOPRIGHT" x="310" y="0" />
         </Anchors> 
         <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
           <BackgroundInsets>
