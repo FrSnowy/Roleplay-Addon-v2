@@ -14,288 +14,72 @@
       <Offset><AbsDimension x="57" y="0"/></Offset>
       </Anchor>
     </Anchors>
-    <Layers>
-      <Layer>
-        <FontString name="$parent_Armor_Light_Name" font="Fonts\FRIZQT__.TTF" text="Легкое">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="44" y="-55" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Повседневная одежда, ряса,">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-80" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="и другое сопоставимое.">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-94" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="Не даёт очков защиты">
-          <Color r="1" g="0.4" b="0.4" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-114" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Light_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Не накладывает штрафов">
-          <Color r="0.4" g="1" b="0.4" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-134" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
-      <Layer>
-        <FontString name="$parent_Armor_Medium_Name" font="Fonts\FRIZQT__.TTF" text="Стандартное">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="220" y="-55" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Кожаная, кольчужная броня,">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-80" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="броня из легких металлов и">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-94" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="другое сопоставимое.">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-108" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Добавляет 1 ОБ за 2 ОЗ">
-          <Color r="0.4" g="1" b="0.4" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-128" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="Небольшой штраф на:">
-          <Color r="1" g="0.4" b="0.4" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-148" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt6" font="Fonts\FRIZQT__.TTF" text="Чарод-во, избегание, ловк. рук">
-          <Color r="1" g="0.3" b="0.3" a="1"/>
-          <FontHeight val="9"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-162" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Medium_Description_Pt7" font="Fonts\FRIZQT__.TTF" text="акробатика, скрытность">
-          <Color r="1" g="0.3" b="0.3" a="1"/>
-          <FontHeight val="9"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="190" y="-172" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
-      <Layer>
-        <FontString name="$parent_Armor_Heavy_Name" font="Fonts\FRIZQT__.TTF" text="Тяжёлое">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="44" y="-206" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt1" font="Fonts\FRIZQT__.TTF" text="Все варианты латных и др.">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-226" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt2" font="Fonts\FRIZQT__.TTF" text="сопоставимых видов брони">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-240" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt3" font="Fonts\FRIZQT__.TTF" text="Добавляет 1 ОБ за 1.5 ОЗ">
-          <Color r="0.4" g="1" b="0.4" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-260" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt4" font="Fonts\FRIZQT__.TTF" text="Большой штраф на:">
-          <Color r="1" g="0.4" b="0.4" a="1"/>
-          <FontHeight val="11"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-280" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt5" font="Fonts\FRIZQT__.TTF" text="Дальний бой, чарод-во, избегание">
-          <Color r="1" g="0.3" b="0.3" a="1"/>
-          <FontHeight val="9"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-294" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt6" font="Fonts\FRIZQT__.TTF" text="ловкость рук, внимательность,">
-          <Color r="1" g="0.3" b="0.3" a="1"/>
-          <FontHeight val="9"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-304" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-        <FontString name="$parent_Armor_Heavy_Description_Pt7" font="Fonts\FRIZQT__.TTF" text="акробатика, скрытность">
-          <Color r="1" g="0.3" b="0.3" a="1"/>
-          <FontHeight val="9"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="14" y="-314" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
-    </Layers>
     <Frames>
-      <CheckButton name="$parent_Armor_Light" inherits="OptionsCheckButtonTemplate" checked="false">
+      <Frame name = "$parent_Light" inherits="SS_Armor_ArmorBlock_Template">
         <Scripts>
-          <OnClick>
-            SS_Armor_SelectType('light', SS_Armor_GetType())
-          </OnClick>
+          <OnLoad>
+            self.name:SetText(SS_Locale('light'));
+            self.check:SetScript("OnClick", function()
+              SS_Armor_SelectType('light', SS_Armor_GetType())
+            end)
+            self.description:SetText('Повседневная одежда, ряса, и другое сопоставимое.')
+            self.bonus:SetText('Не дает очков защиты');
+            self.bonus:SetTextColor(0.75, 0.15, 0.15);
+            self.penalty:SetText('Не накладывает штрафов');
+            self.penalty:SetTextColor(0.25, 0.75, 0.25);
+          </OnLoad>
         </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
-            <Offset>
-              <AbsDimension x="14" y="-50"></AbsDimension>
-            </Offset>
+          <Offset><AbsDimension x="0" y="-40"/></Offset>
           </Anchor>
         </Anchors>
-      </CheckButton>
-      <CheckButton name="$parent_Armor_Medium" inherits="OptionsCheckButtonTemplate" checked="false">
+      </Frame>
+      <Frame name = "$parent_Medium" inherits="SS_Armor_ArmorBlock_Template" >
         <Scripts>
-          <OnClick>
-            SS_Armor_SelectType('medium', SS_Armor_GetType())
-          </OnClick>
+          <OnLoad>
+            self.name:SetText(SS_Locale('medium'));
+            self.check:SetScript("OnClick", function()
+              SS_Armor_SelectType('medium', SS_Armor_GetType())
+            end)
+            self.description:SetText('Кожаная, кольчужная, броня из легких металлов и другое сопоставимое.')
+            self.bonus:SetText('Добавляет 1 ОБ за 2 ОЗ');
+            self.bonus:SetTextColor(0.25, 0.75, 0.25);
+            self.penalty:SetText('Небольшой штраф на');
+            self.penalty:SetTextColor(0.75, 0.15, 0.15);
+            self.penaltyList:SetText('Чародейство, избегание, ловкость рук, акробатика, скрытность');
+            self.penaltyList:SetTextColor(0.75, 0.25, 0.25);
+          </OnLoad>
         </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
-            <Offset>
-              <AbsDimension x="190" y="-50"></AbsDimension>
-            </Offset>
+          <Offset><AbsDimension x="175" y="-40"/></Offset>
           </Anchor>
         </Anchors>
-      </CheckButton>
-      <CheckButton name="$parent_Armor_Heavy" inherits="OptionsCheckButtonTemplate" checked="false">
+      </Frame>
+      <Frame name = "$parent_Heavy" inherits="SS_Armor_ArmorBlock_Template">
         <Scripts>
-          <OnClick>
-            SS_Armor_SelectType('heavy', SS_Armor_GetType())
-          </OnClick>
+          <OnLoad>
+            self.name:SetText(SS_Locale('heavy'));
+            self.check:SetScript("OnClick", function()
+              SS_Armor_SelectType('heavy', SS_Armor_GetType())
+            end)
+            self.description:SetText('Все варианты латных и других сопоставимых видов брони.')
+            self.bonus:SetText('Добавляет 1 ОБ за 1.5 ОЗ');
+            self.bonus:SetTextColor(0.25, 0.75, 0.25);
+            self.penalty:SetText('Большой штраф на');
+            self.penalty:SetTextColor(0.75, 0.15, 0.15);
+            self.penaltyList:SetText('Дальний бой, чарод-во, избегание, ловкость рук, внимательность, акробатика, скрытность');
+            self.penaltyList:SetTextColor(0.75, 0.25, 0.25);
+          </OnLoad>
         </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
-            <Offset>
-              <AbsDimension x="14" y="-200"></AbsDimension>
-            </Offset>
+          <Offset><AbsDimension x="0" y="-190"/></Offset>
           </Anchor>
         </Anchors>
-      </CheckButton>
+        <Size><AbsDimension x="200" y="160"/></Size>
+      </Frame>
       <Button name="$parent_Armor_Light_Visual" hidden = "true">
         <Anchors>
           <Anchor point="BOTTOMRIGHT">
