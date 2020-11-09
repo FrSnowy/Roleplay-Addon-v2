@@ -17,6 +17,12 @@ SS_Skills_GetList = function()
   }
 end;
 
+SS_Skills_IsSkill = function(name)
+  return SS_Shared_Includes(SS_Skills_GetList())(function(value, statName)
+    return statName == name
+  end);
+end;
+
 SS_Skills_GetValue = function(skill)
   if (not(SS_Plots_Current())) then return 0; end;
   local skillValue = SS_Plots_Current().skills[skill];

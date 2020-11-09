@@ -89,6 +89,46 @@
   </Frame>
   <Frame name = "SS_Stats_ButtonControlls_Template" virtual="true">
     <Size x = "80" y = "32" />
+    <Scripts>
+      <OnLoad>
+        self.addBtn:SetScript("OnClick", function()
+          if (SS_Skills_IsSkill(self.target)) then
+            SS_Skills_AddPoint(1, self.target, self.view);
+          else
+            SS_Stats_AddPoint(1, self.target, self.view);
+          end;
+        end);
+        self.reduceBtn:SetScript("OnClick", function()
+          if (SS_Skills_IsSkill(self.target)) then
+            SS_Skills_AddPoint(-1, self.target, self.view);
+          else
+            SS_Stats_AddPoint(-1, self.target, self.view);
+          end;
+        end);
+        self.removeBtn:SetScript("OnClick", function()
+          if (SS_Skills_IsSkill(self.target)) then
+            SS_Skills_AddPoint(-SS_Skills_GetValueWithoutModifier(self.target), self.target, self.view);
+          else
+            SS_Stats_AddPoint(-SS_Stats_GetValueWithoutModifier(self.target), self.target, self.view);
+          end;
+        end);
+        self.infoBtn:SetScript("OnClick", function()
+          if (SS_Skills_IsSkill(self.target)) then
+            if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale(self.target)) then
+              SS_Skills_Menu_Info:Hide();
+            else
+              SS_Draw_SkillInfo(self.target, self.description, self.example);
+            end;
+          else
+            if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info.title:GetText() == SS_Locale(self.target)) then
+              SS_Stats_Menu_Info:Hide();
+            else
+              SS_Draw_StatInfo(self.target, self.description);
+            end;
+          end;
+        end);
+      </OnLoad>
+    </Scripts>
     <Frames>
       <Button inherits="SS_AddButton_Template" parentKey = "addBtn" />
       <Button inherits="SS_ReduceButton_Template" parentKey = "reduceBtn" />

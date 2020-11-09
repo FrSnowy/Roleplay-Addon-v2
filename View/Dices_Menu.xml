@@ -56,117 +56,61 @@
           </Layer>
         </Layers>
         <Frames>
-          <Button name="$parent_Melee" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'melee'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-40"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('melee'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('melee')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Range" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'range'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-64"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('range'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('range')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Magic" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'magic'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-88"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('magic'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('magic')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Religion" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'religion'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-112"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('religion'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('religion')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Perfomance" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'perfomance'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-136"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('perfomance'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('perfomance')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Missing" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'missing'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-160"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('missing'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('missing')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Hands" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'hands'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-184"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('hands'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('hands')
-              </OnClick>
-            </Scripts>
           </Button>
         </Frames>
       </Frame>
@@ -193,117 +137,61 @@
           </Layer>
         </Layers>
         <Frames>
-          <Button name="$parent_Athletics" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'athletics'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-40"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('athletics'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('athletics')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Observation" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'observation'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-64"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('observation'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('observation')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Knowledge" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'knowledge'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-88"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('knowledge'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('knowledge')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Controll" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'controll'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-112"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('controll'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('controll')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Judgment" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'judgment'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-136"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('judgment'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('judgment')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Acrobats" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'acrobats'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-160"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('acrobats'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('acrobats')
-              </OnClick>
-            </Scripts>
           </Button>
-          <Button name="$parent_Stealth" inherits="OptionsButtonTemplate">
-            <Size x = "115" y = "22" />
+          <Button inherits="SS_DiceRollButton_Template">
+            <Scripts><OnLoad>self.stat = 'stealth'</OnLoad></Scripts>
             <Anchors>
               <Anchor point="TOP">
                 <Offset x="0" y="-184"/>
               </Anchor> 
             </Anchors>
-            <Scripts>
-              <OnShow>
-                self:SetText(SS_Locale('stealth'));
-              </OnShow>
-              <OnClick>
-                SS_Roll('stealth')
-              </OnClick>
-            </Scripts>
           </Button>
         </Frames>
       </Frame>

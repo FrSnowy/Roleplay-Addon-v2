@@ -23,4 +23,15 @@
       <Anchor point="TOPRIGHT"> <Offset x="0" y="0"/> </Anchor> 
     </Anchors>
   </Button>
+  <Button name="SS_DiceRollButton_Template" virtual = "true" inherits="OptionsButtonTemplate">
+    <Size x = "115" y = "22" />
+    <Scripts>
+      <OnShow>
+        self:SetText(SS_Locale(self.stat));
+      </OnShow>
+      <OnClick>
+        SS_Roll(self.stat)
+      </OnClick>
+    </Scripts>
+  </Button>
 </Ui>

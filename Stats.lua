@@ -10,6 +10,12 @@ SS_Stats_GetList = function()
   }
 end;
 
+SS_Stats_IsStat = function(name)
+  return SS_Shared_Includes(SS_Stats_GetList())(function(value, statName)
+    return statName == name
+  end);
+end;
+
 SS_Stats_GetValue = function(stat)
   if (not(SS_Plots_Current())) then return 0; end;
   local statValue = SS_Plots_Current().stats[stat];
