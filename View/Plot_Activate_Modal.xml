@@ -1,7 +1,11 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Modal_Plot_Activate" parent = "UIParent" hidden="true">
-    <Size><AbsDimension x="300" y="200"/></Size>
+  <Frame name="SS_Modal_Plot_Activate" parent = "UIParent" inherits="SS_CloseabaleFrameWithBG_Template" hidden="true">
     <Scripts>
+      <OnLoad>
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\popup-background";
+        self.title:SetText("Сюжет")
+        self:SetSize(300, 200);
+      </OnLoad>
       <OnShow>
         SS_Modal_Plot_Activate_Name:SetText('"'..SS_User.plots[SS_User.settings.selectedPlot].name..'"');
         if (SS_User.plots[SS_User.settings.selectedPlot] and SS_User.leadingPlots[SS_User.settings.selectedPlot]) then
@@ -13,6 +17,11 @@
             SS_Modal_Plot_Activate_Role:SetText('Вы - ведущий сюжета');
           end;
         end;
+
+        self.closeBtn:SetScript("OnClick", function()
+          self:Hide()
+          SS_User.settings.selectedPlot = nil;
+        end);
       </OnShow>
     </Scripts>
     <Anchors>
@@ -31,17 +40,6 @@
     </Backdrop>
     <Layers>
       <Layer>
-        <FontString name="$parent_PreName" font="Fonts\FRIZQT__.TTF" text = "Сюжет">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="16"/>
-          <Anchors>
-            <Anchor point="CENTER" x="0" y="50" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
         <FontString name="$parent_Name" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="0.6" b="0" a="1"/>
           <FontHeight val="20"/>
@@ -53,7 +51,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString name="$parent_Role" font="Fonts\FRIZQT__.TTF" text="">
+        <FontString name="$parent_Role" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="14"/>
           <Anchors>
@@ -67,20 +65,6 @@
       </Layer>
     </Layers>
     <Frames>
-      <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
-        <Size x = "20" y = "20" />
-        <Anchors>
-          <Anchor point="TOPRIGHT">
-            <Offset x="-20" y="-20"/>
-          </Anchor> 
-        </Anchors>
-        <Scripts>
-          <OnClick>
-            self:GetParent():Hide()
-            SS_User.settings.selectedPlot = nil;
-          </OnClick>
-        </Scripts>
-      </Button>
       <Button name="$parent_Remove_Button" inherits="OptionsButtonTemplate" text="Удалить">
         <Size x = "80" y = "30" />
         <Anchors>

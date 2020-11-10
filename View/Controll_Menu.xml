@@ -1,6 +1,10 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Controll_Menu" hidden="true">
+  <Frame name="SS_Controll_Menu" inherits="SS_FrameWithoutBG_Template" hidden="true">
     <Scripts>
+      <OnLoad>
+        self.title:SetText('Управление');
+        self:SetSize(500, 250);
+      </OnLoad>
       <OnShow>
         SS_PlotController_Draw(SS_Controll_Menu_Settings_PlotType:GetText())
       </OnShow>
@@ -11,27 +15,7 @@
       <Offset><AbsDimension x="57" y="0"/></Offset>
       </Anchor>
     </Anchors>
-    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-      <BackgroundInsets>
-        <AbsInset left="8" right="8" top="8" bottom="8"/>
-      </BackgroundInsets>
-      <TileSize>
-        <AbsValue val="32"/>
-      </TileSize>
-      <EdgeSize>
-        <AbsValue val="32"/>
-      </EdgeSize>
-    </Backdrop>
     <Layers>
-      <Layer>
-        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Управление">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
-          <Anchors>
-            <Anchor point="TOP" x="0" y="-20" />
-          </Anchors>
-        </FontString>
-      </Layer>
       <Layer>
         <FontString name="$parent_SettingsTitle" font="Fonts\FRIZQT__.TTF" text="Настройки">
           <Color r="1" g="1" b="1" a="1"/>

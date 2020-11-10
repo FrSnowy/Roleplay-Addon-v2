@@ -44,6 +44,32 @@
       </Layer>
     </Layers>
   </Frame>
+  <Frame name = "SS_FrameWithBG_Template" virtual="true">
+    <Scripts>
+      <OnShow>
+        self:SetBackdrop({ 
+          bgFile = self.bg, 
+          edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border", tile = true, tileSize = 350, edgeSize = 32, 
+          insets = { left = 8, right = 8, top = 8, bottom = 8 }
+        });
+      </OnShow>
+    </Scripts>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "title" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
   <Frame name = "SS_CloseableFrameWithoutBG_Template" virtual="true">
     <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
       <BackgroundInsets>
@@ -73,6 +99,47 @@
     </Layers>
     <Frames>
       <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+  <Frame name = "SS_CloseabaleFrameWithBG_Template" virtual="true">
+    <Scripts>
+      <OnShow>
+        self:SetBackdrop({ 
+          bgFile = self.bg, 
+          edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border", tile = true, tileSize = 350, edgeSize = 32, 
+          insets = { left = 8, right = 8, top = 8, bottom = 8 }
+        });
+      </OnShow>
+    </Scripts>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "title" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Anchors>
+            <Anchor point="TOP" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button parentKey="closeBtn" inherits="OptionsButtonTemplate" text="x">
         <Size x = "20" y = "20" />
         <Anchors>
           <Anchor point="TOPRIGHT">

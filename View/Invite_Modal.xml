@@ -1,34 +1,16 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Modal_Invite" parent = "UIParent" hidden="true">
-    <Size><AbsDimension x="340" y="240"/></Size>
+  <Frame name="SS_Modal_Invite" parent = "UIParent" inherits="SS_FrameWithBG_Template" hidden="true">
+    <Scripts>
+      <OnLoad>
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\popup-background";
+        self.title:SetText("Приглашение")
+        self:SetSize(340, 240);
+      </OnLoad>
+    </Scripts>
     <Anchors>
       <Anchor point="CENTER" />
     </Anchors>
-    <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\popup-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-      <BackgroundInsets>
-        <AbsInset left="8" right="8" top="8" bottom="8"/>
-      </BackgroundInsets>
-      <TileSize>
-        <AbsValue val="300"/>
-      </TileSize>
-      <EdgeSize>
-        <AbsValue val="32"/>
-      </EdgeSize>
-    </Backdrop>
     <Layers>
-      <Layer>
-        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Приглашение">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="14"/>
-          <Anchors>
-            <Anchor point="TOP" x="0" y="-20" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
       <Layer>
         <FontString name="$parent_Inviter" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>

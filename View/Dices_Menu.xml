@@ -1,60 +1,29 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Dices_Menu" hidden="true">
-    <Size><AbsDimension x="280" y="256"/></Size>
+  <Frame name="SS_Dices_Menu" inherits="SS_FrameWithoutBG_Template" hidden="true">
+    <Scripts>
+      <OnLoad>
+        self.title:SetText('Проверки');
+        self:SetSize(280, 246);
+      </OnLoad>
+    </Scripts>
     <Anchors>
       <Anchor point="LEFT" relativeTo="SS_Player_Menu">
         <Offset><AbsDimension x="57" y="0"/></Offset>
       </Anchor>
     </Anchors>
-    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-      <BackgroundInsets>
-        <AbsInset left="8" right="8" top="8" bottom="8"/>
-      </BackgroundInsets>
-      <TileSize>
-        <AbsValue val="32"/>
-      </TileSize>
-      <EdgeSize>
-        <AbsValue val="32"/>
-      </EdgeSize>
-    </Backdrop>
-    <Layers>
-      <Layer>
-        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Проверки">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
-          <Anchors>
-            <Anchor point="TOP" x="0" y="-20" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
-    </Layers>
     <Frames>
-      <Frame name="$parent_Active">
-        <Size><AbsDimension x="140" y="210"/></Size>
+      <Frame name="$parent_Active" inherits="SS_ClearFrame_Template">
+        <Scripts>
+          <OnLoad>
+            self.title:SetText('Активные');
+            self:SetSize(140, 210);
+          </OnLoad>
+        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset><AbsDimension x="5" y="-20"/></Offset>
           </Anchor>
         </Anchors>
-        <Layers>
-          <Layer>
-            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Активные">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="12"/>
-              <Anchors>
-                <Anchor point="TOP" x="0" y="-20" />
-              </Anchors>
-              <Shadow>
-                <Offset x="-1" y="-1" />
-                <Color r="0" g="0" b="0"/>
-              </Shadow>
-            </FontString>
-          </Layer>
-        </Layers>
         <Frames>
           <Button inherits="SS_DiceRollButton_Template">
             <Scripts><OnLoad>self.stat = 'melee'</OnLoad></Scripts>
@@ -114,28 +83,19 @@
           </Button>
         </Frames>
       </Frame>
-      <Frame name="$parent_Passive">
+      <Frame name="$parent_Passive" inherits="SS_ClearFrame_Template">
+        <Scripts>
+          <OnLoad>
+            self.title:SetText('Пассивные');
+            self:SetSize(140, 210);
+          </OnLoad>
+        </Scripts>
         <Size><AbsDimension x="140" y="210"/></Size>
         <Anchors>
           <Anchor point="TOPRIGHT">
             <Offset><AbsDimension x="-5" y="-20"/></Offset>
           </Anchor>
         </Anchors>
-        <Layers>
-          <Layer>
-            <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Пассивные">
-              <Color r="1" g="1" b="1" a="1"/>
-              <FontHeight val="12"/>
-              <Anchors>
-                <Anchor point="TOP" x="0" y="-20" />
-              </Anchors>
-              <Shadow>
-                <Offset x="-1" y="-1" />
-                <Color r="0" g="0" b="0"/>
-              </Shadow>
-            </FontString>
-          </Layer>
-        </Layers>
         <Frames>
           <Button inherits="SS_DiceRollButton_Template">
             <Scripts><OnLoad>self.stat = 'athletics'</OnLoad></Scripts>
