@@ -18,14 +18,8 @@
       <Frame name = "$parent_Light" inherits="SS_Armor_ArmorBlock_Template">
         <Scripts>
           <OnLoad>
-            self.name:SetText(SS_Locale('light'));
-            self.check:SetScript("OnClick", function()
-              SS_Armor_SelectType('light', SS_Armor_GetType())
-            end)
-            self.description:SetText('Повседневная одежда, ряса, и другое сопоставимое.')
-            self.bonus:SetText('Не дает очков защиты');
+            self.armor = 'light';
             self.bonus:SetTextColor(0.75, 0.15, 0.15);
-            self.penalty:SetText('Не накладывает штрафов');
             self.penalty:SetTextColor(0.25, 0.75, 0.25);
           </OnLoad>
         </Scripts>
@@ -37,19 +31,7 @@
       </Frame>
       <Frame name = "$parent_Medium" inherits="SS_Armor_ArmorBlock_Template" >
         <Scripts>
-          <OnLoad>
-            self.name:SetText(SS_Locale('medium'));
-            self.check:SetScript("OnClick", function()
-              SS_Armor_SelectType('medium', SS_Armor_GetType())
-            end)
-            self.description:SetText('Кожаная, кольчужная, броня из легких металлов и другое сопоставимое.')
-            self.bonus:SetText('Добавляет 1 ОБ за 2 ОЗ');
-            self.bonus:SetTextColor(0.25, 0.75, 0.25);
-            self.penalty:SetText('Небольшой штраф на');
-            self.penalty:SetTextColor(0.75, 0.15, 0.15);
-            self.penaltyList:SetText('Чародейство, избегание, ловкость рук, акробатика, скрытность');
-            self.penaltyList:SetTextColor(0.75, 0.25, 0.25);
-          </OnLoad>
+          <OnLoad>self.armor = 'medium';</OnLoad>
         </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
@@ -59,19 +41,7 @@
       </Frame>
       <Frame name = "$parent_Heavy" inherits="SS_Armor_ArmorBlock_Template">
         <Scripts>
-          <OnLoad>
-            self.name:SetText(SS_Locale('heavy'));
-            self.check:SetScript("OnClick", function()
-              SS_Armor_SelectType('heavy', SS_Armor_GetType())
-            end)
-            self.description:SetText('Все варианты латных и других сопоставимых видов брони.')
-            self.bonus:SetText('Добавляет 1 ОБ за 1.5 ОЗ');
-            self.bonus:SetTextColor(0.25, 0.75, 0.25);
-            self.penalty:SetText('Большой штраф на');
-            self.penalty:SetTextColor(0.75, 0.15, 0.15);
-            self.penaltyList:SetText('Дальний бой, чарод-во, избегание, ловкость рук, внимательность, акробатика, скрытность');
-            self.penaltyList:SetTextColor(0.75, 0.25, 0.25);
-          </OnLoad>
+          <OnLoad>self.armor = 'heavy';</OnLoad>
         </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">

@@ -95,7 +95,6 @@
         <Scripts>
           <OnShow>
             self.target = 'power';
-            self.description = 'Облегчает проверки ближнего боя и атлетики.';
             self.view = SS_Stats_Menu_Stat_Power;
           </OnShow>
         </Scripts>
@@ -107,7 +106,6 @@
         <Scripts>
           <OnShow>
             self.target = 'accuracy';
-            self.description = 'Облегчает проверки дальнего боя и внимательности.';
             self.view = SS_Stats_Menu_Stat_Accuracy;
           </OnShow>
         </Scripts>
@@ -119,7 +117,6 @@
         <Scripts>
           <OnShow>
             self.target = 'wisdom';
-            self.description = 'Облегчает проверки чародейства и знания.';
             self.view = SS_Stats_Menu_Stat_Wisdom;
           </OnShow>
         </Scripts>
@@ -131,7 +128,6 @@
         <Scripts>
           <OnShow>
             self.target = 'morale';
-            self.description = 'Облегчает проверки веры и самоконтроля.';
             self.view = SS_Stats_Menu_Stat_Morale;
           </OnShow>
         </Scripts>
@@ -143,7 +139,6 @@
         <Scripts>
           <OnShow>
             self.target = 'empathy';
-            self.description = 'Облегчает проверки выступления и суждения.';
             self.view = SS_Stats_Menu_Stat_Empathy;
           </OnShow>
         </Scripts>
@@ -155,7 +150,6 @@
         <Scripts>
           <OnShow>
             self.target = 'mobility';
-            self.description = 'Облегчает проверки избегания и акробатики.';
             self.view = SS_Stats_Menu_Stat_Mobility;
           </OnShow>
         </Scripts>
@@ -167,7 +161,6 @@
         <Scripts>
           <OnShow>
             self.target = 'precision';
-            self.description = 'Облегчает проверки ловкости рук и скрытности.';
             self.view = SS_Stats_Menu_Stat_Precision;
           </OnShow>
         </Scripts>

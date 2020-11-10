@@ -176,7 +176,7 @@ SS_Draw_StatInfo = function(stat, content)
   end
 
   SS_Stats_Menu_Info.title:SetText(SS_Locale(stat));
-  SS_Stats_Menu_Info_Inner_Content_Description:SetText(content);
+  SS_Stats_Menu_Info_Inner_Content_Description:SetText(SS_Locale(stat..'Description'));
 
   local modifiers = SS_Modifiers_GetModifiersOf('stats')(stat);
 
@@ -238,8 +238,8 @@ SS_Draw_SkillInfo = function(skill, content, examples, bonusFrom)
   end
 
   SS_Skills_Menu_Info.title:SetText(SS_Locale(skill));
-  SS_Skills_Menu_Info_Inner_Content_Description:SetText(content);
-  SS_Skills_Menu_Info_Inner_Content_Examples:SetText(examples)
+  SS_Skills_Menu_Info_Inner_Content_Description:SetText(SS_Locale(skill..'Description'));
+  SS_Skills_Menu_Info_Inner_Content_Examples:SetText(SS_Locale('example')..': '..SS_Locale(skill..'Example'))
 
   -- Текст бонус от хар-ки
   local charBonus = 'От хар-ки: '..SS_Locale(SS_Skills_GetStatOf(skill));

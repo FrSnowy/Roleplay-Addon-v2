@@ -112,8 +112,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'melee';
-                self.description = 'Применяется для всех атак, проводимых в ближнем бою.';
-                self.example = 'Пример: Ударить дубиной, парировать атаку.';
                 self.view = SS_Skills_Menu_Active_Skill_Melee;
               </OnShow>
             </Scripts>
@@ -125,8 +123,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'range';
-                self.description = 'Применяется для всех атак, проводимых в дальнем бою.';
-                self.example = 'Пример: Выстрел из оружия д. боя, метнуть предмет.';
                 self.view = SS_Skills_Menu_Active_Skill_Range;
               </OnShow>
             </Scripts>
@@ -138,8 +134,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'magic';
-                self.description = 'Применяется для атак с использованием магии.';
-                self.example = 'Пример: Заклинания колдунов, магов.';
                 self.view = SS_Skills_Menu_Active_Skill_Magic;
               </OnShow>
             </Scripts>
@@ -151,8 +145,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'religion';
-                self.description = 'Применяется для атак, основанных на веровании персонажа.';
-                self.example = 'Пример: Свет, шаманизм, друидизм.';
                 self.view = SS_Skills_Menu_Active_Skill_Religion;
               </OnShow>
             </Scripts>
@@ -164,8 +156,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'perfomance';
-                self.description = 'Применяется для действий связанных с психологическим воздействием на других персонажей.';
-                self.example = 'Пример: Обман, убеждение, привлечение внимания.';
                 self.view = SS_Skills_Menu_Active_Skill_Perfomance;
               </OnShow>
             </Scripts>
@@ -177,8 +167,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'missing';
-                self.description = 'Применяется для проверок побега и отклонения от урона по области.';
-                self.example = 'Пример: Избегание атаки, урона от ловушки, побег.';
                 self.view = SS_Skills_Menu_Active_Skill_Missing;
               </OnShow>
             </Scripts>
@@ -190,8 +178,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'hands';
-                self.description = 'Применяется для действий, требующих мелкой моторики.';
-                self.example = 'Пример: Карманная кража, взлом замков.';
                 self.view = SS_Skills_Menu_Active_Skill_Hands;
               </OnShow>
             </Scripts>
@@ -280,8 +266,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'athletics';
-                self.description = 'Используется для проверок силового взаимодействия персонажа и окружения.';
-                self.example = 'Пример: Удержать крупный камень, залезть на выступ.';
                 self.view = SS_Skills_Menu_Passive_Skill_Athletics;
               </OnShow>
             </Scripts>
@@ -293,8 +277,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'observation';
-                self.description = 'Применяется для проверок, основанных на умении отмечать мелкие детали.';
-                self.example = 'Пример: Обнаружить тайный рычаг, спрятанный предмет.';
                 self.view = SS_Skills_Menu_Passive_Skill_Observation;
               </OnShow>
             </Scripts>
@@ -306,8 +288,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'knowledge';
-                self.description = 'Применяется для проверок знания о мире, существах или истории.';
-                self.example = 'Пример: Опознать существо, прочесть древний текст.';
                 self.view = SS_Skills_Menu_Passive_Skill_Knowledge;
               </OnShow>
             </Scripts>
@@ -319,8 +299,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'controll';
-                self.description = 'Применяется для противодействию ментальному и псих. воздействиям.';
-                self.example = 'Пример: Сопротивление испугу, очарованию.';
                 self.view = SS_Skills_Menu_Passive_Skill_Controll;
               </OnShow>
             </Scripts>
@@ -332,8 +310,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'judgment';
-                self.description = 'Применяется для формирования корректных выводов на основе имеющейся информации.';
-                self.example = 'Пример: Распознать истинные намерения собеседника.';
                 self.view = SS_Skills_Menu_Passive_Skill_Judgment;
               </OnShow>
             </Scripts>
@@ -345,8 +321,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'acrobats';
-                self.description = 'Используется для проверок ловких взаимодействий игрока с миром.';
-                self.example = 'Пример: Баланс на узком уступе, прыжок в длину.';
                 self.view = SS_Skills_Menu_Passive_Skill_Acrobats;
               </OnShow>
             </Scripts>
@@ -358,8 +332,6 @@
             <Scripts>
               <OnShow>
                 self.target = 'stealth';
-                self.description = 'Применяется для действий, которые требуется совершить незаметно.';
-                self.example = 'Пример: Красться, Прятаться от противника.';
                 self.view = SS_Skills_Menu_Passive_Skill_Stealth;
               </OnShow>
             </Scripts>

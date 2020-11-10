@@ -137,6 +137,18 @@
     </Frames>
   </Frame>
   <Frame name = "SS_Armor_ArmorBlock_Template" virtual="true">
+    <Scripts>
+      <OnShow>
+        self.name:SetText(SS_Locale(self.armor));
+        self.description:SetText(SS_Locale(self.armor..'Description'))
+        self.bonus:SetText(SS_Locale(self.armor..'Bonus'))
+        self.penalty:SetText(SS_Locale(self.armor..'Penalty'))
+        self.penaltyList:SetText(SS_Locale(self.armor..'PenaltyList'))
+        self.check:SetScript("OnClick", function()
+          SS_Armor_SelectType(self.armor, SS_Armor_GetType())
+        end)
+      </OnShow>
+    </Scripts>
     <Size><AbsDimension x="180" y="160"/></Size>
     <Layers>
       <Layer>
@@ -170,6 +182,7 @@
       <Layer>
         <FontString parentKey = "bonus" justifyH="LEFT" justifyV="TOP" maxLines="1" wordwrap="true" font="Fonts\FRIZQT__.TTF">
           <Size x = "160" y = "12" />
+          <Color r="0.25" g="0.75" b="0.25" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="14" y = "-85"/>
@@ -182,6 +195,7 @@
         </FontString>
         <FontString parentKey = "penalty" justifyH="LEFT" justifyV="TOP" maxLines="1" wordwrap="true" font="Fonts\FRIZQT__.TTF">
           <Size x = "160" y = "12" />
+          <Color r="0.75" g="0.15" b="0.15" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="14" y = "-107"/>
@@ -194,6 +208,7 @@
         </FontString>
         <FontString parentKey = "penaltyList" justifyH="LEFT" justifyV="TOP" maxLines="3" wordwrap="true" font="Fonts\FRIZQT__.TTF">
           <Size x = "160" y = "40" />
+          <Color r="0.65" g="0.25" b="0.25" a="1"/>
           <FontHeight val="9"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="14" y = "-120"/>
