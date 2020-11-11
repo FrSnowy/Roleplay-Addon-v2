@@ -1,53 +1,27 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Plot_Controll" parent = "UIParent" movable="true" hidden = "true">
+  <Frame name="SS_Plot_Controll" parent = "UIParent" movable="true" inherits="SS_FrameWithBG_Template" hidden="true">
     <Scripts>
       <OnLoad>
         self:RegisterForDrag("LeftButton");
         self:RegisterEvent("PLAYER_ENTERING_WORLD");
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\create-menu-background";
+        self.title:SetText("Участники сюжета")
+        self:SetSize(300, 300);
       </OnLoad>
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
           if (SS_User.settings.currentPlot and SS_LeadingPlots_Current() and not SS_LeadingPlots_Current().isEventOngoing) then
             self:Show();
+            SS_PlotController_DrawPlayers();
           end;
         end;
       </OnEvent>
-      <OnShow>
-        SS_PlotController_DrawPlayers();
-      </OnShow>
       <OnDragStart>self:StartMoving();</OnDragStart>
       <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
     </Scripts>
-    <Size><AbsDimension x="300" y="300"/></Size>
     <Anchors>
       <Anchor point="CENTER" />
     </Anchors>
-    <Backdrop bgFile="Interface\AddOns\SnowySystem\IMG\create-menu-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-      <BackgroundInsets>
-        <AbsInset left="8" right="8" top="8" bottom="8"/>
-      </BackgroundInsets>
-      <TileSize>
-        <AbsValue val="300"/>
-      </TileSize>
-      <EdgeSize>
-        <AbsValue val="32"/>
-      </EdgeSize>
-    </Backdrop>
-    <Layers>
-      <Layer>
-        <FontString name="$parent_Title" font="Fonts\FRIZQT__.TTF" text="Участники сюжета">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="14"/>
-          <Anchors>
-            <Anchor point="TOP" x="0" y="-20" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
-    </Layers>
     <Frames>
       <Button name="$parent_Invite_Button" inherits="OptionsButtonTemplate" text="Пригласить">
         <Scripts>

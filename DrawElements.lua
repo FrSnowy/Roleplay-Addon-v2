@@ -61,6 +61,7 @@ end;
 SS_Draw_OnEventStop = function()
   SS_Event_Controll:Hide();
   SS_Plot_Controll:Show();
+  SS_PlotController_DrawPlayers();
 end;
 
 SS_Draw_PlayerControll = function(player)

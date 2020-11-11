@@ -187,6 +187,7 @@ SS_PlotController_OnActivate = function()
       
     else
       SS_Plot_Controll:Show();
+      SS_PlotController_DrawPlayers();
 
       local plot = SS_Plots_Current();
       local id = SS_User.settings.currentPlot;
