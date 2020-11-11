@@ -1,0 +1,104 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_Player_Controll_Skills" parent = "SS_Player_Controll" inherits="SS_CloseableFrameWithoutBG_Template" hidden="true">
+    <Scripts>
+      <OnLoad>
+        self.title:SetText("Навыки и проверки")
+        self:SetSize(310, 240);
+      </OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPRIGHT" x="310" y="0" />
+    </Anchors> 
+    <Frames>
+      <ScrollFrame name="$parent_Scroll" inherits="UIPanelScrollFrameTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="0" y="-50"/>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="0" y="20"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent" x="-44"/>
+        </Anchors>
+        <ScrollChild>
+          <Frame name="$parent_Content">
+            <Anchors>
+              <Anchor point="TOPLEFT" />
+            </Anchors>
+            <Size>
+              <AbsDimension x="280" y = "1"/>
+            </Size>
+            <Frames>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "melee">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="0" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "range">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-25" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "magic">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-50" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "religion">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-75" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "perfomance">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-100" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "missing">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-125" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "hands">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-150" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "athletics">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-175" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "observation">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-200" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "knowledge">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-225" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "controll">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-250" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "judgment">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-275" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "acrobats">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-300" />
+                </Anchors> 
+              </Frame>
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "stealth">
+                <Anchors>
+                  <Anchor point="TOPLEFT" x="8" y="-325" />
+                </Anchors> 
+              </Frame>
+            </Frames>
+          </Frame>
+        </ScrollChild>
+      </ScrollFrame>
+    </Frames>
+  </Frame>
+</Ui>

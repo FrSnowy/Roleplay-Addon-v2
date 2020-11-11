@@ -72,7 +72,8 @@ SS_Draw_PlayerControll = function(player)
   SS_Player_Controll_Level_Text:SetText("Уровень: "..SS_Target_TMPData.level);
   SS_Player_Controll_Exp_Text:SetText("Опыт: "..SS_Target_TMPData.experience..'/'..SS_Target_TMPData.experienceForUp);
 
-  local drawTargetStat = function(stat, view)
+  local drawTargetStat = function(stat)
+    local view = SS_Player_Controll_Stats[stat].value;
     view:SetText(SS_Locale(stat)..': '..SS_Target_TMPData.stats[stat]);
     if (SS_Target_TMPData.statsModified[stat] == 'up') then
       view:SetTextColor(0.25, 0.75, 0.25);
@@ -96,6 +97,7 @@ SS_Draw_PlayerControll = function(player)
 
     return statModifier + armorModifier;
   end;
+
   local getDiceStr = function(skill)
     local paramsForRoll = {
       level = SS_Target_TMPData.level,
@@ -114,53 +116,42 @@ SS_Draw_PlayerControll = function(player)
     return rollString;
   end;
 
-  local drawTargetSkill = function(skill, skillView, skillDiceView)
-    if (SS_Target_TMPData.skillsModified[skill] == 'up') then
-      skillView:SetTextColor(0.25, 0.75, 0.25);
-    elseif (SS_Target_TMPData.skillsModified[skill] == 'down') then
-      skillView:SetTextColor(0.75, 0.15, 0.15);
-    else
-      skillView:SetTextColor(1, 1, 1);
-    end;
-  
-    skillView:SetText(SS_Locale(skill)..': '..SS_Target_TMPData.skills[skill]);
+  local drawTargetSkill = function(skill)
     local summaryModifier = getSummaryModifier(skill);
-    
-    if (summaryModifier > 0) then
-      skillDiceView:SetTextColor(0.25, 0.75, 0.25)
-    elseif (summaryModifier < 0) then
-      skillDiceView:SetTextColor(0.75, 0.15, 0.15)
+
+    local view = SS_Player_Controll_Skills_Scroll_Content[skill];
+    view.skill = skill;
+  
+    view.value:SetText(SS_Locale(skill)..': '..SS_Target_TMPData.skills[skill]);
+
+    if (SS_Target_TMPData.skillsModified[skill] == 'up') then
+      view.value:SetTextColor(0.25, 0.75, 0.25);
+    elseif (SS_Target_TMPData.skillsModified[skill] == 'down') then
+      view.value:SetTextColor(0.75, 0.15, 0.15);
     else
-      skillDiceView:SetTextColor(1, 1, 1);
+      view.value:SetTextColor(1, 1, 1);
     end;
 
-    skillDiceView:SetText(getDiceStr(skill));
+    view.dice:SetText(getDiceStr(skill));
+
+    if (summaryModifier > 0) then
+      view.dice:SetTextColor(0.25, 0.75, 0.25)
+    elseif (summaryModifier < 0) then
+      view.dice:SetTextColor(0.75, 0.15, 0.15)
+    else
+      view.dice:SetTextColor(1, 1, 1);
+    end;
   end;
 
   -- Статы в меню статов
-  drawTargetStat('power', SS_Player_Controll_Stats_Power);
-  drawTargetStat('accuracy', SS_Player_Controll_Stats_Accuracy);
-  drawTargetStat('morale', SS_Player_Controll_Stats_Wisdom);
-  drawTargetStat('wisdom', SS_Player_Controll_Stats_Morale);
-  drawTargetStat('empathy', SS_Player_Controll_Stats_Empathy);
-  drawTargetStat('mobility', SS_Player_Controll_Stats_Mobility);
-  drawTargetStat('precision', SS_Player_Controll_Stats_Precision);
+  SS_Shared_ForEach(SS_Stats_GetList())(function(value, statName)
+    drawTargetStat(statName);
+  end);
 
   -- Скиллы в меню скиллов
-  drawTargetSkill('melee', SS_Player_Controll_Skills_Scroll_Inner_Melee, SS_Player_Controll_Skills_Scroll_Inner_Melee_DiceInfo);
-  drawTargetSkill('range', SS_Player_Controll_Skills_Scroll_Inner_Range, SS_Player_Controll_Skills_Scroll_Inner_Range_DiceInfo);
-  drawTargetSkill('magic', SS_Player_Controll_Skills_Scroll_Inner_Magic, SS_Player_Controll_Skills_Scroll_Inner_Magic_DiceInfo);
-  drawTargetSkill('religion', SS_Player_Controll_Skills_Scroll_Inner_Religion, SS_Player_Controll_Skills_Scroll_Inner_Religion_DiceInfo);
-  drawTargetSkill('perfomance', SS_Player_Controll_Skills_Scroll_Inner_Perfomance, SS_Player_Controll_Skills_Scroll_Inner_Perfomance_DiceInfo);
-  drawTargetSkill('missing', SS_Player_Controll_Skills_Scroll_Inner_Missing, SS_Player_Controll_Skills_Scroll_Inner_Missing_DiceInfo);
-  drawTargetSkill('hands', SS_Player_Controll_Skills_Scroll_Inner_Hands, SS_Player_Controll_Skills_Scroll_Inner_Hands_DiceInfo);
-  drawTargetSkill('athletics', SS_Player_Controll_Skills_Scroll_Inner_Athletics, SS_Player_Controll_Skills_Scroll_Inner_Athletics_DiceInfo);
-  drawTargetSkill('observation', SS_Player_Controll_Skills_Scroll_Inner_Observation, SS_Player_Controll_Skills_Scroll_Inner_Observation_DiceInfo);
-  drawTargetSkill('knowledge', SS_Player_Controll_Skills_Scroll_Inner_Knowledge, SS_Player_Controll_Skills_Scroll_Inner_Knowledge_DiceInfo);
-  drawTargetSkill('controll', SS_Player_Controll_Skills_Scroll_Inner_Controll, SS_Player_Controll_Skills_Scroll_Inner_Controll_DiceInfo);
-  drawTargetSkill('judgment', SS_Player_Controll_Skills_Scroll_Inner_Judgment, SS_Player_Controll_Skills_Scroll_Inner_Judgment_DiceInfo);
-  drawTargetSkill('acrobats', SS_Player_Controll_Skills_Scroll_Inner_Acrobats, SS_Player_Controll_Skills_Scroll_Inner_Acrobats_DiceInfo);
-  drawTargetSkill('stealth', SS_Player_Controll_Skills_Scroll_Inner_Stealth, SS_Player_Controll_Skills_Scroll_Inner_Stealth_DiceInfo);
+  SS_Shared_ForEach(SS_Skills_GetList())(function(value, skillName)
+    drawTargetSkill(skillName);
+  end);
 
   SS_Player_Controll:Show();
 end;

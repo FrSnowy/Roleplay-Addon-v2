@@ -1,0 +1,50 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_Player_Controll_Stats" parent = "SS_Player_Controll" inherits="SS_CloseableFrameWithoutBG_Template" hidden="true">
+    <Scripts>
+      <OnLoad>
+        self.title:SetText("Характеристики")
+        self:SetSize(200, 240);
+      </OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPLEFT" x="-200" y="0" />
+    </Anchors>
+    <Frames>
+      <Frame inherits = "SS_TargetStat_Template" parentKey="power">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="8" y="-50" />
+        </Anchors> 
+      </Frame>
+      <Frame inherits = "SS_TargetStat_Template" parentKey="accuracy">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="8" y="-75" />
+        </Anchors> 
+      </Frame>
+      <Frame inherits = "SS_TargetStat_Template" parentKey="wisdom">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="8" y="-100" />
+        </Anchors> 
+      </Frame>
+      <Frame inherits = "SS_TargetStat_Template" parentKey="morale">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="8" y="-125" />
+        </Anchors> 
+      </Frame>
+      <Frame inherits = "SS_TargetStat_Template" parentKey="empathy">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="8" y="-150" />
+        </Anchors> 
+      </Frame>
+      <Frame inherits = "SS_TargetStat_Template" parentKey="mobility">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="8" y="-175" />
+        </Anchors> 
+      </Frame>
+      <Frame inherits = "SS_TargetStat_Template" parentKey="precision">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="8" y="-200" />
+        </Anchors> 
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

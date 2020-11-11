@@ -37,5 +37,7 @@ View\System_Frames.xml
 View\Plot_Controll.xml
 View\Event_Controll.xml
 View\Player_Controll.xml
+View\Player_Controll_Stats.xml
+View\Player_Controll_Skills.xml
 View\Invite_Modal.xml
 View\Event_Start_Modal.xml

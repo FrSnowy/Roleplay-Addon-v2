@@ -300,4 +300,64 @@
       </CheckButton>
     </Frames>
   </Frame>
+  <Frame name = "SS_TargetStat_Template" virtual="true">
+    <Size>
+      <AbsDimension x="188" y="12" />
+    </Size>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "value" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="12" y="0" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+  <Frame name = "SS_TargetSkill_Template" virtual="true">
+    <Size>
+      <AbsDimension x="310" y="12" />
+    </Size>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "value" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="12" y="0" />
+          </Anchors>
+        </FontString>
+        <FontString parentKey = "dice" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="184" y="0" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button parentKey = "roll">
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "TOPLEFT")
+            GameTooltip:AddLine("Бросок: "..SS_Locale(self:GetParent().skill))
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="158" y="4" />
+        </Anchors>
+        <Size>
+          <AbsDimension x="20" y="20" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+      </Button>
+    </Frames>
+  </Frame>
 </Ui>
