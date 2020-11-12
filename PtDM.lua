@@ -44,10 +44,26 @@ SS_PtDM_Params = function(params, plotAuthor)
 end;
 
 SS_PtDM_InspectInfo = function(params, plotAuthor)
-  local paramsString = params.health.."+"..params.maxHealth.."+"..params.barrier.."+"..params.maxBarrier.."+"..params.level.."+"..params.experience.."+"..params.experienceForUp.."+"..params.armorType;
-  local statsString =  params.power.."+"..params.accuracy.."+"..params.wisdom.."+"..params.morale.."+"..params.empathy.."+"..params.mobility.."+"..params.precision;
-  local activeSkillsString = params.melee.."+"..params.range.."+"..params.magic.."+"..params.religion.."+"..params.perfomance.."+"..params.missing.."+"..params.hands;
-  local passiveSkillsString = params.athletics.."+"..params.observation.."+"..params.knowledge.."+"..params.controll.."+"..params.judgment.."+"..params.acrobats.."+"..params.stealth;
+  local paramsString = params.health..'}'..params.maxHealth..'}'..params.barrier..'}'..params.maxBarrier..'}'..params.level..'}'..params.experience..'}'..params.experienceForUp..'}'..params.armorType;
+  local statsString =  params.power..'}'..params.accuracy..'}'..params.wisdom..'}'..params.morale..'}'..params.empathy..'}'..params.mobility..'}'..params.precision;
+  local activeSkillsString = params.melee..'}'..params.range..'}'..params.magic..'}'..params.religion..'}'..params.perfomance..'}'..params.missing..'}'..params.hands;
+  local passiveSkillsString = params.athletics..'}'..params.observation..'}'..params.knowledge..'}'..params.controll..'}'..params.judgment..'}'..params.acrobats..'}'..params.stealth;
 
-  SS_PtDM_Direct('sendInspectInfo', paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString, plotAuthor);
+  local statModifiersStr = '';
+  SS_Shared_ForEach(params.statModifiers)(function(modifier, id)
+    currentString = id..'/'..modifier.name..'/'..modifier.stat..'/'..modifier.value..'/'..modifier.count;
+    statModifiersStr = statModifiersStr..currentString..'}';
+  end);
+
+  statModifiersStr = statModifiersStr:sub(1, #statModifiersStr - 1);
+
+  local skillModifiersStr = '';
+  SS_Shared_ForEach(params.skillModifiers)(function(modifier, id)
+    currentString = id..'/'..modifier.name..'/'..modifier.stat..'/'..modifier.value..'/'..modifier.count;
+    skillModifiersStr = skillModifiersStr..currentString..'}';
+  end);
+
+  skillModifiersStr = skillModifiersStr:sub(1, #skillModifiersStr - 1);
+
+  SS_PtDM_Direct('sendInspectInfo', paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString.."+"..statModifiersStr.."+"..skillModifiersStr, plotAuthor);
 end;

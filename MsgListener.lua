@@ -272,16 +272,24 @@ local onDMGetInspectInfo = function(plotID, master)
     judgment = SS_Skills_GetValueWithModifierFlag('judgment'),
     acrobats = SS_Skills_GetValueWithModifierFlag('acrobats'),
     stealth = SS_Skills_GetValueWithModifierFlag('stealth'),
+    statModifiers = SS_Plots_Current().modifiers.stats,
+    skillModifiers = SS_Plots_Current().modifiers.skills,
   }, master);
 end;
 
-local onSendInspectInfo = function(params, player)
+local onSendInspectInfo = function(inspectStr, player)
   -- У: Мастер, от: Игрок, когда: игрок отдает свои характеристики для панели осмотра
-  if (not(params) or not(player)) then return nil; end;
+  if (not(inspectStr) or not(player)) then return nil; end;
   if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;  
-  -- Извините
-  -- много параметров сплитом разделяем в правильном порядке
-  local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType, power, accuracy, wisdom, morale, empathy, mobility, precision, melee, range, magic, religion, perfomance, missing, hands, athletics, observation, knowledge, controll, judgment, acrobats, stealth = strsplit('+', params);
+
+  local params, stats, activeSkills, passiveSkills, statModifiers, skillsModifiers = strsplit('+', inspectStr);
+  local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType = strsplit('}', params);
+  local power, accuracy, wisdom, morale, empathy, mobility, precision = strsplit('}', stats);
+  local melee, range, magic, religion, perfomance, missing, hands = strsplit('}', activeSkills);
+  local athletics, observation, knowledge, controll, judgment, acrobats, stealth = strsplit('}', passiveSkills);
+
+  print(statModifiers);
+  print(skillsModifiers);
 
   local modifierDirection = function(statStr)
     if (not(strfind(statStr, 'mUP') == nil)) then return 'up';
