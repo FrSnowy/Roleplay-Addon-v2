@@ -41,7 +41,7 @@ table.insert(GHI_ProvidedDynamicActions, {
 			description = "Имя добавляемого модификатора",
 			type = "string",
       defaultValue = "",
-      order = 2,
+      order = 2, 
 		},
 		stat = {
 			name = "Характеристика",
