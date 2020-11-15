@@ -36,16 +36,6 @@ SS_Skills_GetValueWithoutModifier = function(skill)
   return SS_Plots_Current().skills[skill];
 end;
 
-SS_Skills_GetValueWithModifierFlag = function(skill)
-  if (SS_Skills_GetValue(skill) == SS_Skills_GetValueWithoutModifier(skill)) then
-    return SS_Skills_GetValue(skill);
-  elseif (SS_Skills_GetValue(skill) > SS_Skills_GetValueWithoutModifier(skill)) then
-    return SS_Skills_GetValue(skill)..'mUP';
-  else
-    return SS_Skills_GetValue(skill)..'mDOWN';
-  end;
-end;
-
 SS_Skills_GetSpentedPoints = function()
   local skillList = SS_Skills_GetList();
 

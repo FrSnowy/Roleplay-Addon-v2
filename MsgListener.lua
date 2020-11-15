@@ -251,27 +251,27 @@ local onDMGetInspectInfo = function(plotID, master)
     experience = SS_Progress_GetExp(),
     experienceForUp = SS_Progress_GetExpForUp(),
     armorType = SS_Armor_GetType(),
-    power = SS_Stats_GetValueWithModifierFlag('power'),
-    accuracy = SS_Stats_GetValueWithModifierFlag('accuracy'),
-    wisdom = SS_Stats_GetValueWithModifierFlag('wisdom'),
-    morale = SS_Stats_GetValueWithModifierFlag('morale'),
-    empathy = SS_Stats_GetValueWithModifierFlag('empathy'),
-    mobility = SS_Stats_GetValueWithModifierFlag('mobility'),
-    precision = SS_Stats_GetValueWithModifierFlag('precision'),
-    melee = SS_Skills_GetValueWithModifierFlag('melee'),
-    range = SS_Skills_GetValueWithModifierFlag('range'),
-    magic = SS_Skills_GetValueWithModifierFlag('magic'),
-    religion = SS_Skills_GetValueWithModifierFlag('religion'),
-    perfomance = SS_Skills_GetValueWithModifierFlag('perfomance'),
-    missing = SS_Skills_GetValueWithModifierFlag('missing'),
-    hands = SS_Skills_GetValueWithModifierFlag('hands'),
-    athletics = SS_Skills_GetValueWithModifierFlag('athletics'),
-    observation = SS_Skills_GetValueWithModifierFlag('observation'),
-    knowledge = SS_Skills_GetValueWithModifierFlag('knowledge'),
-    controll = SS_Skills_GetValueWithModifierFlag('controll'),
-    judgment = SS_Skills_GetValueWithModifierFlag('judgment'),
-    acrobats = SS_Skills_GetValueWithModifierFlag('acrobats'),
-    stealth = SS_Skills_GetValueWithModifierFlag('stealth'),
+    power = SS_Stats_GetValue('power'),
+    accuracy = SS_Stats_GetValue('accuracy'),
+    wisdom = SS_Stats_GetValue('wisdom'),
+    morale = SS_Stats_GetValue('morale'),
+    empathy = SS_Stats_GetValue('empathy'),
+    mobility = SS_Stats_GetValue('mobility'),
+    precision = SS_Stats_GetValue('precision'),
+    melee = SS_Skills_GetValue('melee'),
+    range = SS_Skills_GetValue('range'),
+    magic = SS_Skills_GetValue('magic'),
+    religion = SS_Skills_GetValue('religion'),
+    perfomance = SS_Skills_GetValue('perfomance'),
+    missing = SS_Skills_GetValue('missing'),
+    hands = SS_Skills_GetValue('hands'),
+    athletics = SS_Skills_GetValue('athletics'),
+    observation = SS_Skills_GetValue('observation'),
+    knowledge = SS_Skills_GetValue('knowledge'),
+    controll = SS_Skills_GetValue('controll'),
+    judgment = SS_Skills_GetValue('judgment'),
+    acrobats = SS_Skills_GetValue('acrobats'),
+    stealth = SS_Skills_GetValue('stealth'),
     statModifiers = SS_Plots_Current().modifiers.stats,
     skillModifiers = SS_Plots_Current().modifiers.skills,
   }, master);
@@ -282,21 +282,23 @@ local onSendInspectInfo = function(inspectStr, player)
   if (not(inspectStr) or not(player)) then return nil; end;
   if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;  
 
-  local params, stats, activeSkills, passiveSkills, statModifiers, skillsModifiers = strsplit('+', inspectStr);
+  local params, stats, activeSkills, passiveSkills, statModifiersStr, skillModifiersStr = strsplit('+', inspectStr);
   local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType = strsplit('}', params);
   local power, accuracy, wisdom, morale, empathy, mobility, precision = strsplit('}', stats);
   local melee, range, magic, religion, perfomance, missing, hands = strsplit('}', activeSkills);
   local athletics, observation, knowledge, controll, judgment, acrobats, stealth = strsplit('}', passiveSkills);
 
-  print(statModifiers);
-  print(skillsModifiers);
+  local statModifiers = {};
+  SS_Shared_ForEach({ strsplit('}', statModifiersStr) })(function(modifier)
+    local id, name, stat, value, count = strsplit('/', modifier);
+    statModifiers[id] = { name = name, stat = stat, value = value, count = count };
+  end);
 
-  local modifierDirection = function(statStr)
-    if (not(strfind(statStr, 'mUP') == nil)) then return 'up';
-    elseif (not(strfind(statStr, 'mDOWN') == nil)) then return 'down';
-    else return false;
-    end;
-  end;
+  local skillModifiers = {};
+  SS_Shared_ForEach({ strsplit('}', skillModifiersStr) })(function(modifier)
+    local id, name, stat, value, count = strsplit('/', modifier);
+    skillModifiers[id] = { name = name, stat = stat, value = value, count = count };
+  end);
 
   SS_Target_TMPData = {
     health = health,
@@ -316,15 +318,6 @@ local onSendInspectInfo = function(inspectStr, player)
       mobility = SS_Shared_NumFromStr(mobility),
       precision = SS_Shared_NumFromStr(precision),
     },
-    statsModified = {
-      power = modifierDirection(power),
-      accuracy = modifierDirection(accuracy),
-      wisdom = modifierDirection(wisdom),
-      morale = modifierDirection(morale),
-      empathy = modifierDirection(empathy),
-      mobility = modifierDirection(mobility),
-      precision = modifierDirection(precision),
-    },
     skills = {
       melee = SS_Shared_NumFromStr(melee),
       range = SS_Shared_NumFromStr(range),
@@ -341,23 +334,11 @@ local onSendInspectInfo = function(inspectStr, player)
       acrobats = SS_Shared_NumFromStr(acrobats),
       stealth = SS_Shared_NumFromStr(stealth),
     },
-    skillsModified = {
-      melee = modifierDirection(melee),
-      range = modifierDirection(range),
-      magic = modifierDirection(magic),
-      religion = modifierDirection(religion),
-      perfomance = modifierDirection(perfomance),
-      missing = modifierDirection(missing),
-      hands = modifierDirection(hands),
-      athletics = modifierDirection(athletics),
-      observation = modifierDirection(observation),
-      knowledge = modifierDirection(knowledge),
-      controll = modifierDirection(controll),
-      judgment = modifierDirection(judgment),
-      acrobats = modifierDirection(acrobats),
-      stealth = modifierDirection(stealth),
+    modifiers = {
+      stats = statModifiers,
+      skills = skillModifiers,
     },
-  }
+  };
 
   SS_Draw_PlayerControll(player);
 end;

@@ -29,16 +29,6 @@ SS_Stats_GetValueWithoutModifier = function(stat)
   return SS_Plots_Current().stats[stat];
 end;
 
-SS_Stats_GetValueWithModifierFlag = function(stat)
-  if (SS_Stats_GetValue(stat) == SS_Stats_GetValueWithoutModifier(stat)) then
-    return SS_Stats_GetValue(stat);
-  elseif (SS_Stats_GetValue(stat) > SS_Stats_GetValueWithoutModifier(stat)) then
-    return SS_Stats_GetValue(stat)..'mUP';
-  else
-    return SS_Stats_GetValue(stat)..'mDOWN';
-  end;
-end;
-
 SS_Stats_GetSpentedPoints = function()
   local statList = SS_Stats_GetList();
 

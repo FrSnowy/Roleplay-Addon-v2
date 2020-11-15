@@ -80,18 +80,24 @@ SS_Modifiers_Register = function(modifierType, modifier)
 	end;
 end;
 
-SS_Modifiers_ReadModifiersValue = function(modifierType)
+SS_Modifiers_ReadModifiersValue = function(modifierType, modifiersList)
+  local withLog = false;
   if (not(SS_Plots_Current())) then return 0; end;
   if (not(modifierType == 'stats') and not(modifierType == 'skills')) then return 0; end;
 
-  local modifiers = SS_Plots_Current().modifiers[modifierType];
+  if (modifiersList) then withLog = true; end;
+  
+  if (not(modifiersList)) then
+    modifiersList = SS_Plots_Current().modifiers;
+  end;
+
+  local modifiers = modifiersList[modifierType];
 
   return function(stat)
     if (not(stat)) then return 0; end;
-
     local summary = 0;
 
-    SS_Shared_ForEach(SS_Plots_Current().modifiers[modifierType])(function(modifier, id)
+    SS_Shared_ForEach(modifiers)(function(modifier, id)
       if (modifier.stat == stat) then
         summary = summary + modifier.value;
       end;

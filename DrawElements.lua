@@ -72,19 +72,6 @@ SS_Draw_PlayerControll = function(player)
   SS_Player_Controll_Level_Text:SetText("Уровень: "..SS_Target_TMPData.level);
   SS_Player_Controll_Exp_Text:SetText("Опыт: "..SS_Target_TMPData.experience..'/'..SS_Target_TMPData.experienceForUp);
 
-  local drawTargetStat = function(stat)
-    local view = SS_Player_Controll_Stats[stat].value;
-    view:SetText(SS_Locale(stat)..': '..SS_Target_TMPData.stats[stat]);
-    if (SS_Target_TMPData.statsModified[stat] == 'up') then
-      view:SetTextColor(0.25, 0.75, 0.25);
-    elseif (SS_Target_TMPData.statsModified[stat] == 'down') then
-      view:SetTextColor(0.75, 0.15, 0.15);
-    else
-      view:SetTextColor(1, 1, 1);
-    end;
-  end;
-
-  -- Дайсы возле скиллов
   local diceCount = SS_Roll_GetDicesCount(SS_Target_TMPData.level);
 
   local getSummaryModifier = function(skill)
@@ -123,15 +110,13 @@ SS_Draw_PlayerControll = function(player)
     view.skill = skill;
   
     view.value:SetText(SS_Locale(skill)..': '..SS_Target_TMPData.skills[skill]);
+    local skillModifierValue = SS_Modifiers_ReadModifiersValue('skills', SS_Target_TMPData.modifiers)(skill);
 
-    if (SS_Target_TMPData.skillsModified[skill] == 'up') then
-      view.value:SetTextColor(0.25, 0.75, 0.25);
-    elseif (SS_Target_TMPData.skillsModified[skill] == 'down') then
-      view.value:SetTextColor(0.75, 0.15, 0.15);
-    else
-      view.value:SetTextColor(1, 1, 1);
+    if (skillModifierValue > 0) then view.value:SetTextColor(0.25, 0.75, 0.25);
+    elseif (skillModifierValue < 0) then view.value:SetTextColor(0.75, 0.15, 0.15);
+    else view.value:SetTextColor(1, 1, 1);
     end;
-
+  
     view.dice:SetText(getDiceStr(skill));
 
     if (summaryModifier > 0) then
@@ -140,6 +125,17 @@ SS_Draw_PlayerControll = function(player)
       view.dice:SetTextColor(0.75, 0.15, 0.15)
     else
       view.dice:SetTextColor(1, 1, 1);
+    end;
+  end;
+
+  local drawTargetStat = function(stat)
+    local view = SS_Player_Controll_Stats[stat].value;
+    view:SetText(SS_Locale(stat)..': '..SS_Target_TMPData.stats[stat]);
+    local statModifierValue = SS_Modifiers_ReadModifiersValue('stats', SS_Target_TMPData.modifiers)(stat);
+  
+    if (statModifierValue > 0) then view:SetTextColor(0.25, 0.75, 0.25);
+    elseif (statModifierValue < 0) then view:SetTextColor(0.75, 0.15, 0.15);
+    else view:SetTextColor(1, 1, 1);
     end;
   end;
 
