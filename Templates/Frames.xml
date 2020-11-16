@@ -360,4 +360,153 @@
       </Button>
     </Frames>
   </Frame>
+  <Frame name = "SS_Modifier_Template" virtual = "true">
+    <Scripts>
+      <OnShow>
+        local modifier = self.modifier;
+        if (not(modifier)) then return; end;
+
+        local modifierName = modifier.name..' (';
+        if (tonumber(modifier.value) >= 0) then
+          modifierName = modifierName..'+'..modifier.value
+          self.name:SetTextColor(0.25, 0.75, 0.25);
+        else
+          modifierName = modifierName..modifier.value
+          self.name:SetTextColor(0.75, 0.15, 0.15);
+        end;
+        modifierName = modifierName..')';
+        self.name:SetText(modifierName);
+
+        if (tonumber(modifier.count) > 0) then
+          self.count:SetText('ещё '..modifier.count..' бросков');
+        else
+          self.count:SetText('до отмены мастером');
+        end;
+      </OnShow>
+    </Scripts>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "name" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="0" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString parentKey = "count" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="9"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="-14" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+  <Frame name = "SS_TargetModifier_Template" virtual = "true">
+    <Scripts>
+      <OnShow>
+        local modifier = self.modifier;
+        if (not(modifier)) then return; end;
+
+        local modifierName = modifier.name..' (';
+        if (tonumber(modifier.value) >= 0) then
+          modifierName = modifierName..'+'..modifier.value
+          self.name:SetTextColor(0.25, 0.75, 0.25);
+        else
+          modifierName = modifierName..modifier.value
+          self.name:SetTextColor(0.75, 0.15, 0.15);
+        end;
+        modifierName = modifierName..')';
+        self.name:SetText(modifierName);
+
+        local modifierDescription = 'Для ';
+        if (SS_Stats_IsStat(modifier.stat)) then modifierDescription = modifierDescription..'хар-ки ';
+        elseif (SS_Skills_IsSkill(modifier.stat)) then modifierDescription = modifierDescription..'навыка ';
+        end;
+        modifierDescription = modifierDescription..SS_Locale(modifier.stat);
+        self.char:SetText(modifierDescription);
+
+        if (tonumber(modifier.count) > 0) then
+          self.count:SetText('ещё '..modifier.count..' бросков');
+        else
+          self.count:SetText('до отмены');
+        end;
+      </OnShow>
+    </Scripts>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "name" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="0" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString parentKey = "char" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="-14" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString parentKey = "count" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="-28" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button key="removeBtn" inherits="OptionsButtonTemplate" text="x">
+        <Scripts>
+          <OnClick>
+            local modifier = self:GetParent().modifier;
+            local modifierType = ni;
+    
+            if (SS_Stats_IsStat(modifier.stat)) then modifierType = 'stats';
+            elseif (SS_Skills_IsSkill(modifier.stat)) then modifierType = 'skills';
+            end;
+
+            if (not(modifierType)) then return nil; end;
+            SS_DMtP_RemoveTargetModifier(modifierType, self:GetParent().modifierID);
+          </OnClick>
+        </Scripts>
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="20" y="5"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+    </Frames>
+  </Frame>
 </Ui>

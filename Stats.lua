@@ -108,3 +108,13 @@ SS_Stats_DrawValue = function(stat, view)
     view:SetTextColor(1, 1, 1);
   end;
 end;
+
+SS_Stats_DrawAll = function()
+  SS_Stats_DrawValue('power', SS_Stats_Menu_Stat_Power);
+  SS_Stats_DrawValue('accuracy', SS_Stats_Menu_Stat_Accuracy);
+  SS_Stats_DrawValue('wisdom', SS_Stats_Menu_Stat_Wisdom);
+  SS_Stats_DrawValue('empathy', SS_Stats_Menu_Stat_Empathy);
+  SS_Stats_DrawValue('morale', SS_Stats_Menu_Stat_Morale);
+  SS_Stats_DrawValue('mobility', SS_Stats_Menu_Stat_Mobility);
+  SS_Stats_DrawValue('precision', SS_Stats_Menu_Stat_Precision);
+end;

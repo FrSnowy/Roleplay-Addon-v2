@@ -132,7 +132,12 @@
       <Button name="$parent_Modifiers_Button" inherits="OptionsButtonTemplate" text="Модификаторы">
         <Scripts>
           <OnClick>
-
+            if (not(SS_Player_Controll_Modifiers:IsVisible())) then
+              SS_Draw_HideTargetSubmenus();
+              SS_Player_Controll_Modifiers:Show();
+            else
+              SS_Player_Controll_Modifiers:Hide();
+            end;
           </OnClick>
         </Scripts>
         <Size x = "116" y = "30" />

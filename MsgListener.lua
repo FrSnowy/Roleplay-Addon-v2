@@ -289,18 +289,23 @@ local onSendInspectInfo = function(inspectStr, player)
   local athletics, observation, knowledge, controll, judgment, acrobats, stealth = strsplit('}', passiveSkills);
 
   local statModifiers = {};
-  SS_Shared_ForEach({ strsplit('}', statModifiersStr) })(function(modifier)
-    local id, name, stat, value, count = strsplit('/', modifier);
-    statModifiers[id] = { name = name, stat = stat, value = value, count = count };
-  end);
+  if (not(statModifiersStr == 'nothing')) then
+    SS_Shared_ForEach({ strsplit('}', statModifiersStr) })(function(modifier)
+      local id, name, stat, value, count = strsplit('/', modifier);
+      statModifiers[id] = { name = name, stat = stat, value = value, count = count };
+    end);
+  end;
 
   local skillModifiers = {};
-  SS_Shared_ForEach({ strsplit('}', skillModifiersStr) })(function(modifier)
-    local id, name, stat, value, count = strsplit('/', modifier);
-    skillModifiers[id] = { name = name, stat = stat, value = value, count = count };
-  end);
+  if (not(skillModifiersStr == 'nothing')) then
+    SS_Shared_ForEach({ strsplit('}', skillModifiersStr) })(function(modifier)
+      local id, name, stat, value, count = strsplit('/', modifier);
+      skillModifiers[id] = { name = name, stat = stat, value = value, count = count };
+    end);
+  end;
 
   SS_Target_TMPData = {
+    name = player,
     health = health,
     maxHealth = maxHealth,
     barrier = barrier,
@@ -367,15 +372,8 @@ local onAddStatModifier = function(data, author, prefix)
   });
 
   if (SS_Stats_Menu:IsVisible()) then
-    SS_Stats_DrawValue('power', SS_Stats_Menu_Stat_Power);
-    SS_Stats_DrawValue('accuracy', SS_Stats_Menu_Stat_Accuracy);
-    SS_Stats_DrawValue('wisdom', SS_Stats_Menu_Stat_Wisdom);
-    SS_Stats_DrawValue('empathy', SS_Stats_Menu_Stat_Empathy);
-    SS_Stats_DrawValue('morale', SS_Stats_Menu_Stat_Morale);
-    SS_Stats_DrawValue('mobility', SS_Stats_Menu_Stat_Mobility);
-    SS_Stats_DrawValue('precision', SS_Stats_Menu_Stat_Precision);
-
-    if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info_Title:GetText() == SS_Locale(stat)) then
+    SS_Stats_DrawAll();
+    if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info.title:GetText() == SS_Locale(stat)) then
       SS_Draw_StatInfo(stat, SS_Stats_Menu_Info_Inner_Content_Description:GetText());
     end;
   end;
@@ -407,20 +405,44 @@ local onAddSkillModifier = function(data, author, prefix)
   });
 
   if (SS_Skills_Menu:IsVisible()) then
-    SS_Skills_DrawValue('melee', SS_Skills_Menu_Active_Skill_Melee);
-    SS_Skills_DrawValue('range', SS_Skills_Menu_Active_Skill_Range);
-    SS_Skills_DrawValue('magic', SS_Skills_Menu_Active_Skill_Magic);
-    SS_Skills_DrawValue('religion', SS_Skills_Menu_Active_Skill_Religion);
-    SS_Skills_DrawValue('perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
-    SS_Skills_DrawValue('missing', SS_Skills_Menu_Active_Skill_Missing);
-    SS_Skills_DrawValue('hands', SS_Skills_Menu_Active_Skill_Hands);
-
-    if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info_Title:GetText() == SS_Locale(stat)) then
+    SS_Skills_DrawAll();
+    if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale(stat)) then
       SS_Draw_SkillInfo(stat, SS_Skills_Menu_Info_Inner_Content_Description:GetText(), SS_Skills_Menu_Info_Inner_Content_Examples:GetText());
     end;
   end;
 
   SS_Log_SkillModifierAdded(name, stat, value, count);
+end;
+
+local onDMRemoveTargetModifier = function(data, master)
+  -- У: Игрок, от: Мастер, когда: мастер удаляет модификатор через меню осмотра
+  local plotID, modifierType, modifierID = strsplit('+', data);
+  if (not(plotID) or not(modifierType) or not(modifierID)) then return false; end;
+
+  if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
+  if (not(SS_Plots_Current().author == master)) then return false; end;
+
+  local modifier = SS_Plots_Current().modifiers[modifierType][modifierID];
+  if (not(modifier)) then
+    -- модификатора и так нет
+  end;
+
+  local stat = modifier.stat;
+  SS_Plots_Current().modifiers.stats[modifierID] = nil;
+
+  if (modifierType == 'stats' and SS_Stats_Menu:IsVisible()) then
+    SS_Stats_DrawAll();
+    if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info.title:GetText() == SS_Locale(stat)) then
+      SS_Draw_StatInfo(stat, SS_Stats_Menu_Info_Inner_Content_Description:GetText());
+    end;
+  end;
+
+  if (modifierType == 'skills' and SS_Skills_Menu:IsVisible()) then
+    SS_Skills_DrawAll();
+    if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale(stat)) then
+      SS_Draw_SkillInfo(stat, SS_Skills_Menu_Info_Inner_Content_Description:GetText(), SS_Skills_Menu_Info_Inner_Content_Examples:GetText());
+    end;
+  end;
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
@@ -452,6 +474,7 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     sendInspectInfo = onSendInspectInfo,
     addStatModifier = onAddStatModifier,
     addSkillModifier = onAddSkillModifier,
+    dmRemoveTargetModifier = onDMRemoveTargetModifier,
   };
 
   if (not(actions[action])) then

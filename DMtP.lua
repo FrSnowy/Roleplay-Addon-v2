@@ -125,3 +125,13 @@ SS_DMtP_DisplayInspectInfo = function()
     SS_DMtP_Direct('dmGetInspectSkills', SS_User.settings.currentPlot, player);
   end)
 end;
+
+SS_DMtP_RemoveTargetModifier = function(modifierType, modifierId)
+  if (not(SS_Target_TMPData) or not(SS_Target_TMPData.name)) then
+    SS_Log_NoTarget();
+    return false;
+  end;
+
+  local dataStr = SS_User.settings.currentPlot..'+'..modifierType..'+'..modifierId;
+  SS_DMtP_Direct('dmRemoveTargetModifier', dataStr, SS_Target_TMPData.name);
+end;

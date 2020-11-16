@@ -6,13 +6,7 @@
         self:SetSize(220, 255);
       </OnLoad>
       <OnShow>
-        SS_Stats_DrawValue('power', SS_Stats_Menu_Stat_Power);
-        SS_Stats_DrawValue('accuracy', SS_Stats_Menu_Stat_Accuracy);
-        SS_Stats_DrawValue('wisdom', SS_Stats_Menu_Stat_Wisdom);
-        SS_Stats_DrawValue('empathy', SS_Stats_Menu_Stat_Empathy);
-        SS_Stats_DrawValue('morale', SS_Stats_Menu_Stat_Morale);
-        SS_Stats_DrawValue('mobility', SS_Stats_Menu_Stat_Mobility);
-        SS_Stats_DrawValue('precision', SS_Stats_Menu_Stat_Precision);
+        SS_Stats_DrawAll();
         SS_Stats_Menu_Points_Value:SetText(SS_Stats_GetAvaliablePoints());
       </OnShow>
     </Scripts>

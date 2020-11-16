@@ -1,0 +1,30 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_Player_Controll_Modifiers" parent = "SS_Player_Controll" inherits="SS_CloseableFrameWithoutBG_Template" hidden="true">
+    <Scripts>
+      <OnLoad>
+        self.title:SetText("Модификаторы")
+        self:SetSize(270, 240);
+      </OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPLEFT" x="-270" y="0" />
+    </Anchors>
+    <Frames>
+      <ScrollFrame name="$parent_Inner" inherits="UIPanelScrollFrameTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="10" y="-48"/>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="10" y="20"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent" x="-44"/>
+        </Anchors>
+        <ScrollChild>
+          <Frame name="$parent_Content">
+            <Size x = "1" y = "1" />
+            <Anchors>
+              <Anchor point="TOPLEFT" />
+            </Anchors>
+          </Frame>
+        </ScrollChild>
+      </ScrollFrame>
+    </Frames>
+  </Frame>
+</Ui>

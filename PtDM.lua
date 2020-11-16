@@ -56,6 +56,7 @@ SS_PtDM_InspectInfo = function(params, plotAuthor)
   end);
 
   statModifiersStr = statModifiersStr:sub(1, #statModifiersStr - 1);
+  if (statModifiersStr == '') then statModifiersStr = 'nothing'; end;
 
   local skillModifiersStr = '';
   SS_Shared_ForEach(params.skillModifiers)(function(modifier, id)
@@ -64,6 +65,7 @@ SS_PtDM_InspectInfo = function(params, plotAuthor)
   end);
 
   skillModifiersStr = skillModifiersStr:sub(1, #skillModifiersStr - 1);
+  if (skillModifiersStr == '') then skillModifiersStr = 'nothing'; end;
 
   SS_PtDM_Direct('sendInspectInfo', paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString.."+"..statModifiersStr.."+"..skillModifiersStr, plotAuthor);
 end;

@@ -103,6 +103,35 @@ SS_Draw_PlayerControll = function(player)
     return rollString;
   end;
 
+  local drawTargetModifiers = function()
+    local counter = 0;
+
+    if (SS_Target_TMPData.modifiers.stats) then
+      SS_Shared_ForEach(SS_Target_TMPData.modifiers.stats)(function(modifier, id)
+        local ModifierPanel = CreateFrame("Frame", nil, SS_Player_Controll_Modifiers_Inner_Content, "SS_TargetModifier_Template");
+              ModifierPanel:SetSize(180, 23);
+              ModifierPanel:SetPoint("TOPLEFT", SS_Player_Controll_Modifiers_Inner_Content, "TOPLEFT", 8, -55 * counter);
+              ModifierPanel.modifier = modifier;
+              ModifierPanel.modifierID = id;
+
+        counter = counter + 1;
+      end);
+    end;
+    
+    
+    if (SS_Target_TMPData.modifiers.skills) then
+      SS_Shared_ForEach(SS_Target_TMPData.modifiers.skills)(function(modifier, id)
+        local ModifierPanel = CreateFrame("Frame", nil, SS_Player_Controll_Modifiers_Inner_Content, "SS_TargetModifier_Template");
+              ModifierPanel:SetSize(180, 23);
+              ModifierPanel:SetPoint("TOPLEFT", SS_Player_Controll_Modifiers_Inner_Content, "TOPLEFT", 8, -55 * counter);
+              ModifierPanel.modifier = modifier;
+              ModifierPanel.modifierID = id;
+
+        counter = counter + 1;
+      end);
+    end;
+  end;
+
   local drawTargetSkill = function(skill)
     local summaryModifier = getSummaryModifier(skill);
 
@@ -149,15 +178,20 @@ SS_Draw_PlayerControll = function(player)
     drawTargetSkill(skillName);
   end);
 
+  drawTargetModifiers();
+
   SS_Player_Controll:Show();
 end;
 
 SS_Draw_HideTargetSubmenus = function()
   SS_Player_Controll_Stats:Hide();
   SS_Player_Controll_Skills:Hide();
+  SS_Player_Controll_Modifiers:Hide();
 end;
 
 SS_Draw_StatInfo = function(stat, content)
+  SS_Stats_Menu_Info:Hide();
+
   local childs = { SS_Stats_Menu_Info_Inner_Content:GetChildren() };
   for _, child in pairs(childs) do
     child:Hide();
@@ -175,42 +209,10 @@ SS_Draw_StatInfo = function(stat, content)
     local counter = 0;
 
     SS_Shared_ForEach(modifiers)(function(modifier, id)
-      local ModifierPanel = CreateFrame("Frame", nil, SS_Stats_Menu_Info_Inner_Content);
-            ModifierPanel:Show();
-            ModifierPanel:EnableMouse();
+      local ModifierPanel = CreateFrame("Frame", nil, SS_Stats_Menu_Info_Inner_Content, "SS_Modifier_Template");
             ModifierPanel:SetSize(180, 23);
             ModifierPanel:SetPoint("TOPLEFT", SS_Stats_Menu_Info_Inner_Content, "TOPLEFT", 8, -55 - 30 * counter);
-
-      local modifierTitleStr = modifier.name..' (';
-      if (tonumber(modifier.value) >= 0) then
-        modifierTitleStr = modifierTitleStr..'+'..modifier.value
-      else
-        modifierTitleStr = modifierTitleStr..modifier.value
-      end;
-      modifierTitleStr = modifierTitleStr..')';
-
-      local ModifierName = ModifierPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-            ModifierName:SetPoint("TOPLEFT", ModifierPanel, "TOPLEFT", 0, 0);
-            ModifierName:SetText(modifierTitleStr);
-            ModifierName:SetFont("Fonts\\FRIZQT__.TTF", 11);
-            ModifierName:Show();
-
-      if (tonumber(modifier.value) >= 0) then
-        ModifierName:SetTextColor(0.25, 0.75, 0.25);
-      else
-        ModifierName:SetTextColor(0.75, 0.15, 0.15);
-      end;
-
-      local ModifierCount = ModifierPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-            ModifierCount:SetPoint("TOPLEFT", ModifierPanel, "TOPLEFT", 0, -14);
-            ModifierCount:SetFont("Fonts\\FRIZQT__.TTF", 9);
-            ModifierCount:Show();
-
-      if (tonumber(modifier.count) > 0) then
-        ModifierCount:SetText('ещё '..modifier.count..' бросков');
-      else
-        ModifierCount:SetText('до отмены мастером');
-      end;
+            ModifierPanel.modifier = modifier;
 
       counter = counter + 1;
     end);
@@ -220,6 +222,8 @@ SS_Draw_StatInfo = function(stat, content)
 end;
 
 SS_Draw_SkillInfo = function(skill, content, examples, bonusFrom)
+  SS_Skills_Menu_Info:Hide();
+
   local childs = { SS_Skills_Menu_Info_Inner_Content:GetChildren() };
   for _, child in pairs(childs) do
     child:Hide();
@@ -231,87 +235,44 @@ SS_Draw_SkillInfo = function(skill, content, examples, bonusFrom)
 
   -- Текст бонус от хар-ки
   local charBonus = 'От хар-ки: '..SS_Locale(SS_Skills_GetStatOf(skill));
-  if (SS_Stats_GetModifierFor(skill) >= 0) then
-    charBonus = charBonus..' (+';
-  else
-    charBonus = charBonus..' (';
+  if (SS_Stats_GetModifierFor(skill) >= 0) then charBonus = charBonus..' (+';
+  else charBonus = charBonus..' (';
   end;
   charBonus = charBonus..SS_Stats_GetModifierFor(skill)..')';
   SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetText(charBonus);
 
-  if (SS_Stats_GetModifierFor(skill) > 0) then
-    SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(0.25, 0.75, 0.25);
-  elseif (SS_Stats_GetModifierFor(skill) < 0) then
-    SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(0.75, 0.15, 0.15);
-  else
-    SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(1, 1, 1);
+  if (SS_Stats_GetModifierFor(skill) > 0) then SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(0.25, 0.75, 0.25);
+  elseif (SS_Stats_GetModifierFor(skill) < 0) then SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(0.75, 0.15, 0.15);
+  else SS_Skills_Menu_Info_Inner_Content_Char_Bonus:SetTextColor(1, 1, 1);
   end;
 
   --Текст бонус от снаряжения
   local armorBonus = 'От снар.: '..SS_Locale(SS_Armor_GetType())
   local dices = SS_Roll_GetDices(skill);
   local armorModifier = SS_Armor_GetModifierFor(skill, dices);
-  if (armorModifier >= 0) then
-    armorBonus = armorBonus..' (+';
-  else
-    armorBonus = armorBonus..' (';
+  if (armorModifier >= 0) then armorBonus = armorBonus..' (+';
+  else armorBonus = armorBonus..' (';
   end;
   armorBonus = armorBonus..armorModifier..')';
   SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetText(armorBonus);
 
-  if (armorModifier > 0) then
-    SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(0.25, 0.75, 0.25);
-  elseif (armorModifier < 0) then
-    SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(0.75, 0.15, 0.15);
-  else
-    SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(1, 1, 1);
+  if (armorModifier > 0) then SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(0.25, 0.75, 0.25);
+  elseif (armorModifier < 0) then SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(0.75, 0.15, 0.15);
+  else SS_Skills_Menu_Info_Inner_Content_Armor_Bonus:SetTextColor(1, 1, 1);
   end;
 
   -- Модификаторы
   local modifiers = SS_Modifiers_GetModifiersOf('skills')(skill);
-  if (modifiers == nil) then
-    SS_Skills_Menu_Info_Inner_Content_Modifiers:Hide();
+  if (modifiers == nil) then SS_Skills_Menu_Info_Inner_Content_Modifiers:Hide();
   else
     SS_Skills_Menu_Info_Inner_Content_Modifiers:Show();
     local counter = 0;
 
     SS_Shared_ForEach(modifiers)(function(modifier, id)
-      local ModifierPanel = CreateFrame("Frame", nil, SS_Skills_Menu_Info_Inner_Content);
-            ModifierPanel:Show();
-            ModifierPanel:EnableMouse();
+      local ModifierPanel = CreateFrame("Frame", nil, SS_Skills_Menu_Info_Inner_Content, "SS_Modifier_Template");
             ModifierPanel:SetSize(180, 23);
             ModifierPanel:SetPoint("TOPLEFT", SS_Skills_Menu_Info_Inner_Content, "TOPLEFT", 8, -140 - 30 * counter);
-
-      local modifierTitleStr = modifier.name..' (';
-      if (tonumber(modifier.value) >= 0) then
-        modifierTitleStr = modifierTitleStr..'+'..modifier.value
-      else
-        modifierTitleStr = modifierTitleStr..modifier.value
-      end;
-      modifierTitleStr = modifierTitleStr..')';
-
-      local ModifierName = ModifierPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-            ModifierName:SetPoint("TOPLEFT", ModifierPanel, "TOPLEFT", 0, 0);
-            ModifierName:SetText(modifierTitleStr);
-            ModifierName:SetFont("Fonts\\FRIZQT__.TTF", 11);
-            ModifierName:Show();
-
-      if (tonumber(modifier.value) >= 0) then
-        ModifierName:SetTextColor(0.25, 0.75, 0.25);
-      else
-        ModifierName:SetTextColor(0.75, 0.15, 0.15);
-      end;
-
-      local ModifierCount = ModifierPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-            ModifierCount:SetPoint("TOPLEFT", ModifierPanel, "TOPLEFT", 0, -14);
-            ModifierCount:SetFont("Fonts\\FRIZQT__.TTF", 9);
-            ModifierCount:Show();
-
-      if (tonumber(modifier.count) > 0) then
-        ModifierCount:SetText('ещё '..modifier.count..' бросков');
-      else
-        ModifierCount:SetText('до отмены мастером');
-      end;
+            ModifierPanel.modifier = modifier;
 
       counter = counter + 1;
     end);

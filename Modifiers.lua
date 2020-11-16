@@ -61,23 +61,13 @@ SS_Modifiers_Register = function(modifierType, modifier)
   if (not(SS_User) or not(SS_Plots_Current())) then return nil; end;
   if (not(modifierType == 'stats') and not(modifierType == 'skills')) then return nil; end;
   if (not(SS_Modifiers_CheckParameters(modifier))) then return nil; end;
-
-  if (modifierType == 'stats') then
-    SS_Plots_Current().modifiers.stats[modifier.id] = {
-      name = modifier.name,
-      stat = modifier.stat,
-      value = modifier.value,
-      count = modifier.count,
-    }
-
-  elseif (modifierType == 'skills') then
-    SS_Plots_Current().modifiers.skills[modifier.id] = {
-      name = modifier.name,
-      stat = modifier.stat,
-      value = modifier.value,
-      count = modifier.count,
-    }
-	end;
+  
+  SS_Plots_Current().modifiers[modifierType][modifier.id] = {
+    name = modifier.name,
+    stat = modifier.stat,
+    value = modifier.value,
+    count = modifier.count,
+  }
 end;
 
 SS_Modifiers_ReadModifiersValue = function(modifierType, modifiersList)

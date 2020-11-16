@@ -117,3 +117,20 @@ SS_Skills_DrawValue = function(skill, view)
     view:SetTextColor(1, 1, 1);
   end;
 end;
+
+SS_Skills_DrawAll = function()
+  SS_Skills_DrawValue('melee', SS_Skills_Menu_Active_Skill_Melee);
+  SS_Skills_DrawValue('range', SS_Skills_Menu_Active_Skill_Range);
+  SS_Skills_DrawValue('magic', SS_Skills_Menu_Active_Skill_Magic);
+  SS_Skills_DrawValue('religion', SS_Skills_Menu_Active_Skill_Religion);
+  SS_Skills_DrawValue('perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+  SS_Skills_DrawValue('missing', SS_Skills_Menu_Active_Skill_Missing);
+  SS_Skills_DrawValue('hands', SS_Skills_Menu_Active_Skill_Hands);
+  SS_Skills_DrawValue('stealth', SS_Skills_Menu_Passive_Skill_Stealth);
+  SS_Skills_DrawValue('observation', SS_Skills_Menu_Passive_Skill_Observation);
+  SS_Skills_DrawValue('knowledge', SS_Skills_Menu_Passive_Skill_Knowledge);
+  SS_Skills_DrawValue('controll', SS_Skills_Menu_Passive_Skill_Controll);
+  SS_Skills_DrawValue('judgment', SS_Skills_Menu_Passive_Skill_Judgment);
+  SS_Skills_DrawValue('athletics', SS_Skills_Menu_Passive_Skill_Athletics);
+  SS_Skills_DrawValue('acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
+end;
