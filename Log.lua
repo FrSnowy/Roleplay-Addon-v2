@@ -250,7 +250,7 @@ SS_Log_ModifierRemovedSuccessfully = function(name, player)
 end;
 
 SS_Log_MasterForceRoll = function()
-  print('|cffFFFF00Бросок по запросу ведущего|r');
+  print('|cffFF0000Следующий бросок по запросу ведущего|r');
 end;
 
 SS_Log_RollResultOfOther = function(name, skill, result, efficency, diceMin, diceMax, diceCount, modifier)
