@@ -2,6 +2,12 @@ SS_PtDM_Direct = function(action, data, target)
   SendAddonMessage("SS-PtDM", action.."|"..data, "WHISPER", target);
 end;
 
+SS_PtDM_SayAll = function(action, data)
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  SendAddonMessage("SS-PtDM", "playerToAll".."|"..action.."+"..data, "WHISPER", SS_Plots_Current().author);
+end;
+
 SS_PtDM_PlotAlreadyExists = function(plotName, plotAuthor)
   SS_PtDM_Direct('plotExists', plotName, plotAuthor);
 end;
@@ -68,4 +74,14 @@ SS_PtDM_InspectInfo = function(params, plotAuthor)
   if (skillModifiersStr == '') then skillModifiersStr = 'nothing'; end;
 
   SS_PtDM_Direct('sendInspectInfo', paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString.."+"..statModifiersStr.."+"..skillModifiersStr, plotAuthor);
+end;
+
+SS_PtDM_ModifierRemoved = function(params, plotAuthor)
+  local paramsStr = params.modifierType.."+"..params.modifierID;
+  SS_PtDM_Direct('playerModifierRemoved', paramsStr, plotAuthor);
+end;
+
+SS_PtA_RollResult = function(params)
+  local paramStr = params.skill.."+"..params.skillResult.."+"..params.efficencyResult.."+"..params.dices.from.."+"..params.dices.to.."+"..params.diceCount.."+"..params.modifier;
+  SS_PtDM_SayAll('rollResult', UnitName("player").."+"..paramStr);
 end;

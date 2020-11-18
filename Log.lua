@@ -1,6 +1,6 @@
 SS_Log_SkillRoll = function(finalResult, armorModifier, statModifier, results, dices, diceCount, skillName)
   print('-------------');
-  print('|cffFFFF00Проверка навыка: |r'..SS_Locale(skillName).."|cffFFFF00: |r"..diceCount..'d('..dices.from.."-"..dices.to..')');
+  print('|cffFFFF00Проверка навыка: |r'..SS_Locale(skillName).." "..diceCount..'d('..dices.from.."-"..dices.to..')');
   local outputString = '|cffFFFF00Результаты броска куба: [|r';
   local maxResult = 0;
   for i = 1, diceCount do
@@ -231,4 +231,53 @@ SS_Log_SkillModifierAdded = function(name, stat, value, count)
     outputString = outputString..'|cffFFFF00 до отмены|r';
   end;
   print(outputString);
+end;
+
+SS_Log_ModifierRemovedByDM = function(name, stat, value)
+  local outputString = '|cffFFFF00Модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+
+  outputString = outputString..'|cffFFFF00 для навыка |r'..SS_Locale(stat)..' |cffFF0000удалён мастером|r';
+  print(outputString);
+end;
+
+SS_Log_ModifierRemovedSuccessfully = function(name, player)
+  print('|cffFFFF00Модификатор |r"'..name..'" |cffFFFF00успешно удалён с игрока |r'..player);
+end;
+
+SS_Log_MasterForceRoll = function()
+  print('|cffFFFF00Бросок по запросу ведущего|r');
+end;
+
+SS_Log_RollResultOfOther = function(name, skill, result, efficency, diceMin, diceMax, diceCount, modifier)
+  local diceAverage = (SS_Shared_NumFromStr(diceMin) + SS_Shared_NumFromStr(diceMax)) / 2;
+  local output = '|cffFFFF00'..name..', проверка навыка: |r'..SS_Locale(skill)..".|cffFFFF00 Результат:|r";
+
+  output = output..' '..diceCount..'d('..diceMin..'-'..diceMax..')';
+
+  modifier = SS_Shared_NumFromStr(modifier);
+  if (modifier > 0) then
+    output = output..'|cff00FF00+'..modifier..'|r';
+  elseif (modifier < 0) then
+    output = output..'|cffFF0000'..modifier..'|r';
+  end;
+
+  output = output..'|cffFFFF00 -> |r';
+
+  result = SS_Shared_NumFromStr(result);
+  if (result > diceAverage + (diceAverage * 0.25)) then
+    output = output..'|cFF00FF00'..result..'|r';
+  elseif (result < diceAverage - (diceAverage * 0.25)) then
+    output = output..'|cFFFF0000'..result..'|r';
+  else
+    output = output..result;
+  end;
+
+  output = output..'. |cffFFFF00Эффективность: |r|cff9999FF'..efficency..'|r';
+
+  print(output);
 end;

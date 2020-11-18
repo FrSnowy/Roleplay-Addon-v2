@@ -1,3 +1,9 @@
+local onPlayerToAll = function(data, player)
+  -- У: Мастер, от: Игрок, когда: игрок хочет разослать сообщение всем остальным игрокам
+  local action, content = strsplit('+', data, 2);
+  SS_DMtP_Every(action, content, { player })();
+end;
+
 local onIsOnline = function(data, player)
   -- У: игрок, от: игрок, когда: при запросе на проверку онлайна
   SS_PtP_ImOnline(player);
@@ -424,11 +430,17 @@ local onDMRemoveTargetModifier = function(data, master)
 
   local modifier = SS_Plots_Current().modifiers[modifierType][modifierID];
   if (not(modifier)) then
-    -- модификатора и так нет
+    SS_PtDM_ModifierRemoved({
+      modifierID = modifierID,
+      modifierType = modifierType,
+    }, master);
+
+    return false;
   end;
 
   local stat = modifier.stat;
-  SS_Plots_Current().modifiers.stats[modifierID] = nil;
+  SS_Log_ModifierRemovedByDM(modifier.name, modifier.stat, modifier.value);
+  SS_Plots_Current().modifiers[modifierType][modifierID] = nil;
 
   if (modifierType == 'stats' and SS_Stats_Menu:IsVisible()) then
     SS_Stats_DrawAll();
@@ -443,6 +455,38 @@ local onDMRemoveTargetModifier = function(data, master)
       SS_Draw_SkillInfo(stat, SS_Skills_Menu_Info_Inner_Content_Description:GetText(), SS_Skills_Menu_Info_Inner_Content_Examples:GetText());
     end;
   end;
+
+  SS_PtDM_ModifierRemoved({
+    modifierID = modifierID,
+    modifierType = modifierType,
+  }, master);
+end;
+
+local onPlayerModifierRemoved = function(data, player)
+  -- У: Мастер, от: Игрок, когда: мастер успешно дропнул модификатор игрока
+  local modifierType, modifierID = strsplit('+', data);
+  if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  local modifier = SS_Target_TMPData.modifiers[modifierType][modifierID];
+  SS_Log_ModifierRemovedSuccessfully(modifier.name, player);
+  SS_DMtP_DisplayInspectInfo(SS_Target_TMPData.name);
+end;
+
+local onDMForceRollSkill = function(data, master)
+  local plotID, skill = strsplit('+', data);
+
+  if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
+  if (not(SS_Plots_Current().author == master)) then return false; end;
+
+  SS_Log_MasterForceRoll();
+  SS_Roll(skill);
+end;
+
+local onRollResult = function(data, master)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (not(SS_Plots_Current().author == master)) then return nil; end;
+
+  local name, skill, result, efficency, diceMin, diceMax, diceCount, modifier = strsplit('+', data);
+  SS_Log_RollResultOfOther(name, skill, result, efficency, diceMin, diceMax, diceCount, modifier);
 end;
 
 SS_MsgListener_Controller = function(prefix, text, channel, author)
@@ -453,6 +497,7 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
   local action, data = strsplit('|', text);
 
   local actions = {
+    playerToAll = onPlayerToAll,
     isOnline = onIsOnline,
     iAmOnline = onIAmOnline,
     invite = onInvite,
@@ -475,6 +520,9 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     addStatModifier = onAddStatModifier,
     addSkillModifier = onAddSkillModifier,
     dmRemoveTargetModifier = onDMRemoveTargetModifier,
+    playerModifierRemoved = onPlayerModifierRemoved,
+    dmForceRollSkill = onDMForceRollSkill,
+    rollResult = onRollResult,
   };
 
   if (not(actions[action])) then

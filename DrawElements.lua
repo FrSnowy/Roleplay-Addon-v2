@@ -130,6 +130,16 @@ SS_Draw_PlayerControll = function(player)
         counter = counter + 1;
       end);
     end;
+
+    if (counter > 0) then
+      SS_Player_Controll_Modifiers_Empty:Hide();
+      SS_Player_Controll_Modifiers_Inner:Show();
+    end;
+
+    if (counter == 0) then
+      SS_Player_Controll_Modifiers_Empty:Show();
+      SS_Player_Controll_Modifiers_Inner:Hide();
+    end;
   end;
 
   local drawTargetSkill = function(skill)
@@ -187,6 +197,7 @@ SS_Draw_HideTargetSubmenus = function()
   SS_Player_Controll_Stats:Hide();
   SS_Player_Controll_Skills:Hide();
   SS_Player_Controll_Modifiers:Hide();
+  SS_Player_Controll_Actions:Hide();
 end;
 
 SS_Draw_StatInfo = function(stat, content)

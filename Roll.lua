@@ -112,4 +112,13 @@ SS_Roll = function(skillName)
   
   SS_Modifiers_Fire('stats')(SS_Skills_GetStatOf(skillName));
   SS_Modifiers_Fire('skills')(skillName);
+
+  SS_PtA_RollResult({
+    skill = skillName,
+    skillResult = skillResult,
+    efficencyResult = efficencyResult,
+    dices = dices,
+    diceCount = SS_Roll_GetDicesCount(),
+    modifier = SS_Stats_GetModifierFor(skillName) + SS_Armor_GetModifierFor(skillName, dices),
+  });
 end;

@@ -2,7 +2,11 @@ SS_DMtP_Direct = function(action, data, target)
   SendAddonMessage("SS-DMtP", action..'|'..data, "WHISPER", target);
 end;
 
-SS_DMtP_Every = function(action, data)
+SS_DMtP_Every = function(action, data, except)
+  if (not(except)) then
+    except = {};
+  end;
+
   return function(plotID)
     if (not(plotID)) then
       if (not(SS_User.settings.currentPlot)) then return nil; end;
@@ -16,8 +20,12 @@ SS_DMtP_Every = function(action, data)
     if (not(players)) then return end;
 
     SS_Shared_ForEach(players)(function(player)
+      local isPlayerIgnored = SS_Shared_Includes(except)(function(name)
+        return name == player
+      end);
+
       SS_Shared_IfOnline(player, function()
-        if (not(player == UnitName("player"))) then
+        if (not(isPlayerIgnored)) then
           SS_DMtP_Direct(action, data, player);
         end;
       end);
@@ -47,7 +55,7 @@ end;
 
 SS_DMtP_DeletePlot = function(plotID)
   if (not(plotID)) then return; end;
-  SS_DMtP_Every('dmDeletePlot', plotID)(plotID);
+  SS_DMtP_Every('dmDeletePlot', plotID, { UnitName('player') })(plotID);
 end;
 
 SS_DMtP_KickFromPlot = function(player, plotID)
@@ -69,16 +77,19 @@ SS_DMtP_StartEvent = function(plotID)
   if (not(plot)) then return; end;
 
   SS_Log_EventStarting(plot.name);
-  SS_DMtP_Every('dmStartEvent', plotID)(plotID);
+  SS_DMtP_Every('dmStartEvent', plotID, { UnitName('player') })(plotID);
   PlaySound("LEVELUPSOUND", "SFX");
   SS_Draw_OnEventStarts();
 end;
 
-SS_DMtP_DisplayTargetInfo = function()
+SS_DMtP_DisplayTargetInfo = function(player)
   if (not(SS_User) or not(SS_LeadingPlots_Current())) then return nil; end;
 
-  local player = UnitName("target");
-  if (player == UnitName("player")) then return nil; end;
+  if (not(player)) then
+    player = UnitName("target");
+  end;
+
+  if (player == UnitName("player") or not(player)) then return nil; end;
 
   local isPlayerInCurrentPlot = SS_Shared_Includes(SS_LeadingPlots_Current().players)(function(playerInPlot)
     return playerInPlot == player
@@ -103,15 +114,18 @@ SS_DMtP_StopEvent = function(plotID)
   plot.isEventOngoing = false;
   SS_Log_EventEnd(plot.name);
 
-  SS_DMtP_Every('dmStopEvent', plotID)(plotID);
+  SS_DMtP_Every('dmStopEvent', plotID, { UnitName('player') })(plotID);
   SS_Draw_OnEventStop();
 end;
 
-SS_DMtP_DisplayInspectInfo = function()
+SS_DMtP_DisplayInspectInfo = function(player)
   if (not(SS_User) or not(SS_LeadingPlots_Current())) then return nil; end;
 
-  local player = UnitName("target");
-  if (player == UnitName("player")) then return nil; end;
+  if(not(player)) then
+    player = UnitName("target");
+  end;
+
+  if (player == UnitName("player") or not(player)) then return nil; end;
 
   local isPlayerInCurrentPlot = SS_Shared_Includes(SS_LeadingPlots_Current().players)(function(playerInPlot)
     return playerInPlot == player
@@ -126,12 +140,49 @@ SS_DMtP_DisplayInspectInfo = function()
   end)
 end;
 
-SS_DMtP_RemoveTargetModifier = function(modifierType, modifierId)
-  if (not(SS_Target_TMPData) or not(SS_Target_TMPData.name)) then
+SS_DMtP_RemoveInspectPlayerModifier = function(modifierType, modifierID)
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_Target_TMPData) or not(SS_Target_TMPData.name)) then return nil; end;
+  return SS_DMtP_RemoveTargetModifier(modifierType, modifierID, SS_Target_TMPData.name);
+end;
+
+SS_DMtP_RemoveTargetModifier = function(modifierType, modifierID, player)
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(modifierType) or not(modifierID)) then return nil; end;
+
+  if (not(player)) then
+    player = UnitName('target');
+  end;
+
+  if (not(player)) then
     SS_Log_NoTarget();
     return false;
   end;
 
-  local dataStr = SS_User.settings.currentPlot..'+'..modifierType..'+'..modifierId;
-  SS_DMtP_Direct('dmRemoveTargetModifier', dataStr, SS_Target_TMPData.name);
+  local dataStr = SS_User.settings.currentPlot..'+'..modifierType..'+'..modifierID;
+  SS_DMtP_Direct('dmRemoveTargetModifier', dataStr, player);
+end;
+
+SS_DMtP_ForceRollInspectTargetSkill = function(skillName)
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_Target_TMPData) or not(SS_Target_TMPData.name)) then return nil; end;
+
+  return SS_DMtP_ForceRollSkill(skillName, SS_Target_TMPData.name);
+end;
+
+SS_DMtP_ForceRollSkill = function(skillName, player)
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(skillName)) then return nil; end;
+
+  if (not(player)) then
+    player = UnitName('target');
+  end;
+
+  if (not(player)) then
+    SS_Log_NoTarget();
+    return false;
+  end;
+  
+  local dataStr = SS_User.settings.currentPlot..'+'..skillName;
+  SS_DMtP_Direct('dmForceRollSkill', dataStr, player);
 end;

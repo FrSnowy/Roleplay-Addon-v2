@@ -349,6 +349,9 @@
           <OnLeave>
             GameTooltip:Hide()
           </OnLeave>
+          <OnClick>
+            SS_DMtP_ForceRollInspectTargetSkill(self:GetParent().skill);
+          </OnClick>
         </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT" x="158" y="4" />
@@ -497,7 +500,7 @@
             end;
 
             if (not(modifierType)) then return nil; end;
-            SS_DMtP_RemoveTargetModifier(modifierType, self:GetParent().modifierID);
+            SS_DMtP_RemoveInspectPlayerModifier(modifierType, self:GetParent().modifierID);
           </OnClick>
         </Scripts>
         <Size x = "20" y = "20" />
