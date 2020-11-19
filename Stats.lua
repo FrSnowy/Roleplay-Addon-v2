@@ -88,6 +88,7 @@ SS_Stats_AddPoint = function(value, stat, statView)
   SS_Stats_Menu_Points_Value:SetText(SS_Stats_GetAvaliablePoints());
   UpdateHPOnPointAddToStat();
   UpdateBarrierOnPointAddtoStat();
+  SS_PtDM_UpdatePlayerInfo(SS_Plots_Current().author)
 end;
 
 SS_Stats_GetModifierFor = function(skillName, statPoints)

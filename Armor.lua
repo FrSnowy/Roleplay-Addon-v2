@@ -12,6 +12,7 @@ SS_Armor_SelectType = function(armorType, previousArmorType)
   SS_Armor_DrawCheck();
   SS_Params_DrawHealth();
   SS_Params_DrawBarrier(previousArmorType);
+  SS_PtDM_UpdatePlayerInfo(SS_Plots_Current().author);
 end;
 
 SS_Armor_DrawCheck = function()

@@ -209,20 +209,17 @@ local onDMGetTargetInfo = function(plotID, master)
   if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
   if(not(SS_Plots_Current().author == master)) then return false; end;
 
-  SS_PtDM_Params({
-    health = SS_Params_GetHealth(),
-    maxHealth = SS_Params_GetMaxHealth(),
-    barrier = SS_Params_GetBarrier(),
-    maxBarrier = SS_Params_GetMaxBarrier(),
-    level = SS_Progress_GetLevel(),
-  }, master);
+  SS_PtDM_Params(master);
 end;
 
 local onSendParams = function(params, player)
-  -- У: Мастер, от: игрок, когда: игрок активного сюжета взят в таргет и отвечает на соообщение о своих статах
+  -- У: Мастер, от: игрок, когда: игрок активного сюжета взят в таргет и отвечает на соообщение о своих статах ИЛИ когда игрок обновляет свои параметры во время открытой панели просмотра
   if (not(params) or not(player)) then return nil; end;
   if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
-  local health, maxHealth, barrier, maxBarrier, level = strsplit('+', params);
+  if (not(UnitName("target") == player)) then return nil; end;
+  local plotID, health, maxHealth, barrier, maxBarrier, level = strsplit('+', params);
+  if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
+
   SS_Draw_InfoAboutPlayer({
     health = health,
     maxHealth = maxHealth,
@@ -248,47 +245,18 @@ local onDMGetInspectInfo = function(plotID, master)
   if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
   if (not(SS_Plots_Current().author == master)) then return false; end;
 
-  SS_PtDM_InspectInfo({
-    health = SS_Params_GetHealth(),
-    maxHealth = SS_Params_GetMaxHealth(),
-    barrier = SS_Params_GetBarrier(),
-    maxBarrier = SS_Params_GetMaxBarrier(),
-    level = SS_Progress_GetLevel(),
-    experience = SS_Progress_GetExp(),
-    experienceForUp = SS_Progress_GetExpForUp(),
-    armorType = SS_Armor_GetType(),
-    power = SS_Stats_GetValue('power'),
-    accuracy = SS_Stats_GetValue('accuracy'),
-    wisdom = SS_Stats_GetValue('wisdom'),
-    morale = SS_Stats_GetValue('morale'),
-    empathy = SS_Stats_GetValue('empathy'),
-    mobility = SS_Stats_GetValue('mobility'),
-    precision = SS_Stats_GetValue('precision'),
-    melee = SS_Skills_GetValue('melee'),
-    range = SS_Skills_GetValue('range'),
-    magic = SS_Skills_GetValue('magic'),
-    religion = SS_Skills_GetValue('religion'),
-    perfomance = SS_Skills_GetValue('perfomance'),
-    missing = SS_Skills_GetValue('missing'),
-    hands = SS_Skills_GetValue('hands'),
-    athletics = SS_Skills_GetValue('athletics'),
-    observation = SS_Skills_GetValue('observation'),
-    knowledge = SS_Skills_GetValue('knowledge'),
-    controll = SS_Skills_GetValue('controll'),
-    judgment = SS_Skills_GetValue('judgment'),
-    acrobats = SS_Skills_GetValue('acrobats'),
-    stealth = SS_Skills_GetValue('stealth'),
-    statModifiers = SS_Plots_Current().modifiers.stats,
-    skillModifiers = SS_Plots_Current().modifiers.skills,
-  }, master);
+  SS_PtDM_InspectInfo("create", master);
 end;
 
 local onSendInspectInfo = function(inspectStr, player)
-  -- У: Мастер, от: Игрок, когда: игрок отдает свои характеристики для панели осмотра
+  -- У: Мастер, от: Игрок, когда: игрок отдает свои характеристики для панели осмотра ИЛИ когда игрок обновляет свои параметры во время открытой панели просмотра
   if (not(inspectStr) or not(player)) then return nil; end;
-  if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;  
+  if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
-  local params, stats, activeSkills, passiveSkills, statModifiersStr, skillModifiersStr = strsplit('+', inspectStr);
+  local plotID, params, stats, activeSkills, passiveSkills, statModifiersStr, skillModifiersStr, actionType = strsplit('+', inspectStr);
+  if (actionType == "update" and (not(SS_Target_TMPData) or not(SS_Target_TMPData.name == player))) then return nil; end;
+
+  if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
   local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType = strsplit('}', params);
   local power, accuracy, wisdom, morale, empathy, mobility, precision = strsplit('}', stats);
   local melee, range, magic, religion, perfomance, missing, hands = strsplit('}', activeSkills);

@@ -83,6 +83,7 @@ SS_Skills_AddPoint = function(value, skill, skillView)
   SS_Plots_Current().skills[skill] = SS_Skills_GetValueWithoutModifier(skill) + value;
   skillView:SetText(SS_Locale(skill)..": "..SS_Skills_GetValue(skill));
   SS_Skills_Menu_Points_Value:SetText(SS_Skills_GetAvaliablePoints());
+  SS_PtDM_UpdatePlayerInfo(SS_Plots_Current().author);
 end;
 
 SS_Skills_GetStatOf = function(skill)

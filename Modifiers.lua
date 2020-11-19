@@ -67,7 +67,9 @@ SS_Modifiers_Register = function(modifierType, modifier)
     stat = modifier.stat,
     value = modifier.value,
     count = modifier.count,
-  }
+  };
+
+  SS_PtDM_UpdatePlayerInfo(SS_Plots_Current().author);
 end;
 
 SS_Modifiers_ReadModifiersValue = function(modifierType, modifiersList)
