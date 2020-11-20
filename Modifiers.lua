@@ -137,7 +137,7 @@ SS_Modifiers_Fire = function(modifierType)
           modifier.count = modifier.count - 1;
           if (modifier.count <= 0) then
             SS_Log_StatModifierRemoved(modifier.name, modifier.stat, modifier.value)
-            SS_Modifiers_Remove(modifierType, id);
+            SS_Modifiers_Remove(modifierType)(id);
           end;
         end;
       end;
