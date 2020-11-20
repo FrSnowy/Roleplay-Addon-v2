@@ -203,7 +203,6 @@ SS_Draw_HideTargetSubmenus = function()
   SS_Player_Controll_Stats:Hide();
   SS_Player_Controll_Skills:Hide();
   SS_Player_Controll_Modifiers:Hide();
-  SS_Player_Controll_Actions:Hide();
 end;
 
 SS_Draw_StatInfo = function(stat, content)
