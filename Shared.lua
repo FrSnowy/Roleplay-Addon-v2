@@ -24,6 +24,12 @@ SS_Shared_SortTable = function(dict)
 end;
 
 SS_Shared_ForEach = function(list)
+  if (not(list)) then 
+      return function()
+        return nil;
+      end;
+  end;
+
   return function(callback)
     for index, element in pairs(list) do
       callback(element, index, list);
@@ -58,10 +64,9 @@ end;
 SS_Shared_DrawList = function(target, list, drawSingle)
   if (not(target) or not(list)) then return nil end;
 
-  local childs = { target:GetChildren() };
-  for _, child in pairs(childs) do
+  SS_Shared_ForEach({ target:GetChildren() })(function(child)
     child:Hide();
-  end
+  end);
   
   local sortedList = SS_Shared_SortTable(list);
   local counter = 0;

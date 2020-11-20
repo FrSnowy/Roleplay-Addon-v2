@@ -408,21 +408,7 @@ local onDMRemoveTargetModifier = function(data, master)
 
   local stat = modifier.stat;
   SS_Log_ModifierRemovedByDM(modifier.name, modifier.stat, modifier.value);
-  SS_Plots_Current().modifiers[modifierType][modifierID] = nil;
-
-  if (modifierType == 'stats' and SS_Stats_Menu:IsVisible()) then
-    SS_Stats_DrawAll();
-    if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info.title:GetText() == SS_Locale(stat)) then
-      SS_Draw_StatInfo(stat, SS_Stats_Menu_Info_Inner_Content_Description:GetText());
-    end;
-  end;
-
-  if (modifierType == 'skills' and SS_Skills_Menu:IsVisible()) then
-    SS_Skills_DrawAll();
-    if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale(stat)) then
-      SS_Draw_SkillInfo(stat, SS_Skills_Menu_Info_Inner_Content_Description:GetText(), SS_Skills_Menu_Info_Inner_Content_Examples:GetText());
-    end;
-  end;
+  SS_Modifiers_Remove(modifierType)(modifierID);
 
   SS_PtDM_ModifierRemoved({
     modifierID = modifierID,

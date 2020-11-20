@@ -69,6 +69,9 @@ SS_Modifiers_Register = function(modifierType, modifier)
     count = modifier.count,
   };
 
+  SS_Params_DrawHealth();
+  SS_Params_DrawBarrier();
+
   SS_PtDM_UpdatePlayerInfo(SS_Plots_Current().author);
 end;
 
@@ -134,7 +137,7 @@ SS_Modifiers_Fire = function(modifierType)
           modifier.count = modifier.count - 1;
           if (modifier.count <= 0) then
             SS_Log_StatModifierRemoved(modifier.name, modifier.stat, modifier.value)
-            modifiers[id] = nil;
+            SS_Modifiers_Remove(modifierType, id);
           end;
         end;
       end;
@@ -143,34 +146,36 @@ SS_Modifiers_Fire = function(modifierType)
   end;
 end;
 
+SS_Modifiers_Remove = function(modifierType)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (not(modifierType == 'stats') and not(modifierType == 'skills')) then return nil; end;
+
+  return function(modifierID)
+    if (not(modifierID) or not(SS_Plots_Current().modifiers[modifierType][modifierID])) then return nil; end;
+    local stat = SS_Plots_Current().modifiers[modifierType][modifierID].stat;
+
+    SS_Plots_Current().modifiers[modifierType][modifierID] = nil;
+
+    if (modifierType == 'stats' and SS_Stats_Menu:IsVisible()) then
+      SS_Stats_DrawAll();
+      if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info.title:GetText() == SS_Locale(stat)) then
+        SS_Draw_StatInfo(stat, SS_Stats_Menu_Info_Inner_Content_Description:GetText());
+      end;
+    end;
+
+    if (modifierType == 'skills' and SS_Skills_Menu:IsVisible()) then
+      SS_Skills_DrawAll();
+      if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale(stat)) then
+        SS_Draw_SkillInfo(stat, SS_Skills_Menu_Info_Inner_Content_Description:GetText(), SS_Skills_Menu_Info_Inner_Content_Examples:GetText());
+      end;
+    end;
+
+    SS_Params_DrawHealth();
+    SS_Params_DrawBarrier();
+    SS_PtDM_UpdatePlayerInfo(SS_Plots_Current().author);
+  end;
+end;
+
 SS_Modifiers_Clear = function()
   SS_Plots_Current().modifiers = SS_Modifiers_GetList();
 end;
-
---[[
-SS_Modifiers_RecieveModifiersValue = function(modifierType)
-  if (not(SS_Plots_Current())) then return 0; end;
-  if (not(modifierType == 'stats') and not(modifierType == 'skills')) then return 0; end;
-
-  local modifiers = SS_Plots_Current().modifiers[modifierType];
-
-  return function(stat)
-    if (not(stat)) then return 0; end;
-
-    local summary = 0;
-
-    SS_Shared_ForEach(SS_Plots_Current().modifiers.stats)(function(modifier, id)
-      if (modifier.stat == stat) then
-        summary = summary + modifier.value;
-
-        if (tonumber(modifier.count) >= 0) then
-          modifier.count = modifier.count - 1;
-          if (modifier.count <= 0) then modifiers[id] = nil; end;
-        end;
-      end;
-    end);
-
-    return summary;
-  end;
-end;
---]]

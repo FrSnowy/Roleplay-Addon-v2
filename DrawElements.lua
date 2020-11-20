@@ -104,6 +104,12 @@ SS_Draw_PlayerControll = function(player)
   end;
 
   local drawTargetModifiers = function()
+    SS_Shared_ForEach({ SS_Player_Controll_Modifiers_Inner_Content:GetChildren() })(function(child)
+      child:Hide();
+    end);
+
+    SS_Player_Controll_Modifiers_Inner_Content:Hide();
+
     local counter = 0;
 
     if (SS_Target_TMPData.modifiers.stats) then
@@ -117,8 +123,7 @@ SS_Draw_PlayerControll = function(player)
         counter = counter + 1;
       end);
     end;
-    
-    
+  
     if (SS_Target_TMPData.modifiers.skills) then
       SS_Shared_ForEach(SS_Target_TMPData.modifiers.skills)(function(modifier, id)
         local ModifierPanel = CreateFrame("Frame", nil, SS_Player_Controll_Modifiers_Inner_Content, "SS_TargetModifier_Template");
@@ -140,6 +145,7 @@ SS_Draw_PlayerControll = function(player)
       SS_Player_Controll_Modifiers_Empty:Show();
       SS_Player_Controll_Modifiers_Inner:Hide();
     end;
+    SS_Player_Controll_Modifiers_Inner_Content:Show();
   end;
 
   local drawTargetSkill = function(skill)
@@ -203,10 +209,9 @@ end;
 SS_Draw_StatInfo = function(stat, content)
   SS_Stats_Menu_Info:Hide();
 
-  local childs = { SS_Stats_Menu_Info_Inner_Content:GetChildren() };
-  for _, child in pairs(childs) do
+  SS_Shared_ForEach({ SS_Stats_Menu_Info_Inner_Content:GetChildren() })(function(child)
     child:Hide();
-  end
+  end);
 
   SS_Stats_Menu_Info.title:SetText(SS_Locale(stat));
   SS_Stats_Menu_Info_Inner_Content_Description:SetText(SS_Locale(stat..'Description'));
@@ -235,10 +240,9 @@ end;
 SS_Draw_SkillInfo = function(skill, content, examples, bonusFrom)
   SS_Skills_Menu_Info:Hide();
 
-  local childs = { SS_Skills_Menu_Info_Inner_Content:GetChildren() };
-  for _, child in pairs(childs) do
-    child:Hide();
-  end
+  SS_Shared_ForEach({ SS_Skills_Menu_Info_Inner_Content:GetChildren() })(function(child)
+    child:Hide();  
+  end);
 
   SS_Skills_Menu_Info.title:SetText(SS_Locale(skill));
   SS_Skills_Menu_Info_Inner_Content_Description:SetText(SS_Locale(skill..'Description'));
