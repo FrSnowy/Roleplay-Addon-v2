@@ -1,0 +1,132 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_DicesControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="false" frameStrata="DIALOG" frameLevel="3">
+    <Scripts>
+      <OnLoad>
+        self:SetSize(480, 240);
+        self.title:SetText('Проверки');
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
+        self:RegisterForDrag("LeftButton");
+      </OnLoad>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Frames>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'melee'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="20" y="-45"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'range'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="20" y="-70"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'magic'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="20" y="-95"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'religion'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="20" y="-120"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'perfomance'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="20" y="-145"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'missing'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="20" y="-170"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'hands'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="20" y="-195"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'athletics'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="140" y="-45"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'observation'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="140" y="-70"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'knowledge'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="140" y="-95"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'controll'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="140" y="-120"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'judgment'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="140" y="-145"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'acrobats'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="140" y="-170"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+			<Button inherits="SS_DiceControllRollButton_Template">
+				<Scripts><OnLoad>self.stat = 'stealth'</OnLoad></Scripts>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="140" y="-195"/>
+					</Anchor> 
+				</Anchors>
+			</Button>
+    </Frames>
+  </Frame>
+</Ui>
+

@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Controll_Menu" inherits="SS_FrameWithoutBG_Template" hidden="true">
+  <Frame name="SS_Controll_Menu" inherits="SS_FrameWithoutBG_Template" hidden="true" frameStrata="DIALOG" frameLevel="3">
     <Scripts>
       <OnLoad>
         self.title:SetText('Управление');

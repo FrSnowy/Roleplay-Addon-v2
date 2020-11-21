@@ -113,7 +113,7 @@
       </Button>
     </Frames>
   </Frame>
-  <Frame name = "SS_CloseabaleFrameWithBG_Template" virtual="true">
+  <Frame name = "SS_CloseableFrameWithBG_Template" virtual="true">
     <Scripts>
       <OnShow>
         self:SetBackdrop({ 

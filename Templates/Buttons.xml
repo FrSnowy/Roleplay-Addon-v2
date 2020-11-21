@@ -34,4 +34,15 @@
       </OnClick>
     </Scripts>
   </Button>
+  <Button name="SS_DiceControllRollButton_Template" virtual = "true" inherits="OptionsButtonTemplate">
+    <Size x = "120" y = "24" />
+    <Scripts>
+      <OnShow>
+        self:SetText(SS_Locale(self.stat));
+      </OnShow>
+      <OnClick>
+        SS_Roll(self.stat)
+      </OnClick>
+    </Scripts>
+  </Button>
 </Ui>

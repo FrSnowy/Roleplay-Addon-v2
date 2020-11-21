@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Event_Controll" parent = "UIParent" movable="true" inherits = "SS_FrameWithBG_Template" hidden="true">
+  <Frame name="SS_Event_Controll" parent = "UIParent" movable="true" inherits = "SS_FrameWithBG_Template" hidden="true" frameStrata="DIALOG" frameLevel="3">
     <Scripts>
       <OnLoad>
         self:SetSize(300, 300);
@@ -28,10 +28,74 @@
             SS_DMtP_StopEvent();
           </OnClick>
         </Scripts>
-        <Size x = "150" y = "28" />
+        <Size x = "150" y = "32" />
         <Anchors>
           <Anchor point="BOTTOM">
             <Offset x="0" y="20"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_Checks_Button" inherits="OptionsButtonTemplate" text="+ Проверки">
+        <Size x = "120" y = "32" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-60"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_Modifiers_Button" inherits="OptionsButtonTemplate" text="+ Модифик.">
+        <Size x = "120" y = "32" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-100"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_Battle_Button" inherits="OptionsButtonTemplate" text="+ Сражение">
+        <Size x = "120" y = "32" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-140"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_Damage_Button" inherits="OptionsButtonTemplate" text="+ Урон">
+        <Size x = "120" y = "32" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-180"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_HP_And_Armor_Button" inherits="OptionsButtonTemplate" text="+ Показатели">
+        <Size x = "120" y = "32" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-60"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_NPC_Button" inherits="OptionsButtonTemplate" text="+ NPC">
+        <Size x = "120" y = "32" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-100"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_Athmosphere_Button" inherits="OptionsButtonTemplate" text="+ Атмосфера">
+        <Size x = "120" y = "32" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-140"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_Players_Button" inherits="OptionsButtonTemplate" text="+ Участники">
+        <Size x = "120" y = "32" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-20" y="-180"/>
           </Anchor> 
         </Anchors>
       </Button>
