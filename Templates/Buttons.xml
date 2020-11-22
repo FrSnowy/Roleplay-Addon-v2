@@ -30,7 +30,7 @@
         self:SetText(SS_Locale(self.stat));
       </OnShow>
       <OnClick>
-        SS_Roll(self.stat)
+        SS_Roll(self.stat, true)
       </OnClick>
     </Scripts>
   </Button>
@@ -41,7 +41,7 @@
         self:SetText(SS_Locale(self.stat));
       </OnShow>
       <OnClick>
-        SS_Roll(self.stat)
+        SS_DMtP_ForceRollDiceControllSkill(self.stat)
       </OnClick>
     </Scripts>
   </Button>

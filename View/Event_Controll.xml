@@ -35,7 +35,14 @@
           </Anchor> 
         </Anchors>
       </Button>
-      <Button name="$parent_Checks_Button" inherits="OptionsButtonTemplate" text="+ Проверки">
+      <Button name="$parent_DiceControll_Button" inherits="OptionsButtonTemplate" text="+ Проверки">
+        <Scripts>
+          <OnClick>
+            if (SS_DicesControll_Menu:IsVisible()) then SS_DiceControll_Hide();
+            else SS_DiceControll_Show();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "120" y = "32" />
         <Anchors>
           <Anchor point="TOPLEFT">

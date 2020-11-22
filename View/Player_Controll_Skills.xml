@@ -3,11 +3,11 @@
     <Scripts>
       <OnLoad>
         self.title:SetText("Навыки и проверки")
-        self:SetSize(310, 240);
+        self:SetSize(340, 240);
       </OnLoad>
     </Scripts>
     <Anchors>
-      <Anchor point="TOPRIGHT" x="310" y="0" />
+      <Anchor point="TOPRIGHT" x="340" y="0" />
     </Anchors> 
     <Frames>
       <ScrollFrame name="$parent_Scroll" inherits="UIPanelScrollFrameTemplate">

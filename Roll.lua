@@ -62,7 +62,7 @@ SS_Roll_GetDices = function(skillName)
   return dices;
 end;
 
-SS_Roll_Skill = function(skillName)
+SS_Roll_Skill = function(skillName, visibility)
   local diceCount = SS_Roll_GetDicesCount();
   local dices = SS_Roll_GetDices(skillName);
 
@@ -81,13 +81,15 @@ SS_Roll_Skill = function(skillName)
   if (finalResult < dices.from) then finalResult = dices.from; end;
 
   if (SS_User.settings.displayDiceInfo) then
-    SS_Log_SkillRoll(finalResult, armorModifier, statModifier, results, dices, diceCount, skillName);
+    if (visibility == true) then
+      SS_Log_SkillRoll(finalResult, armorModifier, statModifier, results, dices, diceCount, skillName);
+    end;
   end;
 
   return finalResult;
 end;
 
-SS_Roll_Efficency = function(skillName)
+SS_Roll_Efficency = function(skillName, visibility)
   local statValue = SS_Stats_GetValue(SS_Skills_GetStatOf(skillName));
   local efficencyMaxValue = math.floor(statValue / 2);
   if (efficencyMaxValue < 1) then efficencyMaxValue = 1; end;
@@ -95,19 +97,23 @@ SS_Roll_Efficency = function(skillName)
   local finalResult = math.random(1, efficencyMaxValue);
 
   if (SS_User.settings.displayDiceInfo) then
-    SS_Log_EfficencyRoll(finalResult, efficencyMaxValue);
+    if (visibility == 'true') then
+      SS_Log_EfficencyRoll(finalResult, efficencyMaxValue);
+    end;
   end;
 
   return finalResult;
 end;
 
-SS_Roll = function(skillName)
-  local skillResult = SS_Roll_Skill(skillName);
-  local efficencyResult = SS_Roll_Efficency(skillName);
+SS_Roll = function(skillName, visibility)
+  local skillResult = SS_Roll_Skill(skillName, visibility);
+  local efficencyResult = SS_Roll_Efficency(skillName, visibility);
   local dices = SS_Roll_GetDices(skillName);
 
   if (not(SS_User.settings.displayDiceInfo)) then
-    SS_Log_DiceInfoShort(skillResult, efficencyResult, dices, skillName);
+    if (visibility == true) then
+      SS_Log_DiceInfoShort(skillResult, efficencyResult, dices, skillName);
+    end;
   end;
   
   SS_PtA_RollResult({

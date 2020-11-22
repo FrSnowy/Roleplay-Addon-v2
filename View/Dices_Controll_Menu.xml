@@ -1,11 +1,14 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_DicesControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="false" frameStrata="DIALOG" frameLevel="3">
+  <Frame name="SS_DicesControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="DIALOG" frameLevel="3">
     <Scripts>
       <OnLoad>
-        self:SetSize(480, 240);
+        self:SetSize(430, 240);
         self.title:SetText('Проверки');
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
         self:RegisterForDrag("LeftButton");
+        self.closeBtn:SetScript("OnClick", function()
+          SS_DiceControll_Hide();
+        end);
       </OnLoad>
       <OnDragStart>self:StartMoving();</OnDragStart>
       <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
@@ -13,119 +16,215 @@
     <Anchors>
       <Anchor point="CENTER" />
     </Anchors>
+    <Layers>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Применить к:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="280" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Выбранная цель">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="310" y="-70" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Вся группа">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="310" y="-95" />
+          </Anchors>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Тип броска:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="280" y="-120" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Открытый">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="310" y="-145" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Скрытый">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="310" y="-170" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
     <Frames>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'melee'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="20" y="-45"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'range'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="20" y="-70"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'magic'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="20" y="-95"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'religion'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="20" y="-120"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'perfomance'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="20" y="-145"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'missing'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="20" y="-170"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'hands'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="20" y="-195"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'athletics'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="140" y="-45"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'observation'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="140" y="-70"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'knowledge'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="140" y="-95"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'controll'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="140" y="-120"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'judgment'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="140" y="-145"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'acrobats'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="140" y="-170"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
-			<Button inherits="SS_DiceControllRollButton_Template">
-				<Scripts><OnLoad>self.stat = 'stealth'</OnLoad></Scripts>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="140" y="-195"/>
-					</Anchor> 
-				</Anchors>
-			</Button>
+      <CheckButton name = "$parent_Check_Target_Player" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnClick>SS_DiceControll_SelectTarget('player')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="280" y="-63"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Target_Group" inherits="OptionsCheckButtonTemplate" checked="flase">
+        <Scripts>
+          <OnClick>SS_DiceControll_SelectTarget('group')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="280" y="-88"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Visibility_Visible" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnClick>SS_DiceControll_SelectVisibility(true)</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="280" y="-138"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Visibility_Invisible" inherits="OptionsCheckButtonTemplate" checked="flase">
+        <Scripts>
+          <OnClick>SS_DiceControll_SelectVisibility(false)</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="280" y="-163"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'melee'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-45"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'range'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-70"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'magic'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-95"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'religion'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-120"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'perfomance'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-145"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'missing'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-170"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'hands'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-195"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'athletics'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="140" y="-45"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'observation'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="140" y="-70"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'knowledge'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="140" y="-95"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'controll'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="140" y="-120"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'judgment'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="140" y="-145"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'acrobats'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="140" y="-170"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button inherits="SS_DiceControllRollButton_Template">
+        <Scripts><OnLoad>self.stat = 'stealth'</OnLoad></Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="140" y="-195"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
     </Frames>
   </Frame>
 </Ui>

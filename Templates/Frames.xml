@@ -318,7 +318,7 @@
   </Frame>
   <Frame name = "SS_TargetSkill_Template" virtual="true">
     <Size>
-      <AbsDimension x="310" y="12" />
+      <AbsDimension x="340" y="12" />
     </Size>
     <Layers>
       <Layer>
@@ -333,7 +333,7 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="184" y="0" />
+            <Anchor point="TOPLEFT" x="220" y="0" />
           </Anchors>
         </FontString>
       </Layer>
@@ -350,11 +350,33 @@
             GameTooltip:Hide()
           </OnLeave>
           <OnClick>
-            SS_DMtP_ForceRollInspectTargetSkill(self:GetParent().skill);
+            SS_DMtP_ForceRollInspectTargetSkill(self:GetParent().skill, 'true');
           </OnClick>
         </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT" x="158" y="4" />
+        </Anchors>
+        <Size>
+          <AbsDimension x="20" y="20" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\dice.blp" />
+      </Button>
+      <Button parentKey = "hiddenRoll">
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "TOPLEFT")
+            GameTooltip:AddLine("Скрытый бросок: "..SS_Locale(self:GetParent().skill))
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+          <OnClick>
+            SS_DMtP_ForceRollInspectTargetSkill(self:GetParent().skill, 'false');
+          </OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="190" y="4" />
         </Anchors>
         <Size>
           <AbsDimension x="20" y="20" />

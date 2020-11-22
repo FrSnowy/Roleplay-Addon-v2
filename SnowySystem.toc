@@ -24,6 +24,7 @@ PtDM.lua
 PtP.lua
 MsgListener.lua
 DrawElements.lua
+DiceControll.lua
 SnowySystem.lua
 SnowySystem.xml
 View\Controll_Menu.xml

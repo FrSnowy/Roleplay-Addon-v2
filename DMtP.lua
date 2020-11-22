@@ -163,14 +163,41 @@ SS_DMtP_RemoveTargetModifier = function(modifierType, modifierID, player)
   SS_DMtP_Direct('dmRemoveTargetModifier', dataStr, player);
 end;
 
-SS_DMtP_ForceRollInspectTargetSkill = function(skillName)
+SS_DMtP_ForceRollInspectTargetSkill = function(skillName, visibility)
   if (not(SS_LeadingPlots_Current())) then return nil; end;
   if (not(SS_Target_TMPData) or not(SS_Target_TMPData.name)) then return nil; end;
 
-  return SS_DMtP_ForceRollSkill(skillName, SS_Target_TMPData.name);
+  return SS_DMtP_ForceRollSkill(skillName, visibility, SS_Target_TMPData.name);
 end;
 
-SS_DMtP_ForceRollSkill = function(skillName, player)
+SS_DMtP_ForceRollDiceControllSkill = function(skillName)
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_DiceControll_Data)) then return nil; end;
+
+  local visibility = 'true';
+  if (not(SS_DiceControll_Data.isVisible)) then visibility = 'false'; end;
+
+  if (SS_DiceControll_Data.target == 'player') then
+    if (not(UnitName("target"))) then
+      SS_Log_NoTarget();
+      return nil;
+    end;
+
+    return SS_DMtP_ForceRollSkill(skillName, visibility, UnitName("target"));
+  end;
+
+  if (SS_DiceControll_Data.target == 'group') then
+    return SS_Shared_ForEach(SS_LeadingPlots_Current().players)(function(player)
+      if (player == UnitName("player")) then return nil; end;
+
+      return SS_Shared_IfOnline(player, function()
+        return SS_DMtP_ForceRollSkill(skillName, visibility, player);
+      end);
+    end);
+  end;
+end;
+
+SS_DMtP_ForceRollSkill = function(skillName, visibility, player)
   if (not(SS_LeadingPlots_Current())) then return nil; end;
   if (not(skillName)) then return nil; end;
 
@@ -183,6 +210,6 @@ SS_DMtP_ForceRollSkill = function(skillName, player)
     return false;
   end;
   
-  local dataStr = SS_User.settings.currentPlot..'+'..skillName;
+  local dataStr = SS_User.settings.currentPlot..'+'..visibility.."+"..skillName;
   SS_DMtP_Direct('dmForceRollSkill', dataStr, player);
 end;

@@ -426,13 +426,16 @@ local onPlayerModifierRemoved = function(data, player)
 end;
 
 local onDMForceRollSkill = function(data, master)
-  local plotID, skill = strsplit('+', data);
+  local plotID, visibility, skill = strsplit('+', data);
 
   if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
   if (not(SS_Plots_Current().author == master)) then return false; end;
 
-  SS_Log_MasterForceRoll();
-  SS_Roll(skill);
+  if (visibility == 'true') then
+    SS_Log_MasterForceRoll();
+  end;
+
+  SS_Roll(skill, visibility == 'true');
 end;
 
 local onRollResult = function(data, master)
