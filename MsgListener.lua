@@ -322,70 +322,33 @@ local onSendInspectInfo = function(inspectStr, player)
   SS_Draw_PlayerControll(player);
 end;
 
-local onAddStatModifier = function(data, author, prefix)
+local onAddModifier = function(modifierType)
   -- У: Игрок, от: Мастер/GHI, когда: создается новый модификатор хар-ки
-  local allowModifier = false;
-  if (not(SS_Plots_Current())) then return nil; end;
-
-  if (prefix == 'SS-GHItP') then
-    allowModifier = author == UnitName('player');
-  else
-    allowModifier = author == SS_Plots_Current().author;
-  end;
-
-  if (not(allowModifier)) then return nil; end;
-
-  local id, name, stat, value, count = strsplit('+', data);
-
-  SS_Modifiers_Register('stats', {
-    id = id,
-    name = name,
-    stat = stat,
-    value = value,
-    count = count,
-  });
-
-  if (SS_Stats_Menu:IsVisible()) then
-    SS_Stats_DrawAll();
-    if (SS_Stats_Menu_Info:IsVisible() and SS_Stats_Menu_Info.title:GetText() == SS_Locale(stat)) then
-      SS_Draw_StatInfo(stat, SS_Stats_Menu_Info_Inner_Content_Description:GetText());
+  return function(data, author, prefix)
+    local allowModifier = false;
+    if (not(SS_Plots_Current())) then return nil; end;
+  
+    if (prefix == 'SS-GHItP') then
+      allowModifier = author == UnitName('player');
+    else
+      allowModifier = author == SS_Plots_Current().author;
     end;
+  
+    if (not(allowModifier)) then return nil; end;
+  
+    local id, name, statStr, value, count = strsplit('+', data);
+    local stats = { strsplit('}', statStr) };
+  
+    SS_Modifiers_Register(modifierType, {
+      id = id,
+      name = name,
+      stats = stats,
+      value = value,
+      count = count,
+    });
+  
+    SS_Log_ModifierAdded(name, stats, value, count);
   end;
-
-  SS_Log_StatModifierAdded(name, stat, value, count);
-end;
-
-local onAddSkillModifier = function(data, author, prefix)
-  -- У: Игрок, от: Мастер/GHI, когда: создается новый модификатор навыыка
-  local allowModifier = false;
-  if (not(SS_Plots_Current())) then return nil; end;
-
-  if (prefix == 'SS-GHItP') then
-    allowModifier = author == UnitName('player');
-  else
-    allowModifier = author == SS_Plots_Current().author;
-  end;
-
-  if (not(allowModifier)) then return nil; end;
-
-  local id, name, stat, value, count = strsplit('+', data);
-
-  SS_Modifiers_Register('skills', {
-    id = id,
-    name = name,
-    stat = stat,
-    value = value,
-    count = count,
-  });
-
-  if (SS_Skills_Menu:IsVisible()) then
-    SS_Skills_DrawAll();
-    if (SS_Skills_Menu_Info:IsVisible() and SS_Skills_Menu_Info.title:GetText() == SS_Locale(stat)) then
-      SS_Draw_SkillInfo(stat, SS_Skills_Menu_Info_Inner_Content_Description:GetText(), SS_Skills_Menu_Info_Inner_Content_Examples:GetText());
-    end;
-  end;
-
-  SS_Log_SkillModifierAdded(name, stat, value, count);
 end;
 
 local onDMRemoveTargetModifier = function(data, master)
@@ -474,8 +437,8 @@ SS_MsgListener_Controller = function(prefix, text, channel, author)
     dmStopEvent = onDMStopEvent,
     dmGetInspectInfo = onDMGetInspectInfo,
     sendInspectInfo = onSendInspectInfo,
-    addStatModifier = onAddStatModifier,
-    addSkillModifier = onAddSkillModifier,
+    addStatModifier = onAddModifier('stats'),
+    addSkillModifier = onAddModifier('skills'),
     dmRemoveTargetModifier = onDMRemoveTargetModifier,
     playerModifierRemoved = onPlayerModifierRemoved,
     dmForceRollSkill = onDMForceRollSkill,

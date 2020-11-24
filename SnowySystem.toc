@@ -25,6 +25,7 @@ PtP.lua
 MsgListener.lua
 DrawElements.lua
 DiceControll.lua
+ModifiersControll.lua
 SnowySystem.lua
 SnowySystem.xml
 View\Controll_Menu.xml
@@ -42,5 +43,6 @@ View\Player_Controll_Stats.xml
 View\Player_Controll_Skills.xml
 View\Player_Controll_Modifiers.xml
 View\Dices_Controll_Menu.xml
+View\Modifiers_Controll_Menu.xml
 View\Invite_Modal.xml
 View\Event_Start_Modal.xml

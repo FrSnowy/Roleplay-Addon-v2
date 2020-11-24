@@ -77,7 +77,7 @@
           </Anchor>
         </Anchors>
       </CheckButton>
-      <CheckButton name = "$parent_Check_Target_Group" inherits="OptionsCheckButtonTemplate" checked="flase">
+      <CheckButton name = "$parent_Check_Target_Group" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>SS_DiceControll_SelectTarget('group')</OnClick>
         </Scripts>
@@ -101,7 +101,7 @@
           </Anchor>
         </Anchors>
       </CheckButton>
-      <CheckButton name = "$parent_Check_Visibility_Invisible" inherits="OptionsCheckButtonTemplate" checked="flase">
+      <CheckButton name = "$parent_Check_Visibility_Invisible" inherits="OptionsCheckButtonTemplate" checked="false">
         <Scripts>
           <OnClick>SS_DiceControll_SelectVisibility(false)</OnClick>
         </Scripts>

@@ -188,7 +188,7 @@ SS_Log_EventEnd = function(plot)
   print('|cffFFFF00Вы завершили событие сюжета |r"'..plot..'"');
 end;
 
-SS_Log_StatModifierAdded = function(name, stat, value, count)
+SS_Log_ModifierAdded = function(name, stats, value, count)
   local outputString = '|cffFFFF00Добавлен модификатор |r"'..name..'" ';
   if (tonumber(value) >= 0) then
     outputString = outputString..'|cff00FF00(+'..value..')';
@@ -196,7 +196,13 @@ SS_Log_StatModifierAdded = function(name, stat, value, count)
     outputString = outputString..'|cffFF0000('..value..')';
   end;
 
-  outputString = outputString..'|cffFFFF00 для характеристики |r'..SS_Locale(stat);
+  local statsStr = '';
+  SS_Shared_ForEach(stats)(function(name)
+    statsStr = statsStr..SS_Locale(name)..', ';
+  end);
+  statsStr = statsStr:sub(1, #statsStr - 2);
+
+  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
   if (tonumber(count) > 0) then
     outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
   else
@@ -205,31 +211,21 @@ SS_Log_StatModifierAdded = function(name, stat, value, count)
   print(outputString);
 end;
 
-SS_Log_StatModifierRemoved = function(name, stat, value)
+SS_Log_ModifierRemoved = function(name, stats, value)
   local outputString = '|cffFFFF00Потерян модификатор |r"'..name..'" ';
   if (tonumber(value) >= 0) then
     outputString = outputString..'|cff00FF00(+'..value..')';
   else
     outputString = outputString..'|cffFF0000('..value..')';
   end;
-  outputString = outputString..'|cffFFFF00 для характеристики |r'..SS_Locale(stat);
-  print(outputString);
-end;
 
-SS_Log_SkillModifierAdded = function(name, stat, value, count)
-  local outputString = '|cffFFFF00Добавлен модификатор |r"'..name..'" ';
-  if (tonumber(value) >= 0) then
-    outputString = outputString..'|cff00FF00(+'..value..')';
-  else
-    outputString = outputString..'|cffFF0000('..value..')';
-  end;
+  local statsStr = '';
+  SS_Shared_ForEach(stats)(function(name)
+    statsStr = statsStr..SS_Locale(name)..', ';
+  end);
+  statsStr = statsStr:sub(1, #statsStr - 2);
 
-  outputString = outputString..'|cffFFFF00 для навыка |r'..SS_Locale(stat);
-  if (tonumber(count) > 0) then
-    outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
-  else
-    outputString = outputString..'|cffFFFF00 до отмены|r';
-  end;
+  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
   print(outputString);
 end;
 
