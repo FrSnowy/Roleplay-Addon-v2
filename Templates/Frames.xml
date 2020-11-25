@@ -514,10 +514,10 @@
         <Scripts>
           <OnClick>
             local modifier = self:GetParent().modifier;
-            local modifierType = ni;
+            local modifierType = nil;
     
-            if (SS_Stats_IsStat(modifier.stat)) then modifierType = 'stats';
-            elseif (SS_Skills_IsSkill(modifier.stat)) then modifierType = 'skills';
+            if (SS_Stats_IsStat(modifier.stats[1])) then modifierType = 'stats';
+            elseif (SS_Skills_IsSkill(modifier.stats[1])) then modifierType = 'skills';
             end;
 
             if (not(modifierType)) then return nil; end;

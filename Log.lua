@@ -229,7 +229,7 @@ SS_Log_ModifierRemoved = function(name, stats, value)
   print(outputString);
 end;
 
-SS_Log_ModifierRemovedByDM = function(name, stat, value)
+SS_Log_ModifierRemovedByDM = function(name, value)
   local outputString = '|cffFFFF00Модификатор |r"'..name..'" ';
   if (tonumber(value) >= 0) then
     outputString = outputString..'|cff00FF00(+'..value..')';
@@ -237,7 +237,7 @@ SS_Log_ModifierRemovedByDM = function(name, stat, value)
     outputString = outputString..'|cffFF0000('..value..')';
   end;
 
-  outputString = outputString..'|cffFFFF00 для навыка |r'..SS_Locale(stat)..' |cffFF0000удалён мастером|r';
+  outputString = outputString..' |cffFF0000удалён мастером|r';
   print(outputString);
 end;
 

@@ -372,7 +372,7 @@ local onDMRemoveTargetModifier = function(data, master)
   end;
 
   local stat = modifier.stat;
-  SS_Log_ModifierRemovedByDM(modifier.name, modifier.stat, modifier.value);
+  SS_Log_ModifierRemovedByDM(modifier.name, modifier.value);
   SS_Modifiers_Remove(modifierType)(modifierID);
 
   SS_PtDM_ModifierRemoved({
