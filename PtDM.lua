@@ -62,7 +62,14 @@ SS_PtDM_InspectInfo = function(actionType, plotAuthor)
 
   local statModifiersStr = '';
   SS_Shared_ForEach(SS_Plots_Current().modifiers.stats)(function(modifier, id)
-    currentString = id..'/'..modifier.name..'/'..modifier.stat..'/'..modifier.value..'/'..modifier.count;
+    local modifierStatsAsStr = '';
+
+    SS_Shared_ForEach(modifier.stats)(function(stat)
+      modifierStatsAsStr = modifierStatsAsStr..stat..'\\';
+    end);
+    modifierStatsAsStr = modifierStatsAsStr:sub(1, #modifierStatsAsStr - 1);
+
+    currentString = id..'/'..modifier.name..'/'..modifierStatsAsStr..'/'..modifier.value..'/'..modifier.count;
     statModifiersStr = statModifiersStr..currentString..'}';
   end);
 
@@ -71,13 +78,19 @@ SS_PtDM_InspectInfo = function(actionType, plotAuthor)
 
   local skillModifiersStr = '';
   SS_Shared_ForEach(SS_Plots_Current().modifiers.skills)(function(modifier, id)
-    currentString = id..'/'..modifier.name..'/'..modifier.stat..'/'..modifier.value..'/'..modifier.count;
+    local modifierStatsAsStr = '';
+
+    SS_Shared_ForEach(modifier.stats)(function(stat)
+      modifierStatsAsStr = modifierStatsAsStr..stat..'\\';
+    end);
+    modifierStatsAsStr = modifierStatsAsStr:sub(1, #modifierStatsAsStr - 1);
+
+    currentString = id..'/'..modifier.name..'/'..modifierStatsAsStr..'/'..modifier.value..'/'..modifier.count;
     skillModifiersStr = skillModifiersStr..currentString..'}';
   end);
 
   skillModifiersStr = skillModifiersStr:sub(1, #skillModifiersStr - 1);
   if (skillModifiersStr == '') then skillModifiersStr = 'nothing'; end;
-
   SS_PtDM_Direct('sendInspectInfo', SS_User.settings.currentPlot.."+"..paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString.."+"..statModifiersStr.."+"..skillModifiersStr.."+"..actionType, plotAuthor);
 end;
 

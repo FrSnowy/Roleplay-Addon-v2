@@ -116,7 +116,7 @@ SS_Draw_PlayerControll = function(player)
       SS_Shared_ForEach(SS_Target_TMPData.modifiers.stats)(function(modifier, id)
         local ModifierPanel = CreateFrame("Frame", nil, SS_Player_Controll_Modifiers_Inner_Content, "SS_TargetModifier_Template");
               ModifierPanel:SetSize(180, 23);
-              ModifierPanel:SetPoint("TOPLEFT", SS_Player_Controll_Modifiers_Inner_Content, "TOPLEFT", 8, -55 * counter);
+              ModifierPanel:SetPoint("TOPLEFT", SS_Player_Controll_Modifiers_Inner_Content, "TOPLEFT", 8, -50 * counter);
               ModifierPanel.modifier = modifier;
               ModifierPanel.modifierID = id;
 
@@ -128,7 +128,7 @@ SS_Draw_PlayerControll = function(player)
       SS_Shared_ForEach(SS_Target_TMPData.modifiers.skills)(function(modifier, id)
         local ModifierPanel = CreateFrame("Frame", nil, SS_Player_Controll_Modifiers_Inner_Content, "SS_TargetModifier_Template");
               ModifierPanel:SetSize(180, 23);
-              ModifierPanel:SetPoint("TOPLEFT", SS_Player_Controll_Modifiers_Inner_Content, "TOPLEFT", 8, -55 * counter);
+              ModifierPanel:SetPoint("TOPLEFT", SS_Player_Controll_Modifiers_Inner_Content, "TOPLEFT", 8, -50 * counter);
               ModifierPanel.modifier = modifier;
               ModifierPanel.modifierID = id;
 

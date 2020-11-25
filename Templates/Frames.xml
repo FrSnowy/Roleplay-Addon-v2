@@ -454,13 +454,19 @@
         end;
         modifierName = modifierName..')';
         self.name:SetText(modifierName);
+      
+        self.infoBtn:SetScript('OnEnter', function()
+          GameTooltip:SetOwner(self.infoBtn, "CENTER")
+          GameTooltip:AddLine('Влияет на: ');
+          SS_Shared_ForEach(modifier.stats)(function(stat)
+            GameTooltip:AddLine(SS_Locale(stat));
+          end);
+          GameTooltip:Show()        
+        end);
 
-        local modifierDescription = 'Для ';
-        if (SS_Stats_IsStat(modifier.stat)) then modifierDescription = modifierDescription..'хар-ки ';
-        elseif (SS_Skills_IsSkill(modifier.stat)) then modifierDescription = modifierDescription..'навыка ';
-        end;
-        modifierDescription = modifierDescription..SS_Locale(modifier.stat);
-        self.char:SetText(modifierDescription);
+        self.infoBtn:SetScript('OnLeave', function()
+          GameTooltip:Hide()
+        end);
 
         if (tonumber(modifier.count) > 0) then
           self.count:SetText('ещё '..modifier.count..' бросков');
@@ -482,26 +488,11 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-      </Layer>
-      <Layer>
-        <FontString parentKey = "char" font="Fonts\FRIZQT__.TTF">
-          <Color r="1" g="1" b="1" a="1"/>
-          <FontHeight val="12"/>
-          <Anchors>
-            <Anchor point="TOPLEFT" x="0" y="-14" />
-          </Anchors>
-          <Shadow>
-            <Offset x="-1" y="-1" />
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
-      <Layer>
         <FontString parentKey = "count" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="12"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="0" y="-28" />
+            <Anchor point="TOPLEFT" x="0" y="-17" />
           </Anchors>
           <Shadow>
             <Offset x="-1" y="-1" />
@@ -511,7 +502,15 @@
       </Layer>
     </Layers>
     <Frames>
-      <Button key="removeBtn" inherits="OptionsButtonTemplate" text="x">
+      <Button parentKey="infoBtn" inherits="OptionsButtonTemplate" text="?">
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-5" y="5"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button parentKey="removeBtn" inherits="OptionsButtonTemplate" text="x">
         <Scripts>
           <OnClick>
             local modifier = self:GetParent().modifier;

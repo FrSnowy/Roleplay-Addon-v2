@@ -1,5 +1,5 @@
 SS_PlotController_CreateBoth = function(plotName, authorName)
-  local plotUniqueName = plotName..'-'..random(1, 1000000)..'-'..random(1, 1000000)..'-'..random(1, 1000000);
+  local plotUniqueName = plotName..'-'..random(1, 99999999);
 
   SS_Plots_Create(plotUniqueName, plotName, authorName);
   SS_LeadingPlots_Create(plotUniqueName, plotName, authorName);

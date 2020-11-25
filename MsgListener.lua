@@ -265,16 +265,18 @@ local onSendInspectInfo = function(inspectStr, player)
   local statModifiers = {};
   if (not(statModifiersStr == 'nothing')) then
     SS_Shared_ForEach({ strsplit('}', statModifiersStr) })(function(modifier)
-      local id, name, stat, value, count = strsplit('/', modifier);
-      statModifiers[id] = { name = name, stat = stat, value = value, count = count };
+      local id, name, statsStr, value, count = strsplit('/', modifier);
+      local stats = { strsplit('\\', statsStr) }
+      statModifiers[id] = { name = name, stats = stats, value = value, count = count };
     end);
   end;
 
   local skillModifiers = {};
   if (not(skillModifiersStr == 'nothing')) then
     SS_Shared_ForEach({ strsplit('}', skillModifiersStr) })(function(modifier)
-      local id, name, stat, value, count = strsplit('/', modifier);
-      skillModifiers[id] = { name = name, stat = stat, value = value, count = count };
+      local id, name, statsStr, value, count = strsplit('/', modifier);
+      local stats = { strsplit('\\', statsStr) };
+      skillModifiers[id] = { name = name, stats = stats, value = value, count = count };
     end);
   end;
 
