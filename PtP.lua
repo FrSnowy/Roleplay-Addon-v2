@@ -1,5 +1,5 @@
 SS_PtP_Direct = function(action, data, target)
-	SendAddonMessage("SS-PtP", action.."|"..data, "WHISPER", target);
+  SS_Shared_SAM("SS-PtDM", action, data, target);
 end;
 
 SS_PtP_IsOnline = function(target)

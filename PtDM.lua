@@ -1,11 +1,10 @@
 SS_PtDM_Direct = function(action, data, target)
-  SendAddonMessage("SS-PtDM", action.."|"..data, "WHISPER", target);
+  SS_Shared_SAM("SS-PtDM", action, data, target);
 end;
 
 SS_PtDM_SayAll = function(action, data)
   if (not(SS_Plots_Current())) then return nil; end;
-
-  SendAddonMessage("SS-PtDM", "playerToAll".."|"..action.."+"..data, "WHISPER", SS_Plots_Current().author);
+  SS_Shared_SAM("SS-PtDM", "playerToAll", action.."+"..data, SS_Plots_Current().author);
 end;
 
 SS_PtDM_PlotAlreadyExists = function(plotName, plotAuthor)

@@ -102,7 +102,7 @@ table.insert(GHI_ProvidedDynamicActions, {
 
     local value = dyn.GetInput("value");
     local count = dyn.GetInput("count");
-    SendAddonMessage('SS-GHItP', 'addStatModifier|'..id..'+'..name..'+'..statsAsStr..'+'..value..'+'..count, 'WHISPER', UnitName('player'));
+    SendAddonMessage('SS-GHItP', '~addStatModifier|'..id..'+'..name..'+'..statsAsStr..'+'..value..'+'..count..'~', 'WHISPER', UnitName('player'));
 
     dyn.TriggerOutPort("added")
 	]],
@@ -205,7 +205,7 @@ table.insert(GHI_ProvidedDynamicActions, {
   
     local value = dyn.GetInput("value");
     local count = dyn.GetInput("count");
-    SendAddonMessage('SS-GHItP', 'addSkillModifier|'..id..'+'..name..'+'..statsAsStr..'+'..value..'+'..count, 'WHISPER', UnitName('player'));
+    SendAddonMessage('SS-GHItP', '~addSkillModifier|'..id..'+'..name..'+'..statsAsStr..'+'..value..'+'..count..'~', 'WHISPER', UnitName('player'));
     dyn.TriggerOutPort("added")
 	]],
 	ports = {

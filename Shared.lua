@@ -1,3 +1,44 @@
+local SS_Shared_SAM_Split_String = function(str)
+  local msgs = {};
+
+  local currentMsg = 1;
+  for i = 1, #str do
+    if (not(msgs[currentMsg])) then msgs[currentMsg] = ''; end;
+    local letter = string.sub(str, i, i);
+    msgs[currentMsg] = msgs[currentMsg]..letter;
+
+    if (#msgs[currentMsg] > 200) then currentMsg = currentMsg + 1; end;
+  end;
+
+  return msgs;
+end;
+
+SS_Shared_TimeStamp = function()
+  local cTime = GetTime();
+  local baseStamp = SS_Shared_NumFromStr(string.reverse(''..cTime * 1000));
+  baseStamp = baseStamp + SS_Shared_MathRound(baseStamp / 1000) + SS_Shared_MathRound(baseStamp / 10);
+  
+  return string.sub(''..baseStamp, 1, 8);
+end;
+
+SS_Shared_SAM = function(prefix, action, data, target)
+  if (#data > 200) then
+    messages = SS_Shared_SAM_Split_String(data);
+    local timeStamp = SS_Shared_TimeStamp();
+    SS_Shared_ForEach(messages)(function(msg, index)
+      if (index == 1) then
+        SendAddonMessage(prefix, '~'..action..'|'..timeStamp..'|'..msg, "WHISPER", target);
+      elseif (index == #messages) then
+        SendAddonMessage(prefix, action..'|'..timeStamp..'|'..msg..'~', "WHISPER", target);
+      else
+        SendAddonMessage(prefix, action..'|'..timeStamp..'|'..msg, "WHISPER", target);
+      end;
+    end);
+  else
+    SendAddonMessage(prefix, '~'..action..'|'..data..'~', "WHISPER", target);
+  end;
+end;
+
 SS_Shared_MathRound = function(number)
   if (number == 0) then return 0; end;
 

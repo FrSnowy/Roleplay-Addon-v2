@@ -1,5 +1,5 @@
 SS_DMtP_Direct = function(action, data, target)
-  SendAddonMessage("SS-DMtP", action..'|'..data, "WHISPER", target);
+  SS_Shared_SAM("SS-DMtP", action, data, target);
 end;
 
 SS_DMtP_Every = function(action, data, except)
