@@ -52,7 +52,9 @@ Listeners\Player\onDMStopEvent.lua
 Listeners\Player\onDMGetInspectInfo.lua
 Listeners\Player\onAddModifier.lua
 Listeners\Player\onDMRemoveTargetModifier.lua
+Listeners\Player\onGHIRemoveTargetModifier.lua
 Listeners\Player\onDMForceRollSkill.lua
+Listeners\Player\onGHIForceRollSkill.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml

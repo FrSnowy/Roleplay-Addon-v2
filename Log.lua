@@ -241,12 +241,28 @@ SS_Log_ModifierRemovedByDM = function(name, value)
   print(outputString);
 end;
 
+SS_Log_ModifierRemovedByGHI = function(name, value)
+  local outputString = '|cffFFFF00Модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+
+  outputString = outputString..' |cffFF0000потерян|r |cffFFFF00после использования предмета|r';
+  print(outputString);
+end;
+
 SS_Log_ModifierRemovedSuccessfully = function(name, player)
   print('|cffFFFF00Модификатор |r"'..name..'" |cffFFFF00успешно удалён с игрока |r'..player);
 end;
 
 SS_Log_MasterForceRoll = function()
-  print('|cffFF0000Следующий бросок по запросу ведущего|r');
+  print('|cff00FF00Следующий бросок по запросу ведущего|r');
+end;
+
+SS_Log_GHIForceRoll = function()
+  print('|cff00FF00Следующий бросок по причние взаимодействия с предметом|r');
 end;
 
 SS_Log_RollResultOfOther = function(name, skill, result, efficency, diceMin, diceMax, diceCount, modifier)

@@ -39,7 +39,9 @@ local actionFire = function(action, data, author, prefix)
     addStatModifier = SS_Listeners_Player_OnAddModifier('stats'),
     addSkillModifier = SS_Listeners_Player_OnAddModifier('skills'),
     dmRemoveTargetModifier = SS_Listeners_Player_OnDMRemoveTargetModifier,
+    ghiRemoveTargetModifier = SS_Listeners_Player_OnGHIRemoveTargetModifier,
     dmForceRollSkill = SS_Listeners_Player_OnDMForceRollSkill,
+    ghiForceRollSkill = SS_Listeners_Player_OnGHIForceRollSkill,
   };
 
   if (not(actions[action])) then

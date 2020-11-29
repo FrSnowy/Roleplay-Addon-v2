@@ -1,6 +1,6 @@
 local category = "Ролевая система от Snowy";
 
-local statModifierMenuPoint = function(name, order)
+local statMenuPoint = function(name, order)
   return {
     name = name,
     order = order,
@@ -23,7 +23,7 @@ local statModifierMenuPoint = function(name, order)
   }
 end;
 
-local skillModifierMenuPoint = function(name, order)
+local skillMenuPoint = function(name, order)
   return {
     name = name,
     order = order,
@@ -142,13 +142,13 @@ table.insert(GHI_ProvidedDynamicActions, {
       defaultValue = "",
       order = 4,
     },
-    stat1 = statModifierMenuPoint('Характеристика 1', 5),
-    stat2 = statModifierMenuPoint('Характеристика 2', 6),
-    stat3 = statModifierMenuPoint('Характеристика 3', 7),
-    stat4 = statModifierMenuPoint('Характеристика 4', 8),
-    stat5 = statModifierMenuPoint('Характеристика 5', 9),
-    stat6 = statModifierMenuPoint('Характеристика 6', 10),
-    stat7 = statModifierMenuPoint('Характеристика 7', 11),
+    stat1 = statMenuPoint('Характеристика 1', 5),
+    stat2 = statMenuPoint('Характеристика 2', 6),
+    stat3 = statMenuPoint('Характеристика 3', 7),
+    stat4 = statMenuPoint('Характеристика 4', 8),
+    stat5 = statMenuPoint('Характеристика 5', 9),
+    stat6 = statMenuPoint('Характеристика 6', 10),
+    stat7 = statMenuPoint('Характеристика 7', 11),
 	},
 });
 
@@ -244,20 +244,131 @@ table.insert(GHI_ProvidedDynamicActions, {
       defaultValue = "",
       order = 4,
 		},
-		stat1 = skillModifierMenuPoint("Навык 1", 5),
-		stat2 = skillModifierMenuPoint("Навык 2", 6),
-		stat3 = skillModifierMenuPoint("Навык 3", 7),
-		stat4 = skillModifierMenuPoint("Навык 4", 8),
-		stat5 = skillModifierMenuPoint("Навык 5", 9),
-		stat6 = skillModifierMenuPoint("Навык 6", 10),
-		stat7 = skillModifierMenuPoint("Навык 7", 11),
-		stat8 = skillModifierMenuPoint("Навык 8", 12),
-		stat9 = skillModifierMenuPoint("Навык 9", 13),
-		stat10 = skillModifierMenuPoint("Навык 10", 14),
-		stat11 = skillModifierMenuPoint("Навык 11", 15),
-		stat12 = skillModifierMenuPoint("Навык 12", 16),
-		stat13 = skillModifierMenuPoint("Навык 13", 17),
-		stat14 = skillModifierMenuPoint("Навык 14", 18),
+		stat1 = skillMenuPoint("Навык 1", 5),
+		stat2 = skillMenuPoint("Навык 2", 6),
+		stat3 = skillMenuPoint("Навык 3", 7),
+		stat4 = skillMenuPoint("Навык 4", 8),
+		stat5 = skillMenuPoint("Навык 5", 9),
+		stat6 = skillMenuPoint("Навык 6", 10),
+		stat7 = skillMenuPoint("Навык 7", 11),
+		stat8 = skillMenuPoint("Навык 8", 12),
+		stat9 = skillMenuPoint("Навык 9", 13),
+		stat10 = skillMenuPoint("Навык 10", 14),
+		stat11 = skillMenuPoint("Навык 11", 15),
+		stat12 = skillMenuPoint("Навык 12", 16),
+		stat13 = skillMenuPoint("Навык 13", 17),
+		stat14 = skillMenuPoint("Навык 14", 18),
+	},
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Удалить модификатор хар-ки",
+	guid = "SS_Remove_StatModifier",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = category,
+	description = "Удалить модификатор хар-ки",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    local id = dyn.GetInput("id");
+    SendAddonMessage('SS-GHItP', '~ghiRemoveTargetModifier|'..id..'+'..'stats'..'~', 'WHISPER', UnitName('player'));
+    dyn.TriggerOutPort("removed")
+	]],
+	ports = {
+		removed = {
+			name = "Модификатор удалён",
+			direction = "out",
+			description = "",
+		},
+	},
+	inputs = {
+		id = {
+			name = "id",
+			description = "Идентификатор модификатора",
+			type = "string",
+      defaultValue = "",
+      order = 1,
+		},
+	},
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Удалить модификатор навыка",
+	guid = "SS_Remove_SkillModifier",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = category,
+	description = "Удалить модификатор навыка",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    local id = dyn.GetInput("id");
+    SendAddonMessage('SS-GHItP', '~ghiRemoveTargetModifier|'..id..'+'..'skills'..'~', 'WHISPER', UnitName('player'));
+    dyn.TriggerOutPort("removed")
+	]],
+	ports = {
+		removed = {
+			name = "Модификатор удалён",
+			direction = "out",
+			description = "",
+		},
+	},
+	inputs = {
+		id = {
+			name = "id",
+			description = "Идентификатор модификатора",
+			type = "string",
+      defaultValue = "",
+      order = 1,
+		},
+	},
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Проверка навыка",
+	guid = "SS_Roll_Dice",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = category,
+	description = "Совершить бросок кубика навыка",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    local stat = dyn.GetInput("stat");
+    local hidden = dyn.GetInput("hidden");
+    if (stat == 'nothing') then
+      print('|cffFF00000Ошибка: не указан навык для проверки|r');
+      return nil;
+    end;
+    SendAddonMessage('SS-GHItP', '~ghiForceRollSkill|'..stat..'+'..tostring(hidden)..'~', 'WHISPER', UnitName('player'));
+    dyn.TriggerOutPort("rolled")
+	]],
+	ports = {
+		rolled = {
+			name = "Бросок совершен",
+			direction = "out",
+			description = "",
+		},
+	},
+	inputs = {
+		stat = skillMenuPoint("Навык", 1),
+		hidden = {
+			name = "Скрытый",
+			description = "Скрытый бросок не отображается у игрока",
+			order = 2,
+			type = "boolean",
+			defaultValue = false,
+		},
 	},
 });
 
