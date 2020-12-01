@@ -71,5 +71,6 @@ View\Player_Controll_Skills.xml
 View\Player_Controll_Modifiers.xml
 View\Dices_Controll_Menu.xml
 View\Modifiers_Controll_Menu.xml
+View\Modifiers_Create_Menu.xml
 View\Invite_Modal.xml
 View\Event_Start_Modal.xml

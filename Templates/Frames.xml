@@ -533,4 +533,14 @@
       </Button>
     </Frames>
   </Frame>
+  <EditBox name="SS_Form_EditBox" virtual = "true" letters="24" autoFocus="false">
+    <Size x="200" y="26" />
+    <TextInsets top="4" bottom="4" left="8" right="8" />
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <EdgeSize>
+        <AbsValue val="12"/>
+      </EdgeSize>
+    </Backdrop>
+    <FontString inherits="ChatFontNormal" />
+  </EditBox>
 </Ui>
