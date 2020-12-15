@@ -108,8 +108,6 @@ SS_Draw_PlayerControll = function(player)
       child:Hide();
     end);
 
-    SS_Player_Controll_Modifiers_Inner_Content:Hide();
-
     local counter = 0;
 
     if (SS_Target_TMPData.modifiers.stats) then
@@ -119,6 +117,8 @@ SS_Draw_PlayerControll = function(player)
               ModifierPanel:SetPoint("TOPLEFT", SS_Player_Controll_Modifiers_Inner_Content, "TOPLEFT", 8, -50 * counter);
               ModifierPanel.modifier = modifier;
               ModifierPanel.modifierID = id;
+              ModifierPanel:Hide();
+              ModifierPanel:Show();
 
         counter = counter + 1;
       end);
@@ -131,6 +131,8 @@ SS_Draw_PlayerControll = function(player)
               ModifierPanel:SetPoint("TOPLEFT", SS_Player_Controll_Modifiers_Inner_Content, "TOPLEFT", 8, -50 * counter);
               ModifierPanel.modifier = modifier;
               ModifierPanel.modifierID = id;
+              ModifierPanel:Hide();
+              ModifierPanel:Show();
 
         counter = counter + 1;
       end);
@@ -145,7 +147,6 @@ SS_Draw_PlayerControll = function(player)
       SS_Player_Controll_Modifiers_Empty:Show();
       SS_Player_Controll_Modifiers_Inner:Hide();
     end;
-    SS_Player_Controll_Modifiers_Inner_Content:Show();
   end;
 
   local drawTargetSkill = function(skill)

@@ -293,3 +293,110 @@ SS_Log_RollResultOfOther = function(name, skill, result, efficency, diceMin, dic
 
   print(output);
 end;
+
+SS_Log_NoID = function()
+  print('|cffFF0000Ошибка: не указан идентификатор|r');
+end;
+
+SS_Log_NoName = function()
+  print('|cffFF0000Ошибка: не указано имя|r');
+end;
+
+SS_Log_NoValue = function()
+  print('|cffFF0000Ошибка: не указано значение|r');
+end;
+
+SS_Log_NoCount = function()
+  print('|cffFF0000Ошибка: не указано количество бросков|r');
+end;
+
+SS_Log_NoStats = function()
+  print('|cffFF0000Ошибка: не выбрано ни одной характеристики или навыка|r');
+end;
+
+SS_Log_NoModifier = function()
+  print('|cffFF0000Ошибка: не выбрано ни одного модификатора|r');
+end;
+
+SS_Log_ModifierAddToPlayer = function(name, stats, value, count, player)
+  local outputString = '|cffFFFF00Игроку |r'..player..'|cffFFFF00 добавлен модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+
+  local statsStr = '';
+  SS_Shared_ForEach(stats)(function(name)
+    statsStr = statsStr..SS_Locale(name)..', ';
+  end);
+  statsStr = statsStr:sub(1, #statsStr - 2);
+
+  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
+  if (tonumber(count) > 0) then
+    outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
+  else
+    outputString = outputString..'|cffFFFF00 до отмены|r';
+  end;
+  print(outputString);
+end;
+
+SS_Log_ModifierAddToGroup = function(name, stats, value, count)
+  local outputString = '|cffFFFF00Активным игрокам добавлен модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+
+  local statsStr = '';
+  SS_Shared_ForEach(stats)(function(name)
+    statsStr = statsStr..SS_Locale(name)..', ';
+  end);
+  statsStr = statsStr:sub(1, #statsStr - 2);
+
+  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
+  if (tonumber(count) > 0) then
+    outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
+  else
+    outputString = outputString..'|cffFFFF00 до отмены|r';
+  end;
+  print(outputString);
+end;
+
+
+SS_Log_ModifierRemovedFromPlayer = function(name, stats, value, player)
+  local outputString = '|cffFFFF00Модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+
+  local statsStr = '';
+  SS_Shared_ForEach(stats)(function(name)
+    statsStr = statsStr..SS_Locale(name)..', ';
+  end);
+  statsStr = statsStr:sub(1, #statsStr - 2);
+
+  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']|cffFFFF00 снят с игрока |r'..player;
+  print(outputString);
+end;
+
+SS_Log_ModifierRemovedFromGroup = function(name, stats, value)
+  local outputString = '|cffFFFF00Модификатор |r"'..name..'" ';
+  if (tonumber(value) >= 0) then
+    outputString = outputString..'|cff00FF00(+'..value..')';
+  else
+    outputString = outputString..'|cffFF0000('..value..')';
+  end;
+
+  local statsStr = '';
+  SS_Shared_ForEach(stats)(function(name)
+    statsStr = statsStr..SS_Locale(name)..', ';
+  end);
+  statsStr = statsStr:sub(1, #statsStr - 2);
+
+  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']|cffFFFF00 удален у всех активных игроков|r';
+  print(outputString);
+end;

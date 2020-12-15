@@ -140,6 +140,48 @@ SS_DMtP_DisplayInspectInfo = function(player)
   end)
 end;
 
+SS_DMtP_AddModifier = function(modifierType, modifierID)
+  if (not(SS_User.settings.currentPlot)) then return nil; end;
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(modifierType) or not(modifierID)) then
+    SS_Log_NoModifier();
+    return;
+  end;
+
+  local modifier = SS_LeadingPlots_Current().modifiers[modifierType][modifierID];
+  if (not(modifier)) then return; end;
+
+  local statsAsStr = '';
+  for i = 1, #modifier.stats do
+    statsAsStr = statsAsStr..modifier.stats[i]..'}';
+  end;
+  statsAsStr = statsAsStr:sub(1, #statsAsStr - 1);
+
+  local action = nil;
+  if (modifierType == 'stats') then
+    action = 'addStatModifier'
+  else
+    action = 'addSkillModifier'
+  end;
+
+  local data =  modifierID..'+'..modifier.name..'+'..statsAsStr..'+'..modifier.value..'+'..modifier.count;
+
+  if (SS_ModifierCreate_TMPData.target == 'player') then
+    if (not(UnitName("target"))) then
+      SS_Log_NoTarget();
+      return nil;
+    end;
+
+    SS_DMtP_Direct(action, data, UnitName('target'));
+    SS_Log_ModifierAddToPlayer(modifier.name, modifier.stats, modifier.value, modifier.count, UnitName('target'));
+  end;
+
+  if (SS_ModifierCreate_TMPData.target == 'group') then
+    SS_DMtP_Every(action, data)(SS_User.settings.currentPlot);
+    SS_Log_ModifierAddToGroup(modifier.name, modifier.stats, modifier.value, modifier.count);
+  end;
+end;
+
 SS_DMtP_RemoveInspectPlayerModifier = function(modifierType, modifierID)
   if (not(SS_LeadingPlots_Current())) then return nil; end;
   if (not(SS_Target_TMPData) or not(SS_Target_TMPData.name)) then return nil; end;
@@ -161,6 +203,37 @@ SS_DMtP_RemoveTargetModifier = function(modifierType, modifierID, player)
 
   local dataStr = SS_User.settings.currentPlot..'+'..modifierType..'+'..modifierID;
   SS_DMtP_Direct('dmRemoveTargetModifier', dataStr, player);
+end;
+
+
+SS_DMtP_RemoveModifier = function(modifierType, modifierID)
+  if (not(SS_User.settings.currentPlot)) then return nil; end;
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(modifierType) or not(modifierID)) then
+    SS_Log_NoModifier();
+    return;
+  end;
+
+  local modifier = SS_LeadingPlots_Current().modifiers[modifierType][modifierID];
+  if (not(modifier)) then return; end;
+
+  local action = 'dmRemoveTargetModifier';
+  local dataStr = SS_User.settings.currentPlot..'+'..modifierType..'+'..modifierID;
+
+  if (SS_ModifierCreate_TMPData.target == 'player') then
+    if (not(UnitName("target"))) then
+      SS_Log_NoTarget();
+      return nil;
+    end;
+
+    SS_DMtP_Direct(action, dataStr, UnitName('target'));
+    SS_Log_ModifierRemovedFromPlayer(modifier.name, modifier.stats, modifier.value, UnitName('target'))
+  end;
+
+  if (SS_ModifierCreate_TMPData.target == 'group') then
+    SS_DMtP_Every(action, dataStr)(SS_User.settings.currentPlot);
+    SS_Log_ModifierRemovedFromGroup(modifier.name, modifier.stats, modifier.value);
+  end;
 end;
 
 SS_DMtP_ForceRollInspectTargetSkill = function(skillName, visibility)

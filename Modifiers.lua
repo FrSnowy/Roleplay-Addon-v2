@@ -4,7 +4,7 @@ SS_Modifiers_GetList = function()
       --[[
         id = {
           name = 'Бонус ништяка',
-          stat = 'power',
+          stats = { 'power' },
           value = 1,
           count = 2,
         },
@@ -14,7 +14,7 @@ SS_Modifiers_GetList = function()
       --[[
         id = {
           name = 'Бонус ништяка',
-          stat = 'range',
+          stats = { 'range' },
           value = 1,
           count = 2,
         },

@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_ModifiersControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="false" frameStrata="DIALOG" frameLevel="3">
+  <Frame name="SS_ModifiersControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="DIALOG" frameLevel="3">
     <Scripts>
       <OnLoad>
         self:SetSize(430, 240);
@@ -7,7 +7,7 @@
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
         self:RegisterForDrag("LeftButton");
         self.closeBtn:SetScript("OnClick", function()
-          self:Hide();
+          SS_ModifierControll_Hide()
         end);
       </OnLoad>
       <OnDragStart>self:StartMoving();</OnDragStart>
@@ -17,38 +17,113 @@
       <Anchor point="CENTER" />
     </Anchors>
     <Layers>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" name = "$parent_Empty" justifyH="LEFT" justifyV="TOP" maxLines="3" wordwrap="true" text="Нет сохраненных модификаторов">
+          <Color r="1" g="1" b="1" a="1"/>
+          <Size x = "120" y = "40" />
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-40" />
+            <Anchor point="RIGHT" x="-280" y="0" />
+          </Anchors>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Применить к:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="235" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Выбранная цель">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="263" y="-70" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Вся группа">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="263" y="-95" />
+          </Anchors>
+        </FontString>
+      </Layer>
     </Layers>
     <Frames>
+      <CheckButton name = "$parent_Check_Target_Player" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnClick>SS_ModifierControll_SelectTarget('player')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="235" y="-63"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Target_Group" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>SS_ModifierControll_SelectTarget('group')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="235" y="-88"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <Button name="$parent_Add_Button" inherits="OptionsButtonTemplate" text="Добавить">
+        <Scripts>
+          <OnClick>
+            SS_DMtP_AddModifier(SS_ModifierCreate_TMPData.selectedModifierType, SS_ModifierCreate_TMPData.selectedID)
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="235" y="-120"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Remove_Button" inherits="OptionsButtonTemplate" text="Снять">
+        <Scripts>
+          <OnClick>
+            SS_DMtP_RemoveModifier(SS_ModifierCreate_TMPData.selectedModifierType, SS_ModifierCreate_TMPData.selectedID)
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="328" y="-120"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+        </Scripts>
+      </Button>
       <ScrollFrame name="$parent_Scroll" inherits="UIPanelScrollFrameTemplate">
         <Anchors>
           <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="20" y="-45"/>
-          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="20" y="55"/>
-          <Anchor point="RIGHT" relativePoint="TOPLEFT" relativeTo="$parent" x="160"/>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="20" y="20"/>
+          <Anchor point="RIGHT" relativePoint="TOPLEFT" relativeTo="$parent" x="200"/>
         </Anchors>
         <ScrollChild>
           <Frame name="$parent_Content">
             <Size>
-              <AbsDimension x="180" y="1" />
+              <AbsDimension x="160" y="1" />
             </Size>
-            <Layers>
-              <Layer>
-                <FontString font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP" maxLines="3" wordwrap="true" text="Нет сохраненных модификаторов">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <Size x = "160" y = "40" />
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="0" y="0" />
-                    <Anchor point="TOPRIGHT" x="0" y="0" />
-                  </Anchors>
-                </FontString>
-              </Layer>
-            </Layers>
             <Frames>
             </Frames>
           </Frame>
         </ScrollChild>
       </ScrollFrame>
-      <Button name="$parent_Submit_Button" inherits="OptionsButtonTemplate" text="+ Создать">
+      <Button name="$parent_Create_Button" inherits="OptionsButtonTemplate" text="+ Создать">
         <Scripts>
           <OnClick>
             if (SS_ModifiersCreate_Menu:IsVisible()) then
@@ -60,20 +135,25 @@
             end;
           </OnClick>
         </Scripts>
-        <Size x = "80" y = "26" />
+        <Size x = "90" y = "26" />
         <Anchors>
           <Anchor point="BOTTOMLEFT">
-            <Offset x="20" y="20"/>
+            <Offset x="235" y="20"/>
           </Anchor> 
         </Anchors>
         <Scripts>
         </Scripts>
       </Button>
-      <Button name="$parent_Reset_Button" inherits="OptionsButtonTemplate" text="Очистить">
-        <Size x = "80" y = "26" />
+      <Button name="$parent_Clear_Button" inherits="OptionsButtonTemplate" text="Очистить">
+        <Scripts>
+          <OnClick>
+            SS_ModifierCreate_Clear();
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "26" />
         <Anchors>
           <Anchor point="BOTTOMLEFT">
-            <Offset x="105" y="20"/>
+            <Offset x="328" y="20"/>
           </Anchor> 
         </Anchors>
         <Scripts>

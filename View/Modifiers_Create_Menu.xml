@@ -8,7 +8,7 @@
         self:RegisterForDrag("LeftButton");
         self.closeBtn:SetScript("OnClick", function()
           self:Hide();
-          SS_ModifiersControll_Menu_Submit_Button:SetText("+ Создать");
+          SS_ModifiersControll_Menu_Create_Button:SetText("+ Создать");
         end);
       </OnLoad>
     </Scripts>
@@ -68,59 +68,6 @@
                     <Anchor point="TOPLEFT" x="4" y="0" />
                   </Anchors>
                 </FontString>
-              </Layer>
-              <Layer>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Мощь">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-25" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Точность">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-50" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Мудрость">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-75" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Мораль">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-100" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Эмпатия">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-125" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Подвижность">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-150" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Аккуратность">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-175" />
-                  </Anchors>
-                </FontString>
-              </Layer>
-              <Layer>
                 <FontString font="Fonts\FRIZQT__.TTF" text="Навыки:">
                   <Color r="1" g="1" b="1" a="1"/>
                   <FontHeight val="12"/>
@@ -129,308 +76,187 @@
                   </Anchors>
                 </FontString>
               </Layer>
-              <Layer>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Ближний бой">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-235" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Дальний бой">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-260" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Чародейство">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-285" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Вера">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-310" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Выступление">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-335" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Избегание">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-360" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Ловкость рук">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-385" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Атлетика">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-410" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Внимательность">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-435" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Знание">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-460" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Самоконтроль">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-485" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Суждение">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-510" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Акробатика">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-535" />
-                  </Anchors>
-                </FontString>
-                <FontString font="Fonts\FRIZQT__.TTF" text = "Скрытность">
-                  <Color r="1" g="1" b="1" a="1"/>
-                  <FontHeight val="12"/>
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="30" y="-560" />
-                  </Anchors>
-                </FontString>
-              </Layer>
             </Layers>
             <Frames>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              <Frame parentKey = 'power' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'power'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-18"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-25"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'accuracy' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'accuracy'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-43"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-50"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'wisdom' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'wisdom'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-68"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-75"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'morale' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'morale'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-93"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-100"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'empathy' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'empathy'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-117"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-125"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'mobility' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'mobility'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-143"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-150"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'precision' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'precision'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-168"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-175"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'melee' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'melee'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-228"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-235"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'range' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'range'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-253"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-260"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'magic' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'magic'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-278"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-285"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'religion' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'religion'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-303"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-310"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'perfomance' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'perfomance'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-328"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-335"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'missing' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'missing'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-353"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-360"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'hands' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'hands'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-378"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-385"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'athletics' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'athletics'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-403"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-410"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'observation' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'observation'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-428"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-435"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'knowledge' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'knowledge'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-453"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-460"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'controll' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'controll'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-478"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-485"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'judgment' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'judgment'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-503"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-510"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'acrobats' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'acrobats'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-528"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-535"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
-              <CheckButton inherits="OptionsCheckButtonTemplate" checked="false">
+              </Frame>
+              <Frame parentKey = 'stealth' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'stealth'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
-                    <Offset>
-                      <AbsDimension x="0" y="-553"></AbsDimension>
-                    </Offset>
+                    <Offset><AbsDimension x="0" y="-560"></AbsDimension></Offset>
                   </Anchor>
                 </Anchors>
-              </CheckButton>
+              </Frame>
             </Frames>
           </Frame>
         </ScrollChild>
       </ScrollFrame>
-      <EditBox name="$parent_ID_Input" inherits="SS_Form_EditBox">
+      <EditBox parentKey = "id" inherits="SS_Form_EditBox">
         <Scripts>
           <OnEscapePressed>
             self:ClearFocus();
           </OnEscapePressed>
           <OnTabPressed>
-            SS_ModifiersCreate_Menu_Name_Input:SetFocus();
+            SS_ModifiersCreate_Menu.name:SetFocus();
           </OnTabPressed>
         </Scripts>
         <Anchors>
@@ -439,13 +265,13 @@
           </Anchor>
         </Anchors>
       </EditBox>
-      <EditBox name="$parent_Name_Input" inherits="SS_Form_EditBox">
+      <EditBox parentKey = "name" inherits="SS_Form_EditBox">
         <Scripts>
           <OnEscapePressed>
             self:ClearFocus();
           </OnEscapePressed>
           <OnTabPressed>
-            SS_ModifiersCreate_Menu_Value_Input:SetFocus();
+            SS_ModifiersCreate_Menu.value:SetFocus();
           </OnTabPressed>
         </Scripts>
         <Anchors>
@@ -454,7 +280,7 @@
           </Anchor>
         </Anchors>
       </EditBox>
-      <EditBox name="$parent_Value_Input" inherits="SS_Form_EditBox">
+      <EditBox parentKey = "value" inherits="SS_Form_EditBox">
         <Scripts>
           <OnShow>
             self:SetNumeric();
@@ -463,7 +289,7 @@
             self:ClearFocus();
           </OnEscapePressed>
           <OnTabPressed>
-            SS_ModifiersCreate_Menu_Count_Input:SetFocus();
+            SS_ModifiersCreate_Menu.count:SetFocus();
           </OnTabPressed>
         </Scripts>
         <Size x="90" y="26" />
@@ -473,7 +299,7 @@
           </Anchor>
         </Anchors>
       </EditBox>
-      <EditBox name="$parent_Count_Input" inherits="SS_Form_EditBox">
+      <EditBox parentKey = "count" inherits="SS_Form_EditBox">
         <Scripts>
           <OnShow>
             self:SetNumeric();
@@ -482,7 +308,7 @@
             self:ClearFocus();
           </OnEscapePressed>
           <OnTabPressed>
-            SS_ModifiersCreate_Menu_ID_Input:SetFocus();
+            SS_ModifiersCreate_Menu.id:SetFocus();
           </OnTabPressed>
         </Scripts>
         <Size x="90" y="26" />
@@ -500,6 +326,9 @@
           </Anchor> 
         </Anchors>
         <Scripts>
+          <OnClick>
+            SS_ModifierCreate_Create();
+          </OnClick>
         </Scripts>
       </Button>
     </Frames>

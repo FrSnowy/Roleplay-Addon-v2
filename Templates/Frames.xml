@@ -461,6 +461,7 @@
           SS_Shared_ForEach(modifier.stats)(function(stat)
             GameTooltip:AddLine(SS_Locale(stat));
           end);
+          GameTooltip:AddLine('ID: '..self.modifierID);
           GameTooltip:Show()        
         end);
 
@@ -543,4 +544,47 @@
     </Backdrop>
     <FontString inherits="ChatFontNormal" />
   </EditBox>
+  <Frame name = "SS_CreateModifier_SelectCheckbox" virtual = "true">
+    <Size>
+      <AbsDimension x="180" y="1" />
+    </Size>
+    <Scripts>
+      <OnShow>
+        self.name:SetText(SS_Locale(self.stat)); 
+        self.check:SetScript("OnClick", function()
+          if (self.check:GetChecked()) then
+            SS_ModifierCreate_Select(self.stat);
+          else
+            SS_ModifierCreate_Unselect(self.stat);
+          end;
+        end);
+      </OnShow>
+    </Scripts>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "name" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="30" y="0" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <CheckButton parentKey="check" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="0" y="6"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+    </Frames>
+  </Frame>
 </Ui>

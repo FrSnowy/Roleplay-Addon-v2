@@ -50,7 +50,14 @@
           </Anchor> 
         </Anchors>
       </Button>
-      <Button name="$parent_Modifiers_Button" inherits="OptionsButtonTemplate" text="+ Модифик.">
+      <Button name="$parent_ModifiersControll_Button" inherits="OptionsButtonTemplate" text="+ Модифик.">
+        <Scripts>
+          <OnClick>
+            if (SS_ModifiersControll_Menu:IsVisible()) then SS_ModifierControll_Hide();
+            else SS_ModifierControll_Show();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "120" y = "32" />
         <Anchors>
           <Anchor point="TOPLEFT">
