@@ -5,12 +5,14 @@ if (GHI_MiscData and not(GHI_MiscData["WhiteList"])) then
 end;
 
 SS_Shared_ForEach({
+  'SS_Plots_Current',
   'SS_Roll',
   'SS_Modifiers_Register',
   'SS_Log_ModifierAdded',
   'SS_Log_ModifierRemovedByGHI',
   'SS_Modifiers_Get',
   'SS_Modifiers_Remove',
+  'SS_PtDM_PlayerGetModifier',
 })(function(el)
   local isKeyIncluded = SS_Shared_Includes(GHI_MiscData["WhiteList"])(function(v)
     return v == el;
@@ -88,6 +90,8 @@ table.insert(GHI_ProvidedDynamicActions, {
 	setupOnlyOnce = false,
 	script =
 	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+  
     local id = dyn.GetInput("id");
     local name = dyn.GetInput("name");
     local value = dyn.GetInput("value");
@@ -125,8 +129,6 @@ table.insert(GHI_ProvidedDynamicActions, {
       value = value,
       count = count,
     });
-    
-    SS_Log_ModifierAdded(name, filteredStats, value, count);
     dyn.TriggerOutPort("added")
 	]],
 	ports = {
@@ -188,6 +190,8 @@ table.insert(GHI_ProvidedDynamicActions, {
 	setupOnlyOnce = false,
 	script =
 	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
     local id = dyn.GetInput("id");
     local name = dyn.GetInput("name");
     local value = dyn.GetInput("value");
@@ -229,8 +233,6 @@ table.insert(GHI_ProvidedDynamicActions, {
       value = value,
       count = count,
     });
-    
-    SS_Log_ModifierAdded(name, filteredStats, value, count);
     dyn.TriggerOutPort("added")
 	]],
 	ports = {
@@ -299,6 +301,8 @@ table.insert(GHI_ProvidedDynamicActions, {
 	setupOnlyOnce = false,
 	script =
 	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
     local id = dyn.GetInput("id");
     local mod = SS_Modifiers_Get('stats', id);
     if (mod) then
@@ -338,6 +342,8 @@ table.insert(GHI_ProvidedDynamicActions, {
 	setupOnlyOnce = false,
 	script =
 	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
     local id = dyn.GetInput("id");
     local mod = SS_Modifiers_Get('skills', id);
     if (mod) then
@@ -377,6 +383,8 @@ table.insert(GHI_ProvidedDynamicActions, {
 	setupOnlyOnce = false,
 	script =
 	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
     local stat = dyn.GetInput("stat");
     local successOn = dyn.GetInput("successOn");
     local hidden = dyn.GetInput("hidden");

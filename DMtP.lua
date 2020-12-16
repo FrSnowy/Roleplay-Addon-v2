@@ -173,12 +173,10 @@ SS_DMtP_AddModifier = function(modifierType, modifierID)
     end;
 
     SS_DMtP_Direct(action, data, UnitName('target'));
-    SS_Log_ModifierAddToPlayer(modifier.name, modifier.stats, modifier.value, modifier.count, UnitName('target'));
   end;
 
   if (SS_ModifierCreate_TMPData.target == 'group') then
     SS_DMtP_Every(action, data)(SS_User.settings.currentPlot);
-    SS_Log_ModifierAddToGroup(modifier.name, modifier.stats, modifier.value, modifier.count);
   end;
 end;
 
@@ -227,12 +225,10 @@ SS_DMtP_RemoveModifier = function(modifierType, modifierID)
     end;
 
     SS_DMtP_Direct(action, dataStr, UnitName('target'));
-    SS_Log_ModifierRemovedFromPlayer(modifier.name, modifier.stats, modifier.value, UnitName('target'))
   end;
 
   if (SS_ModifierCreate_TMPData.target == 'group') then
     SS_DMtP_Every(action, dataStr)(SS_User.settings.currentPlot);
-    SS_Log_ModifierRemovedFromGroup(modifier.name, modifier.stats, modifier.value);
   end;
 end;
 

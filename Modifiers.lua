@@ -122,6 +122,10 @@ SS_Modifiers_Register = function(modifierType, modifier)
   SS_Modifiers_DrawStatModifierInfo(modifier.stats);
   SS_Modifiers_DrawSkillModifierInfo(modifier.stats);
   SS_PtDM_UpdatePlayerInfo(SS_Plots_Current().author);
+  SS_PtDM_PlayerGetModifier();
+  
+  SS_Log_ModifierAdded(modifier.name, modifier.stats, modifier.value, modifier.count);
+  SS_PtDM_PlayerGetModifier(SS_Modifiers_Get(modifierType, modifier.id), SS_Plots_Current().author);
 end;
 
 SS_Modifiers_ReadModifiersValue = function(modifierType, modifiersList)
@@ -215,13 +219,13 @@ SS_Modifiers_Remove = function(modifierType)
     if (not(modifierID) or not(SS_Plots_Current().modifiers[modifierType][modifierID])) then return nil; end;
     local stats = SS_Plots_Current().modifiers[modifierType][modifierID].stats;
 
+    SS_PtDM_PlayerLooseModifier(SS_Plots_Current().modifiers[modifierType][modifierID], SS_Plots_Current().author);
     SS_Plots_Current().modifiers[modifierType][modifierID] = nil;
     SS_Modifiers_DrawStatModifierInfo(stats);
     SS_Modifiers_DrawSkillModifierInfo(stats);
 
     SS_Params_DrawHealth();
     SS_Params_DrawBarrier();
-    SS_PtDM_UpdatePlayerInfo(SS_Plots_Current().author);
   end;
 end;
 

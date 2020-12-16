@@ -190,42 +190,50 @@ end;
 
 SS_Log_ModifierAdded = function(name, stats, value, count)
   local outputString = '|cffFFFF00Добавлен модификатор |r"'..name..'" ';
-  if (tonumber(value) >= 0) then
-    outputString = outputString..'|cff00FF00(+'..value..')';
-  else
-    outputString = outputString..'|cffFF0000('..value..')';
+
+  if (SS_User.settings.displayModifierInfo) then
+    if (tonumber(value) >= 0) then
+      outputString = outputString..'|cff00FF00(+'..value..')';
+    else
+      outputString = outputString..'|cffFF0000('..value..')';
+    end;
+
+    local statsStr = '';
+    SS_Shared_ForEach(stats)(function(name)
+      statsStr = statsStr..SS_Locale(name)..', ';
+    end);
+    statsStr = statsStr:sub(1, #statsStr - 2);
+
+    outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
+    if (tonumber(count) > 0) then
+      outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
+    else
+      outputString = outputString..'|cffFFFF00 до отмены|r';
+    end;
   end;
 
-  local statsStr = '';
-  SS_Shared_ForEach(stats)(function(name)
-    statsStr = statsStr..SS_Locale(name)..', ';
-  end);
-  statsStr = statsStr:sub(1, #statsStr - 2);
-
-  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
-  if (tonumber(count) > 0) then
-    outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
-  else
-    outputString = outputString..'|cffFFFF00 до отмены|r';
-  end;
   print(outputString);
 end;
 
 SS_Log_ModifierRemoved = function(name, stats, value)
   local outputString = '|cffFFFF00Потерян модификатор |r"'..name..'" ';
-  if (tonumber(value) >= 0) then
-    outputString = outputString..'|cff00FF00(+'..value..')';
-  else
-    outputString = outputString..'|cffFF0000('..value..')';
+  
+  if (SS_User.settings.displayModifierInfo) then
+    if (tonumber(value) >= 0) then
+      outputString = outputString..'|cff00FF00(+'..value..')';
+    else
+      outputString = outputString..'|cffFF0000('..value..')';
+    end;
+
+    local statsStr = '';
+    SS_Shared_ForEach(stats)(function(name)
+      statsStr = statsStr..SS_Locale(name)..', ';
+    end);
+    statsStr = statsStr:sub(1, #statsStr - 2);
+
+    outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
   end;
 
-  local statsStr = '';
-  SS_Shared_ForEach(stats)(function(name)
-    statsStr = statsStr..SS_Locale(name)..', ';
-  end);
-  statsStr = statsStr:sub(1, #statsStr - 2);
-
-  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
   print(outputString);
 end;
 
@@ -251,10 +259,6 @@ SS_Log_ModifierRemovedByGHI = function(name, value)
 
   outputString = outputString..' |cffFF0000потерян|r |cffFFFF00после использования предмета|r';
   print(outputString);
-end;
-
-SS_Log_ModifierRemovedSuccessfully = function(name, player)
-  print('|cffFFFF00Модификатор |r"'..name..'" |cffFFFF00успешно удалён с игрока |r'..player);
 end;
 
 SS_Log_MasterForceRoll = function()
@@ -307,7 +311,7 @@ SS_Log_RollResultOfOther = function(name, skill, result, efficency, diceMin, dic
     
     output = output..' ('..SS_Locale(skill)..').';
     if (efficency > 1) then
-      output = output..'|cffFFFF00 Эффективность: |r'..efficencyResult;
+      output = output..'|cffFFFF00 Эффективность: |r'..efficency;
     end;
   end;
 
@@ -339,85 +343,44 @@ SS_Log_NoModifier = function()
   print('|cffFF0000Ошибка: не выбрано ни одного модификатора|r');
 end;
 
-SS_Log_ModifierAddToPlayer = function(name, stats, value, count, player)
-  local outputString = '|cffFFFF00Игроку |r'..player..'|cffFFFF00 добавлен модификатор |r"'..name..'" ';
-  if (tonumber(value) >= 0) then
-    outputString = outputString..'|cff00FF00(+'..value..')';
-  else
-    outputString = outputString..'|cffFF0000('..value..')';
-  end;
+SS_Log_PlayerGetModifier = function(name, value, stats, player)
+  local outputString = player..'|cffFFFF00 получил модификатор |r"'..name..'" ';
+  
+  if (SS_User.settings.displayModifierInfo) then
+    if (tonumber(value) >= 0) then
+      outputString = outputString..'|cff00FF00(+'..value..')';
+    else
+      outputString = outputString..'|cffFF0000('..value..')';
+    end;
 
-  local statsStr = '';
-  SS_Shared_ForEach(stats)(function(name)
-    statsStr = statsStr..SS_Locale(name)..', ';
-  end);
-  statsStr = statsStr:sub(1, #statsStr - 2);
+    local statsStr = '';
+    SS_Shared_ForEach(stats)(function(name)
+      statsStr = statsStr..SS_Locale(name)..', ';
+    end);
+    statsStr = statsStr:sub(1, #statsStr - 2);
 
-  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
-  if (tonumber(count) > 0) then
-    outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
-  else
-    outputString = outputString..'|cffFFFF00 до отмены|r';
+    outputString = outputString..'|cffFFFF00 для |r['..statsStr..']|cffFFFF00|r';
   end;
   print(outputString);
 end;
 
-SS_Log_ModifierAddToGroup = function(name, stats, value, count)
-  local outputString = '|cffFFFF00Активным игрокам добавлен модификатор |r"'..name..'" ';
-  if (tonumber(value) >= 0) then
-    outputString = outputString..'|cff00FF00(+'..value..')';
-  else
-    outputString = outputString..'|cffFF0000('..value..')';
+SS_Log_PlayerLooseModifier = function(name, value, stats, player)
+  local outputString = player..'|cffFFFF00 потерял модификатор |r"'..name..'" ';
+  
+  if (SS_User.settings.displayModifierInfo) then
+    if (tonumber(value) >= 0) then
+      outputString = outputString..'|cff00FF00(+'..value..')';
+    else
+      outputString = outputString..'|cffFF0000('..value..')';
+    end;
+
+    local statsStr = '';
+    SS_Shared_ForEach(stats)(function(name)
+      statsStr = statsStr..SS_Locale(name)..', ';
+    end);
+    statsStr = statsStr:sub(1, #statsStr - 2);
+
+    outputString = outputString..'|cffFFFF00 для |r['..statsStr..']|cffFFFF00|r';
   end;
-
-  local statsStr = '';
-  SS_Shared_ForEach(stats)(function(name)
-    statsStr = statsStr..SS_Locale(name)..', ';
-  end);
-  statsStr = statsStr:sub(1, #statsStr - 2);
-
-  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']';
-  if (tonumber(count) > 0) then
-    outputString = outputString..'|cffFFFF00 на |r'..count..'|cffFFFF00 ходов|r';
-  else
-    outputString = outputString..'|cffFFFF00 до отмены|r';
-  end;
-  print(outputString);
-end;
-
-
-SS_Log_ModifierRemovedFromPlayer = function(name, stats, value, player)
-  local outputString = '|cffFFFF00Модификатор |r"'..name..'" ';
-  if (tonumber(value) >= 0) then
-    outputString = outputString..'|cff00FF00(+'..value..')';
-  else
-    outputString = outputString..'|cffFF0000('..value..')';
-  end;
-
-  local statsStr = '';
-  SS_Shared_ForEach(stats)(function(name)
-    statsStr = statsStr..SS_Locale(name)..', ';
-  end);
-  statsStr = statsStr:sub(1, #statsStr - 2);
-
-  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']|cffFFFF00 снят с игрока |r'..player;
-  print(outputString);
-end;
-
-SS_Log_ModifierRemovedFromGroup = function(name, stats, value)
-  local outputString = '|cffFFFF00Модификатор |r"'..name..'" ';
-  if (tonumber(value) >= 0) then
-    outputString = outputString..'|cff00FF00(+'..value..')';
-  else
-    outputString = outputString..'|cffFF0000('..value..')';
-  end;
-
-  local statsStr = '';
-  SS_Shared_ForEach(stats)(function(name)
-    statsStr = statsStr..SS_Locale(name)..', ';
-  end);
-  statsStr = statsStr:sub(1, #statsStr - 2);
-
-  outputString = outputString..'|cffFFFF00 для |r['..statsStr..']|cffFFFF00 удален у всех активных игроков|r';
   print(outputString);
 end;

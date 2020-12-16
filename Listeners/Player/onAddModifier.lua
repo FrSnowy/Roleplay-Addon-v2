@@ -22,7 +22,5 @@ SS_Listeners_Player_OnAddModifier = function(modifierType)
       value = value,
       count = count,
     });
-  
-    SS_Log_ModifierAdded(name, stats, value, count);
   end;
 end;

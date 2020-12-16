@@ -47,6 +47,13 @@
             <Anchor point="TOPLEFT" x="40" y="-106" />
           </Anchors>
         </FontString>
+        <FontString name="$parent_Settings_Invites" font="Fonts\FRIZQT__.TTF" text="Подробные модификаторы">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="40" y="-136" />
+          </Anchors>
+        </FontString>
         <FontString name="$parent_Settings_PlotType" font="Fonts\FRIZQT__.TTF" text="Все">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
@@ -96,6 +103,24 @@
           <Anchor point="TOPLEFT">
             <Offset>
               <AbsDimension x="14" y="-100"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name="$parent_Settings_ModifiersCheck" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnShow>
+            self:SetChecked(SS_User.settings.displayModifierInfo);
+          </OnShow>
+          <OnClick>
+            SS_User.settings.displayModifierInfo = not SS_User.settings.displayModifierInfo;
+            self:SetChecked(SS_User.settings.displayModifierInfo);
+          </OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="14" y="-130"></AbsDimension>
             </Offset>
           </Anchor>
         </Anchors>

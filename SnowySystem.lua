@@ -7,6 +7,7 @@ SS_ApplicationLoad = function()
       selectedPlot = nil,
       acceptInvites = true,
       displayDiceInfo = false,
+      displayModifierInfo = true,
     },
   };
   if (SS_User.plots == nil) then SS_User.plots = { }; end;
