@@ -225,6 +225,15 @@ SS_Modifiers_Remove = function(modifierType)
   end;
 end;
 
+SS_Modifiers_Get = function(modifierType, modifierID)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (not(SS_Plots_Current().modifiers)) then return nil end;
+  if (not(SS_Plots_Current().modifiers[modifierType])) then return nil; end;
+  if (not(SS_Plots_Current().modifiers[modifierType][modifierID])) then return nil; end;
+
+  return SS_Plots_Current().modifiers[modifierType][modifierID];
+end;
+
 SS_Modifiers_Clear = function()
   SS_Plots_Current().modifiers = SS_Modifiers_GetList();
 end;

@@ -127,4 +127,6 @@ SS_Roll = function(skillName, visibility)
   
   SS_Modifiers_Fire('stats')(SS_Skills_GetStatOf(skillName));
   SS_Modifiers_Fire('skills')(skillName);
+
+  return skillResult;
 end;

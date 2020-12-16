@@ -5,7 +5,6 @@
 ## SavedVariablesPerCharacter: SS_User
 Templates\Frames.xml
 Templates\Buttons.xml
-GHI.lua
 Locale.lua
 Log.lua
 Shared.lua
@@ -39,7 +38,6 @@ Listeners\DM\onKickAllright.lua
 Listeners\DM\onPlayerJoinToEvent.lua
 Listeners\DM\onPlayerSendParams.lua
 Listeners\DM\onSendInspectInfo.lua
-Listeners\DM\onPlayerModifierRemoved.lua
 Listeners\DM\onRollResult.lua
 Listeners\Player\onIsOnline.lua
 Listeners\Player\onIAmOnline.lua
@@ -54,7 +52,6 @@ Listeners\Player\onAddModifier.lua
 Listeners\Player\onDMRemoveTargetModifier.lua
 Listeners\Player\onGHIRemoveTargetModifier.lua
 Listeners\Player\onDMForceRollSkill.lua
-Listeners\Player\onGHIForceRollSkill.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml
@@ -72,5 +69,7 @@ View\Player_Controll_Modifiers.xml
 View\Dices_Controll_Menu.xml
 View\Modifiers_Controll_Menu.xml
 View\Modifiers_Create_Menu.xml
+View\Battle_Controll_Menu.xml
 View\Invite_Modal.xml
 View\Event_Start_Modal.xml
+GHI.lua

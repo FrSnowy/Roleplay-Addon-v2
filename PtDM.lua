@@ -93,11 +93,6 @@ SS_PtDM_InspectInfo = function(actionType, plotAuthor)
   SS_PtDM_Direct('sendInspectInfo', SS_User.settings.currentPlot.."+"..paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString.."+"..statModifiersStr.."+"..skillModifiersStr.."+"..actionType, plotAuthor);
 end;
 
-SS_PtDM_ModifierRemoved = function(params, plotAuthor)
-  local paramsStr = params.modifierType.."+"..params.modifierID;
-  SS_PtDM_Direct('playerModifierRemoved', paramsStr, plotAuthor);
-end;
-
 SS_PtA_RollResult = function(params)
   local paramStr = params.skill.."+"..params.skillResult.."+"..params.efficencyResult.."+"..params.dices.from.."+"..params.dices.to.."+"..params.diceCount.."+"..params.modifier;
   SS_PtDM_SayAll('rollResult', UnitName("player").."+"..paramStr);

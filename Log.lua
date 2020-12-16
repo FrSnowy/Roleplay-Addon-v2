@@ -267,31 +267,52 @@ end;
 
 SS_Log_RollResultOfOther = function(name, skill, result, efficency, diceMin, diceMax, diceCount, modifier)
   local diceAverage = (SS_Shared_NumFromStr(diceMin) + SS_Shared_NumFromStr(diceMax)) / 2;
-  local output = '|cffFFFF00'..name..', проверка навыка: |r'..SS_Locale(skill)..".|cffFFFF00 Результат:|r";
-
-  output = output..' '..diceCount..'d('..diceMin..'-'..diceMax..')';
-
-  modifier = SS_Shared_NumFromStr(modifier);
-  if (modifier > 0) then
-    output = output..'|cff00FF00+'..modifier..'|r';
-  elseif (modifier < 0) then
-    output = output..'|cffFF0000'..modifier..'|r';
-  end;
-
-  output = output..'|cffFFFF00 -> |r';
-
   result = SS_Shared_NumFromStr(result);
-  if (result > diceAverage + (diceAverage * 0.25)) then
-    output = output..'|cFF00FF00'..result..'|r';
-  elseif (result < diceAverage - (diceAverage * 0.25)) then
-    output = output..'|cFFFF0000'..result..'|r';
-  else
-    output = output..result;
-  end;
+  efficency = SS_Shared_NumFromStr(efficency);
 
-  output = output..'. |cffFFFF00Эффективность: |r|cff9999FF'..efficency..'|r';
+  local output = '';
+
+  if (SS_User.settings.displayDiceInfo) then
+    output = '|cffFFFF00'..name..', проверка навыка: |r'..SS_Locale(skill)..".|cffFFFF00 Результат:|r";
+    output = output..' '..diceCount..'d('..diceMin..'-'..diceMax..')';
+
+    modifier = SS_Shared_NumFromStr(modifier);
+    if (modifier > 0) then
+      output = output..'|cff00FF00+'..modifier..'|r';
+    elseif (modifier < 0) then
+      output = output..'|cffFF0000'..modifier..'|r';
+    end;
+
+    output = output..'|cffFFFF00 -> |r';
+
+    if (result > diceAverage + (diceAverage * 0.25)) then
+      output = output..'|cFF00FF00'..result..'|r';
+    elseif (result < diceAverage - (diceAverage * 0.25)) then
+      output = output..'|cFFFF0000'..result..'|r';
+    else
+      output = output..result;
+    end;
+
+    output = output..'. |cffFFFF00Эффективность: |r|cff9999FF'..efficency..'|r';
+  else
+    output = '|cffFFFF00'..name..' выбрасывает |r';
+
+    if (result < diceAverage - (diceAverage * 0.25)) then
+      output = output.."|cFFFF0000"..result.."|r";
+    elseif (result > diceAverage + (diceAverage * 0.25)) then
+      output = output.."|cFF00FF00"..result.."|r";
+    else
+      output = output..result;
+    end;
+    
+    output = output..' ('..SS_Locale(skill)..').';
+    if (efficency > 1) then
+      output = output..'|cffFFFF00 Эффективность: |r'..efficencyResult;
+    end;
+  end;
 
   print(output);
+  return;
 end;
 
 SS_Log_NoID = function()

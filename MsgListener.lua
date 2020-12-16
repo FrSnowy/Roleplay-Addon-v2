@@ -25,7 +25,6 @@ local actionFire = function(action, data, author, prefix)
     joinToEvent = SS_Listeners_DM_OnPlayerJoinToEvent,
     sendParams = SS_Listeners_DM_OnPlayerSendParams,
     sendInspectInfo = SS_Listeners_DM_OnSendInspectInfo,
-    playerModifierRemoved = SS_Listeners_DM_OnPlayerModifierRemoved,
     rollResult = SS_Listeners_DM_OnRollResult,
     isOnline = SS_Listeners_Player_OnIsOnline,
     iAmOnline = SS_Listeners_Player_OnIAmOnline,
@@ -39,9 +38,7 @@ local actionFire = function(action, data, author, prefix)
     addStatModifier = SS_Listeners_Player_OnAddModifier('stats'),
     addSkillModifier = SS_Listeners_Player_OnAddModifier('skills'),
     dmRemoveTargetModifier = SS_Listeners_Player_OnDMRemoveTargetModifier,
-    ghiRemoveTargetModifier = SS_Listeners_Player_OnGHIRemoveTargetModifier,
     dmForceRollSkill = SS_Listeners_Player_OnDMForceRollSkill,
-    ghiForceRollSkill = SS_Listeners_Player_OnGHIForceRollSkill,
   };
 
   if (not(actions[action])) then

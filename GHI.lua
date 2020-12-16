@@ -1,5 +1,27 @@
 local category = "Ролевая система от Snowy";
 
+if (GHI_MiscData and not(GHI_MiscData["WhiteList"])) then
+  GHI_MiscData["WhiteList"] = {};
+end;
+
+SS_Shared_ForEach({
+  'SS_Roll',
+  'SS_Modifiers_Register',
+  'SS_Log_ModifierAdded',
+  'SS_Log_ModifierRemovedByGHI',
+  'SS_Modifiers_Get',
+  'SS_Modifiers_Remove',
+})(function(el)
+  local isKeyIncluded = SS_Shared_Includes(GHI_MiscData["WhiteList"])(function(v)
+    return v == el;
+  end);
+
+  if (not(isKeyIncluded)) then
+    table.insert(GHI_MiscData["WhiteList"], el)
+  end;
+end);
+GHI_ScriptEnvList().ReloadEnv(UnitGUID("player"));
+
 local statMenuPoint = function(name, order)
   return {
     name = name,
@@ -68,6 +90,8 @@ table.insert(GHI_ProvidedDynamicActions, {
 	[[
     local id = dyn.GetInput("id");
     local name = dyn.GetInput("name");
+    local value = dyn.GetInput("value");
+    local count = dyn.GetInput("count");
 
     local stats = { dyn.GetInput("stat1"), dyn.GetInput("stat2"), dyn.GetInput("stat3"), dyn.GetInput("stat4"), dyn.GetInput("stat5"), dyn.GetInput("stat6"), dyn.GetInput("stat7") };
     local filteredStats = {};
@@ -94,16 +118,15 @@ table.insert(GHI_ProvidedDynamicActions, {
       return;
     end;
 
-    local statsAsStr = '';
-    for i = 1, #filteredStats do
-      statsAsStr = statsAsStr..filteredStats[i]..'}';
-    end;
-    statsAsStr = statsAsStr:sub(1, #statsAsStr - 1);
-
-    local value = dyn.GetInput("value");
-    local count = dyn.GetInput("count");
-    SendAddonMessage('SS-GHItP', '~addStatModifier|'..id..'+'..name..'+'..statsAsStr..'+'..value..'+'..count..'~', 'WHISPER', UnitName('player'));
-
+    SS_Modifiers_Register('stats', {
+      id = id,
+      name = name,
+      stats = filteredStats,
+      value = value,
+      count = count,
+    });
+    
+    SS_Log_ModifierAdded(name, filteredStats, value, count);
     dyn.TriggerOutPort("added")
 	]],
 	ports = {
@@ -167,6 +190,8 @@ table.insert(GHI_ProvidedDynamicActions, {
 	[[
     local id = dyn.GetInput("id");
     local name = dyn.GetInput("name");
+    local value = dyn.GetInput("value");
+    local count = dyn.GetInput("count");
   
     local stats = {
       dyn.GetInput("stat1"), dyn.GetInput("stat2"), dyn.GetInput("stat3"), dyn.GetInput("stat4"), dyn.GetInput("stat5"), dyn.GetInput("stat6"), dyn.GetInput("stat7"),
@@ -197,15 +222,15 @@ table.insert(GHI_ProvidedDynamicActions, {
       return;
     end;
 
-    local statsAsStr = '';
-    for i = 1, #filteredStats do
-      statsAsStr = statsAsStr..filteredStats[i]..'}';
-    end;
-    statsAsStr = statsAsStr:sub(1, #statsAsStr - 1);
-  
-    local value = dyn.GetInput("value");
-    local count = dyn.GetInput("count");
-    SendAddonMessage('SS-GHItP', '~addSkillModifier|'..id..'+'..name..'+'..statsAsStr..'+'..value..'+'..count..'~', 'WHISPER', UnitName('player'));
+    SS_Modifiers_Register('skills', {
+      id = id,
+      name = name,
+      stats = filteredStats,
+      value = value,
+      count = count,
+    });
+    
+    SS_Log_ModifierAdded(name, filteredStats, value, count);
     dyn.TriggerOutPort("added")
 	]],
 	ports = {
@@ -275,7 +300,11 @@ table.insert(GHI_ProvidedDynamicActions, {
 	script =
 	[[
     local id = dyn.GetInput("id");
-    SendAddonMessage('SS-GHItP', '~ghiRemoveTargetModifier|'..id..'+'..'stats'..'~', 'WHISPER', UnitName('player'));
+    local mod = SS_Modifiers_Get('stats', id);
+    if (mod) then
+      SS_Modifiers_Remove('stats')(id);
+      SS_Log_ModifierRemovedByGHI(mod.name, mod.value);
+    end;
     dyn.TriggerOutPort("removed")
 	]],
 	ports = {
@@ -310,7 +339,11 @@ table.insert(GHI_ProvidedDynamicActions, {
 	script =
 	[[
     local id = dyn.GetInput("id");
-    SendAddonMessage('SS-GHItP', '~ghiRemoveTargetModifier|'..id..'+'..'skills'..'~', 'WHISPER', UnitName('player'));
+    local mod = SS_Modifiers_Get('skills', id);
+    if (mod) then
+      SS_Modifiers_Remove('skills')(id);
+      SS_Log_ModifierRemovedByGHI(mod.name, mod.value);
+    end;
     dyn.TriggerOutPort("removed")
 	]],
 	ports = {
@@ -345,27 +378,45 @@ table.insert(GHI_ProvidedDynamicActions, {
 	script =
 	[[
     local stat = dyn.GetInput("stat");
+    local successOn = dyn.GetInput("successOn");
     local hidden = dyn.GetInput("hidden");
+
     if (stat == 'nothing') then
       print('|cffFF00000Ошибка: не указан навык для проверки|r');
       return nil;
     end;
-    SendAddonMessage('SS-GHItP', '~ghiForceRollSkill|'..stat..'+'..tostring(hidden)..'~', 'WHISPER', UnitName('player'));
-    dyn.TriggerOutPort("rolled")
+
+    local result = SS_Roll(stat, not(hidden));
+    if (result >= successOn) then
+      dyn.TriggerOutPort("success")
+    else
+      dyn.TriggerOutPort("failed")
+    end;
 	]],
 	ports = {
-		rolled = {
-			name = "Бросок совершен",
+		success = {
+			name = "Бросок успешен",
+			direction = "out",
+			description = "",
+		},
+		failed = {
+			name = "Бросок провален",
 			direction = "out",
 			description = "",
 		},
 	},
 	inputs = {
-		stat = skillMenuPoint("Навык", 1),
+    stat = skillMenuPoint("Навык", 1),
+		successOn = {
+			name = "Порог",
+			type = "number",
+      defaultValue = 0,
+      order = 2,
+		},
 		hidden = {
 			name = "Скрытый",
 			description = "Скрытый бросок не отображается у игрока",
-			order = 2,
+			order = 3,
 			type = "boolean",
 			defaultValue = false,
 		},

@@ -1,0 +1,36 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_BattleControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="false" frameStrata="DIALOG" frameLevel="3">
+    <Scripts>
+      <OnLoad>
+        self:SetSize(430, 240);
+        self.title:SetText('Сражение');
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\player-background";
+        self:RegisterForDrag("LeftButton");
+        self.closeBtn:SetScript("OnClick", function()
+          SS_BattleControll_Menu:Hide();
+        end);
+      </OnLoad>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Layers>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" name = "$parent_Empty" justifyH="LEFT" justifyV="TOP" maxLines="3" wordwrap="true" text="Нет сохраненных модификаторов">
+          <Color r="1" g="1" b="1" a="1"/>
+          <Size x = "120" y = "40" />
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-40" />
+            <Anchor point="RIGHT" x="-280" y="0" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      
+    </Frames>
+  </Frame>
+</Ui>

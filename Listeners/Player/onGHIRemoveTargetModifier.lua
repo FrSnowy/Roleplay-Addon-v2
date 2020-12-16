@@ -7,12 +7,4 @@ SS_Listeners_Player_OnGHIRemoveTargetModifier = function(data, author)
 
   local modifier = SS_Plots_Current().modifiers[modifierType][modifierID];
   if (not(modifier)) then return nil; end;
-
-  SS_Log_ModifierRemovedByGHI(modifier.name, modifier.value);
-  SS_Modifiers_Remove(modifierType)(modifierID);
-  
-  SS_PtDM_ModifierRemoved({
-    modifierID = modifierID,
-    modifierType = modifierType,
-  }, SS_Plots_Current().author);
 end;
