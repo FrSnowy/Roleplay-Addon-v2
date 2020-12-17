@@ -1,4 +1,6 @@
 SS_ModifierControll_Show = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
   SS_ModifiersControll_Menu:Show();
   SS_Event_Controll_ModifiersControll_Button:SetText("- Модифик.");
 
@@ -14,6 +16,8 @@ SS_ModifierControll_Show = function()
 end;
 
 SS_ModifierControll_Hide = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
   SS_ModifiersControll_Menu:Hide();
   SS_Event_Controll_ModifiersControll_Button:SetText("+ Модифик.");
 end;
@@ -109,7 +113,7 @@ SS_ModifierCreate_Unselect = function(stat)
 end;
 
 SS_ModifierCreate_Create = function()
-  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
   local id = SS_ModifiersCreate_Menu.id:GetText();
   local name = SS_ModifiersCreate_Menu.name:GetText();

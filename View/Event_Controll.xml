@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_Event_Controll" parent = "UIParent" movable="true" inherits = "SS_FrameWithBG_Template" hidden="true" frameStrata="DIALOG" frameLevel="3">
+  <Frame name="SS_Event_Controll" parent = "UIParent" movable="true" inherits = "SS_FrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="3">
     <Scripts>
       <OnLoad>
         self:SetSize(300, 300);
@@ -66,6 +66,13 @@
         </Anchors>
       </Button>
       <Button name="$parent_Battle_Button" inherits="OptionsButtonTemplate" text="+ Сражение">
+        <Scripts>
+          <OnClick>
+            if (SS_BattleControll:IsVisible()) then SS_BattleControll_Hide();
+            else SS_BattleControll_Show();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "120" y = "32" />
         <Anchors>
           <Anchor point="TOPLEFT">

@@ -8,6 +8,11 @@ SS_Armor_GetType = function()
 end;
 
 SS_Armor_SelectType = function(armorType, previousArmorType)
+  if (SS_Plots_Current().battle) then
+    SS_Log_CanNotInBattle();
+    SS_Armor_DrawCheck();
+    return;
+  end;
   SS_Plots_Current().armor = armorType;
   SS_Armor_DrawCheck();
   SS_Params_DrawHealth();

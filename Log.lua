@@ -343,6 +343,10 @@ SS_Log_NoModifier = function()
   print('|cffFF0000Ошибка: не выбрано ни одного модификатора|r');
 end;
 
+SS_Log_CanNotInBattle = function()
+  print('|cffFF0000Ошибка: нельзя совершать это действие в бою|r');
+end;
+
 SS_Log_PlayerGetModifier = function(name, value, stats, player)
   local outputString = player..'|cffFFFF00 получил модификатор |r"'..name..'" ';
   

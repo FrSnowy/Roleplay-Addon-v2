@@ -25,6 +25,7 @@ MsgListener.lua
 DrawElements.lua
 DiceControll.lua
 ModifiersControll.lua
+BattleControll.lua
 SnowySystem.lua
 SnowySystem.xml
 Listeners\DM\onPlayerToAll.lua
@@ -54,6 +55,7 @@ Listeners\Player\onAddModifier.lua
 Listeners\Player\onDMRemoveTargetModifier.lua
 Listeners\Player\onGHIRemoveTargetModifier.lua
 Listeners\Player\onDMForceRollSkill.lua
+Listeners\Player\onBattleStart.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml

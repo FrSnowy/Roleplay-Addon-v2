@@ -2,6 +2,7 @@ SS_ApplicationLoad = function()
   SS_User = SS_User or {
     plots = { },
     leadingPlots = { },
+    battle = nil,
     settings = {
       currentPlot = nil,
       selectedPlot = nil,

@@ -142,7 +142,7 @@ end;
 
 SS_DMtP_AddModifier = function(modifierType, modifierID)
   if (not(SS_User.settings.currentPlot)) then return nil; end;
-  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(modifierType) or not(modifierID)) then
     SS_Log_NoModifier();
     return;
@@ -187,7 +187,7 @@ SS_DMtP_RemoveInspectPlayerModifier = function(modifierType, modifierID)
 end;
 
 SS_DMtP_RemoveTargetModifier = function(modifierType, modifierID, player)
-  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(modifierType) or not(modifierID)) then return nil; end;
 
   if (not(player)) then
@@ -206,7 +206,7 @@ end;
 
 SS_DMtP_RemoveModifier = function(modifierType, modifierID)
   if (not(SS_User.settings.currentPlot)) then return nil; end;
-  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(modifierType) or not(modifierID)) then
     SS_Log_NoModifier();
     return;
@@ -233,14 +233,14 @@ SS_DMtP_RemoveModifier = function(modifierType, modifierID)
 end;
 
 SS_DMtP_ForceRollInspectTargetSkill = function(skillName, visibility)
-  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_Target_TMPData) or not(SS_Target_TMPData.name)) then return nil; end;
 
   return SS_DMtP_ForceRollSkill(skillName, visibility, SS_Target_TMPData.name);
 end;
 
 SS_DMtP_ForceRollDiceControllSkill = function(skillName)
-  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_DiceControll_Data)) then return nil; end;
 
   local visibility = 'true';
@@ -267,7 +267,7 @@ SS_DMtP_ForceRollDiceControllSkill = function(skillName)
 end;
 
 SS_DMtP_ForceRollSkill = function(skillName, visibility, player)
-  if (not(SS_LeadingPlots_Current())) then return nil; end;
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(skillName)) then return nil; end;
 
   if (not(player)) then
@@ -281,4 +281,14 @@ SS_DMtP_ForceRollSkill = function(skillName, visibility, player)
   
   local dataStr = SS_User.settings.currentPlot..'+'..visibility.."+"..skillName;
   SS_DMtP_Direct('dmForceRollSkill', dataStr, player);
+end;
+
+SS_DMtP_StartPhasesBattle = function(startFrom, authorFights)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  
+  if (authorFights) then
+    SS_DMtP_Every('phaseBattleStart', startFrom)(SS_User.settings.currentPlot);
+  else
+    SS_DMtP_Every('phaseBattleStart', startFrom, { SS_Plots_Current().author })(SS_User.settings.currentPlot);
+  end;
 end;

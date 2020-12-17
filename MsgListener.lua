@@ -41,6 +41,7 @@ local actionFire = function(action, data, author, prefix)
     addSkillModifier = SS_Listeners_Player_OnAddModifier('skills'),
     dmRemoveTargetModifier = SS_Listeners_Player_OnDMRemoveTargetModifier,
     dmForceRollSkill = SS_Listeners_Player_OnDMForceRollSkill,
+    phaseBattleStart = SS_Listeners_Player_OnBattleStart('phases'),
   };
 
   if (not(actions[action])) then

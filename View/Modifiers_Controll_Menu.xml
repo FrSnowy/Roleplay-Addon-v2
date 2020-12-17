@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_ModifiersControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="DIALOG" frameLevel="3">
+  <Frame name="SS_ModifiersControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="5">
     <Scripts>
       <OnLoad>
         self:SetSize(430, 240);
@@ -89,8 +89,6 @@
             <Offset x="235" y="-120"/>
           </Anchor> 
         </Anchors>
-        <Scripts>
-        </Scripts>
       </Button>
       <Button name="$parent_Remove_Button" inherits="OptionsButtonTemplate" text="Снять">
         <Scripts>
@@ -104,8 +102,6 @@
             <Offset x="328" y="-120"/>
           </Anchor> 
         </Anchors>
-        <Scripts>
-        </Scripts>
       </Button>
       <ScrollFrame name="$parent_Scroll" inherits="UIPanelScrollFrameTemplate">
         <Anchors>

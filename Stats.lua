@@ -71,6 +71,11 @@ local UpdateBarrierOnPointAddtoStat = function()
 end;
 
 SS_Stats_AddPoint = function(value, stat, statView)
+  if (SS_Plots_Current().battle) then
+    SS_Log_CanNotInBattle();
+    return;
+  end;
+
   if (SS_Stats_GetValueWithoutModifier(stat) + value < -SS_Stats_GetMaxPointsInSingle(1)) then
     return 0;
   end;

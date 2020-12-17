@@ -68,6 +68,11 @@ SS_Skills_GetAvaliablePoints = function()
 end;
 
 SS_Skills_AddPoint = function(value, skill, skillView)
+  if (SS_Plots_Current().battle) then
+    SS_Log_CanNotInBattle();
+    return 0;
+  end;
+
   if (SS_Skills_GetValueWithoutModifier(skill) + value < -SS_Skills_GetMaxPointsInSingle(1)) then
     return 0;
   end;

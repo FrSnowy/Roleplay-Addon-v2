@@ -1,4 +1,5 @@
 SS_DiceControll_Show = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   SS_DicesControll_Menu:Show();
   SS_Event_Controll_DiceControll_Button:SetText("- Проверки");
   SS_DiceControll_Data = {
@@ -8,6 +9,7 @@ SS_DiceControll_Show = function()
 end;
 
 SS_DiceControll_Hide = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   SS_DicesControll_Menu:Hide();
   SS_Event_Controll_DiceControll_Button:SetText("+ Проверки");
   SS_DicesControll_Menu_Check_Target_Player:SetChecked(true);
