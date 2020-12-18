@@ -144,6 +144,7 @@ SS_BattleControll_WatchMovement = function()
 
         if (diffBetweenPosition.x > 0 or diffBetweenPosition.y > 0) then
           PlaySoundFile('Sound\\Interface\\RaidWarning.ogg');
+          SS_Log_NoMovementPoints();
         end;
       end;
       SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movement.." / "..SS_Plots_Current().battle.maxMovement);
@@ -159,7 +160,7 @@ SS_BattleControll_StartPlayerActivePhase = function()
   SS_BattleControll_BattleInterface.currentTurn.text:SetText("Фаза активного действия");
 
   SS_Plots_Current().battle.maxMovement = 6 + math.floor(SS_Stats_GetValue('mobility') / 2.4);
-  SS_Plots_Current().battle.movement = SS_Plots_Current().battle.maxMovement;
+  SS_Plots_Current().battle.movement = SS_Plots_Current().battle.movement or SS_Plots_Current().battle.maxMovement;
   SS_Plots_Current().battle.previousPosition = nil;
 
   SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movement.." / "..SS_Plots_Current().battle.maxMovement);

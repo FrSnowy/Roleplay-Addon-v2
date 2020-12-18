@@ -347,6 +347,10 @@ SS_Log_CanNotInBattle = function()
   print('|cffFF0000Ошибка: нельзя совершать это действие в бою|r');
 end;
 
+SS_Log_NoMovementPoints = function()
+  print('|cffFF0000Закончились очки перемещения!|r');
+end;
+
 SS_Log_PlayerGetModifier = function(name, value, stats, player)
   local outputString = player..'|cffFFFF00 получил модификатор |r"'..name..'" ';
   
