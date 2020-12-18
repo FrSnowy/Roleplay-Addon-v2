@@ -121,7 +121,7 @@
           </CheckButton>
           <CheckButton name = "$parent_Start_From_Active" inherits="OptionsCheckButtonTemplate" checked="true">
             <Scripts>
-              <OnClick>SS_BattleControll_SelectStartFrom('active')</OnClick>
+              <OnClick>SS_BattleControll_SelectPhase('active')</OnClick>
             </Scripts>
             <Anchors>
               <Anchor point="TOPLEFT">
@@ -133,7 +133,7 @@
           </CheckButton>
           <CheckButton name = "$parent_Start_From_Defence" inherits="OptionsCheckButtonTemplate" checked="false">
             <Scripts>
-              <OnClick>SS_BattleControll_SelectStartFrom('defence')</OnClick>
+              <OnClick>SS_BattleControll_SelectPhase('defence')</OnClick>
             </Scripts>
             <Anchors>
               <Anchor point="TOPLEFT">
@@ -198,7 +198,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString font="Fonts\FRIZQT__.TTF" text="Фаза активного действия">
+                <FontString parentKey="text" font="Fonts\FRIZQT__.TTF" text="Фаза активного действия">
                   <Color r="1" g="1" b="1" a="1"/>
                   <FontHeight val="16"/>
                   <Anchors>
@@ -206,8 +206,30 @@
                   </Anchors>
                 </FontString>
               </Layer>
+              <Layer>
+                <FontString parentKey="movement" font="Fonts\FRIZQT__.TTF" text="10 / 30">
+                  <Color r="1" g="0.6" b="0" a="1"/>
+                  <FontHeight val="14"/>
+                  <Anchors>
+                    <Anchor point="TOP" x="-65" y="-66" relativeTo = "UIParent" />
+                  </Anchors>
+                  <Shadow>
+                    <Offset x="-1" y="-1" />
+                    <Color r="0" g="0" b="0"/>
+                  </Shadow>
+                </FontString>
+              </Layer>
             </Layers>
           </Frame>
+          <Button name="$parent_Movement_Icon">
+            <Anchors>
+              <Anchor point="TOP" x="-105" y="-65" relativeTo = "UIParent" />
+            </Anchors>
+            <Size>
+              <AbsDimension x="16" y="16" />
+            </Size>
+            <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\boot.blp" />
+          </Button>
         </Frames>
       </Frame>
       <Frame name="SS_BattleControll_DMBattleInterface" parent = "UIParent" frameStrata="FULLSCREEN" frameLevel="1" hidden="true">
