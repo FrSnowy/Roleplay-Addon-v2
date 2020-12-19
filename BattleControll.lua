@@ -89,7 +89,7 @@ SS_BattleControll_AmIPlayer = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return true; end;
   if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.players)) then return true; end;
 
-  if (not(SS_LeadingPlots_Current().players[UnitName('player')])) then
+  if (not(SS_LeadingPlots_Current().battle.players[UnitName('player')])) then
     return false;
   else
     return true;
@@ -111,7 +111,11 @@ SS_BattleControll_BattleStart = function()
 
   local startBattleByType = {
     phases = function()
-      SS_DMtP_StartBattle('phases', SS_LeadingPlots_Current().battle.phase, SS_LeadingPlots_Current().battle.authorFights);
+      if (SS_LeadingPlots_Current().battle.authorFights) then
+        SS_Listeners_Player_OnBattleStart_StartBattleByType.phases(SS_LeadingPlots_Current().battle.phase);
+        SS_Listeners_DM_OnPlayerJoinToBattle(nil, UnitName('player'));
+      end;
+      SS_DMtP_StartBattle('phases', SS_LeadingPlots_Current().battle.phase);
       SS_BattleControll_RoundStart('phases', SS_LeadingPlots_Current().battle.phase);
     end,
   };

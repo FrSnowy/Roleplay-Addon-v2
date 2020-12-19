@@ -8,7 +8,7 @@ local startPhasesBattle = function(startPhase)
   SS_BattleControll_RoundStart('phases', startPhase);
 end;
 
-local startBattleByType = {
+SS_Listeners_Player_OnBattleStart_StartBattleByType = {
   phases = startPhasesBattle,
 };
 
@@ -16,7 +16,7 @@ SS_Listeners_Player_OnBattleStart = function(data, author)
   if (not(SS_Plots_Current())) then return nil; end;
 
   local battleType, startPhase = strsplit('+', data);
-  startBattleByType[battleType](startPhase);
+  SS_Listeners_Player_OnBattleStart_StartBattleByType[battleType](startPhase);
   SS_PtDM_JoinToBattle(author);
 end;
 

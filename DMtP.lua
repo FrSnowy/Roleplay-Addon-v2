@@ -283,14 +283,9 @@ SS_DMtP_ForceRollSkill = function(skillName, visibility, player)
   SS_DMtP_Direct('dmForceRollSkill', dataStr, player);
 end;
 
-SS_DMtP_StartBattle = function(battleType, startFrom, authorFights)
+SS_DMtP_StartBattle = function(battleType, startFrom)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
-  
-  if (authorFights) then
-    SS_DMtP_Every('battleStart', battleType..'+'..startFrom)(SS_User.settings.currentPlot);
-  else
-    SS_DMtP_Every('battleStart', battleType..'+'..startFrom, { SS_Plots_Current().author })(SS_User.settings.currentPlot);
-  end;
+  SS_DMtP_Every('battleStart', battleType..'+'..startFrom, { SS_Plots_Current().author })(SS_User.settings.currentPlot);
 end;
 
 SS_DMtP_PlayerJoinSuccess = function(player)
