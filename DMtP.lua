@@ -285,7 +285,7 @@ end;
 
 SS_DMtP_StartBattle = function(battleType, startFrom)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
-  SS_DMtP_Every('battleStart', battleType..'+'..startFrom, { SS_Plots_Current().author })(SS_User.settings.currentPlot);
+  SS_DMtP_Every('battleStart', SS_User.settings.currentPlot..'+'..battleType..'+'..startFrom, { SS_Plots_Current().author })(SS_User.settings.currentPlot);
 end;
 
 SS_DMtP_PlayerJoinSuccess = function(player)
@@ -294,7 +294,7 @@ SS_DMtP_PlayerJoinSuccess = function(player)
   if (not(SS_LeadingPlots_Current().battle.players[player])) then return nil; end;
 
   SS_Shared_IfOnline(player, function()
-    SS_DMtP_Direct('battleJoinSuccess', '', player);
+    SS_DMtP_Direct('battleJoinSuccess', SS_User.settings.currentPlot, player);
   end);
 end;
 
@@ -303,7 +303,7 @@ SS_DMtP_ChangePhase = function(battleType, nextPhase)
 
   SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(_, player)
     SS_Shared_IfOnline(player, function()
-      SS_DMtP_Direct('changeBattlePhase', battleType..'+'..nextPhase, player);
+      SS_DMtP_Direct('changeBattlePhase', SS_User.settings.currentPlot..'+'..battleType..'+'..nextPhase, player);
     end);
   end);
 end;

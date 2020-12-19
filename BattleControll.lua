@@ -113,7 +113,7 @@ SS_BattleControll_BattleStart = function()
     phases = function()
       if (SS_LeadingPlots_Current().battle.authorFights) then
         SS_Listeners_Player_OnBattleStart_StartBattleByType.phases(SS_LeadingPlots_Current().battle.phase);
-        SS_Listeners_DM_OnPlayerJoinToBattle(nil, UnitName('player'));
+        SS_Listeners_DM_OnPlayerJoinToBattle(SS_User.settings.currentPlot, UnitName('player'));
       end;
       SS_DMtP_StartBattle('phases', SS_LeadingPlots_Current().battle.phase);
       SS_BattleControll_RoundStart('phases', SS_LeadingPlots_Current().battle.phase);
