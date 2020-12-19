@@ -128,8 +128,13 @@ SS_BattleControll_RoundStart = function(battleType, currentPhase)
 
   if (SS_BattleControll_AmIPlayer()) then
     if (currentPhase == 'active') then
+      SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
       SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
+    elseif (currentPhase == 'defence') then
+      SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+      SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
     else
+      SS_Plots_Current().battle.maxMovementPoints = 0;
       SS_Plots_Current().battle.movementPoints = 0;
     end;
   end;
@@ -200,11 +205,7 @@ end;
 SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
   local drawInterfaceByType = {
     phases = function()
-      if (SS_BattleControll_AmIPlayer()) then
-        SS_BattleControll_BattleInterface_Movement_Icon:Show();
-        SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Stats_GetMaxMovementPoints());
-        SS_BattleControll_BattleInterface.currentTurn.movement:Show();
-      else
+      if (not(SS_BattleControll_AmIPlayer())) then
         SS_BattleControll_BattleInterface_Movement_Icon:Hide();
         SS_BattleControll_BattleInterface.currentTurn.movement:Hide();
         SS_BattleControll_BattleInterface_End_Round:Hide();
@@ -223,6 +224,10 @@ SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
         if (SS_BattleControll_AmIPlayer()) then
           SS_BattleControll_BattleInterface_End_Round:Show();
           SS_BattleControll_BattleInterface_Leave_Battle:Show();
+          
+          SS_BattleControll_BattleInterface_Movement_Icon:Show();
+          SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+          SS_BattleControll_BattleInterface.currentTurn.movement:Show();
         end;
       elseif (currentPhase == 'defence') then
         SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза защиты');
@@ -230,12 +235,20 @@ SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
         if (SS_BattleControll_AmIPlayer()) then
           SS_BattleControll_BattleInterface_End_Round:Hide();
           SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+
+          SS_BattleControll_BattleInterface_Movement_Icon:Show();
+          SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+          SS_BattleControll_BattleInterface.currentTurn.movement:Show();
         end;
       elseif (currentPhase == 'waiting') then
         SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ожидание других игроков');
         if (SS_BattleControll_AmIPlayer()) then
           SS_BattleControll_BattleInterface_End_Round:Hide();
           SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+
+          SS_BattleControll_BattleInterface_Movement_Icon:Hide();
+          SS_BattleControll_BattleInterface.currentTurn.movement:SetText("");
+          SS_BattleControll_BattleInterface.currentTurn.movement:Hide();
         end;
       end;
     end;
@@ -289,7 +302,7 @@ SS_BattleControll_StartMovementWatch = function()
       else
         SS_BattleControll_BattleInterface.currentTurn.movement:SetTextColor(1, 0.6, 0);
       end;
-      SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Stats_GetMaxMovementPoints());
+      SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
       SS_Plots_Current().battle.previousPosition = currentPosition;
       SS_Plots_Current().battle.movementTimer:Hide();
       SS_BattleControll_StartMovementWatch();
