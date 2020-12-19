@@ -24,6 +24,10 @@ SS_Stats_GetValue = function(stat)
   return statValue + modifierOfStat;
 end;
 
+SS_Stats_GetMaxMovementPoints = function()
+  return 4 + math.floor(SS_Stats_GetValue('mobility') / 2.4);
+end;
+
 SS_Stats_GetValueWithoutModifier = function(stat)
   if (not(SS_Plots_Current())) then return 0; end;
   return SS_Plots_Current().stats[stat];

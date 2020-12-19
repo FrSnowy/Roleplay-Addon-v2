@@ -141,3 +141,11 @@ SS_PtDM_UpdatePlayerInfo = function(master)
     end);
   end;
 end;
+
+SS_PtDM_JoinToBattle = function(master)
+  if (SS_Plots_Current()) then
+    SS_Shared_IfOnline(master, function()
+      SS_PtDM_Direct('playerJoinToBattle', '', master);
+    end);    
+  end;
+end;

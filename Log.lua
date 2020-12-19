@@ -392,3 +392,11 @@ SS_Log_PlayerLooseModifier = function(name, value, stats, player)
   end;
   print(outputString);
 end;
+
+SS_Log_PlayerJoinedToBattle = function(name)
+  print(name..'|cffFFFF00 присоединился к сражению|r');
+end;
+
+SS_Log_BattleJoinSuccess = function(name)
+  print('|cffFFFF00Начинается бой!|r');
+end;

@@ -177,7 +177,7 @@
           </OnLoad>
           <OnEvent>
             if(event == "PLAYER_ENTERING_WORLD") then
-              SS_BattleControll_ShowPlayerBattleMenuAfterRelog()
+              SS_BattleControll_Reset()
             end;
           </OnEvent>
         </Scripts>
@@ -207,11 +207,11 @@
                 </FontString>
               </Layer>
               <Layer>
-                <FontString parentKey="movement" font="Fonts\FRIZQT__.TTF" text="10 / 30">
+                <FontString parentKey="movement" font="Fonts\FRIZQT__.TTF" text="">
                   <Color r="1" g="0.6" b="0" a="1"/>
                   <FontHeight val="14"/>
                   <Anchors>
-                    <Anchor point="TOP" x="-65" y="-66" relativeTo = "UIParent" />
+                    <Anchor point="TOP" x="-70" y="-66" relativeTo = "UIParent" />
                   </Anchors>
                   <Shadow>
                     <Offset x="-1" y="-1" />
@@ -222,6 +222,19 @@
             </Layers>
           </Frame>
           <Button name="$parent_Movement_Icon">
+            <Scripts>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "CENTER")
+                GameTooltip:AddLine("Очки перемещения")
+                GameTooltip:AddLine("Отображают, какое расстояние персонаж")
+                GameTooltip:AddLine("может преодолеть в текущем раунде")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                SS_Player_Menu:SetPoint("LEFT", -64, 0);
+                GameTooltip:Hide()
+              </OnLeave>
+            </Scripts>
             <Anchors>
               <Anchor point="TOP" x="-105" y="-65" relativeTo = "UIParent" />
             </Anchors>
@@ -230,33 +243,76 @@
             </Size>
             <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\boot.blp" />
           </Button>
-        </Frames>
-      </Frame>
-      <Frame name="SS_BattleControll_DMBattleInterface" parent = "UIParent" frameStrata="FULLSCREEN" frameLevel="1" hidden="true">
-        <Scripts>
-          <OnLoad>
-            self:RegisterEvent("PLAYER_ENTERING_WORLD");
-          </OnLoad>
-          <OnEvent>
-            if(event == "PLAYER_ENTERING_WORLD") then
-              SS_BattleControll_ShowDMBattleMenuAfterRelog()
-            end;
-          </OnEvent>
-        </Scripts>
-        <Frames>
-          <Button name="$parent_Next_Round" inherits="OptionsButtonTemplate" text="След. фаза/ход">
-            <Size x = "115" y = "26" />
+          <Button name="$parent_End_Round" inherits="OptionsButtonTemplate" text="Закончить свой ход">
+            <Scripts>
+              <OnClick>
+                SS_BattleControll_PlayerEndTurn();
+              </OnClick>
+            </Scripts>
+            <Size x = "140" y = "26" />
             <Anchors>
               <Anchor point="TOP" relativeTo="UIParent">
-                <Offset x="190" y="-10"/>
+                <Offset x="50" y="-63"/>
               </Anchor> 
             </Anchors>
           </Button>
-          <Button name="$parent_Prev_Round" inherits="OptionsButtonTemplate" text="Пред. фаза/ход">
-            <Size x = "115" y = "26" />
+          <Button name="$parent_Leave_Battle" inherits="OptionsButtonTemplate" text="Покинуть бой">
+            <Size x = "140" y = "26" />
             <Anchors>
               <Anchor point="TOP" relativeTo="UIParent">
-                <Offset x="-190" y="-10"/>
+                <Offset x="50" y="-93"/>
+              </Anchor> 
+            </Anchors>
+          </Button>
+        </Frames>
+      </Frame>
+      <Frame name="SS_BattleControll_DMBattleInterface" inherits = "SS_CloseableFrameWithBG_Template" movable="true" parent = "UIParent" frameStrata="FULLSCREEN" frameLevel="1" hidden="true">
+        <Scripts>
+          <OnLoad>
+            self:RegisterEvent("PLAYER_ENTERING_WORLD");
+            self:SetSize(390, 200);
+            self.title:SetText('Сражение');
+            self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\player-background";
+            self:RegisterForDrag("LeftButton");
+            self.closeBtn:SetScript("OnClick", function()
+              SS_BattleControll_Hide()
+            end);
+          </OnLoad>
+          <OnEvent>
+            if(event == "PLAYER_ENTERING_WORLD") then
+              nil
+            end;
+          </OnEvent>
+          <OnDragStart>self:StartMoving();</OnDragStart>
+          <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+        </Scripts>
+        <Anchors>
+          <Anchor point="CENTER" />
+        </Anchors>
+        <Frames>
+          <Button name="$parent_Prev_Round" inherits="OptionsButtonTemplate" text="Пред. фаза/ход">
+            <Scripts>
+              <OnClick>
+                SS_BattleControll_RoundPrevious()
+              </OnClick>
+            </Scripts>
+            <Size x = "115" y = "26" />
+            <Anchors>
+              <Anchor point="BOTTOMLEFT">
+                <Offset x="20" y="20"/>
+              </Anchor> 
+            </Anchors>
+          </Button>
+          <Button name="$parent_Next_Round" inherits="OptionsButtonTemplate" text="След. фаза/ход">
+            <Scripts>
+              <OnClick>
+                SS_BattleControll_RoundNext()
+              </OnClick>
+            </Scripts>
+            <Size x = "115" y = "26" />
+            <Anchors>
+              <Anchor point="BOTTOMRIGHT">
+                <Offset x="-20" y="20"/>
               </Anchor> 
             </Anchors>
           </Button>

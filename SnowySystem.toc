@@ -42,6 +42,8 @@ Listeners\DM\onPlayerJoinToEvent.lua
 Listeners\DM\onPlayerSendParams.lua
 Listeners\DM\onSendInspectInfo.lua
 Listeners\DM\onRollResult.lua
+Listeners\DM\onPlayerJoinToBattle.lua
+Listeners\DM\onPlayerBattleTurnEnd.lua
 Listeners\Player\onIsOnline.lua
 Listeners\Player\onIAmOnline.lua
 Listeners\Player\onInvite.lua
@@ -56,6 +58,7 @@ Listeners\Player\onDMRemoveTargetModifier.lua
 Listeners\Player\onGHIRemoveTargetModifier.lua
 Listeners\Player\onDMForceRollSkill.lua
 Listeners\Player\onBattleStart.lua
+Listeners\Player\onChangeBattlePhase.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml

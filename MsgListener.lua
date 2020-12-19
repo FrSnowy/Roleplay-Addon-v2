@@ -28,6 +28,8 @@ local actionFire = function(action, data, author, prefix)
     sendParams = SS_Listeners_DM_OnPlayerSendParams,
     sendInspectInfo = SS_Listeners_DM_OnSendInspectInfo,
     rollResult = SS_Listeners_DM_OnRollResult,
+    playerJoinToBattle = SS_Listeners_DM_OnPlayerJoinToBattle,
+    playerBattleTurnEnd = SS_Listeners_DM_OnPlayerBattleTurnEnd,
     isOnline = SS_Listeners_Player_OnIsOnline,
     iAmOnline = SS_Listeners_Player_OnIAmOnline,
     invite = SS_Listeners_Player_OnInvite,
@@ -41,7 +43,9 @@ local actionFire = function(action, data, author, prefix)
     addSkillModifier = SS_Listeners_Player_OnAddModifier('skills'),
     dmRemoveTargetModifier = SS_Listeners_Player_OnDMRemoveTargetModifier,
     dmForceRollSkill = SS_Listeners_Player_OnDMForceRollSkill,
-    phaseBattleStart = SS_Listeners_Player_OnBattleStart('phases'),
+    battleStart = SS_Listeners_Player_OnBattleStart,
+    battleJoinSuccess = SS_Listeners_Player_OnBattleJoinSuccess,
+    changeBattlePhase = SS_Listeners_Player_OnChangeBattlePhase,
   };
 
   if (not(actions[action])) then

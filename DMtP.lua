@@ -283,12 +283,32 @@ SS_DMtP_ForceRollSkill = function(skillName, visibility, player)
   SS_DMtP_Direct('dmForceRollSkill', dataStr, player);
 end;
 
-SS_DMtP_StartPhasesBattle = function(startFrom, authorFights)
+SS_DMtP_StartBattle = function(battleType, startFrom, authorFights)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   
   if (authorFights) then
-    SS_DMtP_Every('phaseBattleStart', startFrom)(SS_User.settings.currentPlot);
+    SS_DMtP_Every('battleStart', battleType..'+'..startFrom)(SS_User.settings.currentPlot);
   else
-    SS_DMtP_Every('phaseBattleStart', startFrom, { SS_Plots_Current().author })(SS_User.settings.currentPlot);
+    SS_DMtP_Every('battleStart', battleType..'+'..startFrom, { SS_Plots_Current().author })(SS_User.settings.currentPlot);
   end;
+end;
+
+SS_DMtP_PlayerJoinSuccess = function(player)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle.players[player])) then return nil; end;
+
+  SS_Shared_IfOnline(player, function()
+    SS_DMtP_Direct('battleJoinSuccess', '', player);
+  end);
+end;
+
+SS_DMtP_ChangePhase = function(battleType, nextPhase)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+  SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(_, player)
+    SS_Shared_IfOnline(player, function()
+      SS_DMtP_Direct('changeBattlePhase', battleType..'+'..nextPhase, player);
+    end);
+  end);
 end;
