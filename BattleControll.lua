@@ -143,8 +143,12 @@ SS_BattleControll_RoundStart = function(battleType, currentPhase)
     end;
   end;
 
+  if (SS_Plots_Current().battle.movementTimer) then
+    SS_BattleControll_ReloadMovementWatch();
+  else
+    SS_BattleControll_StartMovementWatch();
+  end;
   startRoundByType[battleType]();
-  SS_BattleControll_StartMovementWatch();
   PlaySoundFile('Sound\\Interface\\PVPFlagTakenMono.ogg');
 end;
 
@@ -334,6 +338,46 @@ SS_BattleControll_StartMovementWatch = function()
       SS_Plots_Current().battle.previousPosition = currentPosition;
       SS_Plots_Current().battle.movementTimer:Hide();
       SS_BattleControll_StartMovementWatch();
+    end
+  end)
+end;
+
+SS_BattleControll_ReloadMovementWatch = function()
+  local prevMovementFn = SS_BattleControll_StartMovementWatch;
+  SS_BattleControll_StartMovementWatch = function()
+    return nil;
+  end;
+
+  if (SS_Plots_Current().battle.movementTimer) then SS_Plots_Current().battle.movementTimer:Hide(); end;
+  SS_Plots_Current().battle.movementTimer = nil;
+
+  local t = 1;
+  local f = CreateFrame("Frame")
+  f:SetScript("OnUpdate", function(self, elapsed)
+    t = t - elapsed
+    if t <= 0 then
+      SS_BattleControll_StartMovementWatch = prevMovementFn;
+      SS_BattleControll_StartMovementWatch();
+      f:Hide();
+    end
+  end)
+end;
+
+SS_BattleControll_StopMovementWatch = function()
+  local prevMovementFn = SS_BattleControll_StartMovementWatch;
+  SS_BattleControll_StartMovementWatch = function()
+    return nil;
+  end;
+
+  local t = 1;
+  local f = CreateFrame("Frame")
+  f:SetScript("OnUpdate", function(self, elapsed)
+    t = t - elapsed
+    if t <= 0 then
+      if (SS_Plots_Current().battle.movementTimer) then SS_Plots_Current().battle.movementTimer:Hide(); end;
+
+      SS_BattleControll_StartMovementWatch = prevMovementFn;
+      f:Hide();
     end
   end)
 end;
