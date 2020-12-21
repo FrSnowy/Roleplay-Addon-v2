@@ -167,14 +167,11 @@ SS_BattleControll_RoundLoadFromCache = function(battleType, currentPhase)
   end;
 
   if (not(battleType) or not(currentPhase)) then return nil; end;
-
-  local loadRoundByType = {
-    phases = function()
-      SS_BattleControll_RoundStart('phases', currentPhase, true);
-    end,
-  }
-
-  loadRoundByType[battleType]();
+  
+  SS_BattleControll_RoundStart(battleType, currentPhase, true);
+  if (SS_BattleControll_AmIDM()) then return nil; end;
+  SS_BattleControll_BattleInterface_Leave_Battle:Show();
+  SS_PtDM_RequestActualBattleInfo(SS_Plots_Current().author);
 end;
 
 SS_BattleControll_RoundNext = function(battleType, currentPhase)
@@ -280,7 +277,7 @@ SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
 
         if (SS_BattleControll_AmIPlayer()) then
           SS_BattleControll_BattleInterface_End_Round:Show();
-          SS_BattleControll_BattleInterface_Leave_Battle:Show();
+          SS_BattleControll_BattleInterface_Leave_Battle:Hide();
           
           SS_BattleControll_BattleInterface_Movement_Icon:Show();
           SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
@@ -361,7 +358,9 @@ SS_BattleControll_StartMovementWatch = function()
       end;
       SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
       SS_Plots_Current().battle.previousPosition = currentPosition;
-      SS_Plots_Current().battle.movementTimer:Hide();
+      if (SS_Plots_Current().battle.movementTimer) then
+        SS_Plots_Current().battle.movementTimer:Hide();
+      end;
       SS_BattleControll_StartMovementWatch();
     end
   end)

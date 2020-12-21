@@ -157,3 +157,12 @@ SS_PtDM_EndBattleTurn = function(master)
     SS_PtDM_Direct('playerBattleTurnEnd', SS_User.settings.currentPlot, master);
   end);
 end;
+
+SS_PtDM_RequestActualBattleInfo = function(master)
+  if (not(SS_Plots_Current()) or not(SS_Plots_Current().battle)) then return nil; end;
+  if (master == UnitName('player')) then return nil; end;
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Direct('playerRequestActualBattleInfo', SS_User.settings.currentPlot, master);
+  end);
+end;
