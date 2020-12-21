@@ -315,10 +315,24 @@ SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
   SS_BattleControll_BattleInterface:Show();
 end;
 
+SS_BattleControll_LeaveBattle = function()
+  SS_BattleControll_StopMovementWatch();
+  SS_BattleControll_Reset();
+end;
 
 SS_BattleControll_Reset = function()
-  SS_Plots_Current().battle = nil;
-  SS_LeadingPlots_Current().battle = nil;
+  SS_BattleControll:Hide();
+
+  if (SS_BattleControll_AmIPlayer()) then
+    SS_Plots_Current().battle = nil;
+    SS_BattleControll_BattleInterface:Hide();
+  end;
+
+  if (SS_BattleControll_AmIDM()) then
+    SS_LeadingPlots_Current().battle = nil;
+    SS_BattleControll_DMBattleInterface:Hide();
+    SS_Event_Controll_Battle_Button:SetText("+ Сражение");
+  end;
 end;
 
 SS_BattleControll_StartMovementWatch = function()
@@ -393,15 +407,7 @@ SS_BattleControll_StopMovementWatch = function()
     return nil;
   end;
 
-  local t = 1;
-  local f = CreateFrame("Frame")
-  f:SetScript("OnUpdate", function(self, elapsed)
-    t = t - elapsed
-    if t <= 0 then
-      if (SS_Plots_Current().battle.movementTimer) then SS_Plots_Current().battle.movementTimer:Hide(); end;
-
-      SS_BattleControll_StartMovementWatch = prevMovementFn;
-      f:Hide();
-    end
-  end)
+  
+  if (SS_Plots_Current().battle.movementTimer) then SS_Plots_Current().battle.movementTimer:Hide(); end;
+  SS_BattleControll_StartMovementWatch = prevMovementFn;
 end;

@@ -257,6 +257,11 @@
             </Anchors>
           </Button>
           <Button name="$parent_Leave_Battle" inherits="OptionsButtonTemplate" text="Покинуть бой">
+            <Scripts>
+              <OnClick>
+                SS_BattleControll_LeaveBattle();
+              </OnClick>
+            </Scripts>
             <Size x = "140" y = "26" />
             <Anchors>
               <Anchor point="TOP" relativeTo="UIParent">
