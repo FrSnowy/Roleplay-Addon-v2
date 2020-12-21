@@ -1,5 +1,15 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Frame name="SS_BattleControll" parent = "UIParent" hidden = "true">
+    <Scripts>
+      <OnLoad>
+        self:RegisterEvent("PLAYER_ENTERING_WORLD");
+      </OnLoad>
+      <OnEvent>
+        if(event == "PLAYER_ENTERING_WORLD") then
+          SS_BattleControll_RoundLoadFromCache();
+        end;
+      </OnEvent>
+    </Scripts>
     <Frames>
       <Frame name="SS_BattleControll_Start" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="6">
         <Scripts>
@@ -171,16 +181,6 @@
         </Frames>
       </Frame>
       <Frame name="SS_BattleControll_BattleInterface" parent = "UIParent" frameStrata="FULLSCREEN" frameLevel="1" hidden="true">
-        <Scripts>
-          <OnLoad>
-            self:RegisterEvent("PLAYER_ENTERING_WORLD");
-          </OnLoad>
-          <OnEvent>
-            if(event == "PLAYER_ENTERING_WORLD") then
-              SS_BattleControll_Reset()
-            end;
-          </OnEvent>
-        </Scripts>
         <Frames>
           <Frame parentKey="currentTurn" inherits = "SS_FrameWithBG_Template">
             <Scripts>
@@ -269,7 +269,6 @@
       <Frame name="SS_BattleControll_DMBattleInterface" inherits = "SS_CloseableFrameWithBG_Template" movable="true" parent = "UIParent" frameStrata="FULLSCREEN" frameLevel="1" hidden="true">
         <Scripts>
           <OnLoad>
-            self:RegisterEvent("PLAYER_ENTERING_WORLD");
             self:SetSize(390, 200);
             self.title:SetText('Сражение');
             self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\player-background";
@@ -278,11 +277,6 @@
               SS_BattleControll_Hide()
             end);
           </OnLoad>
-          <OnEvent>
-            if(event == "PLAYER_ENTERING_WORLD") then
-              nil
-            end;
-          </OnEvent>
           <OnDragStart>self:StartMoving();</OnDragStart>
           <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
         </Scripts>

@@ -123,33 +123,58 @@ SS_BattleControll_BattleStart = function()
   startBattleByType[SS_LeadingPlots_Current().battle.battleType]();
 end;
 
-SS_BattleControll_RoundStart = function(battleType, currentPhase)
+SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
   local startRoundByType = {
     phases = function()
       SS_BattleControll_DrawBattleInterface('phases', currentPhase)
     end,
   };
 
-  if (SS_BattleControll_AmIPlayer()) then
-    if (currentPhase == 'active') then
-      SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
-      SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
-    elseif (currentPhase == 'defence') then
-      SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
-      SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
-    else
-      SS_Plots_Current().battle.maxMovementPoints = 0;
-      SS_Plots_Current().battle.movementPoints = 0;
+  if (not(isCacheLoad)) then
+    if (SS_BattleControll_AmIPlayer()) then
+      if (currentPhase == 'active') then
+        SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
+        SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
+      elseif (currentPhase == 'defence') then
+        SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+        SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+      else
+        SS_Plots_Current().battle.maxMovementPoints = 0;
+        SS_Plots_Current().battle.movementPoints = 0;
+      end;
     end;
   end;
 
-  if (SS_Plots_Current().battle.movementTimer) then
+  if (SS_Plots_Current() and SS_Plots_Current().battle and SS_Plots_Current().battle.movementTimer and not(isCacheLoad)) then
     SS_BattleControll_ReloadMovementWatch();
   else
     SS_BattleControll_StartMovementWatch();
   end;
+
   startRoundByType[battleType]();
   PlaySoundFile('Sound\\Interface\\PVPFlagTakenMono.ogg');
+end;
+
+SS_BattleControll_RoundLoadFromCache = function(battleType, currentPhase)
+  if (not(SS_Plots_Current()) or not(SS_Plots_Current().battle)) then return nil; end;
+
+  if (not(battleType)) then
+    battleType = SS_Plots_Current().battle.battleType;
+  end;
+
+  if (not(currentPhase)) then
+    currentPhase = SS_Plots_Current().battle.phase;
+  end;
+
+  if (not(battleType) or not(currentPhase)) then return nil; end;
+
+  local loadRoundByType = {
+    phases = function()
+      SS_BattleControll_RoundStart('phases', currentPhase, true);
+    end,
+  }
+
+  loadRoundByType[battleType]();
 end;
 
 SS_BattleControll_RoundNext = function(battleType, currentPhase)
