@@ -134,18 +134,26 @@ SS_PtA_RollResult = function(params)
 end;
 
 SS_PtDM_UpdatePlayerInfo = function(master)
-  if (SS_Plots_Current()) then
-    SS_Shared_IfOnline(master, function()
-      SS_PtDM_Params(master);
-      SS_PtDM_InspectInfo("update", master);
-    end);
-  end;
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Params(master);
+    SS_PtDM_InspectInfo("update", master);
+  end);
 end;
 
 SS_PtDM_JoinToBattle = function(master)
-  if (SS_Plots_Current()) then
-    SS_Shared_IfOnline(master, function()
-      SS_PtDM_Direct('playerJoinToBattle', SS_User.settings.currentPlot, master);
-    end);    
-  end;
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Direct('playerJoinToBattle', SS_User.settings.currentPlot, master);
+  end);
+end;
+
+SS_PtDM_EndBattleTurn = function(master)
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Direct('playerBattleTurnEnd', SS_User.settings.currentPlot, master);
+  end);
 end;

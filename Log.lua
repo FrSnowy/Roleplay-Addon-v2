@@ -400,3 +400,11 @@ end;
 SS_Log_BattleJoinSuccess = function(name)
   print('|cffFFFF00Начинается бой!|r');
 end;
+
+SS_Log_BattlePlayerEndTurn = function(name, fullCount, completedCount)
+  if (not(fullCount == completedCount)) then
+    print(name..'|cffFFFF00 закончил ход. Всего |r['..completedCount..'/'..fullCount..']');
+  else
+    print(name..'|cffFFFF00 закончил ход. Все игроки закончили ход|r');
+  end;
+end;

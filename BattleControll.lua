@@ -206,6 +206,30 @@ SS_BattleControll_RoundPrevious = function(battleType, currentPhase)
   nextRoundByType[battleType]();
 end;
 
+SS_BattleControll_EndRound = function(battleType, currentPhase)
+  if (not(SS_BattleControll_AmIPlayer())) then return nil; end;
+
+  if (not(battleType)) then
+    battleType = SS_Plots_Current().battle.battleType;
+  end;
+
+  if (not(currentPhase)) then
+    currentPhase = SS_Plots_Current().battle.phase;
+  end;
+
+  if (not(battleType) or not(currentPhase)) then return nil; end;
+
+  local changeRoundByType = {
+    phases = function()
+      SS_Plots_Current().battle.phase = 'waiting';
+      SS_BattleControll_RoundStart('phases', SS_Plots_Current().battle.phase);
+    end,
+  };
+
+  SS_PtDM_EndBattleTurn(SS_Plots_Current().author);
+  changeRoundByType[battleType]();
+end;
+
 SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
   local drawInterfaceByType = {
     phases = function()
@@ -250,9 +274,9 @@ SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
           SS_BattleControll_BattleInterface_End_Round:Hide();
           SS_BattleControll_BattleInterface_Leave_Battle:Hide();
 
-          SS_BattleControll_BattleInterface_Movement_Icon:Hide();
-          SS_BattleControll_BattleInterface.currentTurn.movement:SetText("");
-          SS_BattleControll_BattleInterface.currentTurn.movement:Hide();
+          SS_BattleControll_BattleInterface_Movement_Icon:Show();
+          SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+          SS_BattleControll_BattleInterface.currentTurn.movement:Show();
         end;
       end;
     end;

@@ -246,7 +246,7 @@
           <Button name="$parent_End_Round" inherits="OptionsButtonTemplate" text="Закончить свой ход">
             <Scripts>
               <OnClick>
-                SS_BattleControll_PlayerEndTurn();
+                SS_BattleControll_EndRound();
               </OnClick>
             </Scripts>
             <Size x = "140" y = "26" />
