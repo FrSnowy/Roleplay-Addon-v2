@@ -16,7 +16,6 @@ SS_Listeners_DM_OnPlayerBattleTurnEnd = function(plotID, player)
   end);
 
   SS_Log_BattlePlayerEndTurn(player, playersCount, completedTurnPlayers);
-
   
   if (SS_LeadingPlots_Current().battle.battleType == 'phases') then
     if (playersCount == completedTurnPlayers) then

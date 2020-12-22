@@ -45,6 +45,10 @@ SS_Listeners_DM_OnPlayerSendBattleInitiative = function(data, player)
         end;
 
         SS_DMtP_BattleInitiativeTableFormed(SS_LeadingPlots_Current().battle.phase);
+
+        if (not(SS_BattleControll_AmIPlayer())) then
+          SS_BattleControll_RoundStart('initiative', SS_LeadingPlots_Current().battle.phase);
+        end;
       end
     end)
   end;

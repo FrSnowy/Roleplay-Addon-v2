@@ -1,5 +1,5 @@
 ## Interface: 30300
-## Title: [2.0] Ролевая система от FriendSnowy
+## Title: [2.0] Ролевая система от Снежка
 ## Version: 2.0
 ## DefaultState: Enabled
 ## SavedVariablesPerCharacter: SS_User

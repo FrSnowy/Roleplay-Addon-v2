@@ -135,36 +135,40 @@ end;
 SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
   local startRoundByType = {
     phases = function()
-      if (currentPhase == 'active') then
-        SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
-        SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
-      elseif (currentPhase == 'defence') then
-        SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
-        SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
-      else
-        SS_Plots_Current().battle.maxMovementPoints = 0;
-        SS_Plots_Current().battle.movementPoints = 0;
+      if (not(isCacheLoad)) then
+        if (currentPhase == 'active') then
+          SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
+          SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
+        elseif (currentPhase == 'defence') then
+          SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+          SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+        else
+          SS_Plots_Current().battle.maxMovementPoints = 0;
+          SS_Plots_Current().battle.movementPoints = 0;
+        end;
       end;
   
       SS_BattleControll_DrawBattleInterface('phases', currentPhase)
     end,
     initiative = function()
-      if (currentPhase == 'active') then
-        SS_Plots_Current().battle.maxMovementPoints = 0;
-        SS_Plots_Current().battle.movementPoints = 0;
-      elseif (currentPhase == 'defence') then
-        SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
-        SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
-      elseif (currentPhase == 'waiting') then
-        SS_Plots_Current().battle.maxMovementPoints = 0;
-        SS_Plots_Current().battle.movementPoints = 0;
-      else
-        if (UnitName('player') == currentPhase) then
-          SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
-          SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
-        else
+      if (not(isCacheLoad)) then
+        if (currentPhase == 'active') then
           SS_Plots_Current().battle.maxMovementPoints = 0;
           SS_Plots_Current().battle.movementPoints = 0;
+        elseif (currentPhase == 'defence') then
+          SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+          SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+        elseif (currentPhase == 'waiting') then
+          SS_Plots_Current().battle.maxMovementPoints = 0;
+          SS_Plots_Current().battle.movementPoints = 0;
+        else
+          if (UnitName('player') == currentPhase) then
+            SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
+            SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
+          else
+            SS_Plots_Current().battle.maxMovementPoints = 0;
+            SS_Plots_Current().battle.movementPoints = 0;
+          end;
         end;
       end;
 
@@ -258,6 +262,7 @@ SS_BattleControll_RoundNext = function(battleType, currentPhase)
       end;
 
       SS_LeadingPlots_Current().battle.phase = nextPhase;
+      SS_Plots_Current().battle.phase = nextPhase;
       SS_BattleControll_RoundStart('initiative', nextPhase);
       SS_DMtP_ChangePhase('initiative', nextPhase);
     end,
@@ -313,6 +318,7 @@ SS_BattleControll_RoundPrevious = function(battleType, currentPhase)
       end;
 
       SS_LeadingPlots_Current().battle.phase = nextPhase;
+      SS_Plots_Current().battle.phase = nextPhase;
       SS_BattleControll_RoundStart('initiative', nextPhase);
       SS_DMtP_ChangePhase('initiative', nextPhase);
     end,
@@ -420,6 +426,9 @@ local drawInitiativeInterface = function(currentPhase)
       SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
       SS_BattleControll_BattleInterface.currentTurn.movement:Show();
     end;
+  elseif (currentPhase == 'active') then
+    SS_BattleControll_BattleInterface.currentTurn.text:SetText('Определяем порядок ходов');
+
   elseif (currentPhase == 'waiting') then
     SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ожидание других игроков');
     if (SS_BattleControll_AmIPlayer()) then

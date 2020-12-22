@@ -1,4 +1,4 @@
-local category = "Ролевая система от Snowy";
+local category = "Ролевая система от Снежка";
 
 if (GHI_MiscData and not(GHI_MiscData["WhiteList"])) then
   GHI_MiscData["WhiteList"] = {};
