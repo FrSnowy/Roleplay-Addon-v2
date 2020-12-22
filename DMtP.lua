@@ -300,6 +300,7 @@ end;
 
 SS_DMtP_ChangePhase = function(battleType, nextPhase)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
 
   SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(_, player)
     SS_Shared_IfOnline(player, function()
@@ -310,6 +311,7 @@ end;
 
 SS_DMtP_SendActualBattleInfo = function(battleType, phase, isTurnEnded, player)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
 
   if (isTurnEnded == true) then isTurnEnded = 'true' else isTurnEnded = 'false' end;
 

@@ -107,20 +107,26 @@ SS_BattleControll_BattleStart = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_LeadingPlots_Current().battle)) then return nil; end;
 
-  SS_LeadingPlots_Current().battle.started = true;
-
   local startBattleByType = {
     phases = function()
       if (SS_LeadingPlots_Current().battle.authorFights) then
-        SS_Listeners_Player_OnBattleStart_StartBattleByType.phases(SS_LeadingPlots_Current().battle.phase);
+        SS_Listeners_Player_OnBattleStart_StartBattleByType.phases(SS_LeadingPlots_Current().battle.phase, UnitName('player'));
         SS_Listeners_DM_OnPlayerJoinToBattle(SS_User.settings.currentPlot, UnitName('player'));
       end;
       SS_DMtP_StartBattle('phases', SS_LeadingPlots_Current().battle.phase);
       SS_BattleControll_RoundStart('phases', SS_LeadingPlots_Current().battle.phase);
     end,
+    initiative = function()
+      if (SS_LeadingPlots_Current().battle.authorFights) then
+        local DMInitiative = math.floor(math.random(0, SS_Stats_GetMaxMovementPoints()));
+        SS_Listeners_DM_OnPlayerSendBattleInitiative(SS_User.settings.currentPlot..'+'..DMInitiative, UnitName('player'))
+      end;
+      SS_DMtP_StartBattle('initiative', SS_LeadingPlots_Current().battle.phase);
+    end,
   };
 
   startBattleByType[SS_LeadingPlots_Current().battle.battleType]();
+  SS_LeadingPlots_Current().battle.started = true;
 end;
 
 SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)

@@ -166,3 +166,11 @@ SS_PtDM_RequestActualBattleInfo = function(master)
     SS_PtDM_Direct('playerRequestActualBattleInfo', SS_User.settings.currentPlot, master);
   end);
 end;
+
+SS_PtDM_SendBattleInitiative = function(initiative, master)
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Direct('playerSendBattleInitiative', SS_User.settings.currentPlot.."+"..initiative, master);
+  end);
+end;

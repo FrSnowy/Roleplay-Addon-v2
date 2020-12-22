@@ -1,4 +1,4 @@
-local startPhasesBattle = function(startPhase)
+local startPhasesBattle = function(startPhase, author)
   SS_Plots_Current().battle = {
     battleType = 'phases',
     phase = startPhase,
@@ -6,10 +6,24 @@ local startPhasesBattle = function(startPhase)
   }
 
   SS_BattleControll_RoundStart('phases', startPhase);
+  if (not(author == UnitName('player'))) then
+    SS_PtDM_JoinToBattle(author);
+  end;
+end;
+
+local startInitiativeBattle = function(startPhase, author)
+  SS_Plots_Current().battle = {
+    battleType = 'initiative',
+    isTurnEnded = false,
+  }
+
+  local initiative = math.floor(math.random(0, SS_Stats_GetMaxMovementPoints()));
+  SS_PtDM_SendBattleInitiative(initiative, SS_Plots_Current().author);
 end;
 
 SS_Listeners_Player_OnBattleStart_StartBattleByType = {
   phases = startPhasesBattle,
+  initiative = startInitiativeBattle,
 };
 
 SS_Listeners_Player_OnBattleStart = function(data, author)
@@ -19,8 +33,7 @@ SS_Listeners_Player_OnBattleStart = function(data, author)
   if (not(plotID == SS_User.settings.currentPlot)) then
     return nil;
   end;
-  SS_Listeners_Player_OnBattleStart_StartBattleByType[battleType](startPhase);
-  SS_PtDM_JoinToBattle(author);
+  SS_Listeners_Player_OnBattleStart_StartBattleByType[battleType](startPhase, author);
 end;
 
 SS_Listeners_Player_OnBattleJoinSuccess = function(plotID)

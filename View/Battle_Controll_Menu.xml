@@ -6,7 +6,9 @@
       </OnLoad>
       <OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
-          SS_BattleControll_RoundLoadFromCache();
+          --SS_BattleControll_RoundLoadFromCache();
+          SS_Plots_Current().battle = nil;
+          SS_LeadingPlots_Current().battle = nil;
         end;
       </OnEvent>
     </Scripts>

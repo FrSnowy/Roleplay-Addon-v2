@@ -45,6 +45,7 @@ Listeners\DM\onRollResult.lua
 Listeners\DM\onPlayerJoinToBattle.lua
 Listeners\DM\onPlayerBattleTurnEnd.lua
 Listeners\DM\onPlayerRequestActualBattleInfo.lua
+Listeners\DM\onPlayerSendBattleInitiative.lua
 Listeners\Player\onIsOnline.lua
 Listeners\Player\onIAmOnline.lua
 Listeners\Player\onInvite.lua
