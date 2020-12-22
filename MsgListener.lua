@@ -46,7 +46,8 @@ local actionFire = function(action, data, author, prefix)
     dmRemoveTargetModifier = SS_Listeners_Player_OnDMRemoveTargetModifier,
     dmForceRollSkill = SS_Listeners_Player_OnDMForceRollSkill,
     battleStart = SS_Listeners_Player_OnBattleStart,
-    battleJoinSuccess = SS_Listeners_Player_OnBattleJoinSuccess,
+    battleJoinSuccess = SS_Listeners_Player_OnBattleJoinSuccess('phases'),
+    initiativeBattleJoinSuccess = SS_Listeners_Player_OnBattleJoinSuccess('initiative'),
     changeBattlePhase = SS_Listeners_Player_OnChangeBattlePhase,
     actualBattleInfo = SS_Listeners_Player_OnRecieveActualBattleInfo,
   };

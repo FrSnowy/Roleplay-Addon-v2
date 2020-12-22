@@ -11,11 +11,17 @@ SS_Listeners_DM_OnPlayerSendBattleInitiative = function(data, player)
     SS_LeadingPlots_Current().battle.playersByInitiative = {}; 
   end;
 
-  local isPlayerInTable = SS_Shared_Includes(SS_LeadingPlots_Current().battle.playersByInitiative)(function (p)
-    return p.name == player
-  end);
+  if (not(SS_LeadingPlots_Current().battle.players)) then
+    SS_LeadingPlots_Current().battle.players = {};
+  end;
 
-  if (not(isPlayerInTable)) then
+  if (not(SS_LeadingPlots_Current().battle.players[player])) then
+    SS_LeadingPlots_Current().battle.players[player] = {
+      isTurnEnded = false,
+    };
+  end;
+
+  if (not(SS_LeadingPlots_Current().battle.players[player].isTurnEnded)) then
     table.insert(SS_LeadingPlots_Current().battle.playersByInitiative, { name = player, initiative = initiative });
     table.sort(SS_LeadingPlots_Current().battle.playersByInitiative, function(player, nextPlayer)
       return player.initiative > nextPlayer.initiative
@@ -33,6 +39,12 @@ SS_Listeners_DM_OnPlayerSendBattleInitiative = function(data, player)
       if syncTime <= 0 then
         SS_LeadingPlots_Current().battle.syncTimer:Hide();
         SS_LeadingPlots_Current().battle.syncTimer = nil;
+
+        if (not(SS_LeadingPlots_Current().battle.phase == 'defence')) then
+          SS_LeadingPlots_Current().battle.phase = SS_LeadingPlots_Current().battle.playersByInitiative[1].name;
+        end;
+
+        SS_DMtP_BattleInitiativeTableFormed(SS_LeadingPlots_Current().battle.phase);
       end
     end)
   end;

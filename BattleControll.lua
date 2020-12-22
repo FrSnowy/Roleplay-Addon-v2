@@ -117,27 +117,23 @@ SS_BattleControll_BattleStart = function()
       SS_BattleControll_RoundStart('phases', SS_LeadingPlots_Current().battle.phase);
     end,
     initiative = function()
+      SS_BattleControll_Start:Hide();
       if (SS_LeadingPlots_Current().battle.authorFights) then
         local DMInitiative = math.floor(math.random(0, SS_Stats_GetMaxMovementPoints()));
+        SS_Listeners_Player_OnBattleStart_StartBattleByType.initiative(SS_LeadingPlots_Current().battle.phase, UnitName('player'));
         SS_Listeners_DM_OnPlayerSendBattleInitiative(SS_User.settings.currentPlot..'+'..DMInitiative, UnitName('player'))
       end;
       SS_DMtP_StartBattle('initiative', SS_LeadingPlots_Current().battle.phase);
     end,
   };
 
-  startBattleByType[SS_LeadingPlots_Current().battle.battleType]();
   SS_LeadingPlots_Current().battle.started = true;
+  startBattleByType[SS_LeadingPlots_Current().battle.battleType]();
 end;
 
 SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
   local startRoundByType = {
     phases = function()
-      SS_BattleControll_DrawBattleInterface('phases', currentPhase)
-    end,
-  };
-
-  if (not(isCacheLoad)) then
-    if (SS_BattleControll_AmIPlayer()) then
       if (currentPhase == 'active') then
         SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
         SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
@@ -148,16 +144,37 @@ SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
         SS_Plots_Current().battle.maxMovementPoints = 0;
         SS_Plots_Current().battle.movementPoints = 0;
       end;
-    end;
-  end;
+  
+      SS_BattleControll_DrawBattleInterface('phases', currentPhase)
+    end,
+    initiative = function()
+      if (currentPhase == 'defence') then
+        SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+        SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+      elseif (currentPhase == 'waiting') then
+        SS_Plots_Current().battle.maxMovementPoints = 0;
+        SS_Plots_Current().battle.movementPoints = 0;
+      else
+        if (UnitName('player') == currentPhase) then
+          SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
+          SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
+        else
+          SS_Plots_Current().battle.maxMovementPoints = 0;
+          SS_Plots_Current().battle.movementPoints = 0;
+        end;
+      end;
 
+      SS_BattleControll_DrawBattleInterface('initiative', currentPhase)
+    end,
+  };
+
+  startRoundByType[battleType]();
   if (SS_Plots_Current() and SS_Plots_Current().battle and SS_Plots_Current().battle.movementTimer and not(isCacheLoad)) then
     SS_BattleControll_ReloadMovementWatch();
   else
     SS_BattleControll_StartMovementWatch();
   end;
 
-  startRoundByType[battleType]();
   PlaySoundFile('Sound\\Interface\\PVPFlagTakenMono.ogg');
 end;
 
@@ -191,13 +208,13 @@ SS_BattleControll_RoundNext = function(battleType, currentPhase)
 
   if (not(battleType) or not(currentPhase)) then return nil; end;
 
-  SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
-    p.isTurnEnded = false;
-  end);
-
   local nextRoundByType = {
     phases = function()
       local nextPhase = nil;
+      
+      SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
+        p.isTurnEnded = false;
+      end);
 
       if (currentPhase == 'active' or currentPhase == 'waiting') then
         nextPhase = 'defence'
@@ -209,9 +226,41 @@ SS_BattleControll_RoundNext = function(battleType, currentPhase)
       SS_BattleControll_RoundStart('phases', nextPhase);
       SS_DMtP_ChangePhase('phases', nextPhase);
     end,
+    initiative = function()
+      local nextPhase = nil;
+
+      if (currentPhase == 'defence') then
+        SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
+          p.isTurnEnded = false;
+        end);
+
+        nextPhase = SS_LeadingPlots_Current().battle.playersByInitiative[1].name;
+      else        
+        local currentIndex = 0;
+
+        local counter = 0;
+        SS_Shared_ForEach(SS_LeadingPlots_Current().battle.playersByInitiative)(function(p)
+          counter = counter + 1;
+          if (currentIndex == 0 and p.name == SS_LeadingPlots_Current().battle.phase) then
+            currentIndex = counter;
+          end;
+        end);
+
+        if (currentIndex + 1 <= #SS_LeadingPlots_Current().battle.playersByInitiative) then
+          nextPhase = SS_LeadingPlots_Current().battle.playersByInitiative[currentIndex + 1].name;
+        else
+          nextPhase = 'defence';
+        end;
+      end;
+
+      SS_LeadingPlots_Current().battle.phase = nextPhase;
+      SS_BattleControll_RoundStart('initiative', nextPhase);
+      SS_DMtP_ChangePhase('initiative', nextPhase);
+    end,
   };
 
   nextRoundByType[battleType]();
+
 end;
 
 SS_BattleControll_RoundPrevious = function(battleType, currentPhase)
@@ -256,68 +305,131 @@ SS_BattleControll_EndRound = function(battleType, currentPhase)
       SS_Plots_Current().battle.phase = 'waiting';
       SS_BattleControll_RoundStart('phases', SS_Plots_Current().battle.phase);
     end,
+    initiative = function()
+      SS_Plots_Current().battle.phase = 'waiting';
+      SS_BattleControll_RoundStart('initiative', SS_Plots_Current().battle.phase);
+    end,
   };
 
   SS_PtDM_EndBattleTurn(SS_Plots_Current().author);
   changeRoundByType[battleType]();
 end;
 
-SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
-  local drawInterfaceByType = {
-    phases = function()
-      if (not(SS_BattleControll_AmIPlayer())) then
-        SS_BattleControll_BattleInterface_Movement_Icon:Hide();
-        SS_BattleControll_BattleInterface.currentTurn.movement:Hide();
+local hidePlayerInterfacePartsIfNeed = function()
+  if (not(SS_BattleControll_AmIPlayer())) then
+    SS_BattleControll_BattleInterface_Movement_Icon:Hide();
+    SS_BattleControll_BattleInterface.currentTurn.movement:Hide();
+    SS_BattleControll_BattleInterface_End_Round:Hide();
+    SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+  end;
+end;
+
+local drawDMInterfaceIfNeed = function()
+  if (SS_BattleControll_AmIDM()) then
+    SS_BattleControll_DMBattleInterface:Show();
+  else
+    SS_BattleControll_DMBattleInterface:Hide();
+  end;
+end;
+
+local drawPhasesInterface = function(currentPhase)
+  hidePlayerInterfacePartsIfNeed();
+  drawDMInterfaceIfNeed();
+
+  if (currentPhase == 'active') then
+    SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза активного действия');
+
+    if (SS_BattleControll_AmIPlayer()) then
+      SS_BattleControll_BattleInterface_End_Round:Show();
+      SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+      
+      SS_BattleControll_BattleInterface_Movement_Icon:Show();
+      SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+      SS_BattleControll_BattleInterface.currentTurn.movement:Show();
+    end;
+  elseif (currentPhase == 'defence') then
+    SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза защиты');
+
+    if (SS_BattleControll_AmIPlayer()) then
+      SS_BattleControll_BattleInterface_End_Round:Hide();
+      SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+
+      SS_BattleControll_BattleInterface_Movement_Icon:Show();
+      SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+      SS_BattleControll_BattleInterface.currentTurn.movement:Show();
+    end;
+  elseif (currentPhase == 'waiting') then
+    SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ожидание других игроков');
+    if (SS_BattleControll_AmIPlayer()) then
+      SS_BattleControll_BattleInterface_End_Round:Hide();
+      SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+
+      SS_BattleControll_BattleInterface_Movement_Icon:Show();
+      SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+      SS_BattleControll_BattleInterface.currentTurn.movement:Show();
+    end;
+  end;
+end;
+
+local drawInitiativeInterface = function(currentPhase)
+  hidePlayerInterfacePartsIfNeed();
+  drawDMInterfaceIfNeed();
+
+  if (currentPhase == 'defence') then
+    SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза защиты');
+
+    if (SS_BattleControll_AmIPlayer()) then
+      SS_BattleControll_BattleInterface_End_Round:Hide();
+      SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+
+      SS_BattleControll_BattleInterface_Movement_Icon:Show();
+      SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+      SS_BattleControll_BattleInterface.currentTurn.movement:Show();
+    end;
+  elseif (currentPhase == 'waiting') then
+    SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ожидание других игроков');
+    if (SS_BattleControll_AmIPlayer()) then
+      SS_BattleControll_BattleInterface_End_Round:Hide();
+      SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+
+      SS_BattleControll_BattleInterface_Movement_Icon:Show();
+      SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+      SS_BattleControll_BattleInterface.currentTurn.movement:Show();
+    end;
+  else
+    if (currentPhase == UnitName('player')) then
+      SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ваш ход');
+      
+      if (SS_BattleControll_AmIPlayer()) then
+        SS_BattleControll_BattleInterface_End_Round:Show();
+      end;
+    else
+      SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ход игрока '..currentPhase);
+      
+      if (SS_BattleControll_AmIPlayer()) then
         SS_BattleControll_BattleInterface_End_Round:Hide();
-        SS_BattleControll_BattleInterface_Leave_Battle:Hide();
-      end;
-
-      if (SS_BattleControll_AmIDM()) then
-        SS_BattleControll_DMBattleInterface:Show();
-      else
-        SS_BattleControll_DMBattleInterface:Hide();
-      end;
-
-      if (currentPhase == 'active') then
-        SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза активного действия');
-
-        if (SS_BattleControll_AmIPlayer()) then
-          SS_BattleControll_BattleInterface_End_Round:Show();
-          SS_BattleControll_BattleInterface_Leave_Battle:Hide();
-          
-          SS_BattleControll_BattleInterface_Movement_Icon:Show();
-          SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
-          SS_BattleControll_BattleInterface.currentTurn.movement:Show();
-        end;
-      elseif (currentPhase == 'defence') then
-        SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза защиты');
-
-        if (SS_BattleControll_AmIPlayer()) then
-          SS_BattleControll_BattleInterface_End_Round:Hide();
-          SS_BattleControll_BattleInterface_Leave_Battle:Hide();
-
-          SS_BattleControll_BattleInterface_Movement_Icon:Show();
-          SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
-          SS_BattleControll_BattleInterface.currentTurn.movement:Show();
-        end;
-      elseif (currentPhase == 'waiting') then
-        SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ожидание других игроков');
-        if (SS_BattleControll_AmIPlayer()) then
-          SS_BattleControll_BattleInterface_End_Round:Hide();
-          SS_BattleControll_BattleInterface_Leave_Battle:Hide();
-
-          SS_BattleControll_BattleInterface_Movement_Icon:Show();
-          SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
-          SS_BattleControll_BattleInterface.currentTurn.movement:Show();
-        end;
       end;
     end;
+
+    if (SS_BattleControll_AmIPlayer()) then
+      SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+      SS_BattleControll_BattleInterface_Movement_Icon:Show();
+      SS_BattleControll_BattleInterface.currentTurn.movement:SetText(SS_Plots_Current().battle.movementPoints.." / "..SS_Plots_Current().battle.maxMovementPoints);
+      SS_BattleControll_BattleInterface.currentTurn.movement:Show();
+    end;
+  end;
+end;
+
+SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
+  local drawInterfaceByType = {
+    phases = drawPhasesInterface,
+    initiative = drawInitiativeInterface,
   }
 
   SS_BattleControll_Start:Hide();
   SS_BattleControll_BattleInterface:Hide();
 
-  drawInterfaceByType[battleType]();
+  drawInterfaceByType[battleType](currentPhase);
   SS_BattleControll_BattleInterface:Show();
 end;
 

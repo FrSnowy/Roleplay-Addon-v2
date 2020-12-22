@@ -18,7 +18,9 @@ local startInitiativeBattle = function(startPhase, author)
   }
 
   local initiative = math.floor(math.random(0, SS_Stats_GetMaxMovementPoints()));
-  SS_PtDM_SendBattleInitiative(initiative, SS_Plots_Current().author);
+  if (not(author == UnitName('player'))) then
+    SS_PtDM_SendBattleInitiative(initiative, SS_Plots_Current().author);
+  end;
 end;
 
 SS_Listeners_Player_OnBattleStart_StartBattleByType = {
@@ -33,12 +35,24 @@ SS_Listeners_Player_OnBattleStart = function(data, author)
   if (not(plotID == SS_User.settings.currentPlot)) then
     return nil;
   end;
+
   SS_Listeners_Player_OnBattleStart_StartBattleByType[battleType](startPhase, author);
 end;
 
-SS_Listeners_Player_OnBattleJoinSuccess = function(plotID)
+SS_Listeners_Player_OnBattleJoinSuccess = function(battleType)
   if (not(SS_Plots_Current())) then return nil; end;
-  if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
 
-  SS_Log_BattleJoinSuccess();
+  return function(data)
+    local plotID = strsplit('+', data);
+    if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
+
+    if (battleType == 'initiative') then
+      local _, phase = strsplit('+', data);
+      SS_Plots_Current().battle.phase = phase;
+      SS_BattleControll_RoundStart(battleType, phase);
+    end;
+  
+    SS_Log_BattleJoinSuccess();
+  end;
+
 end;

@@ -320,3 +320,14 @@ SS_DMtP_SendActualBattleInfo = function(battleType, phase, isTurnEnded, player)
     SS_DMtP_Direct('actualBattleInfo', SS_User.settings.currentPlot..'+'..battleType..'+'..phase..'+'..isTurnEnded, player);    
   end);
 end;
+
+SS_DMtP_BattleInitiativeTableFormed = function(currentPhase)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
+
+  SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(_, player)
+    SS_Shared_IfOnline(player, function()
+      SS_DMtP_Direct('initiativeBattleJoinSuccess', SS_User.settings.currentPlot..'+'..currentPhase, player);
+    end);
+  end);
+end;
