@@ -17,7 +17,12 @@ SS_Listeners_DM_OnPlayerBattleTurnEnd = function(plotID, player)
 
   SS_Log_BattlePlayerEndTurn(player, playersCount, completedTurnPlayers);
 
-  if (playersCount == completedTurnPlayers) then
+  
+  if (SS_LeadingPlots_Current().battle.battleType == 'phases') then
+    if (playersCount == completedTurnPlayers) then
+      SS_BattleControll_RoundNext()
+    end;
+  elseif(SS_LeadingPlots_Current().battle.battleType == 'initiative') then
     SS_BattleControll_RoundNext()
   end;
 end;

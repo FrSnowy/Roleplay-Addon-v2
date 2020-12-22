@@ -282,6 +282,36 @@ SS_BattleControll_RoundPrevious = function(battleType, currentPhase)
     phases = function()
       SS_BattleControll_RoundNext(battleType, currentPhase)
     end,
+    initiative = function()
+      local nextPhase = nil;
+
+      if (currentPhase == 'defence') then
+        SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
+          p.isTurnEnded = false;
+        end);
+
+        nextPhase = SS_LeadingPlots_Current().battle.playersByInitiative[#SS_LeadingPlots_Current().battle.playersByInitiative].name;
+      else        
+        local currentIndex = 0;
+        local counter = 0;
+        SS_Shared_ForEach(SS_LeadingPlots_Current().battle.playersByInitiative)(function(p)
+          counter = counter + 1;
+          if (currentIndex == 0 and p.name == SS_LeadingPlots_Current().battle.phase) then
+            currentIndex = counter;
+          end;
+        end);
+
+        if (currentIndex -1 <= 0) then
+          nextPhase = 'defence';
+        else
+          nextPhase = SS_LeadingPlots_Current().battle.playersByInitiative[currentIndex - 1].name;
+        end;
+      end;
+
+      SS_LeadingPlots_Current().battle.phase = nextPhase;
+      SS_BattleControll_RoundStart('initiative', nextPhase);
+      SS_DMtP_ChangePhase('initiative', nextPhase);
+    end,
   };
 
   nextRoundByType[battleType]();
@@ -306,8 +336,8 @@ SS_BattleControll_EndRound = function(battleType, currentPhase)
       SS_BattleControll_RoundStart('phases', SS_Plots_Current().battle.phase);
     end,
     initiative = function()
-      SS_Plots_Current().battle.phase = 'waiting';
-      SS_BattleControll_RoundStart('initiative', SS_Plots_Current().battle.phase);
+      SS_BattleControll_BattleInterface_End_Round:Hide();
+      -- Тут ничего не делаем. Фазы меняются последовательно без ожидания других игроков
     end,
   };
 
