@@ -110,9 +110,9 @@ SS_BattleControll_BattleStart = function()
   local startBattleByType = {
     phases = function()
       if (SS_LeadingPlots_Current().battle.authorFights) then
-        SS_Listeners_Player_OnBattleStart_StartBattleByType.phases(SS_LeadingPlots_Current().battle.phase, UnitName('player'));
         SS_Listeners_DM_OnPlayerJoinToBattle(SS_User.settings.currentPlot, UnitName('player'));
       end;
+      SS_Listeners_Player_OnBattleStart_StartBattleByType.phases(SS_LeadingPlots_Current().battle.phase, UnitName('player'));
       SS_DMtP_StartBattle('phases', SS_LeadingPlots_Current().battle.phase);
       SS_BattleControll_RoundStart('phases', SS_LeadingPlots_Current().battle.phase);
     end,
@@ -120,10 +120,11 @@ SS_BattleControll_BattleStart = function()
       SS_BattleControll_Start:Hide();
       if (SS_LeadingPlots_Current().battle.authorFights) then
         local DMInitiative = math.floor(math.random(0, SS_Stats_GetMaxMovementPoints()));
-        SS_Listeners_Player_OnBattleStart_StartBattleByType.initiative(SS_LeadingPlots_Current().battle.phase, UnitName('player'));
         SS_Listeners_DM_OnPlayerSendBattleInitiative(SS_User.settings.currentPlot..'+'..DMInitiative, UnitName('player'))
       end;
+      SS_Listeners_Player_OnBattleStart_StartBattleByType.initiative(SS_LeadingPlots_Current().battle.phase, UnitName('player'));
       SS_DMtP_StartBattle('initiative', SS_LeadingPlots_Current().battle.phase);
+      SS_BattleControll_RoundStart('initiative', SS_LeadingPlots_Current().battle.phase);
     end,
   };
 
@@ -148,7 +149,10 @@ SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
       SS_BattleControll_DrawBattleInterface('phases', currentPhase)
     end,
     initiative = function()
-      if (currentPhase == 'defence') then
+      if (currentPhase == 'active') then
+        SS_Plots_Current().battle.maxMovementPoints = 0;
+        SS_Plots_Current().battle.movementPoints = 0;
+      elseif (currentPhase == 'defence') then
         SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
         SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
       elseif (currentPhase == 'waiting') then
@@ -164,7 +168,7 @@ SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
         end;
       end;
 
-      SS_BattleControll_DrawBattleInterface('initiative', currentPhase)
+      SS_BattleControll_DrawBattleInterface('initiative', currentPhase);
     end,
   };
 

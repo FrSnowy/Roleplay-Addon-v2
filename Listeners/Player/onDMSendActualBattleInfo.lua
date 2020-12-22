@@ -9,17 +9,19 @@ SS_Listeners_Player_OnRecieveActualBattleInfo = function(data, master)
 
   isTurnEnded = isTurnEnded == 'true';
 
-  print(battleType, phase, isTurnEnded);
-
-
   SS_Plots_Current().battle.battleType = battleType;
   SS_Plots_Current().battle.isTurnEnded = isTurnEnded;
 
-  if (isTurnEnded) then
-    SS_Plots_Current().battle.phase = 'waiting';
+  if (battleType == 'phases') then
+    if (isTurnEnded) then
+      SS_Plots_Current().battle.phase = 'waiting';
+    else
+      SS_Plots_Current().battle.phase = phase;
+    end;
   else
     SS_Plots_Current().battle.phase = phase;
   end;
+
 
   SS_BattleControll_RoundStart(battleType, phase, true);
 end;

@@ -315,7 +315,6 @@ SS_DMtP_SendActualBattleInfo = function(battleType, phase, isTurnEnded, player)
 
   if (isTurnEnded == true) then isTurnEnded = 'true' else isTurnEnded = 'false' end;
 
-  print(SS_User.settings.currentPlot..'+'..battleType..'+'..phase..'+'..isTurnEnded);
   SS_Shared_IfOnline(player, function()
     SS_DMtP_Direct('actualBattleInfo', SS_User.settings.currentPlot..'+'..battleType..'+'..phase..'+'..isTurnEnded, player);    
   end);
