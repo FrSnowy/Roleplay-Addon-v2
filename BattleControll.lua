@@ -177,6 +177,11 @@ SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
   };
 
   startRoundByType[battleType]();
+
+  if (SS_Plots_Current().battle.battleType == battleType and SS_Plots_Current().battle.phase == currentPhase and SS_Plots_Current().battle.movementTimer and not(isCacheLoad)) then
+    return nil;
+  end;
+
   if (SS_Plots_Current() and SS_Plots_Current().battle and SS_Plots_Current().battle.movementTimer and not(isCacheLoad)) then
     SS_BattleControll_ReloadMovementWatch();
   else
@@ -200,9 +205,15 @@ SS_BattleControll_RoundLoadFromCache = function(battleType, currentPhase)
   if (not(battleType) or not(currentPhase)) then return nil; end;
   
   SS_BattleControll_RoundStart(battleType, currentPhase, true);
-  if (SS_BattleControll_AmIDM()) then return nil; end;
-  SS_BattleControll_BattleInterface_Leave_Battle:Show();
-  SS_PtDM_RequestActualBattleInfo(SS_Plots_Current().author);
+  if (not(SS_BattleControll_AmIDM())) then
+    SS_BattleControll_BattleInterface_Leave_Battle:Show();
+    SS_PtDM_RequestActualBattleInfo(SS_Plots_Current().author);
+  end;
+
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().battle)) then return nil; end;
+
+  SS_BattleControll_RoundStart(battleType, currentPhase);
+  SS_DMtP_ChangePhase(battleType, currentPhase);
 end;
 
 SS_BattleControll_RoundNext = function(battleType, currentPhase)
