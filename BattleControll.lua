@@ -191,17 +191,12 @@ SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
     end,
   };
 
-  startRoundByType[battleType]();
-
   if (not(SS_Plots_Current().battle.movementTimer) or not(SS_Plots_Current().battle.movementTimer['Hide'])) then
     SS_Plots_Current().battle.movementTimer = nil;
     SS_BattleControll_ReloadMovementWatch();
   end;
 
-  if (SS_Plots_Current().battle.battleType == battleType and SS_Plots_Current().battle.phase == currentPhase and SS_Plots_Current().battle.movementTimer and not(isCacheLoad)) then
-    return nil;
-  end;
-
+  startRoundByType[battleType]();
   PlaySoundFile('Sound\\Interface\\PVPFlagTakenMono.ogg');
 end;
 
@@ -218,7 +213,6 @@ SS_BattleControll_RoundLoadFromCache = function(battleType, currentPhase)
 
   if (not(battleType) or not(currentPhase)) then return nil; end;
   
-  SS_BattleControll_RoundStart(battleType, currentPhase, true);
   if (not(SS_BattleControll_AmIDM())) then
     SS_BattleControll_BattleInterface_Leave_Battle:Show();
     SS_PtDM_RequestActualBattleInfo(SS_Plots_Current().author);
@@ -226,7 +220,7 @@ SS_BattleControll_RoundLoadFromCache = function(battleType, currentPhase)
 
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().battle)) then return nil; end;
 
-  SS_BattleControll_RoundStart(battleType, currentPhase);
+  SS_BattleControll_RoundStart(battleType, currentPhase, true);
   SS_DMtP_ChangePhase(battleType, currentPhase);
 end;
 
@@ -406,7 +400,11 @@ local drawPhasesInterface = function(currentPhase)
 
     if (SS_BattleControll_AmIPlayer()) then
       SS_BattleControll_BattleInterface_End_Round:Show();
-      SS_BattleControll_BattleInterface_Double_Move:Show();
+      if (SS_Plots_Current().battle.movementPoints == SS_Plots_Current().battle.maxMovementPoints) then
+        SS_BattleControll_BattleInterface_Double_Move:Show();
+      else
+        SS_BattleControll_BattleInterface_Double_Move:Hide();
+      end;
       SS_BattleControll_BattleInterface_Leave_Battle:Hide();
       
       SS_BattleControll_BattleInterface_Movement_Icon:Show();
@@ -553,6 +551,9 @@ SS_BattleControll_StartMovementWatch = function()
         if (spentedPoints > 1) then spentedPoints = 1; end;
     
         SS_Plots_Current().battle.movementPoints = SS_Plots_Current().battle.movementPoints - spentedPoints;
+        if (SS_Plots_Current().battle.movementPoints < SS_Plots_Current().battle.maxMovementPoints) then
+          SS_BattleControll_BattleInterface_Double_Move:Hide();
+        end;
         if (SS_Plots_Current().battle.movementPoints <= 0) then
           SS_Plots_Current().battle.movementPoints = 0;
           SS_BattleControll_BattleInterface.currentTurn.movement:SetTextColor(1, 0, 0);
@@ -582,7 +583,7 @@ SS_BattleControll_ReloadMovementWatch = function()
     return nil;
   end;
 
-  if (SS_Plots_Current().battle.movementTimer) then SS_Plots_Current().battle.movementTimer:Hide(); end;
+  if (SS_Plots_Current().battle.movementTimer and SS_Plots_Current().battle.movementTimer['Hide']) then SS_Plots_Current().battle.movementTimer:Hide(); end;
   SS_Plots_Current().battle.movementTimer = nil;
 
   local t = 1;
