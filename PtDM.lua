@@ -182,6 +182,16 @@ SS_PtDM_SendBattleInitiative = function(initiative, master)
   end);
 end;
 
+SS_PtDM_SendMovementPointsEnd = function(master)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (not(SS_Plots_Current().battle)) then return nil; end;
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Direct('playerMovementPointsEnd', SS_User.settings.currentPlot, master);
+  end);
+
+end;
+
 SS_PtDM_LeaveBattleSuccess = function(master)
   if (not(SS_Plots_Current())) then return nil; end;
 

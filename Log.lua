@@ -409,6 +409,10 @@ SS_Log_BattlePlayerEndTurn = function(name, fullCount, completedCount)
   end;
 end;
 
+SS_Log_PlayerMovingWithoutPoints = function(name)
+  print(name..'|cffFFFF00 потерял все доступные очки перемещения!|r');
+end;
+
 SS_Log_BattleEnded = function()
   print('|cffFFFF00Бой завершён|r');
 end;

@@ -33,6 +33,7 @@ local actionFire = function(action, data, author, prefix)
     playerRequestActualBattleInfo = SS_Listeners_DM_OnPlayerRequestActualBattleInfo,
     playerSendBattleInitiative = SS_Listeners_DM_OnPlayerSendBattleInitiative,
     playerLeaveBattle = SS_Listeners_DM_OnPlayerLeaveBattle,
+    playerMovementPointsEnd = SS_Listeners_DM_OnPlayerMovementPointsEnd,
     isOnline = SS_Listeners_Player_OnIsOnline,
     iAmOnline = SS_Listeners_Player_OnIAmOnline,
     invite = SS_Listeners_Player_OnInvite,

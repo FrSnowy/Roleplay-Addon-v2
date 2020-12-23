@@ -25,7 +25,12 @@ SS_Stats_GetValue = function(stat)
 end;
 
 SS_Stats_GetMaxMovementPoints = function()
-  return 4 + math.floor(SS_Stats_GetValue('mobility') / 2.4);
+  local movementPoints = 4 + math.floor(SS_Stats_GetValue('mobility') / 2.4);
+  if (SS_Plots_Current().battle.fullRoundMovement) then
+    movementPoints = movementPoints * 2;
+  end;
+
+  return movementPoints;
 end;
 
 SS_Stats_GetValueWithoutModifier = function(stat)
