@@ -231,7 +231,6 @@
                 GameTooltip:Show()
               </OnEnter>
               <OnLeave>
-                SS_Player_Menu:SetPoint("LEFT", -64, 0);
                 GameTooltip:Hide()
               </OnLeave>
             </Scripts>
@@ -243,16 +242,52 @@
             </Size>
             <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\boot.blp" />
           </Button>
-          <Button name="$parent_End_Round" inherits="OptionsButtonTemplate" text="Закончить свой ход">
+          <Button name="$parent_Double_Move" inherits="OptionsButtonTemplate" text="x2">
+            <Scripts>
+              <OnClick>
+                SS_BattleControll_DoubleMovement();
+              </OnClick>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "CENTER")
+                GameTooltip:AddLine("Удвоить очки перемещения")
+                GameTooltip:AddLine("Позволяет преодолеть большее расстояние,")
+                GameTooltip:AddLine("мгновенно завершает ход, когда ОП кончаются.")
+                GameTooltip:AddLine("При использовании двойного перемещения, запрещено")
+                GameTooltip:AddLine("совершать иные действия в этом ходу.")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
+            </Scripts>
+            <Size x = "40" y = "26" />
+            <Anchors>
+              <Anchor point="TOP" relativeTo="UIParent">
+                <Offset x="-15" y="-63"/>
+              </Anchor> 
+            </Anchors>
+          </Button>
+          <Button name="$parent_End_Round" inherits="OptionsButtonTemplate" text="Завершить">
             <Scripts>
               <OnClick>
                 SS_BattleControll_EndRound();
               </OnClick>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "CENTER")
+                GameTooltip:AddLine("Закончить ход")
+                GameTooltip:AddLine("Нажатие обозначает, что вы закончили все активные действия из доступных")
+                GameTooltip:AddLine("(перемещение, атака, использование предмета) и готовы перейти к")
+                GameTooltip:AddLine("следующему раунду сражения.")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
             </Scripts>
-            <Size x = "140" y = "26" />
+            <Size x = "80" y = "26" />
             <Anchors>
               <Anchor point="TOP" relativeTo="UIParent">
-                <Offset x="50" y="-63"/>
+                <Offset x="85" y="-63"/>
               </Anchor> 
             </Anchors>
           </Button>
@@ -261,6 +296,16 @@
               <OnClick>
                 SS_BattleControll_LeaveBattle();
               </OnClick>
+              <OnEnter>
+                GameTooltip:SetOwner(this, "CENTER")
+                GameTooltip:AddLine("Покинуть бой")
+                GameTooltip:AddLine("Мгновенно выведет вас из состояния боя. Использовать,")
+                GameTooltip:AddLine("если мастер вышел из игры, но оставил вас в бою.")
+                GameTooltip:Show()
+              </OnEnter>
+              <OnLeave>
+                GameTooltip:Hide()
+              </OnLeave>
             </Scripts>
             <Size x = "140" y = "26" />
             <Anchors>
