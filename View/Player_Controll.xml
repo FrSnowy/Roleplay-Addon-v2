@@ -72,6 +72,21 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
+        <FontString name="$parent_Battle_Text" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="14"/>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="150" y="25" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
       </Layer>
     </Layers>
     <Frames>

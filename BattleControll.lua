@@ -500,6 +500,7 @@ SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
 
   SS_BattleControll_Start:Hide();
   SS_BattleControll_BattleInterface:Hide();
+  PlayerLevelText:SetTextColor(1, 0, 0);
 
   drawInterfaceByType[battleType](currentPhase);
   SS_BattleControll_BattleInterface:Show();
@@ -508,6 +509,10 @@ end;
 SS_BattleControll_LeaveBattle = function()
   SS_BattleControll_StopMovementWatch();
   SS_BattleControll_Reset();
+
+  if (not(SS_Plots_Current().author == UnitName('player'))) then
+    SS_PtDM_LeaveBattleSuccess(SS_Plots_Current().author);
+  end;
 end;
 
 SS_BattleControll_Reset = function()

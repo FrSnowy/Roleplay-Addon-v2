@@ -32,6 +32,7 @@ local actionFire = function(action, data, author, prefix)
     playerBattleTurnEnd = SS_Listeners_DM_OnPlayerBattleTurnEnd,
     playerRequestActualBattleInfo = SS_Listeners_DM_OnPlayerRequestActualBattleInfo,
     playerSendBattleInitiative = SS_Listeners_DM_OnPlayerSendBattleInitiative,
+    playerLeaveBattle = SS_Listeners_DM_OnPlayerLeaveBattle,
     isOnline = SS_Listeners_Player_OnIsOnline,
     iAmOnline = SS_Listeners_Player_OnIAmOnline,
     invite = SS_Listeners_Player_OnInvite,
@@ -50,6 +51,7 @@ local actionFire = function(action, data, author, prefix)
     initiativeBattleJoinSuccess = SS_Listeners_Player_OnBattleJoinSuccess('initiative'),
     changeBattlePhase = SS_Listeners_Player_OnChangeBattlePhase,
     actualBattleInfo = SS_Listeners_Player_OnRecieveActualBattleInfo,
+    battleEnd = SS_Listeners_Player_OnBattleEnd,
   };
 
   if (not(actions[action])) then

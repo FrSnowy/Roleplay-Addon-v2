@@ -334,6 +334,19 @@
           <Anchor point="CENTER" />
         </Anchors>
         <Frames>
+          <Button name="$parent_Next_Round" inherits="OptionsButtonTemplate" text="След. фаза/ход">
+            <Scripts>
+              <OnClick>
+                SS_BattleControll_RoundNext()
+              </OnClick>
+            </Scripts>
+            <Size x = "115" y = "26" />
+            <Anchors>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-50"/>
+              </Anchor> 
+            </Anchors>
+          </Button>
           <Button name="$parent_Prev_Round" inherits="OptionsButtonTemplate" text="Пред. фаза/ход">
             <Scripts>
               <OnClick>
@@ -342,15 +355,17 @@
             </Scripts>
             <Size x = "115" y = "26" />
             <Anchors>
-              <Anchor point="BOTTOMLEFT">
-                <Offset x="20" y="20"/>
+              <Anchor point="TOPRIGHT">
+                <Offset x="-20" y="-80"/>
               </Anchor> 
             </Anchors>
           </Button>
-          <Button name="$parent_Next_Round" inherits="OptionsButtonTemplate" text="След. фаза/ход">
+          <Button name="$parent_End_Battle" inherits="OptionsButtonTemplate" text="Закончить бой">
             <Scripts>
               <OnClick>
-                SS_BattleControll_RoundNext()
+                self:GetParent():Hide();
+                SS_DMtP_BattleEnd();
+                SS_BattleControll_LeaveBattle();
               </OnClick>
             </Scripts>
             <Size x = "115" y = "26" />

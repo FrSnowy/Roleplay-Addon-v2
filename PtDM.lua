@@ -46,7 +46,10 @@ end;
 SS_PtDM_Params = function(plotAuthor)
   if (not(SS_Plots_Current())) then return nil end;
 
-  local paramsString = SS_User.settings.currentPlot.."+"..SS_Params_GetHealth().."+"..SS_Params_GetMaxHealth().."+"..SS_Params_GetBarrier().."+"..SS_Params_GetMaxBarrier().."+"..SS_Progress_GetLevel();
+  local isInBattle = not(SS_Plots_Current().battle == nil);
+  if (isInBattle) then isInBattle = 'true' else isInBattle = 'false'; end;
+
+  local paramsString = SS_User.settings.currentPlot.."+"..SS_Params_GetHealth().."+"..SS_Params_GetMaxHealth().."+"..SS_Params_GetBarrier().."+"..SS_Params_GetMaxBarrier().."+"..SS_Progress_GetLevel().."+"..isInBattle;
   SS_PtDM_Direct('sendParams', paramsString, plotAuthor);
 end;
 
@@ -89,7 +92,11 @@ SS_PtDM_InspectInfo = function(actionType, plotAuthor)
 
   skillModifiersStr = skillModifiersStr:sub(1, #skillModifiersStr - 1);
   if (skillModifiersStr == '') then skillModifiersStr = 'nothing'; end;
-  SS_PtDM_Direct('sendInspectInfo', SS_User.settings.currentPlot.."+"..paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString.."+"..statModifiersStr.."+"..skillModifiersStr.."+"..actionType, plotAuthor);
+  
+  local isInBattle = not(SS_Plots_Current().battle == nil);
+  if (isInBattle) then isInBattle = 'true' else isInBattle = 'false'; end;
+
+  SS_PtDM_Direct('sendInspectInfo', SS_User.settings.currentPlot.."+"..paramsString.."+"..statsString.."+"..activeSkillsString.."+"..passiveSkillsString.."+"..statModifiersStr.."+"..skillModifiersStr.."+"..isInBattle.."+"..actionType, plotAuthor);
 end;
 
 SS_PtDM_PlayerGetModifier = function(modifier, master)
@@ -172,5 +179,15 @@ SS_PtDM_SendBattleInitiative = function(initiative, master)
 
   SS_Shared_IfOnline(master, function()
     SS_PtDM_Direct('playerSendBattleInitiative', SS_User.settings.currentPlot.."+"..initiative, master);
+  end);
+end;
+
+SS_PtDM_LeaveBattleSuccess = function(master)
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Direct('playerLeaveBattle', SS_User.settings.currentPlot, master);
+    SS_PtDM_Params(master);
+    SS_PtDM_InspectInfo("update", master);
   end);
 end;

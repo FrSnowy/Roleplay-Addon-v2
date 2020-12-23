@@ -33,7 +33,11 @@ end;
 
 SS_Draw_InfoAboutPlayer = function(params)
   TargetFrame.levelText:SetText(params.level);
-  TargetFrame.levelText:SetTextColor(1, 1, 1);
+  if (params.isInBattle) then
+    TargetFrame.levelText:SetTextColor(1, 0, 0);
+  else
+    TargetFrame.levelText:SetTextColor(1, 1, 1);
+  end;
   TargetFrame.levelText:SetFont("Fonts\\FRIZQT__.TTF", 11);
 
   SS_TargetFrame_HP_Text:SetText(params.health..'/'..params.maxHealth);
@@ -70,6 +74,13 @@ SS_Draw_PlayerControll = function(player)
   SS_Player_Controll_HP_Text:SetText(SS_Target_TMPData.health..'/'..SS_Target_TMPData.maxHealth);
   SS_Player_Controll_Barrier_Text:SetText(SS_Target_TMPData.barrier..'/'..SS_Target_TMPData.maxBarrier..', '..SS_Locale(SS_Target_TMPData.armorType));
   SS_Player_Controll_Level_Text:SetText("Уровень: "..SS_Target_TMPData.level);
+  if (SS_Target_TMPData.battle.isInBattle) then
+    SS_Player_Controll_Battle_Text:SetText('В режиме боя');
+    SS_Player_Controll_Battle_Text:SetTextColor(1, 0, 0);
+  else
+    SS_Player_Controll_Battle_Text:SetText('Не в бою');
+    SS_Player_Controll_Battle_Text:SetTextColor(1, 1, 1);
+  end;
   SS_Player_Controll_Exp_Text:SetText("Опыт: "..SS_Target_TMPData.experience..'/'..SS_Target_TMPData.experienceForUp);
 
   local diceCount = SS_Roll_GetDicesCount(SS_Target_TMPData.level);

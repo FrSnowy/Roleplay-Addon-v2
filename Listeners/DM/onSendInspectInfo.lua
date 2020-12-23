@@ -3,7 +3,7 @@ SS_Listeners_DM_OnSendInspectInfo = function(inspectStr, player)
   if (not(inspectStr) or not(player)) then return nil; end;
   if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
-  local plotID, params, stats, activeSkills, passiveSkills, statModifiersStr, skillModifiersStr, actionType = strsplit('+', inspectStr);
+  local plotID, params, stats, activeSkills, passiveSkills, statModifiersStr, skillModifiersStr, isInBattle, actionType = strsplit('+', inspectStr);
   if (actionType == "update" and (not(SS_Target_TMPData) or not(SS_Target_TMPData.name == player))) then return nil; end;
 
   if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
@@ -11,6 +11,7 @@ SS_Listeners_DM_OnSendInspectInfo = function(inspectStr, player)
   local power, accuracy, wisdom, morale, empathy, mobility, precision = strsplit('}', stats);
   local melee, range, magic, religion, perfomance, missing, hands = strsplit('}', activeSkills);
   local athletics, observation, knowledge, controll, judgment, acrobats, stealth = strsplit('}', passiveSkills);
+  isInBattle = isInBattle == 'true';
 
   local statModifiers = {};
   if (not(statModifiersStr == 'nothing')) then
@@ -40,6 +41,9 @@ SS_Listeners_DM_OnSendInspectInfo = function(inspectStr, player)
     experience = experience,
     experienceForUp = experienceForUp,
     armorType = armorType,
+    battle = {
+      isInBattle = isInBattle,
+    },
     stats = {
       power = SS_Shared_NumFromStr(power),
       accuracy = SS_Shared_NumFromStr(accuracy),

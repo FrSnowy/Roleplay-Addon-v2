@@ -330,3 +330,14 @@ SS_DMtP_BattleInitiativeTableFormed = function(currentPhase)
     end);
   end);
 end;
+
+SS_DMtP_BattleEnd = function(currentPhase)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
+
+  SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(_, player)
+    SS_Shared_IfOnline(player, function()
+      SS_DMtP_Direct('battleEnd', SS_User.settings.currentPlot, player);
+    end);
+  end);
+end;

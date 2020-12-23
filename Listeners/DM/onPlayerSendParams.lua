@@ -4,8 +4,10 @@ SS_Listeners_DM_OnPlayerSendParams = function(params, player)
   if (player == UnitName("player")) then return nil; end;
   if (not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(UnitName("target") == player)) then return nil; end;
-  local plotID, health, maxHealth, barrier, maxBarrier, level = strsplit('+', params);
+  local plotID, health, maxHealth, barrier, maxBarrier, level, isInBattle = strsplit('+', params);
   if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
+
+  isInBattle = isInBattle == 'true';
 
   SS_Draw_InfoAboutPlayer({
     health = health,
@@ -13,5 +15,6 @@ SS_Listeners_DM_OnPlayerSendParams = function(params, player)
     barrier = barrier,
     maxBarrier = maxBarrier,
     level = level,
+    isInBattle = isInBattle,
   });
 end;

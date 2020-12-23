@@ -408,3 +408,11 @@ SS_Log_BattlePlayerEndTurn = function(name, fullCount, completedCount)
     print(name..'|cffFFFF00 закончил ход. Все игроки закончили ход|r');
   end;
 end;
+
+SS_Log_BattleEnded = function()
+  print('|cffFFFF00Бой завершён|r');
+end;
+
+SS_Log_PlayerLeavesBattle = function(name)
+  print(name..'|cffFFFF00 покинул бой.|r');
+end;
