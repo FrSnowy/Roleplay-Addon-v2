@@ -26,6 +26,7 @@ SS_Draw_HidePlayerInfoPlates = function()
   SS_TargetFrame_HP_Icon:Hide();
   SS_TargetFrame_Barrier_Icon:Hide();
   SS_TargetFrame_Settings_Icon:Hide();
+  SS_TargetFrame_In_Battle_Icon:Hide();
   SS_TargetFrame_HP_Text:SetText(nil);
   SS_TargetFrame_Barrier_Text:SetText(nil);
   SS_TargetFrame_Settings_Text:SetText(nil);
@@ -35,6 +36,7 @@ SS_Draw_InfoAboutPlayer = function(params)
   TargetFrame.levelText:SetText(params.level);
   if (params.isInBattle) then
     TargetFrame.levelText:SetTextColor(1, 0, 0);
+    SS_TargetFrame_In_Battle_Icon:Show();
   else
     TargetFrame.levelText:SetTextColor(1, 1, 1);
   end;
@@ -76,11 +78,10 @@ SS_Draw_PlayerControll = function(player)
   SS_Player_Controll_Level_Text:SetText("Уровень: "..SS_Target_TMPData.level);
   if (SS_Target_TMPData.battle.isInBattle) then
     SS_Player_Controll_Battle_Text:SetText('В режиме боя');
-    SS_Player_Controll_Battle_Text:SetTextColor(1, 0, 0);
   else
     SS_Player_Controll_Battle_Text:SetText('Не в бою');
-    SS_Player_Controll_Battle_Text:SetTextColor(1, 1, 1);
   end;
+  SS_Player_Controll_Battle_Text:SetTextColor(1, 1, 1);
   SS_Player_Controll_Exp_Text:SetText("Опыт: "..SS_Target_TMPData.experience..'/'..SS_Target_TMPData.experienceForUp);
 
   local diceCount = SS_Roll_GetDicesCount(SS_Target_TMPData.level);

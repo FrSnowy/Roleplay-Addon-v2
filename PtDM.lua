@@ -154,6 +154,8 @@ SS_PtDM_JoinToBattle = function(master)
 
   SS_Shared_IfOnline(master, function()
     SS_PtDM_Direct('playerJoinToBattle', SS_User.settings.currentPlot, master);
+    SS_PtDM_Params(master);
+    SS_PtDM_InspectInfo("update", master);
   end);
 end;
 

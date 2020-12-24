@@ -48,6 +48,8 @@ SS_Listeners_Player_OnBattleStart = function(data, author)
     return nil;
   end;
 
+  if (SS_Plots_Current().battle and SS_Plots_Current().battle.phase == startPhase and SS_Plots_Current().battle.battleType == battleType) then return nil; end;
+
   SS_Listeners_Player_OnBattleStart_StartBattleByType[battleType](startPhase, author);
 end;
 

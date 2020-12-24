@@ -334,6 +334,32 @@
           <Anchor point="CENTER" />
         </Anchors>
         <Frames>
+          <Button name="$parent_Add_Player" inherits="OptionsButtonTemplate" text="Доб. игрока">
+            <Scripts>
+              <OnClick>
+                SS_BattleControll_AddNewPlayer(UnitName("target"));
+              </OnClick>
+            </Scripts>
+            <Size x = "115" y = "26" />
+            <Anchors>
+              <Anchor point="TOPLEFT">
+                <Offset x="20" y="-50"/>
+              </Anchor> 
+            </Anchors>
+          </Button>
+          <Button name="$parent_Add_Player" inherits="OptionsButtonTemplate" text="Убрать игрока">
+            <Scripts>
+              <OnClick>
+                SS_BattleControll_KickFromBattle(UnitName("target"));
+              </OnClick>
+            </Scripts>
+            <Size x = "115" y = "26" />
+            <Anchors>
+              <Anchor point="TOPLEFT">
+                <Offset x="20" y="-80"/>
+              </Anchor> 
+            </Anchors>
+          </Button>
           <Button name="$parent_Next_Round" inherits="OptionsButtonTemplate" text="След. фаза/ход">
             <Scripts>
               <OnClick>

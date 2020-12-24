@@ -546,6 +546,7 @@ local drawFreeInterface = function()
   SS_BattleControll_BattleInterface_Movement_Icon:Hide();
   SS_BattleControll_BattleInterface.currentTurn.text:SetText('В бою');
   SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+  SS_BattleControll_BattleInterface.currentTurn.movement:Hide();
 end;
 
 SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
@@ -688,4 +689,36 @@ SS_BattleControll_DoubleMovement = function()
   SS_BattleControll_CalculateMovementPoints(SS_Plots_Current().battle.battleType, SS_Plots_Current().battle.phase);
   
   SS_BattleControll_BattleInterface_Double_Move:Hide();
+end;
+
+SS_BattleControll_AddNewPlayer = function(player)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle)) then return nil; end;
+  if (not(player)) then
+    SS_Log_NoTarget();
+    return nil;
+  end;
+
+  if (UnitName("player") == player) then return nil; end;
+
+  local isPlayerInBattle = not(SS_LeadingPlots_Current().battle.players[player] == nil);
+
+  if (isPlayerInBattle) then
+    SS_Log_PlayerAlreadyInBattle(player);
+    return nil;
+  end;
+  
+  SS_DMtP_AddToBattle(SS_LeadingPlots_Current().battle.battleType, SS_LeadingPlots_Current().battle.phase, player);
+end;
+
+SS_BattleControll_KickFromBattle = function(player)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle)) then return nil; end;
+
+  if (not(player)) then
+    SS_Log_NoTarget();
+    return nil;
+  end;
+
+  SS_DMtP_KickFromBattle(player);
 end;

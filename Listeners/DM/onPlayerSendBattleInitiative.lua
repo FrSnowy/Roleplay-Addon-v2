@@ -19,6 +19,8 @@ SS_Listeners_DM_OnPlayerSendBattleInitiative = function(data, player)
     SS_LeadingPlots_Current().battle.players[player] = {
       isTurnEnded = false,
     };
+    
+    SS_Log_PlayerJoinedToBattle(player);
   end;
 
   if (not(SS_LeadingPlots_Current().battle.players[player].isTurnEnded)) then

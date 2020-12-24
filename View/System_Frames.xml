@@ -209,8 +209,34 @@
           <AbsDimension x="16" y="16" />
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\hp.blp" />
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Очки Здоровья (ОЗ)");
+            GameTooltip:AddLine("Обозначают количество очков урона,")
+            GameTooltip:AddLine("которые ваш персонаж может принять");
+            GameTooltip:AddLine("до того, как окажется выведен из боя");
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
       </Button>
       <Button name="$parent_Barrier_Icon">
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Очки брони (ОБ)");
+            GameTooltip:AddLine("Обозначают количество очков урона,")
+            GameTooltip:AddLine("которые будут поглощены доспехами, не");
+            GameTooltip:AddLine("уменьшая при этом очков боеспособности");
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT" x="0" y="-25" />
         </Anchors>
@@ -232,6 +258,25 @@
           <AbsDimension x="16" y="16" />
         </Size>
         <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\settings_normal.blp" />
+      </Button>
+      <Button name="$parent_In_Battle_Icon">
+        <Anchors>
+          <Anchor point="TOPLEFT" x = "-90" y = "-60"/>
+        </Anchors>
+        <Size>
+          <AbsDimension x="16" y="16" />
+        </Size>
+        <NormalTexture file = "Interface\AddOns\SnowySystem\IMG\in-melee.blp" />
+        <Scripts>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("В режиме боя");
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
+        </Scripts>
       </Button>
     </Frames>
   </Frame>

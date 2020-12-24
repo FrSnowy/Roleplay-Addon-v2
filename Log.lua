@@ -413,10 +413,22 @@ SS_Log_PlayerMovingWithoutPoints = function(name)
   print(name..'|cffFFFF00 потерял все доступные очки перемещения!|r');
 end;
 
+SS_Log_BattleKicked = function()
+  print('|cffFFFF00Вы были исключены из сражения|r');
+end;
+
 SS_Log_BattleEnded = function()
   print('|cffFFFF00Бой завершён|r');
 end;
 
+SS_Log_PlayerAlreadyInBattle = function(name)
+  print(name..'|cffFF0000 уже находится в состоянии боя.|r');
+end;
+
 SS_Log_PlayerLeavesBattle = function(name)
   print(name..'|cffFFFF00 покинул бой.|r');
+end;
+
+SS_Log_AllPlayersLeavedBattle = function()
+  print('|cffFFFF00Все игроки покинули сражение. Битва завершена автоматически.|r');
 end;

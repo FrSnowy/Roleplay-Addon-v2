@@ -288,6 +288,14 @@ SS_DMtP_StartBattle = function(battleType, startFrom)
   SS_DMtP_Every('battleStart', SS_User.settings.currentPlot..'+'..battleType..'+'..startFrom, { SS_Plots_Current().author })(SS_User.settings.currentPlot);
 end;
 
+SS_DMtP_AddToBattle = function(battleType, startFrom, player)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  
+  SS_Shared_IfOnline(player, function()
+    SS_DMtP_Direct('battleStart', SS_User.settings.currentPlot..'+'..battleType..'+'..startFrom, player);
+  end);
+end;
+
 SS_DMtP_PlayerJoinSuccess = function(player)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
@@ -331,7 +339,7 @@ SS_DMtP_BattleInitiativeTableFormed = function(currentPhase)
   end);
 end;
 
-SS_DMtP_BattleEnd = function(currentPhase)
+SS_DMtP_BattleEnd = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
 
@@ -341,5 +349,16 @@ SS_DMtP_BattleEnd = function(currentPhase)
     SS_Shared_IfOnline(player, function()
       SS_DMtP_Direct('battleEnd', SS_User.settings.currentPlot, player);
     end);
+  end);
+end;
+
+SS_DMtP_KickFromBattle = function(player)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
+  if (not(player)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle.players[player])) then return nil; end;
+
+  SS_Shared_IfOnline(player, function()
+    SS_DMtP_Direct('battleEnd', SS_User.settings.currentPlot.."+"..'true', player);
   end);
 end;
