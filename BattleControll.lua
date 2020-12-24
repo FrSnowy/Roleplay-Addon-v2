@@ -242,7 +242,11 @@ SS_BattleControll_RoundLoadFromCache = function(battleType, currentPhase)
   end;
 
   if (not(currentPhase)) then
-    currentPhase = SS_Plots_Current().battle.phase;
+    if (SS_BattleControll_AmIDM()) then
+      currentPhase = SS_LeadingPlots_Current().battle.phase
+    else
+      currentPhase = SS_Plots_Current().battle.phase;
+    end;
   end;
 
   if (not(battleType) or (not(battleType == 'free') and not(currentPhase))) then return nil; end;

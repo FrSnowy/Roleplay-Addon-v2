@@ -4,7 +4,12 @@ SS_Listeners_Player_OnDMStartEvent = function(plotID, master)
   if (not(plotID) or not(SS_Plots_Includes(plotID))) then return; end;
 
   local plot = SS_User.plots[plotID];
-  if (not(plot.author == master)) then return; end;
+  if (not(plot) or not(plot.author == master)) then return; end;
+
+  if (not(SS_User.settings.acceptInvites)) then
+    SS_PtDM_DeclineInvite(SS_User.plots[plotID].name, master);
+    return;
+  end;
 
   SS_Modal_EventStart_Leader:SetText('Ведущий '..master);
   SS_Modal_EventStart_PlotName:SetText(plot.name);
