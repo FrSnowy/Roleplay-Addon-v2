@@ -6,6 +6,7 @@ SS_Listeners_DM_OnPlayerJoinToBattle = function(plotID, player)
 
   SS_LeadingPlots_Current().battle.players[player] = {
     isTurnEnded = false,
+    isMovementNotifyShowed = false,
   };
 
   SS_Log_PlayerJoinedToBattle(player);

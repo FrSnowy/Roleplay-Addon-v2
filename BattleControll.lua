@@ -57,6 +57,26 @@ SS_BattleControll_SelectBattleType = function(battleType)
   elseif (battleType == 'free') then
     SS_BattleControll_Start_Battle_Type_Free:SetChecked(true);
   end;
+
+  if (battleType == 'free') then
+    SS_BattleControll_Start_Start_From_Active:Hide();
+    SS_BattleControll_Start_Start_From_Defence:Hide();
+    SS_BattleControll_Start_Author_Fights:Hide();
+    SS_BattleControll_Start_Label_StartFrom:Hide();
+    SS_BattleControll_Start_Label_StartFromActive:Hide();
+    SS_BattleControll_Start_Label_StartFromDefence:Hide();
+    SS_BattleControll_Start_Label_AuthorFights:Hide();
+    SS_BattleControll_Start:SetSize(240, 200);
+  else
+    SS_BattleControll_Start_Start_From_Active:Show();
+    SS_BattleControll_Start_Start_From_Defence:Show();
+    SS_BattleControll_Start_Author_Fights:Show();
+    SS_BattleControll_Start_Label_StartFrom:Show();
+    SS_BattleControll_Start_Label_StartFromActive:Show();
+    SS_BattleControll_Start_Label_StartFromDefence:Show();
+    SS_BattleControll_Start_Label_AuthorFights:Show();
+    SS_BattleControll_Start:SetSize(390, 200);
+  end;
 end;
 
 SS_BattleControll_SelectPhase = function(phase)
@@ -115,6 +135,8 @@ SS_BattleControll_BattleStart = function()
       SS_Listeners_Player_OnBattleStart_StartBattleByType.phases(SS_LeadingPlots_Current().battle.phase, UnitName('player'));
       SS_DMtP_StartBattle('phases', SS_LeadingPlots_Current().battle.phase);
       SS_BattleControll_RoundStart('phases', SS_LeadingPlots_Current().battle.phase);
+  
+      SS_BattleControll_StartMovementWatch();
     end,
     initiative = function()
       SS_BattleControll_Start:Hide();
@@ -125,13 +147,18 @@ SS_BattleControll_BattleStart = function()
       SS_Listeners_Player_OnBattleStart_StartBattleByType.initiative(SS_LeadingPlots_Current().battle.phase, UnitName('player'));
       SS_DMtP_StartBattle('initiative', SS_LeadingPlots_Current().battle.phase);
       SS_BattleControll_RoundStart('initiative', SS_LeadingPlots_Current().battle.phase);
+  
+      SS_BattleControll_StartMovementWatch();
+    end,
+    free = function()
+      SS_Listeners_Player_OnBattleStart_StartBattleByType.free('', UnitName('player'));
+      SS_DMtP_StartBattle('free', '');
+      SS_BattleControll_RoundStart('free');
     end,
   };
 
   SS_LeadingPlots_Current().battle.started = true;
   startBattleByType[SS_LeadingPlots_Current().battle.battleType]();
-  
-  SS_BattleControll_StartMovementWatch();
 end;
 
 SS_BattleControll_CalculateMovementPoints = function(battleType, currentPhase)
@@ -191,11 +218,16 @@ SS_BattleControll_RoundStart = function(battleType, currentPhase, isCacheLoad)
 
       SS_BattleControll_DrawBattleInterface('initiative', currentPhase);
     end,
+    free = function()
+      SS_BattleControll_DrawBattleInterface('free');
+    end,
   };
 
-  if (not(SS_Plots_Current().battle.movementTimer) or not(SS_Plots_Current().battle.movementTimer['Hide'])) then
-    SS_Plots_Current().battle.movementTimer = nil;
-    SS_BattleControll_ReloadMovementWatch();
+  if (not(battleType == 'free')) then
+    if (not(SS_Plots_Current().battle.movementTimer) or not(SS_Plots_Current().battle.movementTimer['Hide'])) then
+      SS_Plots_Current().battle.movementTimer = nil;
+      SS_BattleControll_ReloadMovementWatch();
+    end;
   end;
 
   startRoundByType[battleType]();
@@ -213,17 +245,22 @@ SS_BattleControll_RoundLoadFromCache = function(battleType, currentPhase)
     currentPhase = SS_Plots_Current().battle.phase;
   end;
 
-  if (not(battleType) or not(currentPhase)) then return nil; end;
+  if (not(battleType) or (not(battleType == 'free') and not(currentPhase))) then return nil; end;
   
   if (not(SS_BattleControll_AmIDM())) then
+    SS_BattleControll_RoundStart(battleType, currentPhase, true);
     SS_BattleControll_BattleInterface_Leave_Battle:Show();
     SS_PtDM_RequestActualBattleInfo(SS_Plots_Current().author);
   end;
 
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().battle)) then return nil; end;
-
   SS_BattleControll_RoundStart(battleType, currentPhase, true);
-  SS_DMtP_ChangePhase(battleType, currentPhase);
+
+  if (battleType == 'free') then
+    SS_DMtP_ChangePhase('free', '');
+  else
+    SS_DMtP_ChangePhase(battleType, currentPhase);
+  end;
 end;
 
 SS_BattleControll_RoundNext = function(battleType, currentPhase)
@@ -243,6 +280,7 @@ SS_BattleControll_RoundNext = function(battleType, currentPhase)
       
       SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
         p.isTurnEnded = false;
+        p.isMovementNotifyShowed = false;
       end);
 
       if (currentPhase == 'active' or currentPhase == 'waiting') then
@@ -261,6 +299,7 @@ SS_BattleControll_RoundNext = function(battleType, currentPhase)
       if (currentPhase == 'defence') then
         SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
           p.isTurnEnded = false;
+          p.isMovementNotifyShowed = false;
         end);
 
         nextPhase = SS_LeadingPlots_Current().battle.playersByInitiative[1].name;
@@ -306,6 +345,7 @@ SS_BattleControll_RoundPrevious = function(battleType, currentPhase)
 
   SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
     p.isTurnEnded = false;
+    p.isMovementNotifyShowed = false;
   end);
 
   local nextRoundByType = {
@@ -318,6 +358,7 @@ SS_BattleControll_RoundPrevious = function(battleType, currentPhase)
       if (currentPhase == 'defence') then
         SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
           p.isTurnEnded = false;
+          p.isMovementNotifyShowed = false;
         end);
 
         nextPhase = SS_LeadingPlots_Current().battle.playersByInitiative[#SS_LeadingPlots_Current().battle.playersByInitiative].name;
@@ -399,13 +440,12 @@ local drawPhasesInterface = function(currentPhase)
 
   if (currentPhase == 'active') then
     SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза активного действия');
+    SS_BattleControll_BattleInterface_Double_Move:Hide();
 
     if (SS_BattleControll_AmIPlayer()) then
       SS_BattleControll_BattleInterface_End_Round:Show();
       if (SS_Plots_Current().battle.movementPoints == SS_Plots_Current().battle.maxMovementPoints and not(SS_Plots_Current().battle.fullRoundMovement)) then
         SS_BattleControll_BattleInterface_Double_Move:Show();
-      else
-        SS_BattleControll_BattleInterface_Double_Move:Hide();
       end;
       SS_BattleControll_BattleInterface_Leave_Battle:Hide();
       
@@ -415,10 +455,10 @@ local drawPhasesInterface = function(currentPhase)
     end;
   elseif (currentPhase == 'defence') then
     SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза защиты');
+    SS_BattleControll_BattleInterface_Double_Move:Hide();
 
     if (SS_BattleControll_AmIPlayer()) then
       SS_BattleControll_BattleInterface_End_Round:Hide();
-      SS_BattleControll_BattleInterface_Double_Move:Hide();
       SS_BattleControll_BattleInterface_Leave_Battle:Hide();
 
       SS_BattleControll_BattleInterface_Movement_Icon:Show();
@@ -427,9 +467,9 @@ local drawPhasesInterface = function(currentPhase)
     end;
   elseif (currentPhase == 'waiting') then
     SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ожидание других игроков');
+    SS_BattleControll_BattleInterface_Double_Move:Hide();
     if (SS_BattleControll_AmIPlayer()) then
       SS_BattleControll_BattleInterface_End_Round:Hide();
-      SS_BattleControll_BattleInterface_Double_Move:Hide();
       SS_BattleControll_BattleInterface_Leave_Battle:Hide();
 
       SS_BattleControll_BattleInterface_Movement_Icon:Show();
@@ -445,10 +485,10 @@ local drawInitiativeInterface = function(currentPhase)
 
   if (currentPhase == 'defence') then
     SS_BattleControll_BattleInterface.currentTurn.text:SetText('Фаза защиты');
+    SS_BattleControll_BattleInterface_Double_Move:Hide();
 
     if (SS_BattleControll_AmIPlayer()) then
       SS_BattleControll_BattleInterface_End_Round:Hide();
-      SS_BattleControll_BattleInterface_Double_Move:Hide();
       SS_BattleControll_BattleInterface_Leave_Battle:Hide();
 
       SS_BattleControll_BattleInterface_Movement_Icon:Show();
@@ -457,11 +497,12 @@ local drawInitiativeInterface = function(currentPhase)
     end;
   elseif (currentPhase == 'active') then
     SS_BattleControll_BattleInterface.currentTurn.text:SetText('Определяем порядок ходов');
+    SS_BattleControll_BattleInterface_Double_Move:Hide();
   elseif (currentPhase == 'waiting') then
     SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ожидание других игроков');
+    SS_BattleControll_BattleInterface_Double_Move:Hide();
     if (SS_BattleControll_AmIPlayer()) then
       SS_BattleControll_BattleInterface_End_Round:Hide();
-      SS_BattleControll_BattleInterface_Double_Move:Hide();
       SS_BattleControll_BattleInterface_Leave_Battle:Hide();
 
       SS_BattleControll_BattleInterface_Movement_Icon:Show();
@@ -471,21 +512,20 @@ local drawInitiativeInterface = function(currentPhase)
   else
     if (currentPhase == UnitName('player')) then
       SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ваш ход');
+      SS_BattleControll_BattleInterface_Double_Move:Hide();
       
       if (SS_BattleControll_AmIPlayer()) then
         SS_BattleControll_BattleInterface_End_Round:Show();
-        if (SS_Plots_Current().battle.fullRoundMovement) then
-          SS_BattleControll_BattleInterface_Double_Move:Hide();
-        else
+        if (SS_Plots_Current().battle.movementPoints == SS_Plots_Current().battle.maxMovementPoints and not(SS_Plots_Current().battle.fullRoundMovement)) then
           SS_BattleControll_BattleInterface_Double_Move:Show();
         end;
       end;
     else
       SS_BattleControll_BattleInterface.currentTurn.text:SetText('Ход игрока '..currentPhase);
+      SS_BattleControll_BattleInterface_Double_Move:Hide();
       
       if (SS_BattleControll_AmIPlayer()) then
         SS_BattleControll_BattleInterface_End_Round:Hide();
-        SS_BattleControll_BattleInterface_Double_Move:Hide();
       end;
     end;
 
@@ -498,10 +538,21 @@ local drawInitiativeInterface = function(currentPhase)
   end;
 end;
 
+local drawFreeInterface = function()
+  drawDMInterfaceIfNeed();
+
+  SS_BattleControll_BattleInterface_End_Round:Hide();
+  SS_BattleControll_BattleInterface_Double_Move:Hide();
+  SS_BattleControll_BattleInterface_Movement_Icon:Hide();
+  SS_BattleControll_BattleInterface.currentTurn.text:SetText('В бою');
+  SS_BattleControll_BattleInterface_Leave_Battle:Hide();
+end;
+
 SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
   local drawInterfaceByType = {
     phases = drawPhasesInterface,
     initiative = drawInitiativeInterface,
+    free = drawFreeInterface,
   }
 
   SS_BattleControll_Start:Hide();
@@ -516,6 +567,8 @@ SS_BattleControll_LeaveBattle = function()
   SS_BattleControll_StopMovementWatch();
   SS_BattleControll_Reset();
 
+  PlayerLevelText:SetTextColor(1, 1, 1);
+
   if (not(SS_Plots_Current().author == UnitName('player'))) then
     SS_PtDM_LeaveBattleSuccess(SS_Plots_Current().author);
   end;
@@ -523,10 +576,10 @@ end;
 
 SS_BattleControll_Reset = function()
   SS_BattleControll:Hide();
+  SS_BattleControll_BattleInterface:Hide();
 
   if (SS_BattleControll_AmIPlayer()) then
     SS_Plots_Current().battle = nil;
-    SS_BattleControll_BattleInterface:Hide();
   end;
 
   if (SS_BattleControll_AmIDM()) then

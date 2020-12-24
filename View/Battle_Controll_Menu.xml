@@ -60,21 +60,21 @@
             </FontString>
           </Layer>
           <Layer>
-            <FontString font="Fonts\FRIZQT__.TTF" text="Начать с:">
+            <FontString name="$parent_Label_StartFrom" font="Fonts\FRIZQT__.TTF" text="Начать с:">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
                 <Anchor point="TOPLEFT" x="223" y="-45" />
               </Anchors>
             </FontString>
-            <FontString font="Fonts\FRIZQT__.TTF" text="Активного действия">
+            <FontString name="$parent_Label_StartFromActive" font="Fonts\FRIZQT__.TTF" text="Активного действия">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
                 <Anchor point="TOPLEFT" x="250" y="-70" />
               </Anchors>
             </FontString>
-            <FontString font="Fonts\FRIZQT__.TTF" text="Защиты">
+            <FontString name="$parent_Label_StartFromDefence" font="Fonts\FRIZQT__.TTF" text="Защиты">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="11"/>
               <Anchors>
@@ -83,7 +83,7 @@
             </FontString>
           </Layer>
           <Layer>
-            <FontString font="Fonts\FRIZQT__.TTF" text="Ведущий сражается">
+            <FontString name="$parent_Label_AuthorFights" font="Fonts\FRIZQT__.TTF" text="Ведущий сражается">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
@@ -307,10 +307,10 @@
                 GameTooltip:Hide()
               </OnLeave>
             </Scripts>
-            <Size x = "140" y = "26" />
+            <Size x = "100" y = "26" />
             <Anchors>
               <Anchor point="TOP" relativeTo="UIParent">
-                <Offset x="50" y="-93"/>
+                <Offset x="180" y="-10"/>
               </Anchor> 
             </Anchors>
           </Button>

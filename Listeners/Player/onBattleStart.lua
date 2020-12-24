@@ -23,9 +23,21 @@ local startInitiativeBattle = function(startPhase, author)
   end;
 end;
 
+local startFreeBattle = function(_, author)
+  SS_Plots_Current().battle = {
+    battleType = 'free',
+  };
+
+  if (not(author == UnitName('player'))) then
+    SS_PtDM_JoinToBattle(author);
+    SS_BattleControll_RoundStart('free', '');
+  end;
+end;
+
 SS_Listeners_Player_OnBattleStart_StartBattleByType = {
   phases = startPhasesBattle,
   initiative = startInitiativeBattle,
+  free = startFreeBattle,
 };
 
 SS_Listeners_Player_OnBattleStart = function(data, author)

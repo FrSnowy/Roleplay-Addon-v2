@@ -26,7 +26,7 @@ end;
 
 SS_Stats_GetMaxMovementPoints = function()
   local movementPoints = 4 + math.floor(SS_Stats_GetValue('mobility') / 2.4);
-  if (SS_Plots_Current().battle.fullRoundMovement) then
+  if (SS_Plots_Current() and SS_Plots_Current().battle and SS_Plots_Current().battle.fullRoundMovement) then
     movementPoints = movementPoints * 2;
   end;
 
