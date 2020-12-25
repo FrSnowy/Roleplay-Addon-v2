@@ -21,6 +21,7 @@ SS_Shared_ForEach({
   'SS_BattleControll_IsInPhase',
   'SS_Log_MovementPointsAdded',
   'SS_PtDM_GetAdditionalMovementPoints',
+  'SS_BattleControll_EndRound',
 })(function(el)
   local isKeyIncluded = SS_Shared_Includes(GHI_MiscData["WhiteList"])(function(v)
     return v == el;
@@ -576,7 +577,10 @@ table.insert(GHI_ProvidedDynamicActions, {
     if (not(SS_Plots_Current())) then return nil; end;
     if (not(SS_Plots_Current().battle)) then return nil; end;
     if (SS_Plots_Current().battle.movementPoints == nil) then return nil; end;
-    if (SS_BattleControll_IsInBattle('free')) then return nil; end;
+    if (SS_BattleControll_IsInBattle('free')) then
+      dyn.TriggerOutPort("added")
+      return nil;
+    end;
 
     local movementPoints = dyn.GetInput("movement");
     SS_Plots_Current().battle.movementPoints = SS_Plots_Current().battle.movementPoints + movementPoints;
@@ -602,6 +606,35 @@ table.insert(GHI_ProvidedDynamicActions, {
 			description = "",
 			type = "number",
       defaultValue = "",
+      order = 1,
+		},
+	},
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Завершить ход",
+	guid = "SS_Battle_EndRound",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.battle,
+	description = "Закончить текущий ход",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+    if (not(SS_Plots_Current().battle)) then return nil; end;
+    if (SS_BattleControll_IsInBattle('free')) then return nil; end;
+    SS_BattleControll_EndRound();
+    dyn.TriggerOutPort("ended")
+	]],
+	ports = {
+    ended = {
+			name = "Ход завершен",
+			direction = "out",
+      description = "",
       order = 1,
 		},
 	},

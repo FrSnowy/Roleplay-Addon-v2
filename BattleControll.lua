@@ -473,6 +473,9 @@ SS_BattleControll_EndRound = function(battleType, currentPhase)
       SS_BattleControll_BattleInterface_End_Round:Hide();
       -- Тут ничего не делаем. Фазы меняются последовательно без ожидания других игроков
     end,
+    free = function()
+
+    end,
   };
 
   SS_PtDM_EndBattleTurn(SS_Plots_Current().author);
