@@ -58,7 +58,7 @@ SS_PtDM_InspectInfo = function(actionType, plotAuthor)
 
   local paramsString = SS_Params_GetHealth()..'}'..SS_Params_GetMaxHealth()..'}'..SS_Params_GetBarrier()..'}'..SS_Params_GetMaxBarrier()..'}'..SS_Progress_GetLevel()..'}'..SS_Progress_GetExp()..'}'..SS_Progress_GetExpForUp()..'}'..SS_Armor_GetType();
   local statsString =  SS_Stats_GetValue('power')..'}'..SS_Stats_GetValue('accuracy')..'}'..SS_Stats_GetValue('wisdom')..'}'..SS_Stats_GetValue('morale')..'}'..SS_Stats_GetValue('empathy')..'}'..SS_Stats_GetValue('mobility')..'}'..SS_Stats_GetValue('precision');
-  local activeSkillsString = SS_Skills_GetValue('melee')..'}'..SS_Skills_GetValue('range')..'}'..SS_Skills_GetValue('magic')..'}'..SS_Skills_GetValue('religion')..'}'..SS_Skills_GetValue('perfomance')..'}'..SS_Skills_GetValue('missing')..'}'..SS_Skills_GetValue('hands');
+  local activeSkillsString = SS_Skills_GetValue('melee')..'}'..SS_Skills_GetValue('range')..'}'..SS_Skills_GetValue('magic')..'}'..SS_Skills_GetValue('religion')..'}'..SS_Skills_GetValue('charm')..'}'..SS_Skills_GetValue('missing')..'}'..SS_Skills_GetValue('hands');
   local passiveSkillsString = SS_Skills_GetValue('athletics')..'}'..SS_Skills_GetValue('observation')..'}'..SS_Skills_GetValue('knowledge')..'}'..SS_Skills_GetValue('controll')..'}'..SS_Skills_GetValue('judgment')..'}'..SS_Skills_GetValue('acrobats')..'}'..SS_Skills_GetValue('stealth');
 
   local statModifiersStr = '';

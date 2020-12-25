@@ -166,8 +166,8 @@
                   </Anchor>
                 </Anchors>
               </Frame>
-              <Frame parentKey = 'perfomance' inherits="SS_CreateModifier_SelectCheckbox">
-                <Scripts><OnLoad>self.stat = 'perfomance'</OnLoad></Scripts>
+              <Frame parentKey = 'charm' inherits="SS_CreateModifier_SelectCheckbox">
+                <Scripts><OnLoad>self.stat = 'charm'</OnLoad></Scripts>
                 <Anchors>
                   <Anchor point="TOPLEFT">
                     <Offset><AbsDimension x="0" y="-335"></AbsDimension></Offset>

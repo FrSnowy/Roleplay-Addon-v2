@@ -39,6 +39,11 @@ SS_Listeners_DM_OnPlayerSendBattleInitiative = function(data, player)
     SS_LeadingPlots_Current().battle.syncTimer:SetScript("OnUpdate", function(self, elapsed)
       syncTime = syncTime - elapsed
       if syncTime <= 0 then
+        if (not(SS_LeadingPlots_Current().battle)) then 
+          self:Hide();
+          self = nil;
+          return;
+        end;
         SS_LeadingPlots_Current().battle.syncTimer:Hide();
         SS_LeadingPlots_Current().battle.syncTimer = nil;
 

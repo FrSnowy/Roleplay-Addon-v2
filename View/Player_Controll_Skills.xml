@@ -45,7 +45,7 @@
                   <Anchor point="TOPLEFT" x="8" y="-75" />
                 </Anchors> 
               </Frame>
-              <Frame inherits = "SS_TargetSkill_Template" parentKey = "perfomance">
+              <Frame inherits = "SS_TargetSkill_Template" parentKey = "charm">
                 <Anchors>
                   <Anchor point="TOPLEFT" x="8" y="-100" />
                 </Anchors> 

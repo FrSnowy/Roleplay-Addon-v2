@@ -11,7 +11,8 @@ SS_BattleControll_Show = function()
         started = false,
         battleType = 'phases',
         phase = 'active',
-        authorFights = false,
+        authorFights = true,
+        withoutDefence = false,
         players = {},
       };
     end;
@@ -66,6 +67,11 @@ SS_BattleControll_SelectBattleType = function(battleType)
     SS_BattleControll_Start_Label_StartFromActive:Hide();
     SS_BattleControll_Start_Label_StartFromDefence:Hide();
     SS_BattleControll_Start_Label_AuthorFights:Hide();
+    SS_BattleControll_Start_Label_Specials:Hide();
+
+    SS_BattleControll_SelectPhase('active');
+    SS_BattleControll_SelectAuthorFights(true);
+
     SS_BattleControll_Start:SetSize(240, 200);
   else
     SS_BattleControll_Start_Start_From_Active:Show();
@@ -75,8 +81,21 @@ SS_BattleControll_SelectBattleType = function(battleType)
     SS_BattleControll_Start_Label_StartFromActive:Show();
     SS_BattleControll_Start_Label_StartFromDefence:Show();
     SS_BattleControll_Start_Label_AuthorFights:Show();
-    SS_BattleControll_Start:SetSize(390, 200);
+    SS_BattleControll_Start_Label_Specials:Show();
+    SS_BattleControll_Start:SetSize(590, 200);
   end;
+
+  if (battleType == 'initiative') then
+    SS_BattleControll_Start_Label_StartFromActive:SetText('Броска инициативы');
+    SS_BattleControll_Start_Label_No_Defence:Show();
+    SS_BattleControll_Start_No_Defence:Show();
+  else
+    SS_BattleControll_Start_Label_StartFromActive:SetText('Активного действия');
+    SS_BattleControll_Start_Label_No_Defence:Hide();
+    SS_BattleControll_Start_No_Defence:Hide();
+    SS_BattleControll_SelectWithoutDefence(false);
+  end;
+
 end;
 
 SS_BattleControll_SelectPhase = function(phase)
@@ -95,13 +114,39 @@ SS_BattleControll_SelectPhase = function(phase)
   end;
 end;
 
-
 SS_BattleControll_SelectAuthorFights = function(isAuthorFight)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_LeadingPlots_Current().battle)) then return nil; end;
 
   SS_LeadingPlots_Current().battle.authorFights = isAuthorFight;
   SS_BattleControll_Start_Author_Fights:SetChecked(isAuthorFight);
+end;
+
+SS_BattleControll_SelectWithoutDefence = function(withoutDefence)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle)) then return nil; end;
+
+  SS_LeadingPlots_Current().battle.withoutDefence = withoutDefence;
+  SS_BattleControll_Start_No_Defence:SetChecked(withoutDefence);
+
+  if (withoutDefence) then
+    SS_BattleControll_Start_Start_From_Defence:Hide();
+    SS_BattleControll_Start_Label_StartFromDefence:Hide();
+
+    if (SS_LeadingPlots_Current().battle.battleType == 'free') then
+      SS_BattleControll_SelectPhase('');
+    else
+      SS_BattleControll_SelectPhase('active');
+    end;
+  else
+    if (SS_LeadingPlots_Current().battle.battleType == 'free') then
+      SS_BattleControll_Start_Start_From_Defence:Hide();
+      SS_BattleControll_Start_Label_StartFromDefence:Hide();
+    else
+      SS_BattleControll_Start_Start_From_Defence:Show();
+      SS_BattleControll_Start_Label_StartFromDefence:Show();
+    end;
+  end;
 end;
 -- Конец селекторов
 
@@ -321,7 +366,16 @@ SS_BattleControll_RoundNext = function(battleType, currentPhase)
         if (currentIndex + 1 <= #SS_LeadingPlots_Current().battle.playersByInitiative) then
           nextPhase = SS_LeadingPlots_Current().battle.playersByInitiative[currentIndex + 1].name;
         else
-          nextPhase = 'defence';
+          if (SS_LeadingPlots_Current().battle.withoutDefence) then
+            SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
+              p.isTurnEnded = false;
+              p.isMovementNotifyShowed = false;
+            end);
+    
+            nextPhase = SS_LeadingPlots_Current().battle.playersByInitiative[1].name;
+          else
+            nextPhase = 'defence';
+          end;
         end;
       end;
 
@@ -433,8 +487,21 @@ end;
 local drawDMInterfaceIfNeed = function()
   if (SS_BattleControll_AmIDM()) then
     SS_BattleControll_DMBattleInterface:Show();
+    SS_Event_Controll_Battle_Button:SetText("- Сражение");
+
+    if (SS_LeadingPlots_Current().battle.battleType == 'free') then
+      SS_BattleControll_DMBattleInterface_Next_Round:Hide();
+      SS_BattleControll_DMBattleInterface_Prev_Round:Hide();
+      SS_BattleControll_DMBattleInterface:SetSize(200, 180);
+    
+    else
+      SS_BattleControll_DMBattleInterface_Next_Round:Show();
+      SS_BattleControll_DMBattleInterface_Prev_Round:Show();
+      SS_BattleControll_DMBattleInterface:SetSize(280, 180);
+    end;
   else
     SS_BattleControll_DMBattleInterface:Hide();
+    SS_Event_Controll_Battle_Button:SetText("+ Сражение");
   end;
 end;
 
@@ -725,4 +792,41 @@ SS_BattleControll_KickFromBattle = function(player)
   end;
 
   SS_DMtP_KickFromBattle(player);
+end;
+
+SS_BattleControll_IsInBattle = function(searchingBattleType)
+  if (not(searchingBattleType)) then
+    return not(SS_Plots_Current().battle == nil);
+  else
+    if (SS_Plots_Current().battle == nil) then return false; end;
+
+    return SS_Plots_Current().battle.battleType == searchingBattleType;
+  end;
+end;
+
+SS_BattleControll_IsInPhase = function(searchingPhase)
+  if (not(SS_BattleControll_IsInBattle())) then return false; end;
+  if (SS_BattleControll_IsInBattle('free')) then return false; end;
+
+  if (searchingPhase == 'active') then
+    if (SS_BattleControll_IsInBattle('phases')) then
+      return SS_Plots_Current().battle.phase == 'active';
+    else
+      return false;
+    end;
+  end;
+
+  if (searchingPhase == 'selfTurn') then
+    if (SS_BattleControll_IsInBattle('initiative')) then
+      return SS_Plots_Current().battle.phase == UnitName("player");
+    elseif (SS_BattleControll_IsInBattle('phases')) then
+      return SS_Plots_Current().battle.phase == 'active';
+    else
+      return false;
+    end;
+  end;
+
+  if (searchingPhase == 'defence') then
+    return SS_Plots_Current().battle.phase == 'defence';
+  end;
 end;

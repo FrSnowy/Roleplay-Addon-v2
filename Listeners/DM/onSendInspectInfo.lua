@@ -9,7 +9,7 @@ SS_Listeners_DM_OnSendInspectInfo = function(inspectStr, player)
   if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
   local health, maxHealth, barrier, maxBarrier, level, experience, experienceForUp, armorType = strsplit('}', params);
   local power, accuracy, wisdom, morale, empathy, mobility, precision = strsplit('}', stats);
-  local melee, range, magic, religion, perfomance, missing, hands = strsplit('}', activeSkills);
+  local melee, range, magic, religion, charm, missing, hands = strsplit('}', activeSkills);
   local athletics, observation, knowledge, controll, judgment, acrobats, stealth = strsplit('}', passiveSkills);
   isInBattle = isInBattle == 'true';
 
@@ -58,7 +58,7 @@ SS_Listeners_DM_OnSendInspectInfo = function(inspectStr, player)
       range = SS_Shared_NumFromStr(range),
       magic = SS_Shared_NumFromStr(magic),
       religion = SS_Shared_NumFromStr(religion),
-      perfomance = SS_Shared_NumFromStr(perfomance),
+      charm = SS_Shared_NumFromStr(charm),
       missing = SS_Shared_NumFromStr(missing),
       hands = SS_Shared_NumFromStr(hands),
       athletics = SS_Shared_NumFromStr(athletics),

@@ -14,7 +14,7 @@
       <Frame name="SS_BattleControll_Start" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="6">
         <Scripts>
           <OnLoad>
-            self:SetSize(390, 200);
+            self:SetSize(590, 200);
             self.title:SetText('Сражение');
             self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\player-background";
             self:RegisterForDrag("LeftButton");
@@ -83,11 +83,25 @@
             </FontString>
           </Layer>
           <Layer>
-            <FontString name="$parent_Label_AuthorFights" font="Fonts\FRIZQT__.TTF" text="Ведущий сражается">
+            <FontString name = "$parent_Label_Specials" font="Fonts\FRIZQT__.TTF" text="Особенности:">
               <Color r="1" g="1" b="1" a="1"/>
               <FontHeight val="12"/>
               <Anchors>
-                <Anchor point="TOPLEFT" x="250" y="-120" />
+                <Anchor point="TOPLEFT" x="388" y="-45" />
+              </Anchors>
+            </FontString>
+            <FontString name="$parent_Label_AuthorFights" font="Fonts\FRIZQT__.TTF" text="Ведущий сражается">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="11"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="415" y="-70" />
+              </Anchors>
+            </FontString>
+            <FontString name="$parent_Label_No_Defence" font="Fonts\FRIZQT__.TTF" text="Отключить фазу защиты">
+              <Color r="1" g="1" b="1" a="1"/>
+              <FontHeight val="11"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="415" y="-95" />
               </Anchors>
             </FontString>
           </Layer>
@@ -160,7 +174,19 @@
             <Anchors>
               <Anchor point="TOPLEFT">
                 <Offset>
-                  <AbsDimension x="220" y="-113"></AbsDimension>
+                  <AbsDimension x="385" y="-63"></AbsDimension>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          <CheckButton name = "$parent_No_Defence" inherits="OptionsCheckButtonTemplate" checked="false">
+            <Scripts>
+              <OnClick>SS_BattleControll_SelectWithoutDefence(not(SS_LeadingPlots_Current().battle.withoutDefence))</OnClick>
+            </Scripts>
+            <Anchors>
+              <Anchor point="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="385" y="-88"></AbsDimension>
                 </Offset>
               </Anchor>
             </Anchors>
@@ -319,7 +345,7 @@
       <Frame name="SS_BattleControll_DMBattleInterface" inherits = "SS_CloseableFrameWithBG_Template" movable="true" parent = "UIParent" frameStrata="FULLSCREEN" frameLevel="1" hidden="true">
         <Scripts>
           <OnLoad>
-            self:SetSize(390, 200);
+            self:SetSize(280, 180);
             self.title:SetText('Сражение');
             self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\player-background";
             self:RegisterForDrag("LeftButton");

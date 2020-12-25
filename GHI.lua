@@ -1,4 +1,8 @@
-local category = "Ролевая система от Снежка";
+local categories = {
+  modifiers = 'Ролевая система от Снежка: Модификаторы',
+  checks = 'Ролевая система от Снежка: Проверки',
+  battle = 'Ролевая система от Снежка: Бой',
+};
 
 if (GHI_MiscData and not(GHI_MiscData["WhiteList"])) then
   GHI_MiscData["WhiteList"] = {};
@@ -13,6 +17,8 @@ SS_Shared_ForEach({
   'SS_Modifiers_Get',
   'SS_Modifiers_Remove',
   'SS_PtDM_PlayerGetModifier',
+  'SS_BattleControll_IsInBattle',
+  'SS_BattleControll_IsInPhase',
 })(function(el)
   local isKeyIncluded = SS_Shared_Includes(GHI_MiscData["WhiteList"])(function(v)
     return v == el;
@@ -62,7 +68,7 @@ local skillMenuPoint = function(name, order)
         { value = "range", text = "Дальний бой" },
         { value = "magic", text = "Чародейство" },
         { value = "religion", text = "Вера" },
-        { value = "perfomance", text = "Выступление" },
+        { value = "charm", text = "Харизма" },
         { value = "missing", text = "Избегание" },
         { value = "hands", text = "Ловкость рук" },
         { value = "athletics", text = "Атлетика" },
@@ -83,7 +89,7 @@ table.insert(GHI_ProvidedDynamicActions, {
 	authorName = "FriendSnowy",
 	authorGuid = "00x1",
 	version = 1,
-	category = category,
+	category = categories.modifiers,
 	description = "Добавить модификатор для ролевой характеристики",
 	icon = "Interface\\Icons\\achievement_guild_level10",
 	gotOnSetupPort = false,
@@ -183,7 +189,7 @@ table.insert(GHI_ProvidedDynamicActions, {
 	authorName = "FriendSnowy",
 	authorGuid = "00x1",
 	version = 1,
-	category = category,
+	category = categories.modifiers,
 	description = "Добавить модификатор для ролевого навыка",
 	icon = "Interface\\Icons\\achievement_guild_level10",
 	gotOnSetupPort = false,
@@ -294,7 +300,7 @@ table.insert(GHI_ProvidedDynamicActions, {
 	authorName = "FriendSnowy",
 	authorGuid = "00x1",
 	version = 1,
-	category = category,
+	category = categories.modifiers,
 	description = "Удалить модификатор хар-ки",
 	icon = "Interface\\Icons\\achievement_guild_level10",
 	gotOnSetupPort = false,
@@ -335,7 +341,7 @@ table.insert(GHI_ProvidedDynamicActions, {
 	authorName = "FriendSnowy",
 	authorGuid = "00x1",
 	version = 1,
-	category = category,
+	category = categories.modifiers,
 	description = "Удалить модификатор навыка",
 	icon = "Interface\\Icons\\achievement_guild_level10",
 	gotOnSetupPort = false,
@@ -376,7 +382,7 @@ table.insert(GHI_ProvidedDynamicActions, {
 	authorName = "FriendSnowy",
 	authorGuid = "00x1",
 	version = 1,
-	category = category,
+	category = categories.checks,
 	description = "Совершить бросок кубика навыка",
 	icon = "Interface\\Icons\\achievement_guild_level10",
 	gotOnSetupPort = false,
@@ -428,6 +434,127 @@ table.insert(GHI_ProvidedDynamicActions, {
 			type = "boolean",
 			defaultValue = false,
 		},
+	},
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Находится в бою",
+	guid = "SS_Battle_Check",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.battle,
+	description = "Находится ли персонаж в состоянии ролевого боя",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
+    local battleType = dyn.GetInput("battleType");
+    local result = false;
+
+    if (battleType == 'all') then
+      result = SS_BattleControll_IsInBattle()
+    else
+      result = SS_BattleControll_IsInBattle(battleType)
+    end;
+
+    if (result) then
+      dyn.TriggerOutPort("isIn")
+    else
+      dyn.TriggerOutPort("isNotIn")
+    end;
+	]],
+	ports = {
+		isIn = {
+			name = "Находится в бою",
+			direction = "out",
+      description = "",
+      order = 1,
+		},
+		isNotIn = {
+			name = "Не находится в бою",
+			direction = "out",
+      description = "",
+      order = 2,
+		},
+	},
+	inputs = {
+    battleType = {
+      name = 'Тип боя',
+      order = 1,
+      type = "string",
+      defaultValue = "all",
+      specialGHM = "ghm_fromDDList",
+      specialGHMScript = [[
+        dataFunc = function()
+          return {
+            { value = "all", text = "Любой" },
+            { value = "phases", text = "Послед. фазы" },
+            { value = "initiative", text = "Инициатива" },
+            { value = "free", text = "Свободный" },
+          };
+        end]],
+    }
+	},
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Находится в фазе боя",
+	guid = "SS_Battle_PhaseCheck",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.battle,
+	description = "Находится ли персонаж в нужной фазе ролевого боя",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
+    local phase = dyn.GetInput("phase");
+    local result = SS_BattleControll_IsInPhase(phase);
+
+    if (result) then
+      dyn.TriggerOutPort("isIn")
+    else
+      dyn.TriggerOutPort("isNotIn")
+    end;
+	]],
+	ports = {
+		isIn = {
+			name = "Находится в фазе",
+			direction = "out",
+      description = "",
+      order = 1,
+		},
+		isNotIn = {
+			name = "Не находится в фазе",
+			direction = "out",
+      description = "",
+      order = 2,
+		},
+	},
+	inputs = {
+    phase = {
+      name = 'Фаза',
+      order = 1,
+      type = "string",
+      defaultValue = "active",
+      specialGHM = "ghm_fromDDList",
+      specialGHMScript = [[
+        dataFunc = function()
+          return {
+            { value = "active", text = "Активное действие" },
+            { value = "selfTurn", text = "Свой ход по инициативе" },
+            { value = "defence", text = "Защита" },
+          };
+        end]],
+    }
 	},
 });
 

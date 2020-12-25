@@ -146,7 +146,7 @@
         </Anchors>
       </Button>
       <Button inherits="SS_DiceControllRollButton_Template">
-        <Scripts><OnLoad>self.stat = 'perfomance'</OnLoad></Scripts>
+        <Scripts><OnLoad>self.stat = 'charm'</OnLoad></Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset x="20" y="-145"/>

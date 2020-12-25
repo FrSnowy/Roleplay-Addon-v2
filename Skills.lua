@@ -4,7 +4,7 @@ SS_Skills_GetList = function()
     range = 0,
     magic = 0,
     religion = 0,
-    perfomance = 0,
+    charm = 0,
     missing = 0,
     hands = 0,
     athletics = 0,
@@ -61,6 +61,10 @@ SS_Skills_GetMaxPointsInSingle = function(playerLevel)
   return playerLevel * 5;
 end;
 
+SS_Skills_GetMinPointsInSingle = function()
+  return -SS_Skills_GetMaxPointsInSingle(1);
+end;
+
 SS_Skills_GetAvaliablePoints = function()
   local baseSkillPoints = SS_Skills_GetMaxPoints();
   local summaryPoints = SS_Skills_GetSpentedPoints();
@@ -73,7 +77,7 @@ SS_Skills_AddPoint = function(value, skill, skillView)
     return 0;
   end;
 
-  if (SS_Skills_GetValueWithoutModifier(skill) + value < -SS_Skills_GetMaxPointsInSingle(1)) then
+  if (SS_Skills_GetValueWithoutModifier(skill) + value < SS_Skills_GetMinPointsInSingle()) then
     return 0;
   end;
 
@@ -97,7 +101,7 @@ SS_Skills_GetStatOf = function(skill)
     range = 'accuracy',
     magic = 'wisdom',
     religion = 'morale',
-    perfomance = 'empathy',
+    charm = 'empathy',
     missing = 'mobility',
     hands = 'precision',
     athletics = 'power',
@@ -129,7 +133,7 @@ SS_Skills_DrawAll = function()
   SS_Skills_DrawValue('range', SS_Skills_Menu_Active_Skill_Range);
   SS_Skills_DrawValue('magic', SS_Skills_Menu_Active_Skill_Magic);
   SS_Skills_DrawValue('religion', SS_Skills_Menu_Active_Skill_Religion);
-  SS_Skills_DrawValue('perfomance', SS_Skills_Menu_Active_Skill_Perfomance);
+  SS_Skills_DrawValue('charm', SS_Skills_Menu_Active_Skill_Charm);
   SS_Skills_DrawValue('missing', SS_Skills_Menu_Active_Skill_Missing);
   SS_Skills_DrawValue('hands', SS_Skills_Menu_Active_Skill_Hands);
   SS_Skills_DrawValue('stealth', SS_Skills_Menu_Passive_Skill_Stealth);
