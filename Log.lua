@@ -432,3 +432,19 @@ end;
 SS_Log_AllPlayersLeavedBattle = function()
   print('|cffFFFF00Все игроки покинули сражение. Битва завершена автоматически.|r');
 end;
+
+SS_Log_MovementPointsAdded = function(points)
+  if (points >= 0) then
+    print('|cffFFFF00Добавлено |r'..points..'|cffFFFF00 очков перемещения.|r');
+  else
+    print('|cffFF0000Потеряно |r'..math.abs(points)..'|cffFF0000 очков перемещения.|r');
+  end;
+end;
+
+SS_Log_PlayerGetAdditionalBattleMovementPoints = function(points, player)
+  if (points >= 0) then
+    print(player..'|cffFFFF00 получил |r'..points..'|cffFFFF00 очко перемещения от использования предмета GHI.|r');
+  else
+    print(player..'|cffFF0000 потерял |r'..math.abs(points)..'|cffFF0000 очков перемещения от использования предмета GHI.|r');
+  end;
+end;

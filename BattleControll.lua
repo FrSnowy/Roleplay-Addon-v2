@@ -310,6 +310,10 @@ SS_BattleControll_RoundLoadFromCache = function(battleType, currentPhase)
   else
     SS_DMtP_ChangePhase(battleType, currentPhase);
   end;
+
+  SS_Shared_ForEach(SS_LeadingPlots_Current().battle.players)(function(p)
+    p.isMovementNotifyShowed = false;
+  end);
 end;
 
 SS_BattleControll_RoundNext = function(battleType, currentPhase)

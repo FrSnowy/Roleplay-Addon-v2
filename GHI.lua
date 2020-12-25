@@ -19,6 +19,8 @@ SS_Shared_ForEach({
   'SS_PtDM_PlayerGetModifier',
   'SS_BattleControll_IsInBattle',
   'SS_BattleControll_IsInPhase',
+  'SS_Log_MovementPointsAdded',
+  'SS_PtDM_GetAdditionalMovementPoints',
 })(function(el)
   local isKeyIncluded = SS_Shared_Includes(GHI_MiscData["WhiteList"])(function(v)
     return v == el;
@@ -555,6 +557,53 @@ table.insert(GHI_ProvidedDynamicActions, {
           };
         end]],
     }
+	},
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Добавить очков перемещения",
+	guid = "SS_Battle_AddMovementPoints",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.battle,
+	description = "Добавить дополнительные очки перемещения",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+    if (not(SS_Plots_Current().battle)) then return nil; end;
+    if (SS_Plots_Current().battle.movementPoints == nil) then return nil; end;
+    if (SS_BattleControll_IsInBattle('free')) then return nil; end;
+
+    local movementPoints = dyn.GetInput("movement");
+    SS_Plots_Current().battle.movementPoints = SS_Plots_Current().battle.movementPoints + movementPoints;
+    if (SS_Plots_Current().battle.movementPoints < 0) then
+      SS_Plots_Current().battle.movementPoints = 0;
+    end;
+    SS_Log_MovementPointsAdded(movementPoints);
+    SS_PtDM_GetAdditionalMovementPoints(movementPoints, SS_Plots_Current().author);
+
+    dyn.TriggerOutPort("added")
+	]],
+	ports = {
+		added = {
+			name = "ОП Добавлены",
+			direction = "out",
+      description = "",
+      order = 1,
+		},
+	},
+	inputs = {
+		movement = {
+			name = "Дополнительные очки",
+			description = "",
+			type = "number",
+      defaultValue = "",
+      order = 1,
+		},
 	},
 });
 

@@ -203,3 +203,12 @@ SS_PtDM_LeaveBattleSuccess = function(master)
     SS_PtDM_InspectInfo("update", master);
   end);
 end;
+
+SS_PtDM_GetAdditionalMovementPoints = function(points, master)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName("player")) then return nil; end;
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Direct('playerGetAdditionalMovemetPoints', SS_User.settings.currentPlot.."+"..points, master);
+  end);
+end;

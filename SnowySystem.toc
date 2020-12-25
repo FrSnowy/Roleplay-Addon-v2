@@ -48,6 +48,7 @@ Listeners\DM\onPlayerRequestActualBattleInfo.lua
 Listeners\DM\onPlayerSendBattleInitiative.lua
 Listeners\DM\onPlayerLeaveBattle.lua
 Listeners\DM\onPlayerMovementPointsEnd.lua
+Listeners\DM\onPlayerGetAdditionalBattleMovementPoints.lua
 Listeners\Player\onIsOnline.lua
 Listeners\Player\onIAmOnline.lua
 Listeners\Player\onInvite.lua
