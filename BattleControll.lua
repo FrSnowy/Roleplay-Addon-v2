@@ -729,6 +729,9 @@ SS_BattleControll_StartMovementWatch = function()
 end;
 
 SS_BattleControll_ReloadMovementWatch = function()
+  if (SS_Plots_Current().battle.reloadingMovement) then return nil; end;
+  SS_Plots_Current().battle.reloadingMovement = true;
+
   local prevMovementFn = SS_BattleControll_StartMovementWatch;
   SS_BattleControll_StartMovementWatch = function()
     return nil;
@@ -745,6 +748,7 @@ SS_BattleControll_ReloadMovementWatch = function()
       SS_BattleControll_StartMovementWatch = prevMovementFn;
       SS_BattleControll_StartMovementWatch();
       f:Hide();
+      SS_Plots_Current().battle.reloadingMovement = false;
     end
   end)
 end;
