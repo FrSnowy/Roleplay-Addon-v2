@@ -290,20 +290,14 @@ end;
 
 SS_DMtP_AddToBattle = function(battleType, startFrom, player)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
-  
-  SS_Shared_IfOnline(player, function()
-    SS_DMtP_Direct('battleStart', SS_User.settings.currentPlot..'+'..battleType..'+'..startFrom, player);
-  end);
+  SS_DMtP_Direct('battleStart', SS_User.settings.currentPlot..'+'..battleType..'+'..startFrom, player);
 end;
 
 SS_DMtP_PlayerJoinSuccess = function(player)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
   if (not(SS_LeadingPlots_Current().battle.players[player])) then return nil; end;
-
-  SS_Shared_IfOnline(player, function()
-    SS_DMtP_Direct('battleJoinSuccess', SS_User.settings.currentPlot, player);
-  end);
+  SS_DMtP_Direct('battleJoinSuccess', SS_User.settings.currentPlot, player);
 end;
 
 SS_DMtP_ChangePhase = function(battleType, nextPhase)
@@ -322,10 +316,7 @@ SS_DMtP_SendActualBattleInfo = function(battleType, phase, isTurnEnded, player)
   if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started) or not(SS_LeadingPlots_Current().battle.players)) then return nil; end;
 
   if (isTurnEnded == true) then isTurnEnded = 'true' else isTurnEnded = 'false' end;
-
-  SS_Shared_IfOnline(player, function()
-    SS_DMtP_Direct('actualBattleInfo', SS_User.settings.currentPlot..'+'..battleType..'+'..phase..'+'..isTurnEnded, player);    
-  end);
+  SS_DMtP_Direct('actualBattleInfo', SS_User.settings.currentPlot..'+'..battleType..'+'..phase..'+'..isTurnEnded, player);
 end;
 
 SS_DMtP_BattleInitiativeTableFormed = function(currentPhase)

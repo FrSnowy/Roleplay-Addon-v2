@@ -474,5 +474,16 @@ SS_Log_BarrierGetDMGAndDestoyed = function(damage)
 end;
 
 SS_Log_NoHP = function()
-  print('|cffFF0000Вы потеряли все очки здоровья и больше не можете совершать активных действий.|r');
+  print('|cffFF0000Вы потеряли все ОЗ и не можете совершать активных действий.|r');
+end;
+
+SS_Log_PlayerRecievedDamage = function(dmg, currentHP, player)
+  local output = player..'|cffFFFF00 получает |r'..dmg..'|cffFFFF00 ед. урона|r';
+  if (currentHP == 0) then
+    output = output..'|cffFFFF00 и не может совершать активных действий.|r';
+  else
+    output = output..'|cffFFFF00.|r'
+  end;
+
+  print(output);
 end;

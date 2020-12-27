@@ -2,10 +2,10 @@ SS_Listeners_Player_OnSendDamage = function(data, master)
   if (not(SS_Plots_Current())) then return nil; end;
   if (not(master == SS_Plots_Current().author)) then return nil; end;
 
-  local plotID, dmg, ignoreArmor = strsplit('+', data);
+  local plotID, fullDMG, ignoreArmor = strsplit('+', data);
   if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
 
-  dmg = SS_Shared_NumFromStr(dmg);
+  local dmg = SS_Shared_NumFromStr(fullDMG);
   ignoreArmor = ignoreArmor == 'true';
 
   local currentHP = SS_Params_GetHealth();
@@ -51,10 +51,15 @@ SS_Listeners_Player_OnSendDamage = function(data, master)
   
   SS_Params_DrawHealth();
   SS_Params_DrawBarrier();
-  SS_PtDM_UpdatePlayerInfo(master);
 
   if (SS_Plots_Current().params.health == 0) then
     SS_Log_NoHP(dmg);
     PlaySoundFile('Sound\\Interface\\AlarmClockWarning3.ogg');
-  end;
+  end;  
+
+  SS_Shared_IfOnline(master, function()
+    SS_PtDM_Params(master);
+    SS_PtDM_InspectInfo("update", master);
+    SS_PtDM_RecievedDamage(fullDMG, SS_Params_GetHealth(), master);
+  end);
 end;
