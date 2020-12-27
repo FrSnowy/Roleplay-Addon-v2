@@ -1,7 +1,7 @@
 local categories = {
   modifiers = 'Ролевая система от Снежка: Модификаторы',
   checks = 'Ролевая система от Снежка: Проверки',
-  battle = 'Ролевая система от Снежка: Бой',
+  battle = 'Ролевая система от Снежка: Бой и урон',
 };
 
 if (GHI_MiscData and not(GHI_MiscData["WhiteList"])) then
@@ -22,6 +22,7 @@ SS_Shared_ForEach({
   'SS_Log_MovementPointsAdded',
   'SS_PtDM_GetAdditionalMovementPoints',
   'SS_BattleControll_EndRound',
+  'SS_DamageControll_RecieveDamage',
 })(function(el)
   local isKeyIncluded = SS_Shared_Includes(GHI_MiscData["WhiteList"])(function(v)
     return v == el;
@@ -638,6 +639,52 @@ table.insert(GHI_ProvidedDynamicActions, {
       order = 1,
 		},
 	},
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Получить урон",
+	guid = "SS_Battle_GetDamage",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.battle,
+	description = "",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
+    local dmg = dyn.GetInput("damage");
+    local ignoreArmor = dyn.GetInput("ignoreArmor");
+
+    SS_DamageControll_RecieveDamage(dmg, ignoreArmor, SS_Plots_Current().author);
+    dyn.TriggerOutPort("damageSended")
+	]],
+	ports = {
+    damageSended = {
+			name = "Урон нанесен",
+			direction = "out",
+      description = "",
+      order = 1,
+		},
+	},
+	inputs = {
+		damage = {
+			name = "Количество урона",
+			type = "number",
+      defaultValue = 0,
+      order = 1,
+    },
+		ignoreArmor = {
+			name = "Игнорировать броню",
+			description = "Урон пройдет сразу по ОЗ",
+			order = 2,
+			type = "boolean",
+			defaultValue = false,
+		},
+  },
 });
 
 GHI_DynamicActionList().LoadActions();

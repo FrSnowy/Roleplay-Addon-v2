@@ -4,6 +4,9 @@ SS_Listeners_Player_OnDMStopEvent = function(plotID, master)
   if (not(SS_User.settings.currentPlot == plotID)) then return false; end;
   if (not(SS_Plots_Current().author == master)) then return false; end;
 
+  local name = SS_Plots_Current().name;
+
   SS_User.settings.currentPlot = nil;
   SS_PlotController_OnDeactivate();
+  SS_Log_DMStopEvent(name);
 end;

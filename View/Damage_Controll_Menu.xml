@@ -7,7 +7,7 @@
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
         self:RegisterForDrag("LeftButton");
         self.closeBtn:SetScript("OnClick", function()
-          SS_DiceControll_Hide();
+          SS_DamageControll_Hide();
         end);
       </OnLoad>
       <OnDragStart>self:StartMoving();</OnDragStart>

@@ -171,6 +171,10 @@ SS_Log_AcceptEventStart = function(plot)
   print('|cffFFFF00Вы согласились на участие в событии сюжета |r"'..plot..'"');
 end;
 
+SS_Log_DMStopEvent = function(plot)
+  print('|cffFFFF00Мастер завершил событие сюжета |r"'..plot..'"');
+end;
+
 SS_Log_PlayerJoinedToEvent = function(player, plot)
   if (player == UnitName("player")) then return nil; end;
   print('|cffFFFF00Игрок |r'..player..'|cffFFFF00 присоединился к событию сюжета |r"'..plot..'"');
