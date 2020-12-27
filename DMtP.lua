@@ -362,3 +362,28 @@ SS_DMtP_KickFromBattle = function(player)
     SS_DMtP_Direct('battleEnd', SS_User.settings.currentPlot.."+"..'true', player);
   end);
 end;
+
+SS_DMtP_SendDamage = function(damage)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_DamageControll_Data)) then return nil; end;
+
+  local ignoreArmor = 'false';
+  if (SS_DamageControll_Data.ignoreArmor) then ignoreArmor = 'true'; end;
+
+  local data = SS_User.settings.currentPlot.."+"..damage.."+"..ignoreArmor;
+
+  if (SS_DamageControll_Data.target == 'player') then
+    if (not(UnitName("target"))) then
+      SS_Log_NoTarget();
+      return nil;
+    end;
+
+    SS_Shared_IfOnline(UnitName('target'), function()
+      SS_DMtP_Direct('sendDamage', data, UnitName('target'));
+    end);
+  end;
+
+  if (SS_DamageControll_Data.target == 'group') then
+    SS_DMtP_Every('sendDamage', data)(SS_User.settings.currentPlot);
+  end;
+end;

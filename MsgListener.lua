@@ -54,6 +54,7 @@ local actionFire = function(action, data, author, prefix)
     changeBattlePhase = SS_Listeners_Player_OnChangeBattlePhase,
     actualBattleInfo = SS_Listeners_Player_OnRecieveActualBattleInfo,
     battleEnd = SS_Listeners_Player_OnBattleEnd,
+    sendDamage = SS_Listeners_Player_OnSendDamage,
   };
 
   if (not(actions[action])) then

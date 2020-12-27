@@ -80,7 +80,14 @@
           </Anchor> 
         </Anchors>
       </Button>
-      <Button name="$parent_Damage_Button" inherits="OptionsButtonTemplate" text="+ Урон">
+      <Button name="$parent_DamageControll_Button" inherits="OptionsButtonTemplate" text="+ Урон">
+        <Scripts>
+          <OnClick>
+            if (SS_DamageControll_Menu:IsVisible()) then SS_DamageControll_Hide();
+            else SS_DamageControll_Show();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "120" y = "32" />
         <Anchors>
           <Anchor point="TOPLEFT">

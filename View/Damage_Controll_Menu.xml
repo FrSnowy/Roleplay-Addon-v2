@@ -1,0 +1,128 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_DamageControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="4">
+    <Scripts>
+      <OnLoad>
+        self:SetSize(350, 175);
+        self.title:SetText('Урон');
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
+        self:RegisterForDrag("LeftButton");
+        self.closeBtn:SetScript("OnClick", function()
+          SS_DiceControll_Hide();
+        end);
+      </OnLoad>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Layers>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Количество урона:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Игнорировать броню">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="46" y="-104" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Применить к:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-65" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Выбранная цель">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-30" y="-70" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Вся группа">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-60" y="-95" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <EditBox name = "$parent_Dmg_Input" inherits="SS_Form_EditBox">
+        <Scripts>
+          <OnShow>
+            self:SetNumeric();
+          </OnShow>
+          <OnEscapePressed>
+            self:ClearFocus();
+          </OnEscapePressed>
+        </Scripts>
+        <Size x="110" y="26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="20" y="-66"/></Offset>
+          </Anchor>
+        </Anchors>
+      </EditBox>
+      <CheckButton name = "$parent_Check_Ignore_Armor" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>
+            SS_DamageControll_SelectIgnoreArmor(not(SS_DamageControll_Data.ignoreArmor))
+          </OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="20" y="-98"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>    
+      <CheckButton name = "$parent_Check_Target_Player" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnClick>SS_DamageControll_SelectTarget('player')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-123" y="-63"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Target_Group" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>SS_DamageControll_SelectTarget('group')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-123" y="-88"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>     
+      <Button name="$parent_Send_Damage" inherits="OptionsButtonTemplate" text="Нанести урон">
+        <Scripts>
+          <OnClick>
+            SS_DamageControll_SendDamage();
+          </OnClick>
+        </Scripts>
+        <Size x = "115" y = "26" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-30" y="-120"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

@@ -335,6 +335,10 @@ SS_Log_NoCount = function()
   print('|cffFF0000Ошибка: не указано количество бросков|r');
 end;
 
+SS_Log_NoDMGValue = function()
+  print('|cffFF0000Ошибка: не указано количество наносимых очков урона|r');
+end;
+
 SS_Log_NoStats = function()
   print('|cffFF0000Ошибка: не выбрано ни одной характеристики или навыка|r');
 end;
@@ -447,4 +451,28 @@ SS_Log_PlayerGetAdditionalBattleMovementPoints = function(points, player)
   else
     print(player..'|cffFF0000 потерял |r'..math.abs(points)..'|cffFF0000 очков перемещения от использования предмета GHI.|r');
   end;
+end;
+
+SS_Log_RecievedDamage = function(damage, ignoreArmor)
+  if (ignoreArmor) then
+    print('|cffFF0000Вы получили |r'..damage..'|cffFF0000 ед. урона, игнорирующего броню.|r');
+  else
+    print('|cffFF0000Вы получили |r'..damage..'|cffFF0000 ед. урона.|r');
+  end;
+end;
+
+SS_Log_BarrierGetDMG = function(damage)
+  print('|cff55AAFFБарьер впитал |r'..damage..'|cff55AAFF ед. урона.|r');
+end;
+
+SS_Log_BarrierGetDMGDestoyedAndSendDMGToHP = function(barrierDMG, hpDMG)
+  print('|cffFF0000Барьер впитал |r'..barrierDMG..'|cffFF0000 ед. урона и был разрушен. Вы получили |r'..hpDMG..'|cffFF0000 ед. урона.|r');
+end;
+
+SS_Log_BarrierGetDMGAndDestoyed = function(damage)
+  print('|cff55AAFFБарьер впитал |r'..damage..'|cff55AAFF ед. урона и был разрушен.|r');
+end;
+
+SS_Log_NoHP = function()
+  print('|cffFF0000Вы потеряли все очки здоровья и больше не можете совершать активных действий.|r');
 end;

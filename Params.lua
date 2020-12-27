@@ -61,8 +61,7 @@ SS_Params_GetMaxBarrier = function(previousArmorType)
     end;
   end;
 
-  -- Ещё флаг, что не в бою
-  if (SS_Params_GetBarrier() == 0 or SS_Params_GetBarrier() > maxBarrier or (previousArmorType and SS_Params_GetBarrier() == previousMaxBarrier)) then
+  if (SS_Params_GetBarrier() > maxBarrier or (previousArmorType and SS_Params_GetBarrier() == previousMaxBarrier)) then
     SS_Plots_Current().params.barrier = maxBarrier;
   end;
 
@@ -85,7 +84,5 @@ SS_Params_DrawBarrier = function(previousArmorType)
 
   SS_PlayerFrame_Barrier:Show();
   SS_PlayerFrame_Barrier_Icon:Show();
-
-  local currentBarrier = SS_Params_GetBarrier();
-  SS_PlayerFrame_Barrier:SetText(currentBarrier.."/"..maxBarrierPoints)
+  SS_PlayerFrame_Barrier:SetText(SS_Params_GetBarrier().."/"..maxBarrierPoints)
 end;
