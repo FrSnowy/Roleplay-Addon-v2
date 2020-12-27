@@ -27,6 +27,7 @@ DiceControll.lua
 ModifiersControll.lua
 BattleControll.lua
 DamageControll.lua
+ParamsControll.lua
 SnowySystem.lua
 SnowySystem.xml
 Listeners\DM\onPlayerToAll.lua
@@ -51,6 +52,10 @@ Listeners\DM\onPlayerLeaveBattle.lua
 Listeners\DM\onPlayerMovementPointsEnd.lua
 Listeners\DM\onPlayerGetAdditionalBattleMovementPoints.lua
 Listeners\DM\onPlayerDamageRecieve.lua
+Listeners\DM\onPlayerHealthChange.lua
+Listeners\DM\onPlayerBarrierChange.lua
+Listeners\DM\onPlayerExpChange.lua
+Listeners\DM\onPlayerLevelChange.lua
 Listeners\Player\onIsOnline.lua
 Listeners\Player\onIAmOnline.lua
 Listeners\Player\onInvite.lua
@@ -69,6 +74,10 @@ Listeners\Player\onChangeBattlePhase.lua
 Listeners\Player\onDMSendActualBattleInfo.lua
 Listeners\Player\onBattleEnd.lua
 Listeners\Player\onSendDamage.lua
+Listeners\Player\onDMChangeHealth.lua
+Listeners\Player\onDMChangeBarrier.lua
+Listeners\Player\onDMChangeExp.lua
+Listeners\Player\onDMChangeLevel.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml
@@ -88,6 +97,7 @@ View\Modifiers_Controll_Menu.xml
 View\Modifiers_Create_Menu.xml
 View\Battle_Controll_Menu.xml
 View\Damage_Controll_Menu.xml
+View\Params_Controll_Menu.xml
 View\Invite_Modal.xml
 View\Event_Start_Modal.xml
 GHI.lua

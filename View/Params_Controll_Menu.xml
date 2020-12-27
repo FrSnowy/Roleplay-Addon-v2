@@ -1,0 +1,190 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_ParamsControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="4">
+    <Scripts>
+      <OnLoad>
+        self:SetSize(390, 185);
+        self.title:SetText('Показатели');
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\player-background";
+        self:RegisterForDrag("LeftButton");
+        self.closeBtn:SetScript("OnClick", function()
+          SS_ParamsControll_Hide();
+        end);
+      </OnLoad>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Layers>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Значение:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Показатель:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="110" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Очки здоровья">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="140" y="-70" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Очки брони">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="140" y="-95" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Уровень">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="140" y="-120" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Опыт">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="140" y="-145" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Применить к:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-65" y="-45" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Выбранная цель">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-30" y="-70" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Вся группа">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-60" y="-95" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <EditBox name = "$parent_Value_Input" inherits="SS_Form_EditBox">
+        <Scripts>
+          <OnShow>
+            self:SetNumeric();
+          </OnShow>
+          <OnEscapePressed>
+            self:ClearFocus();
+          </OnEscapePressed>
+        </Scripts>
+        <Size x="80" y="26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="20" y="-66"/></Offset>
+          </Anchor>
+        </Anchors>
+      </EditBox>
+      <CheckButton name = "$parent_Check_Params_Health" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnClick>SS_ParamsControll_SelectParam('health')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="110" y="-63"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Params_Barrier" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>SS_ParamsControll_SelectParam('barrier')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="110" y="-88"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Params_Level" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>SS_ParamsControll_SelectParam('level')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="110" y="-113"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Params_Exp" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>SS_ParamsControll_SelectParam('exp')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="110" y="-138"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Target_Player" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnClick>SS_ParamsControll_SelectTarget('player')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-123" y="-63"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Target_Group" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>SS_ParamsControll_SelectTarget('group')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-123" y="-88"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>     
+      <Button name="$parent_Send_Update" inherits="OptionsButtonTemplate" text="Применить">
+        <Scripts>
+          <OnClick>
+            SS_ParamsControll_SendUpdateInfo();
+          </OnClick>
+        </Scripts>
+        <Size x = "115" y = "26" />
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset x="-30" y="20"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

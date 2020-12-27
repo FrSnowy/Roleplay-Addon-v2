@@ -378,3 +378,34 @@ SS_DMtP_SendDamage = function(damage)
     SS_DMtP_Every('sendDamage', data)(SS_User.settings.currentPlot);
   end;
 end;
+
+SS_DMtP_SendParamUpdate = function(updateValue)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_ParamsControll_Data)) then return nil; end;
+
+  local prefixByBaram = {
+    health = 'updateHealth',
+    barrier = 'updateBarrier',
+    level = 'updateLevel',
+    exp = 'updateExp',
+  };
+
+  if (not(prefixByBaram[SS_ParamsControll_Data.param])) then return nil; end;
+  local prefix = prefixByBaram[SS_ParamsControll_Data.param];
+  local data = SS_User.settings.currentPlot.."+"..updateValue;
+
+  if (SS_ParamsControll_Data.target == 'player') then
+    if (not(UnitName("target"))) then
+      SS_Log_NoTarget();
+      return nil;
+    end;
+
+    SS_Shared_IfOnline(UnitName('target'), function()
+      SS_DMtP_Direct(prefix, data, UnitName('target'));
+    end);
+  end;
+
+  if (SS_ParamsControll_Data.target == 'group') then
+    SS_DMtP_Every(prefix, data)(SS_User.settings.currentPlot);
+  end;
+end;

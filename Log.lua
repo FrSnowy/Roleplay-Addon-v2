@@ -359,6 +359,10 @@ SS_Log_NoMovementPoints = function()
   print('|cffFF0000Закончились очки перемещения!|r');
 end;
 
+SS_Log_ValueMustBeNum = function()
+  print('|cffFF0000Значение должно быть числом|r');
+end;
+
 SS_Log_PlayerGetModifier = function(name, value, stats, player)
   local outputString = player..'|cffFFFF00 получил модификатор |r"'..name..'" ';
   

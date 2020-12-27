@@ -120,6 +120,11 @@ SS_ModifierCreate_Create = function()
   local value = SS_ModifiersCreate_Menu.value:GetText();
   local count = SS_ModifiersCreate_Menu.count:GetText();
 
+  if (not(SS_Shared_IsNumber(value))) then
+    SS_Log_ValueMustBeNum();
+    return nil;
+  end;
+
   if (id == '') then SS_Log_NoID(); return nil; end;
   if (name == '') then SS_Log_NoName(); return nil; end;
   if (value == '') then SS_Log_NoValue(); return nil; end;

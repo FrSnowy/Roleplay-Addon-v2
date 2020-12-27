@@ -282,9 +282,6 @@
       </EditBox>
       <EditBox parentKey = "value" inherits="SS_Form_EditBox">
         <Scripts>
-          <OnShow>
-            self:SetNumeric();
-          </OnShow>
           <OnEscapePressed>
             self:ClearFocus();
           </OnEscapePressed>

@@ -130,6 +130,10 @@ SS_Shared_IfOnline = function(target, callback)
   SS_PtP_IsOnline(target);
 end;
 
+SS_Shared_IsNumber = function(str)
+  return string.match(str, "^%-?%d+$");
+end;
+
 SS_Shared_NumFromStr = function(strWithNum)
   return tonumber(string.match(strWithNum, "%-?%d+"));
 end;
