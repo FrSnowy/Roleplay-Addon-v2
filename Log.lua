@@ -495,3 +495,27 @@ SS_Log_PlayerRecievedDamage = function(dmg, currentHP, player)
 
   print(output);
 end;
+
+SS_Log_HealthChanged = function(updateValue, master)
+  if (master == UnitName('player')) then
+    if (updateValue >= 0) then
+      print('|cff00FF00Ваше текущее здоровье увеличено на |r'..updateValue..'|cff00FF00 [|r'..SS_Params_GetHealth()..'/'..SS_Params_GetMaxHealth()..'|cff00FF00]|r');
+    else
+      print('|cffFF0000Ваше текущее здоровье уменьшено на |r'..math.abs(updateValue)..'|cffFF0000 [|r'..SS_Params_GetHealth()..'/'..SS_Params_GetMaxHealth()..'|cffFF0000]|r');
+    end;
+  else
+    if (updateValue >= 0) then
+      print(master..'|cff00FF00 увеличил ваше текущее здоровье на |r'..updateValue..'|cff00FF00 [|r'..SS_Params_GetHealth()..'/'..SS_Params_GetMaxHealth()..'|cff00FF00]|r');
+    else
+      print(master..'|cffFF0000 уменьшил ваше текущее здоровье на |r'..math.abs(updateValue)..'|cffFF0000 [|r'..SS_Params_GetHealth()..'/'..SS_Params_GetMaxHealth()..'|cffFF0000]|r');
+    end;
+  end;
+end;
+
+SS_Log_PlayerHealthChanged = function(updateValue, player)
+  if (updateValue >= 0) then
+    print(player..'|cff00FF00 увеличил текущее здоровье на |r'..updateValue..'|cff00FF00.|r');
+  else
+    print(player..'|cffFF0000 уменьшил текущее здоровье на |r'..math.abs(updateValue)..'|cffFF0000.|r');
+  end;
+end;

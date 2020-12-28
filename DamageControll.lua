@@ -101,7 +101,7 @@ SS_DamageControll_RecieveDamage = function(damage, ignoreArmor, master)
   if (SS_Plots_Current().params.health == 0) then
     SS_Log_NoHP(dmg);
     PlaySoundFile('Sound\\Interface\\AlarmClockWarning3.ogg');
-  end;  
+  end;
 
   SS_Shared_IfOnline(master, function()
     SS_PtDM_Params(master);

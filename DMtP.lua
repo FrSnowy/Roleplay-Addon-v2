@@ -383,11 +383,16 @@ SS_DMtP_SendParamUpdate = function(updateValue)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_ParamsControll_Data)) then return nil; end;
 
+  if (not(SS_Shared_IsNumber(updateValue))) then
+    SS_Log_ValueMustBeNum();
+    return nil;
+  end;
+
   local prefixByBaram = {
-    health = 'updateHealth',
-    barrier = 'updateBarrier',
-    level = 'updateLevel',
-    exp = 'updateExp',
+    health = 'dmChangeHealth',
+    barrier = 'dmChangeBarrier',
+    level = 'dmChangeLevel',
+    exp = 'dmChangeExp',
   };
 
   if (not(prefixByBaram[SS_ParamsControll_Data.param])) then return nil; end;

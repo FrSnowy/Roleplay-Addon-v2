@@ -60,11 +60,16 @@ SS_ParamsControll_SendUpdateInfo = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
   local updateValue = SS_ParamsControll_Menu_Value_Input:GetText();
+  
+  if (not(SS_Shared_IsNumber(updateValue))) then
+    SS_Log_ValueMustBeNum();
+    return nil;
+  end;
 
   if (not(updateValue) or updateValue == '' or updateValue == '0') then
     SS_Log_ValueMustBeNum();
     return nil;
   end;
 
-  SS_DMtP_SendParamUpdate(damage);
+  SS_DMtP_SendParamUpdate(updateValue);
 end;

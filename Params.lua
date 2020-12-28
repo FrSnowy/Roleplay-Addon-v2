@@ -86,3 +86,26 @@ SS_Params_DrawBarrier = function(previousArmorType)
   SS_PlayerFrame_Barrier_Icon:Show();
   SS_PlayerFrame_Barrier:SetText(SS_Params_GetBarrier().."/"..maxBarrierPoints)
 end;
+
+SS_Params_ChangeHealth = function(updateValue, master)
+  SS_Plots_Current().params.health = SS_Plots_Current().params.health + updateValue;
+  if (SS_Plots_Current().params.health > SS_Params_GetMaxHealth()) then
+    SS_Plots_Current().params.health = SS_Params_GetMaxHealth();
+  end;
+
+  SS_Params_DrawHealth();
+  SS_Params_DrawBarrier();
+
+  if (SS_Plots_Current().params.health == 0) then
+    SS_Log_NoHP(dmg);
+    PlaySoundFile('Sound\\Interface\\AlarmClockWarning3.ogg');
+  end;
+
+  if (not(master == UnitName("player"))) then
+    SS_Shared_IfOnline(master, function()
+      SS_PtDM_Params(master);
+      SS_PtDM_InspectInfo("update", master);
+      SS_PtDM_HPChanged(updateValue, master);
+    end);
+  end;
+end;

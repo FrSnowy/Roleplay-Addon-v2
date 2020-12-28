@@ -142,12 +142,16 @@ end;
 
 SS_PtDM_UpdatePlayerInfo = function(master)
   if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName('player')) then return nil; end;
+
   SS_PtDM_Params(master);
   SS_PtDM_InspectInfo("update", master);
 end;
 
 SS_PtDM_JoinToBattle = function(master)
   if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName('player')) then return nil; end;
+
   SS_PtDM_Direct('playerJoinToBattle', SS_User.settings.currentPlot, master);
   SS_PtDM_Params(master);
   SS_PtDM_InspectInfo("update", master);
@@ -155,6 +159,7 @@ end;
 
 SS_PtDM_EndBattleTurn = function(master)
   if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName('player')) then return nil; end;
 
   SS_Shared_IfOnline(master, function()
     SS_PtDM_Direct('playerBattleTurnEnd', SS_User.settings.currentPlot, master);
@@ -164,6 +169,7 @@ end;
 SS_PtDM_RequestActualBattleInfo = function(master)
   if (not(SS_Plots_Current()) or not(SS_Plots_Current().battle)) then return nil; end;
   if (master == UnitName('player')) then return nil; end;
+
   SS_PtDM_Direct('playerRequestActualBattleInfo', SS_User.settings.currentPlot, master);
 end;
 
@@ -206,4 +212,11 @@ SS_PtDM_RecievedDamage = function(dmg, currentHP, master)
   if (master == UnitName("player")) then return nil; end;
 
   SS_PtDM_Direct('playerGetDamage', SS_User.settings.currentPlot.."+"..dmg.."+"..currentHP, master);
+end;
+
+SS_PtDM_HPChanged = function(updateValue, master)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName("player")) then return nil; end;
+
+  SS_PtDM_Direct('playerHealthChange', SS_User.settings.currentPlot.."+"..updateValue, master);
 end;
