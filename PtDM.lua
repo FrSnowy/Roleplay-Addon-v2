@@ -220,3 +220,10 @@ SS_PtDM_HPChanged = function(updateValue, master)
 
   SS_PtDM_Direct('playerHealthChange', SS_User.settings.currentPlot.."+"..updateValue, master);
 end;
+
+SS_PtDM_BarrierChanged = function(updateValue, master)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName("player")) then return nil; end;
+
+  SS_PtDM_Direct('playerBarrierChange', SS_User.settings.currentPlot.."+"..updateValue, master);
+end;

@@ -61,7 +61,7 @@ SS_Params_GetMaxBarrier = function(previousArmorType)
     end;
   end;
 
-  if (SS_Params_GetBarrier() > maxBarrier or (previousArmorType and SS_Params_GetBarrier() == previousMaxBarrier)) then
+  if (previousArmorType and SS_Params_GetBarrier() >= previousMaxBarrier) then
     SS_Plots_Current().params.barrier = maxBarrier;
   end;
 
@@ -84,7 +84,12 @@ SS_Params_DrawBarrier = function(previousArmorType)
 
   SS_PlayerFrame_Barrier:Show();
   SS_PlayerFrame_Barrier_Icon:Show();
-  SS_PlayerFrame_Barrier:SetText(SS_Params_GetBarrier().."/"..maxBarrierPoints)
+
+  if (maxBarrierPoints > 0) then
+    SS_PlayerFrame_Barrier:SetText(SS_Params_GetBarrier().."/"..maxBarrierPoints)
+  elseif (maxBarrierPoints == 0) then
+    SS_PlayerFrame_Barrier:SetText(SS_Params_GetBarrier())
+  end;
 end;
 
 SS_Params_ChangeHealth = function(updateValue, master)
@@ -94,10 +99,9 @@ SS_Params_ChangeHealth = function(updateValue, master)
   end;
 
   SS_Params_DrawHealth();
-  SS_Params_DrawBarrier();
 
   if (SS_Plots_Current().params.health == 0) then
-    SS_Log_NoHP(dmg);
+    SS_Log_NoHP();
     PlaySoundFile('Sound\\Interface\\AlarmClockWarning3.ogg');
   end;
 
@@ -106,6 +110,23 @@ SS_Params_ChangeHealth = function(updateValue, master)
       SS_PtDM_Params(master);
       SS_PtDM_InspectInfo("update", master);
       SS_PtDM_HPChanged(updateValue, master);
+    end);
+  end;
+end;
+
+SS_Params_ChangeBarrier = function(updateValue, master)
+  SS_Plots_Current().params.barrier = SS_Plots_Current().params.barrier + updateValue;
+  if (SS_Plots_Current().params.barrier < 0) then
+    SS_Plots_Current().params.barrier = 0;
+  end;
+
+  SS_Params_DrawBarrier();
+
+  if (not(master == UnitName("player"))) then
+    SS_Shared_IfOnline(master, function()
+      SS_PtDM_Params(master);
+      SS_PtDM_InspectInfo("update", master);
+      SS_PtDM_BarrierChanged(updateValue, master);
     end);
   end;
 end;

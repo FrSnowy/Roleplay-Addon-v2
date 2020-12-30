@@ -39,7 +39,7 @@ SS_ParamsControll_SelectTarget = function(target)
 end;
 
 SS_ParamsControll_SelectParam = function(target)
-  SS_ParamsControll_Data.param = param;
+  SS_ParamsControll_Data.param = target;
   SS_ParamsControll_Menu_Check_Params_Health:SetChecked(false);
   SS_ParamsControll_Menu_Check_Params_Barrier:SetChecked(false);
   SS_ParamsControll_Menu_Check_Params_Level:SetChecked(false);

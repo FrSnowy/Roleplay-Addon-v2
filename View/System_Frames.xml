@@ -134,7 +134,8 @@
             GameTooltip:SetOwner(this, "CENTER")
             GameTooltip:AddLine("Очки брони (ОБ)");
             GameTooltip:AddLine("Обозначают количество очков урона,")
-            GameTooltip:AddLine("которые будут поглощены доспехами, не");
+            GameTooltip:AddLine("которые будут поглощены доспехами или");
+            GameTooltip:AddLine("магически сотворенным барьером, не");
             GameTooltip:AddLine("уменьшая при этом очков боеспособности");
             GameTooltip:Show()
           </OnEnter>
@@ -229,7 +230,8 @@
             GameTooltip:SetOwner(this, "CENTER")
             GameTooltip:AddLine("Очки брони (ОБ)");
             GameTooltip:AddLine("Обозначают количество очков урона,")
-            GameTooltip:AddLine("которые будут поглощены доспехами, не");
+            GameTooltip:AddLine("которые будут поглощены доспехами или");
+            GameTooltip:AddLine("магически сотворенным барьером, не");
             GameTooltip:AddLine("уменьшая при этом очков боеспособности");
             GameTooltip:Show()
           </OnEnter>

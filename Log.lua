@@ -512,10 +512,50 @@ SS_Log_HealthChanged = function(updateValue, master)
   end;
 end;
 
+SS_Log_BarrierChanged = function(updateValue, master)
+  local output = '';
+  if (master == UnitName('player')) then
+    if (updateValue >= 0) then
+      output = '|cff00FF00Текущая броня увеличена на |r'..updateValue;
+      if (SS_Params_GetMaxBarrier() > 0) then
+        output = output..'|cff00FF00 [|r'..SS_Params_GetBarrier()..'/'..SS_Params_GetMaxBarrier()..'|cff00FF00]|r';
+      end;
+    else
+      output = '|cffFF0000Текущая броня уменьшена на |r'..math.abs(updateValue);
+
+      if (SS_Params_GetMaxBarrier() > 0) then
+        output = output..'|cffFF0000 [|r'..SS_Params_GetBarrier()..'/'..SS_Params_GetMaxBarrier()..'|cffFF0000]|r';
+      end;
+    end;
+  else
+    if (updateValue >= 0) then
+      output = master..'|cff00FF00 увеличил вашу броню на |r'..updateValue;
+      if (SS_Params_GetMaxBarrier() > 0) then
+        output = output..'|cff00FF00 [|r'..SS_Params_GetBarrier()..'/'..SS_Params_GetMaxBarrier()..'|cff00FF00]|r';
+      end;
+    else
+      output = master..'|cffFF0000 уменьшил вашу броню на |r'..math.abs(updateValue);
+      if (SS_Params_GetMaxBarrier() > 0) then
+        output = output..'|cffFF0000 [|r'..SS_Params_GetBarrier()..'/'..SS_Params_GetMaxBarrier()..'|cffFF0000]|r';
+      end;
+    end;
+  end;
+
+  print(output);
+end;
+
 SS_Log_PlayerHealthChanged = function(updateValue, player)
   if (updateValue >= 0) then
     print(player..'|cff00FF00 увеличил текущее здоровье на |r'..updateValue..'|cff00FF00.|r');
   else
     print(player..'|cffFF0000 уменьшил текущее здоровье на |r'..math.abs(updateValue)..'|cffFF0000.|r');
+  end;
+end;
+
+SS_Log_PlayerBarrierChanged = function(updateValue, player)
+  if (updateValue >= 0) then
+    print(player..'|cff00FF00 получил |r'..updateValue..'|cff00FF00 очков брони.|r');
+  else
+    print(player..'|cffFF0000 потерял |r'..math.abs(updateValue)..'|cffFF0000 очков брони.|r');
   end;
 end;

@@ -37,6 +37,7 @@ local actionFire = function(action, data, author, prefix)
     playerGetAdditionalMovemetPoints = SS_Listeners_DM_OnPlayerGetAdditionalBattleMovementPoints,
     playerGetDamage = SS_Listeners_DM_OnPlayerGetDamage,
     playerHealthChange = SS_Listeners_DM_OnPlayerHealthChange,
+    playerBarrierChange = SS_Listeners_DM_OnPlayerBarrierChange,
     isOnline = SS_Listeners_Player_OnIsOnline,
     iAmOnline = SS_Listeners_Player_OnIAmOnline,
     invite = SS_Listeners_Player_OnInvite,
@@ -58,6 +59,7 @@ local actionFire = function(action, data, author, prefix)
     battleEnd = SS_Listeners_Player_OnBattleEnd,
     sendDamage = SS_Listeners_Player_OnSendDamage,
     dmChangeHealth = SS_Listeners_Player_OnDMChangeHealth,
+    dmChangeBarrier = SS_Listeners_Player_OnDMChangeBarrier,
   };
 
   if (not(actions[action])) then

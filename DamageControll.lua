@@ -99,7 +99,7 @@ SS_DamageControll_RecieveDamage = function(damage, ignoreArmor, master)
   SS_Params_DrawBarrier();
 
   if (SS_Plots_Current().params.health == 0) then
-    SS_Log_NoHP(dmg);
+    SS_Log_NoHP();
     PlaySoundFile('Sound\\Interface\\AlarmClockWarning3.ogg');
   end;
 
