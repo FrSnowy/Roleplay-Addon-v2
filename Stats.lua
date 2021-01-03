@@ -137,3 +137,19 @@ SS_Stats_DrawAll = function()
   SS_Stats_DrawValue('mobility', SS_Stats_Menu_Stat_Mobility);
   SS_Stats_DrawValue('precision', SS_Stats_Menu_Stat_Precision);
 end;
+
+SS_Stats_ResetStats = function(stat)
+  if (not(SS_Plots_Current())) then return 0; end;
+
+  SS_Shared_ForEach(SS_Stats_GetList())(function(value, statName)
+    SS_Plots_Current().stats[statName] = 0;
+  end);
+
+  if (SS_Params_GetHealth() > SS_Params_GetMaxHealth()) then
+    SS_Plots_Current().params.health = SS_Params_GetMaxHealth();
+  end;
+
+  if (SS_Params_GetBarrier() > SS_Params_GetMaxBarrier()) then
+    SS_Plots_Current().params.barrier = SS_Params_GetMaxBarrier();
+  end;
+end;

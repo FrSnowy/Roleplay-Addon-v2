@@ -227,3 +227,11 @@ SS_PtDM_BarrierChanged = function(updateValue, master)
 
   SS_PtDM_Direct('playerBarrierChange', SS_User.settings.currentPlot.."+"..updateValue, master);
 end;
+
+SS_PtDM_LevelChanged = function(master)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName("player")) then return nil; end;
+
+  SS_PtDM_Direct('playerLevelChange', SS_User.settings.currentPlot.."+"..SS_Plots_Current().progress.level, master);
+end;
+

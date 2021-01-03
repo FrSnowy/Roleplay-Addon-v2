@@ -18,7 +18,7 @@
     </Anchors>
     <Layers>
       <Layer>
-        <FontString font="Fonts\FRIZQT__.TTF" text="Значение:">
+        <FontString font="Fonts\FRIZQT__.TTF" text="Изменение:">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="12"/>
           <Anchors>
@@ -74,7 +74,7 @@
             <Anchor point="TOPRIGHT" x="-30" y="-70" />
           </Anchors>
         </FontString>
-        <FontString font="Fonts\FRIZQT__.TTF" text="Вся группа">
+        <FontString font="Fonts\FRIZQT__.TTF" name="$parent_Check_Target_Group_Text" text="Вся группа">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -97,6 +97,19 @@
           </Anchor>
         </Anchors>
       </EditBox>
+      <Button name="$parent_Send_Reset" inherits="OptionsButtonTemplate" text="Полное">
+        <Scripts>
+          <OnClick>
+            SS_ParamsControll_SendResetInfo();
+          </OnClick>
+        </Scripts>
+        <Size x = "80" y = "26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="20" y="-100"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
       <CheckButton name = "$parent_Check_Params_Health" inherits="OptionsCheckButtonTemplate" checked="true">
         <Scripts>
           <OnClick>SS_ParamsControll_SelectParam('health')</OnClick>
@@ -168,7 +181,7 @@
             </Offset>
           </Anchor>
         </Anchors>
-      </CheckButton>     
+      </CheckButton>
       <Button name="$parent_Send_Update" inherits="OptionsButtonTemplate" text="Применить">
         <Scripts>
           <OnClick>

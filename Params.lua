@@ -93,6 +93,7 @@ SS_Params_DrawBarrier = function(previousArmorType)
 end;
 
 SS_Params_ChangeHealth = function(updateValue, master)
+  if (not(SS_Plots_Current())) then return nil; end;
   SS_Plots_Current().params.health = SS_Plots_Current().params.health + updateValue;
   if (SS_Plots_Current().params.health > SS_Params_GetMaxHealth()) then
     SS_Plots_Current().params.health = SS_Params_GetMaxHealth();
@@ -115,6 +116,7 @@ SS_Params_ChangeHealth = function(updateValue, master)
 end;
 
 SS_Params_ChangeBarrier = function(updateValue, master)
+  if (not(SS_Plots_Current())) then return nil; end;
   SS_Plots_Current().params.barrier = SS_Plots_Current().params.barrier + updateValue;
   if (SS_Plots_Current().params.barrier < 0) then
     SS_Plots_Current().params.barrier = 0;

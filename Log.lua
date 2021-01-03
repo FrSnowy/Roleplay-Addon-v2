@@ -544,6 +544,25 @@ SS_Log_BarrierChanged = function(updateValue, master)
   print(output);
 end;
 
+SS_Log_LevelChanged = function(updateValue, master)
+  local output = '';
+  if (master == UnitName('player')) then
+    if (updateValue >= 0) then
+      output = '|cff00FF00Вы перешли на уровень |r'..SS_Plots_Current().progress.level;
+    else
+      output = '|cffFF0000Вы перешли на уровень |r'..SS_Plots_Current().progress.level;
+    end;
+  else
+    if (updateValue >= 0) then
+      output = master..'|cff00FF00 установил ваш уровень на |r'..SS_Plots_Current().progress.level;
+    else
+      output = master..'|cffFF0000 установил ваш уровень на |r'..SS_Plots_Current().progress.level;
+    end;
+  end;
+
+  print(output);
+end;
+
 SS_Log_PlayerHealthChanged = function(updateValue, player)
   if (updateValue >= 0) then
     print(player..'|cff00FF00 увеличил текущее здоровье на |r'..updateValue..'|cff00FF00.|r');
@@ -558,4 +577,13 @@ SS_Log_PlayerBarrierChanged = function(updateValue, player)
   else
     print(player..'|cffFF0000 потерял |r'..math.abs(updateValue)..'|cffFF0000 очков брони.|r');
   end;
+end;
+
+
+SS_Log_PlayerLevelChanged = function(playerLevel, player)
+  print('|cffFFFF00Уровень игрока |r'..player..'|cffFFFF00 установлен на |r'..playerLevel..'|cffFFFF00.|r');
+end;
+
+SS_Log_PointsReset = function()
+  print('|cffFFFF00Очки навыков и характеристик были сброшены.|r');
 end;

@@ -144,3 +144,12 @@ SS_Skills_DrawAll = function()
   SS_Skills_DrawValue('athletics', SS_Skills_Menu_Passive_Skill_Athletics);
   SS_Skills_DrawValue('acrobats', SS_Skills_Menu_Passive_Skill_Acrobats);
 end;
+
+
+SS_Stats_ResetSkills = function(stat)
+  if (not(SS_Plots_Current())) then return 0; end;
+
+  SS_Shared_ForEach(SS_Skills_GetList())(function(value, skillName)
+    SS_Plots_Current().skills[skillName] = 0;
+  end);
+end;

@@ -8,8 +8,13 @@ SS_Listeners_Player_OnDMChangeBarrier = function(data, master)
   updateValue = SS_Shared_NumFromStr(updateValue);
 
   local realUpdateValue = updateValue;
-  if (SS_Params_GetBarrier() + realUpdateValue < 0) then
-    realUpdateValue = -SS_Params_GetBarrier();
+  
+  if (realUpdateValue == 88005553535) then
+    realUpdateValue = SS_Params_GetMaxBarrier() - SS_Params_GetBarrier();
+  else
+    if (SS_Params_GetBarrier() + realUpdateValue < 0) then
+      realUpdateValue = -SS_Params_GetBarrier();
+    end;
   end;
 
   if (not(realUpdateValue == 0)) then
