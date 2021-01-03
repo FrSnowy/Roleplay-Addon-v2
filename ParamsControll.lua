@@ -7,6 +7,9 @@ SS_ParamsControll_Show = function()
     target = 'player',
     param = 'health',
   };
+  
+  SS_ParamsControll_Menu_Check_Target_Group:Show();
+  SS_ParamsControll_Menu_Check_Target_Group_Text:Show()
 end;
 
 SS_ParamsControll_Hide = function()
