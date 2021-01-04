@@ -21,11 +21,88 @@ SS_Progress_GetExp = function()
   return 0;
 end;
 
-SS_Progress_GetExpForUp = function()
-  local levelWithPow = math.floor(math.pow(SS_Progress_GetLevel(), 1.566));
+SS_Progress_GetExpForUp = function(level)
+  if (not(level)) then level = SS_Progress_GetLevel(); end;
+
+  local levelWithPow = math.floor(math.pow(level, 1.566));
   local experienceForEvent = 100;
 
   return levelWithPow * experienceForEvent;
+end;
+
+SS_Progress_UpdateExp = function(updateValue, master)
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  if (SS_Progress_GetExp() == 0 and SS_Progress_GetLevel() == 1 and updateValue < 0) then return nil; end;
+  if (SS_Progress_GetLevel() == 20 and updateValue > 0) then
+    SS_Plots_Current().progress.experience = 0;
+    return nil;
+  end;
+
+  local cachedValue = updateValue;
+  local cachedLevel = SS_Plots_Current().progress.level;
+
+  local addExp = function(updValue)
+    SS_Plots_Current().progress.experience = SS_Progress_GetExp() + updValue;
+  end;
+
+  if (SS_Progress_GetExp() + updateValue > 0 and SS_Progress_GetExp() + updateValue < SS_Progress_GetExpForUp()) then
+    addExp(updateValue);
+  elseif (SS_Progress_GetExp() + updateValue > SS_Progress_GetExpForUp()) then
+    local gettedLevels = 0;
+
+    while updateValue > (SS_Progress_GetExpForUp(SS_Progress_GetLevel() + gettedLevels) - SS_Progress_GetExp()) do
+      local differenceBetweenMaxAndCurrent = SS_Progress_GetExpForUp(SS_Progress_GetLevel() + gettedLevels) - SS_Progress_GetExp();
+      gettedLevels = gettedLevels + 1;
+      updateValue = updateValue - differenceBetweenMaxAndCurrent;
+      SS_Plots_Current().progress.experience = 0;
+    end;
+
+    SS_Progress_UpdateLevel(gettedLevels, master, true);
+    addExp(updateValue);
+  elseif (SS_Progress_GetExp() + updateValue == SS_Progress_GetExpForUp()) then
+    SS_Plots_Current().progress.experience = 0;
+    SS_Progress_UpdateLevel(1, master, true);
+  elseif (SS_Progress_GetExp() + updateValue < 0) then
+    local loosedLevels = 1;
+    local cachedExp = 0;
+
+    updateValue = updateValue + SS_Progress_GetExp();
+    addExp(-SS_Progress_GetExp());
+
+    while updateValue < 0 do
+      local previousLevelMaxExp = SS_Progress_GetExpForUp(SS_Progress_GetLevel() - loosedLevels);
+
+      if (math.abs(updateValue) < previousLevelMaxExp) then
+        cachedExp = previousLevelMaxExp + updateValue;
+        updateValue = 0;
+        break;
+      else
+        SS_Plots_Current().progress.experience = 0;
+        updateValue = updateValue + previousLevelMaxExp;
+        loosedLevels = loosedLevels + 1;
+      end;
+    end;
+
+    SS_Progress_UpdateLevel(-loosedLevels, master, true);
+    SS_Plots_Current().progress.experience = cachedExp;
+  elseif (SS_Progress_GetExp() + updateValue == 0) then
+    SS_Plots_Current().progress.experience = 0;
+  end;
+
+  SS_Progress_DrawExp();
+
+  if (not(master == UnitName("player"))) then
+    SS_Shared_IfOnline(master, function()
+      SS_PtDM_Params(master);
+      SS_PtDM_InspectInfo("update", master);
+      SS_PtDM_ExpChanged(cachedValue, master);
+
+      if (not(cachedLevel == SS_Plots_Current().progress.level)) then
+        SS_PtDM_LevelChanged(master);
+      end;
+    end);
+  end;
 end;
 
 SS_Progress_DrawAddonLevel = function()
@@ -43,7 +120,11 @@ end;
 SS_Progress_DrawExp = function()
   local fullWidth = MainMenuExpBar:GetWidth() - 180;
   local progress = (SS_Progress_GetExp() / SS_Progress_GetExpForUp())
-  SS_Exp_Bar_Progress:SetWidth(fullWidth * progress);
+  if (progress == 0) then
+    SS_Exp_Bar_Progress:SetWidth(1);
+  else
+    SS_Exp_Bar_Progress:SetWidth(fullWidth * progress);
+  end;    
   SS_Exp_Bar_Experience:SetText(SS_Progress_GetExp().."/"..SS_Progress_GetExpForUp());
 end;
 
@@ -58,7 +139,7 @@ SS_Progress_HideExpBar = function()
   SS_Exp_Bar:Hide();
 end;
 
-SS_Progress_UpdateLevel = function(updateValue, master)
+SS_Progress_UpdateLevel = function(updateValue, master, noMasterMsg)
   if (not(SS_Plots_Current())) then return nil; end;
   
   if (not(SS_Shared_IsNumber(updateValue))) then
@@ -68,6 +149,7 @@ SS_Progress_UpdateLevel = function(updateValue, master)
 
   local previousLevel = SS_Plots_Current().progress.level;
   SS_Plots_Current().progress.level = SS_Plots_Current().progress.level + updateValue;
+  SS_Plots_Current().progress.experience = 0;
 
   if (SS_Plots_Current().progress.level > 20) then
     SS_Plots_Current().progress.level = 20;
@@ -93,11 +175,13 @@ SS_Progress_UpdateLevel = function(updateValue, master)
   SS_Progress_DrawExp();
   PlaySoundFile('Sound\\INTERFACE\\LevelUp.ogg');
 
-  if (not(master == UnitName("player"))) then
-    SS_Shared_IfOnline(master, function()
-      SS_PtDM_Params(master);
-      SS_PtDM_InspectInfo("update", master);
-      SS_PtDM_LevelChanged(master);
-    end);
+  if (not(noMasterMsg)) then
+    if (not(master == UnitName("player"))) then
+      SS_Shared_IfOnline(master, function()
+        SS_PtDM_Params(master);
+        SS_PtDM_InspectInfo("update", master);
+        SS_PtDM_LevelChanged(master);
+      end);
+    end;
   end;
 end;

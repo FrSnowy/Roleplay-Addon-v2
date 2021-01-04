@@ -235,3 +235,9 @@ SS_PtDM_LevelChanged = function(master)
   SS_PtDM_Direct('playerLevelChange', SS_User.settings.currentPlot.."+"..SS_Plots_Current().progress.level, master);
 end;
 
+SS_PtDM_ExpChanged = function(updateValue, master)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName("player")) then return nil; end;
+
+  SS_PtDM_Direct('playerExpChange', SS_User.settings.currentPlot.."+"..updateValue, master);
+end;

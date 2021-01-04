@@ -544,20 +544,23 @@ SS_Log_BarrierChanged = function(updateValue, master)
   print(output);
 end;
 
-SS_Log_LevelChanged = function(updateValue, master)
+SS_Log_LevelChanged = function(updateValue)
   local output = '';
-  if (master == UnitName('player')) then
-    if (updateValue >= 0) then
-      output = '|cff00FF00Вы перешли на уровень |r'..SS_Plots_Current().progress.level;
-    else
-      output = '|cffFF0000Вы перешли на уровень |r'..SS_Plots_Current().progress.level;
-    end;
+  if (updateValue >= 0) then
+    output = '|cff00FF00Вы перешли на уровень |r'..SS_Plots_Current().progress.level;
   else
-    if (updateValue >= 0) then
-      output = master..'|cff00FF00 установил ваш уровень на |r'..SS_Plots_Current().progress.level;
-    else
-      output = master..'|cffFF0000 установил ваш уровень на |r'..SS_Plots_Current().progress.level;
-    end;
+    output = '|cffFF0000Вы перешли на уровень |r'..SS_Plots_Current().progress.level;
+  end;
+
+  print(output);
+end;
+
+SS_Log_ExpChanged = function(updateValue)
+  local output = '';
+  if (updateValue >= 0) then
+    output = '|cff00FF00Вы получили |r'..updateValue..'|cff00FF00 ед. опыта|r';
+  else
+    output = '|cffFF0000Вы потеряли |r'..math.abs(updateValue)..'|cffFF0000 ед. опыта|r';
   end;
 
   print(output);
@@ -582,6 +585,14 @@ end;
 
 SS_Log_PlayerLevelChanged = function(playerLevel, player)
   print('|cffFFFF00Уровень игрока |r'..player..'|cffFFFF00 установлен на |r'..playerLevel..'|cffFFFF00.|r');
+end;
+
+SS_Log_PlayerExpChanged = function(updateValue, player)
+  if (updateValue >= 0) then
+    print(player..'|cff00FF00 получил |r'..updateValue..'|cff00FF00 ед. опыта.|r');
+  else
+    print(player..'|cffFF0000 потерял |r'..math.abs(updateValue)..'|cffFF0000 ед опыта.|r');
+  end;  
 end;
 
 SS_Log_PointsReset = function()
