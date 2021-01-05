@@ -9,6 +9,5 @@ SS_Listeners_Player_OnDMChangeExp = function(data, master)
 
   if (not(updateValue == 0)) then
     SS_Progress_UpdateExp(updateValue, master);
-    SS_Log_ExpChanged(updateValue);
   end;
 end;

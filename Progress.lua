@@ -32,6 +32,8 @@ end;
 
 SS_Progress_UpdateExp = function(updateValue, master)
   if (not(SS_Plots_Current())) then return nil; end;
+  
+  SS_Log_ExpChanged(updateValue);
 
   if (SS_Progress_GetExp() == 0 and SS_Progress_GetLevel() == 1 and updateValue < 0) then return nil; end;
   if (SS_Progress_GetLevel() == 20 and updateValue > 0) then
@@ -63,7 +65,7 @@ SS_Progress_UpdateExp = function(updateValue, master)
   elseif (SS_Progress_GetExp() + updateValue == SS_Progress_GetExpForUp()) then
     SS_Plots_Current().progress.experience = 0;
     SS_Progress_UpdateLevel(1, master, true);
-  elseif (SS_Progress_GetExp() + updateValue < 0) then
+  elseif (SS_Progress_GetExp() + updateValue < 0 and SS_Progress_GetLevel() > 1) then
     local loosedLevels = 1;
     local cachedExp = 0;
 
@@ -86,6 +88,8 @@ SS_Progress_UpdateExp = function(updateValue, master)
 
     SS_Progress_UpdateLevel(-loosedLevels, master, true);
     SS_Plots_Current().progress.experience = cachedExp;
+  elseif (SS_Progress_GetExp() + updateValue < 0 and SS_Progress_GetLevel() == 1) then
+    SS_Plots_Current().progress.experience = 0;
   elseif (SS_Progress_GetExp() + updateValue == 0) then
     SS_Plots_Current().progress.experience = 0;
   end;

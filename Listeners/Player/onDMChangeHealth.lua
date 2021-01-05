@@ -16,6 +16,5 @@ SS_Listeners_Player_OnDMChangeHealth = function(data, master)
 
   if (not(realUpdateValue == 0)) then
     SS_Params_ChangeHealth(realUpdateValue, master);
-    SS_Log_HealthChanged(realUpdateValue, master);
   end;
 end;

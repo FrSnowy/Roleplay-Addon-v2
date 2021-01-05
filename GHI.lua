@@ -2,6 +2,7 @@ local categories = {
   modifiers = 'Ролевая система от Снежка: Модификаторы',
   checks = 'Ролевая система от Снежка: Проверки',
   battle = 'Ролевая система от Снежка: Бой и урон',
+  params = 'Ролевая система от Снежка: Показатели',
 };
 
 if (GHI_MiscData and not(GHI_MiscData["WhiteList"])) then
@@ -23,6 +24,18 @@ SS_Shared_ForEach({
   'SS_PtDM_GetAdditionalMovementPoints',
   'SS_BattleControll_EndRound',
   'SS_DamageControll_RecieveDamage',
+  'SS_Shared_IfOnline',
+  'SS_Log_CanNotInBattle',
+  'SS_PtDM_Params',
+  'SS_PtDM_InspectInfo',
+  'SS_PtDM_HPChanged',
+  'SS_PtDM_BarrierChanged',
+  'SS_PtDM_ExpChanged',
+  'SS_PtDM_LevelChanged',
+  'SS_Params_ChangeHealth',
+  'SS_Params_ChangeBarrier',
+  'SS_Progress_UpdateExp',
+  'SS_Progress_UpdateLevel',
 })(function(el)
   local isKeyIncluded = SS_Shared_Includes(GHI_MiscData["WhiteList"])(function(v)
     return v == el;
@@ -684,6 +697,218 @@ table.insert(GHI_ProvidedDynamicActions, {
 			type = "boolean",
 			defaultValue = false,
 		},
+  },
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Изменить очки здоровья",
+	guid = "SS_Battle_ChangeHealth",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.params,
+	description = "",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
+    local updateValue = dyn.GetInput("updateValue");
+    if (not(updateValue == 0)) then
+      SS_Params_ChangeHealth(updateValue, UnitName("player"));
+    
+      SS_Shared_IfOnline(SS_Plots_Current().author, function()
+        SS_PtDM_Params(SS_Plots_Current().author);
+        SS_PtDM_InspectInfo("update", SS_Plots_Current().author);
+        SS_PtDM_HPChanged(updateValue, SS_Plots_Current().author);
+      end);
+    end;
+
+    dyn.TriggerOutPort("healthChanged")
+	]],
+	ports = {
+    healthChanged = {
+			name = "ОЗ изменилось",
+			direction = "out",
+      description = "",
+      order = 1,
+		},
+	},
+	inputs = {
+		updateValue = {
+			name = "Изменение ОЗ",
+			type = "number",
+      defaultValue = 0,
+      order = 1,
+    },
+  },
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Изменить очки брони",
+	guid = "SS_Battle_ChangeBarrier",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.params,
+	description = "",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
+    local updateValue = dyn.GetInput("updateValue");
+    if (not(updateValue == 0)) then
+      SS_Params_ChangeBarrier(updateValue, UnitName("player"));
+  
+      SS_Shared_IfOnline(SS_Plots_Current().author, function()
+        SS_PtDM_Params(SS_Plots_Current().author);
+        SS_PtDM_InspectInfo("update", SS_Plots_Current().author);
+        SS_PtDM_BarrierChanged(updateValue, SS_Plots_Current().author);
+      end);
+    end;
+    dyn.TriggerOutPort("barrierChanged")
+	]],
+	ports = {
+    barrierChanged = {
+			name = "ОБ изменились",
+			direction = "out",
+      description = "",
+      order = 1,
+		},
+	},
+	inputs = {
+		updateValue = {
+			name = "Изменение ОБ",
+			type = "number",
+      defaultValue = 0,
+      order = 1,
+    },
+  },
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Изменить опыт",
+	guid = "SS_Battle_ChangeExp",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.params,
+	description = "",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
+    local cachedLevel = SS_Plots_Current().progress.level;
+
+    local updateValue = dyn.GetInput("updateValue");
+    if (updateValue < 0 and SS_BattleControll_IsInBattle()) then
+      SS_Log_CanNotInBattle();
+      dyn.TriggerOutPort("expWasntChanged")
+      return;
+    end;
+
+    if (not(updateValue == 0)) then
+      SS_Progress_UpdateExp(updateValue, UnitName("player"));
+  
+      SS_Shared_IfOnline(SS_Plots_Current().author, function()
+        SS_PtDM_Params(SS_Plots_Current().author);
+        SS_PtDM_InspectInfo("update", SS_Plots_Current().author);
+        SS_PtDM_ExpChanged(updateValue, SS_Plots_Current().author);
+
+        if (not(cachedLevel == SS_Plots_Current().progress.level)) then
+          SS_PtDM_LevelChanged(SS_Plots_Current().author);
+        end;
+      end);
+    end;
+    dyn.TriggerOutPort("expChanged")
+	]],
+	ports = {
+    expChanged = {
+			name = "Опыт изменился",
+			direction = "out",
+      description = "",
+      order = 1,
+		},
+    expWasntChanged = {
+			name = "Опыт не изменился",
+			direction = "out",
+      description = "",
+      order = 2,
+		},
+	},
+	inputs = {
+		updateValue = {
+			name = "Изменение опыта",
+			type = "number",
+      defaultValue = 0,
+      order = 1,
+    },
+  },
+});
+
+table.insert(GHI_ProvidedDynamicActions, {
+	name = "Изменить уровень",
+	guid = "SS_Battle_ChangeLevel",
+	authorName = "FriendSnowy",
+	authorGuid = "00x1",
+	version = 1,
+	category = categories.params,
+	description = "",
+	icon = "Interface\\Icons\\achievement_guild_level10",
+	gotOnSetupPort = false,
+	setupOnlyOnce = false,
+	script =
+	[[
+    if (not(SS_Plots_Current())) then return nil; end;
+
+    local updateValue = dyn.GetInput("updateValue");
+    
+    if (updateValue < 0 and SS_BattleControll_IsInBattle()) then
+      SS_Log_CanNotInBattle();
+      dyn.TriggerOutPort("levelWasntChanged")
+      return;
+    end;
+
+    if (not(updateValue == 0)) then
+      SS_Progress_UpdateLevel(updateValue, UnitName("player"));
+  
+      SS_Shared_IfOnline(SS_Plots_Current().author, function()
+        SS_PtDM_Params(SS_Plots_Current().author);
+        SS_PtDM_InspectInfo("update", SS_Plots_Current().author);
+        SS_PtDM_LevelChanged(SS_Plots_Current().author);
+      end);
+    end;
+    dyn.TriggerOutPort("levelChanged")
+	]],
+	ports = {
+    levelChanged = {
+			name = "Уровень изменился",
+			direction = "out",
+      description = "",
+      order = 1,
+		},
+    levelWasntChanged = {
+			name = "Уровень не изменился",
+			direction = "out",
+      description = "",
+      order = 2,
+		},
+	},
+	inputs = {
+		updateValue = {
+			name = "Изменение уровня",
+			type = "number",
+      defaultValue = 0,
+      order = 1,
+    },
   },
 });
 

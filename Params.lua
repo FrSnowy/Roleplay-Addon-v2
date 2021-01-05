@@ -99,12 +99,14 @@ SS_Params_ChangeHealth = function(updateValue, master)
     SS_Plots_Current().params.health = SS_Params_GetMaxHealth();
   end;
 
-  SS_Params_DrawHealth();
-
-  if (SS_Plots_Current().params.health == 0) then
+  if (SS_Plots_Current().params.health <= 0) then
     SS_Log_NoHP();
+    SS_Plots_Current().params.health = 0;
     PlaySoundFile('Sound\\Interface\\AlarmClockWarning3.ogg');
   end;
+
+  SS_Params_DrawHealth();
+  SS_Log_HealthChanged(updateValue, master);
 
   if (not(master == UnitName("player"))) then
     SS_Shared_IfOnline(master, function()
@@ -123,6 +125,7 @@ SS_Params_ChangeBarrier = function(updateValue, master)
   end;
 
   SS_Params_DrawBarrier();
+  SS_Log_BarrierChanged(updateValue, master);
 
   if (not(master == UnitName("player"))) then
     SS_Shared_IfOnline(master, function()

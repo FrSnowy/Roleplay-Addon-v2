@@ -19,6 +19,5 @@ SS_Listeners_Player_OnDMChangeBarrier = function(data, master)
 
   if (not(realUpdateValue == 0)) then
     SS_Params_ChangeBarrier(realUpdateValue, master);
-    SS_Log_BarrierChanged(realUpdateValue, master);
   end;
 end;

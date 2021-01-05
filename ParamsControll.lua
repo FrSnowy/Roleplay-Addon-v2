@@ -85,6 +85,8 @@ SS_ParamsControll_SendUpdateInfo = function()
 
   if (SS_ParamsControll_Data.param == 'level' and SS_LeadingPlots_Current().battle) then
     SS_Log_CanNotInBattle();
+  elseif (SS_ParamsControll_Data.param == 'exp' and SS_Shared_NumFromStr(updateValue) < 0 and SS_LeadingPlots_Current().battle) then
+    SS_Log_CanNotInBattle();
   else
     SS_DMtP_SendParamUpdate(updateValue);
   end;
