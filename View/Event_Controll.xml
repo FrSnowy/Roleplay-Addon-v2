@@ -110,7 +110,14 @@
           </Anchor> 
         </Anchors>
       </Button>
-      <Button name="$parent_NPC_Button" inherits="OptionsButtonTemplate" text="+ NPC">
+      <Button name="$parent_NPCControll_Button" inherits="OptionsButtonTemplate" text="+ NPC">
+        <Scripts>
+          <OnClick>
+            if (SS_NPCControll_Menu:IsVisible()) then SS_NPCControll_Hide();
+            else SS_NPCControll_Show();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "120" y = "32" />
         <Anchors>
           <Anchor point="TOPRIGHT">

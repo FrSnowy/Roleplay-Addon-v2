@@ -1,0 +1,86 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_NPCCreate_Menu" parent="SS_NPCControll_Menu" inherits = "SS_CloseableFrameWithBG_Template" hidden="false">
+    <Scripts>
+      <OnLoad>
+        self:SetSize(430, 260);
+        self.title:SetText('Создать NPC');
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\popup-background";
+        self:RegisterForDrag("LeftButton");
+        self.closeBtn:SetScript("OnClick", function()
+        end);
+      </OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPLEFT" x="0" y="270" relativeTo="SS_NPCControll_Menu" />
+    </Anchors>
+    <Layers>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Имя:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-50" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Уровень:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-110" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <EditBox parentKey = "name" inherits="SS_Form_EditBox">
+        <Scripts>
+          <OnEscapePressed>
+            self:ClearFocus();
+          </OnEscapePressed>
+          <OnTabPressed>
+            SS_ModifiersCreate_Menu.value:SetFocus();
+          </OnTabPressed>
+        </Scripts>
+        <Size x="120" y="26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="20" y="-70"/></Offset>
+          </Anchor>
+        </Anchors>
+      </EditBox>
+      <EditBox parentKey = "count" inherits="SS_Form_EditBox">
+        <Scripts>
+          <OnShow>
+            self:SetNumeric();
+          </OnShow>
+          <OnEscapePressed>
+            self:ClearFocus();
+          </OnEscapePressed>
+          <OnTabPressed>
+            SS_ModifiersCreate_Menu.id:SetFocus();
+          </OnTabPressed>
+        </Scripts>
+        <Size x="120" y="26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="20" y="-130"/></Offset>
+          </Anchor>
+        </Anchors>
+      </EditBox>
+      <Button name="$parent_Submit_Button" inherits="OptionsButtonTemplate" text="Создать">
+        <Size x = "80" y = "26" />
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset x="-20" y="20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            SS_ModifierCreate_Create();
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>
+

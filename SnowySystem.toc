@@ -28,6 +28,7 @@ ModifiersControll.lua
 BattleControll.lua
 DamageControll.lua
 ParamsControll.lua
+NPCControll.lua
 SnowySystem.lua
 SnowySystem.xml
 Listeners\DM\onPlayerToAll.lua
@@ -98,6 +99,8 @@ View\Modifiers_Create_Menu.xml
 View\Battle_Controll_Menu.xml
 View\Damage_Controll_Menu.xml
 View\Params_Controll_Menu.xml
+View\NPC_Controll_Menu.xml
+View\NPC_Create_Menu.xml
 View\Invite_Modal.xml
 View\Event_Start_Modal.xml
 GHI.lua

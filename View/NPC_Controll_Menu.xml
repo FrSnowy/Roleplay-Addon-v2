@@ -1,0 +1,87 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="SS_NPCControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="6">
+    <Scripts>
+      <OnLoad>
+        self:SetSize(245, 280);
+        self.title:SetText('Управление NPC');
+        self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
+        self:RegisterForDrag("LeftButton");
+        self.closeBtn:SetScript("OnClick", function()
+          SS_NPCControll_Hide()
+        end);
+      </OnLoad>
+      <OnDragStart>self:StartMoving();</OnDragStart>
+      <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+    </Scripts>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Layers>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" name = "$parent_Empty" justifyH="LEFT" justifyV="TOP" maxLines="3" wordwrap="true" text="Нет созданых NPC">
+          <Color r="1" g="1" b="1" a="1"/>
+          <Size x = "140" y = "40" />
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-50" />
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <ScrollFrame name="$parent_Scroll" inherits="UIPanelScrollFrameTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="20" y="-50"/>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="20" y="55"/>
+          <Anchor point="RIGHT" relativePoint="TOPLEFT" relativeTo="$parent" x="200"/>
+        </Anchors>
+        <ScrollChild>
+          <Frame name="$parent_Content">
+            <Size>
+              <AbsDimension x="160" y="1" />
+            </Size>
+            <Frames>
+            </Frames>
+          </Frame>
+        </ScrollChild>
+      </ScrollFrame>
+      <Button name="$parent_Create_Button" inherits="OptionsButtonTemplate" text="+ Создать">
+        <Scripts>
+          <OnClick>
+            if (SS_ModifiersCreate_Menu:IsVisible()) then
+              SS_ModifiersCreate_Menu:Hide();
+              self:SetText("+ Создать");
+            else
+              SS_ModifiersCreate_Menu:Show();
+              self:SetText("- Создать");
+            end;
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "26" />
+        <Anchors>
+          <Anchor point="BOTTOMLEFT">
+            <Offset x="20" y="20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Clear_Button" inherits="OptionsButtonTemplate" text="Очистить">
+        <Scripts>
+          <OnClick>
+            SS_ModifierCreate_Clear();
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "26" />
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset x="-20" y="20"/>
+          </Anchor> 
+        </Anchors>
+        <Scripts>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>
+
