@@ -15,7 +15,7 @@ SS_Roll_GetDicesCount = function(playerLevel)
     playerLevel = SS_Progress_GetLevel();
   end;
 
-  return math.floor(1 + (SS_Progress_GetLevel() / 10));
+  return math.floor(1 + (playerLevel / 10));
 end;
 
 SS_Roll_GetMinimum = function(skillName, params)

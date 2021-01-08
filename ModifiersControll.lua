@@ -19,6 +19,8 @@ SS_ModifierControll_Hide = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
   SS_ModifiersControll_Menu:Hide();
+  SS_ModifiersCreate_Menu:Hide();
+  SS_ModifiersControll_Menu_Create_Button:SetText("+ Создать");
   SS_Event_Controll_ModifiersControll_Button:SetText("+ Модифик.");
 end;
 
@@ -61,6 +63,19 @@ SS_ModifierControll_SelectTarget = function(target)
   elseif (target == 'group') then
     SS_ModifiersControll_Menu_Check_Target_Group:SetChecked(true);
   end;
+end;
+
+SS_ModifierCreate_Show = function()
+  SS_ModifiersCreate_Menu.id:SetText('');
+  SS_ModifiersCreate_Menu.name:SetText('');
+  SS_ModifiersCreate_Menu.value:SetText('');
+  SS_ModifiersCreate_Menu.count:SetText('');
+
+  SS_Shared_ForEach(SS_Stats_GetList())(function(_, stat)
+    SS_ModifiersCreate_Menu_Scroll_Content[stat].check:SetChecked(false);
+  end);
+
+  SS_ModifiersCreate_Menu:Show();
 end;
 
 SS_ModifierCreate_Select = function(stat)
@@ -181,7 +196,7 @@ SS_ModifierCreate_DrawList = function()
   if (SS_LeadingPlots_Current().modifiers.stats) then
     SS_Shared_ForEach(SS_LeadingPlots_Current().modifiers.stats)(function(modifier, id)
       local ModifierPanel = CreateFrame("Frame", nil, SS_ModifiersControll_Menu_Scroll_Content, "SS_TargetModifier_Template");
-            ModifierPanel:SetSize(140, 23);
+            ModifierPanel:SetSize(180, 23);
             ModifierPanel:SetPoint("TOPLEFT", SS_ModifiersControll_Menu_Scroll_Content, "TOPLEFT", 20, -50 * counter);
             ModifierPanel.modifier = modifier;
             ModifierPanel.modifierID = id;

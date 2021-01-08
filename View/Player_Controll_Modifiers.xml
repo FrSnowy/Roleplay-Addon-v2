@@ -3,11 +3,11 @@
     <Scripts>
       <OnLoad>
         self.title:SetText("Модификаторы")
-        self:SetSize(270, 240);
+        self:SetSize(240, 240);
       </OnLoad>
     </Scripts>
     <Anchors>
-      <Anchor point="TOPLEFT" x="-270" y="0" />
+      <Anchor point="TOPLEFT" x="-240" y="0" />
     </Anchors>
     <Layers>
       <Layer>

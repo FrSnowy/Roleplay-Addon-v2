@@ -2,7 +2,7 @@
   <Frame name="SS_NPCControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="6">
     <Scripts>
       <OnLoad>
-        self:SetSize(245, 280);
+        self:SetSize(310, 280);
         self.title:SetText('Управление NPC');
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
         self:RegisterForDrag("LeftButton");
@@ -33,7 +33,7 @@
         <Anchors>
           <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="20" y="-50"/>
           <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="20" y="55"/>
-          <Anchor point="RIGHT" relativePoint="TOPLEFT" relativeTo="$parent" x="200"/>
+          <Anchor point="RIGHT" relativePoint="TOPLEFT" relativeTo="$parent" x="265"/>
         </Anchors>
         <ScrollChild>
           <Frame name="$parent_Content">
@@ -48,11 +48,11 @@
       <Button name="$parent_Create_Button" inherits="OptionsButtonTemplate" text="+ Создать">
         <Scripts>
           <OnClick>
-            if (SS_ModifiersCreate_Menu:IsVisible()) then
-              SS_ModifiersCreate_Menu:Hide();
+            if (SS_NPCCreate_Menu:IsVisible()) then
+              SS_NPCCreate_Menu:Hide();
               self:SetText("+ Создать");
             else
-              SS_ModifiersCreate_Menu:Show();
+              SS_NPCCreate_Show();
               self:SetText("- Создать");
             end;
           </OnClick>
@@ -69,7 +69,7 @@
       <Button name="$parent_Clear_Button" inherits="OptionsButtonTemplate" text="Очистить">
         <Scripts>
           <OnClick>
-            SS_ModifierCreate_Clear();
+            SS_NPCControll_Clear();
           </OnClick>
         </Scripts>
         <Size x = "90" y = "26" />

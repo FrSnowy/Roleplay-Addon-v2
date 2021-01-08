@@ -2,7 +2,7 @@
   <Frame name="SS_ModifiersControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="5">
     <Scripts>
       <OnLoad>
-        self:SetSize(430, 240);
+        self:SetSize(450, 240);
         self.title:SetText('Модификаторы');
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
         self:RegisterForDrag("LeftButton");
@@ -33,21 +33,21 @@
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="12"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="235" y="-45" />
+            <Anchor point="TOPLEFT" x="255" y="-45" />
           </Anchors>
         </FontString>
         <FontString font="Fonts\FRIZQT__.TTF" text="Выбранная цель">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="263" y="-70" />
+            <Anchor point="TOPLEFT" x="283" y="-70" />
           </Anchors>
         </FontString>
         <FontString font="Fonts\FRIZQT__.TTF" text="Вся группа">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="263" y="-95" />
+            <Anchor point="TOPLEFT" x="283" y="-95" />
           </Anchors>
         </FontString>
       </Layer>
@@ -60,7 +60,7 @@
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
-              <AbsDimension x="235" y="-63"></AbsDimension>
+              <AbsDimension x="255" y="-63"></AbsDimension>
             </Offset>
           </Anchor>
         </Anchors>
@@ -72,7 +72,7 @@
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
-              <AbsDimension x="235" y="-88"></AbsDimension>
+              <AbsDimension x="255" y="-88"></AbsDimension>
             </Offset>
           </Anchor>
         </Anchors>
@@ -86,7 +86,7 @@
         <Size x = "90" y = "26" />
         <Anchors>
           <Anchor point="TOPLEFT">
-            <Offset x="235" y="-120"/>
+            <Offset x="255" y="-120"/>
           </Anchor> 
         </Anchors>
       </Button>
@@ -99,7 +99,7 @@
         <Size x = "90" y = "26" />
         <Anchors>
           <Anchor point="TOPLEFT">
-            <Offset x="328" y="-120"/>
+            <Offset x="348" y="-120"/>
           </Anchor> 
         </Anchors>
       </Button>
@@ -107,7 +107,7 @@
         <Anchors>
           <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="20" y="-45"/>
           <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="20" y="20"/>
-          <Anchor point="RIGHT" relativePoint="TOPLEFT" relativeTo="$parent" x="200"/>
+          <Anchor point="RIGHT" relativePoint="TOPLEFT" relativeTo="$parent" x="220"/>
         </Anchors>
         <ScrollChild>
           <Frame name="$parent_Content">
@@ -126,7 +126,7 @@
               SS_ModifiersCreate_Menu:Hide();
               self:SetText("+ Создать");
             else
-              SS_ModifiersCreate_Menu:Show();
+              SS_ModifierCreate_Show();
               self:SetText("- Создать");
             end;
           </OnClick>
@@ -134,7 +134,7 @@
         <Size x = "90" y = "26" />
         <Anchors>
           <Anchor point="BOTTOMLEFT">
-            <Offset x="235" y="20"/>
+            <Offset x="255" y="20"/>
           </Anchor> 
         </Anchors>
         <Scripts>
@@ -149,7 +149,7 @@
         <Size x = "90" y = "26" />
         <Anchors>
           <Anchor point="BOTTOMLEFT">
-            <Offset x="328" y="20"/>
+            <Offset x="348" y="20"/>
           </Anchor> 
         </Anchors>
         <Scripts>

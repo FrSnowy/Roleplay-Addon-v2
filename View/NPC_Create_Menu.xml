@@ -1,17 +1,19 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="SS_NPCCreate_Menu" parent="SS_NPCControll_Menu" inherits = "SS_CloseableFrameWithBG_Template" hidden="false">
+  <Frame name="SS_NPCCreate_Menu" parent="SS_NPCControll_Menu" inherits = "SS_CloseableFrameWithBG_Template" hidden="true">
     <Scripts>
       <OnLoad>
-        self:SetSize(430, 260);
+        self:SetSize(230, 220);
         self.title:SetText('Создать NPC');
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\popup-background";
         self:RegisterForDrag("LeftButton");
         self.closeBtn:SetScript("OnClick", function()
+          SS_NPCCreate_Menu:Hide();
+          SS_NPCControll_Menu_Create_Button:SetText("+ Создать")
         end);
       </OnLoad>
     </Scripts>
     <Anchors>
-      <Anchor point="TOPLEFT" x="0" y="270" relativeTo="SS_NPCControll_Menu" />
+      <Anchor point="TOP" x="0" y="220" relativeTo="SS_NPCControll_Menu" />
     </Anchors>
     <Layers>
       <Layer>
@@ -38,17 +40,17 @@
             self:ClearFocus();
           </OnEscapePressed>
           <OnTabPressed>
-            SS_ModifiersCreate_Menu.value:SetFocus();
+            SS_NPCCreate_Menu.level:SetFocus();
           </OnTabPressed>
         </Scripts>
-        <Size x="120" y="26" />
+        <Size x="190" y="26" />
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset><AbsDimension x="20" y="-70"/></Offset>
           </Anchor>
         </Anchors>
       </EditBox>
-      <EditBox parentKey = "count" inherits="SS_Form_EditBox">
+      <EditBox parentKey = "level" inherits="SS_Form_EditBox">
         <Scripts>
           <OnShow>
             self:SetNumeric();
@@ -57,10 +59,10 @@
             self:ClearFocus();
           </OnEscapePressed>
           <OnTabPressed>
-            SS_ModifiersCreate_Menu.id:SetFocus();
+            SS_NPCCreate_Menu.name:SetFocus();
           </OnTabPressed>
         </Scripts>
-        <Size x="120" y="26" />
+        <Size x="190" y="26" />
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset><AbsDimension x="20" y="-130"/></Offset>
@@ -76,7 +78,7 @@
         </Anchors>
         <Scripts>
           <OnClick>
-            SS_ModifierCreate_Create();
+            SS_NPCCreate_Create();
           </OnClick>
         </Scripts>
       </Button>

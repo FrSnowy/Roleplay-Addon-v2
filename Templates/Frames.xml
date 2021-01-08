@@ -444,23 +444,25 @@
         local modifier = self.modifier;
         if (not(modifier)) then return; end;
 
-        local modifierName = modifier.name..' (';
+        local modifierName = modifier.name;
         if (tonumber(modifier.value) >= 0) then
-          modifierName = modifierName..'+'..modifier.value
           self.name:SetTextColor(0.25, 0.75, 0.25);
         else
-          modifierName = modifierName..modifier.value
           self.name:SetTextColor(0.75, 0.15, 0.15);
         end;
-        modifierName = modifierName..')';
         self.name:SetText(modifierName);
       
         self.infoBtn:SetScript('OnEnter', function()
           GameTooltip:SetOwner(self.infoBtn, "CENTER")
-          GameTooltip:AddLine('Влияет на: ');
+          if (SS_Shared_NumFromStr(modifier.value) >= 0) then
+            GameTooltip:AddLine('Добавляет +'..modifier.value..' для: ');
+          else
+            GameTooltip:AddLine('Отнимает '..math.abs(modifier.value)..' от: ');
+          end;
           SS_Shared_ForEach(modifier.stats)(function(stat)
             GameTooltip:AddLine(SS_Locale(stat));
           end);
+          GameTooltip:AddLine('-----------');
           GameTooltip:AddLine('ID: '..self.modifierID);
           GameTooltip:Show()        
         end);
@@ -507,7 +509,7 @@
         <Size x = "20" y = "20" />
         <Anchors>
           <Anchor point="TOPRIGHT">
-            <Offset x="-5" y="5"/>
+            <Offset x="-23" y="5"/>
           </Anchor> 
         </Anchors>
       </Button>
@@ -528,13 +530,13 @@
         <Size x = "20" y = "20" />
         <Anchors>
           <Anchor point="TOPRIGHT">
-            <Offset x="20" y="5"/>
+            <Offset x="0" y="5"/>
           </Anchor> 
         </Anchors>
       </Button>
     </Frames>
   </Frame>
-  <EditBox name="SS_Form_EditBox" virtual = "true" letters="24" autoFocus="false">
+  <EditBox name="SS_Form_EditBox" virtual = "true" letters="20" autoFocus="false">
     <Size x="200" y="26" />
     <TextInsets top="4" bottom="4" left="8" right="8" />
     <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
@@ -585,6 +587,74 @@
           </Anchor>
         </Anchors>
       </CheckButton>
+    </Frames>
+  </Frame>
+  
+  <Frame name = "SS_NPCElement_Template" virtual = "true">
+    <Scripts>
+      <OnShow>
+        local npc = SS_LeadingPlots_Current().npc[self.npcID];
+        self.name:SetText(npc.name);
+        self.level:SetText("Уровень "..npc.level);
+      </OnShow>
+    </Scripts>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "name" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="0" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString parentKey = "level" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="-20" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button parentKey="roll" inherits="OptionsButtonTemplate" text="Броски">
+        <Scripts>
+          <OnClick>
+            local npcID = self:GetParent().npcID;
+            SS_NPCControll_DrawNPCDiceMenu(npcID);
+          </OnClick>
+        </Scripts>
+        <Size x = "70" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-25" y="5"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button parentKey="removeBtn" inherits="OptionsButtonTemplate" text="x">
+        <Scripts>
+          <OnClick>
+            SS_LeadingPlots_Current().npc[self:GetParent().npcID] = nil;
+            SS_NPCControll_Menu_Scroll_Content:Hide();
+            SS_NPCControll_DrawList();
+            SS_NPCControll_Menu_Scroll_Content:Show();
+          </OnClick>
+        </Scripts>
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="0" y="5"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
     </Frames>
   </Frame>
 </Ui>

@@ -360,7 +360,11 @@ SS_Log_NoMovementPoints = function()
 end;
 
 SS_Log_ValueMustBeNum = function()
-  print('|cffFF0000Значение должно быть числом|r');
+  print('|cffFF0000Ошибка: значение должно быть числом|r');
+end;
+
+SS_Log_ValueIsNotLevel = function()
+  print('|cffFF0000Ошибка: уровень должен быть в промежутке от 1 до 20|r')
 end;
 
 SS_Log_PlayerGetModifier = function(name, value, stats, player)
