@@ -27,7 +27,7 @@ local actionFire = function(action, data, author, prefix)
     joinToEvent = SS_Listeners_DM_OnPlayerJoinToEvent,
     sendParams = SS_Listeners_DM_OnPlayerSendParams,
     sendInspectInfo = SS_Listeners_DM_OnSendInspectInfo,
-    rollResult = SS_Listeners_DM_OnRollResult,
+    rollResult = SS_Listeners_Player_OnRollResult,
     playerJoinToBattle = SS_Listeners_DM_OnPlayerJoinToBattle,
     playerBattleTurnEnd = SS_Listeners_DM_OnPlayerBattleTurnEnd,
     playerRequestActualBattleInfo = SS_Listeners_DM_OnPlayerRequestActualBattleInfo,
@@ -64,6 +64,7 @@ local actionFire = function(action, data, author, prefix)
     dmChangeBarrier = SS_Listeners_Player_OnDMChangeBarrier,
     dmChangeLevel = SS_Listeners_Player_OnDMChangeLevel,
     dmChangeExp = SS_Listeners_Player_OnDMChangeExp,
+    npcRoll = SS_Listeners_Player_OnNPCRollResult,
   };
 
   if (not(actions[action])) then

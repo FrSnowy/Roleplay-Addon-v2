@@ -414,3 +414,14 @@ SS_DMtP_SendParamUpdate = function(updateValue)
     SS_DMtP_Every(prefix, data)(SS_User.settings.currentPlot);
   end;
 end;
+
+SS_DMtP_SendParamUpdate = function(name, result)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+  if (not(SS_Shared_IsNumber(result))) then
+    SS_Log_ValueMustBeNum();
+    return nil;
+  end;
+
+  SS_DMtP_Every('npcRoll', SS_User.settings.currentPlot..'+'..name..'+'..result)(SS_User.settings.currentPlot);
+end;

@@ -44,7 +44,6 @@ Listeners\DM\onKickAllright.lua
 Listeners\DM\onPlayerJoinToEvent.lua
 Listeners\DM\onPlayerSendParams.lua
 Listeners\DM\onSendInspectInfo.lua
-Listeners\DM\onRollResult.lua
 Listeners\DM\onPlayerJoinToBattle.lua
 Listeners\DM\onPlayerBattleTurnEnd.lua
 Listeners\DM\onPlayerRequestActualBattleInfo.lua
@@ -79,6 +78,7 @@ Listeners\Player\onDMChangeHealth.lua
 Listeners\Player\onDMChangeBarrier.lua
 Listeners\Player\onDMChangeExp.lua
 Listeners\Player\onDMChangeLevel.lua
+Listeners\Player\onRollResult.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml

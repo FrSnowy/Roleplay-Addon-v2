@@ -273,6 +273,10 @@ SS_Log_GHIForceRoll = function()
   print('|cff00FF00Следующий бросок по причние взаимодействия с предметом|r');
 end;
 
+SS_Log_RollResultOfNPC = function(name, result)
+  print(name..'|cffFFFF00 выбрасывает |r'..result);
+end;
+
 SS_Log_RollResultOfOther = function(name, skill, result, efficency, diceMin, diceMax, diceCount, modifier)
   local diceAverage = (SS_Shared_NumFromStr(diceMin) + SS_Shared_NumFromStr(diceMax)) / 2;
   result = SS_Shared_NumFromStr(result);

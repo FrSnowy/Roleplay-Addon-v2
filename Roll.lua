@@ -130,3 +130,27 @@ SS_Roll = function(skillName, visibility)
 
   return skillResult;
 end;
+
+SS_Roll_AsNPC = function(name, diceCount, rollParams, expectationText)
+  local maxResult = -1;
+  local result = maxResult;
+
+  if (SS_Shared_IsNumber(expectationText)) then
+    maxResult = SS_Shared_NumFromStr(expectationText);
+    if (maxResult < rollParams.minimum + rollParams.statModifier) then
+      maxResult = rollParams.minimum + rollParams.statModifier;
+    elseif (maxResult > rollParams.maximum + rollParams.statModifier) then
+      maxResult = rollParams.maximum + rollParams.statModifier;
+    end;
+
+    result = maxResult;
+  else
+    for i = 1, diceCount do
+      local rnd = math.random(rollParams.minimum, rollParams.maximum);
+      if (rnd > maxResult) then maxResult = rnd; end;
+    end;
+    result = maxResult + rollParams.statModifier;
+  end;
+
+  SS_DMtP_SendParamUpdate(name, result);
+end;

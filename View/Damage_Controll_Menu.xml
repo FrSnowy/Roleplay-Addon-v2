@@ -2,7 +2,7 @@
   <Frame name="SS_DamageControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="4">
     <Scripts>
       <OnLoad>
-        self:SetSize(350, 175);
+        self:SetSize(300, 175);
         self.title:SetText('Урон');
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\event-background";
         self:RegisterForDrag("LeftButton");
@@ -25,7 +25,7 @@
             <Anchor point="TOPLEFT" x="20" y="-45" />
           </Anchors>
         </FontString>
-        <FontString font="Fonts\FRIZQT__.TTF" text="Игнорировать броню">
+        <FontString font="Fonts\FRIZQT__.TTF" text="Игнор. броню">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>

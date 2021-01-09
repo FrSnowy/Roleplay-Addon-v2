@@ -98,7 +98,7 @@
       </Layer>
     </Layers>
     <Frames>
-      <Button name="$parent_Close_Button" inherits="OptionsButtonTemplate" text="x">
+      <Button name="$parent_Close_Button" parentKey="closeBtn" inherits="OptionsButtonTemplate" text="x">
         <Size x = "20" y = "20" />
         <Anchors>
           <Anchor point="TOPRIGHT">
@@ -629,7 +629,12 @@
         <Scripts>
           <OnClick>
             local npcID = self:GetParent().npcID;
-            SS_NPCControll_DrawNPCDiceMenu(npcID);
+            if (not(SS_NPCDicesViews[npcID])) then
+              SS_NPCControll_DrawNPCDiceMenu(npcID);
+            else
+              SS_NPCDicesViews[npcID]:Hide();
+              SS_NPCDicesViews[npcID] = nil;
+            end;
           </OnClick>
         </Scripts>
         <Size x = "70" y = "20" />

@@ -1,3 +1,5 @@
+SS_NPCDicesViews = {};
+
 SS_NPCControll_Show = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
@@ -27,7 +29,7 @@ SS_NPCControll_DrawList = function()
   SS_Shared_ForEach(SS_LeadingPlots_Current().npc)(function(npc, id)
     counter = counter + 1;
     local NPCPanel = CreateFrame("Frame", nil, SS_NPCControll_Menu_Scroll_Content, "SS_NPCElement_Template");
-          NPCPanel:SetSize(245, 23);
+          NPCPanel:SetSize(245, 24);
           NPCPanel:SetPoint("TOPLEFT", SS_NPCControll_Menu_Scroll_Content, "TOPLEFT", 0, -50 * (counter - 1));
           NPCPanel.npcID = id;
   end);
@@ -57,6 +59,11 @@ SS_NPCControll_DrawNPCDiceMenu = function(npcID)
         NPCRollPanel.title:SetText('Броски от лица NPC');
         NPCRollPanel:SetScript("OnDragStart", self.StartMoving)
         NPCRollPanel:SetScript("OnDragStop", self.StopMovingOrSizing)
+
+  NPCRollPanel.closeBtn:SetScript("OnClick", function()
+    SS_NPCDicesViews[npcID]:Hide();
+    SS_NPCDicesViews[npcID] = nil;
+  end);
 
   local npcName = NPCRollPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
         npcName:SetPoint("TOP", NPCRollPanel, "TOP", 0, -40);
@@ -108,39 +115,66 @@ SS_NPCControll_DrawNPCDiceMenu = function(npcID)
     strong = diceCount..'d'..skillDices.strong.minimum..'-'..skillDices.strong.maximum..'+'..skillDices.strong.statModifier,
   };
 
+  local expectation = NPCRollPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
+        expectation:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 170, -70);
+        expectation:SetText('Ожидание:');
+        expectation:SetFont("Fonts\\FRIZQT__.TTF", 12);
+
+  local expectationInput = CreateFrame("EditBox", "input", NPCRollPanel, "SS_Form_EditBox");
+        expectationInput:SetScript("OnEscapePressed", function() expectationInput:ClearFocus(); end);
+        expectationInput:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 170, -88)
+        expectationInput:SetFont("Fonts\\FRIZQT__.TTF", 11)
+        expectationInput:SetSize(80, 24);
+        expectationInput:SetNumeric(true);
+        expectationInput:SetMaxLetters(2);
+
   local weakRollButton = CreateFrame("Button", nil, NPCRollPanel, "UIPanelButtonTemplate");
         weakRollButton:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 20, -70);
-        weakRollButton:SetSize(95, 24);
+        weakRollButton:SetSize(75, 24);
         weakRollButton:SetText("Слабый");
         weakRollButton:RegisterForClicks("AnyUp");
+        weakRollButton:SetScript("OnClick", function()
+          SS_Roll_AsNPC(npc.name, diceCount, skillDices.weak, expectationInput:GetText());
+          expectationInput:SetText('');
+        end);
 
   local weakRollDesc = NPCRollPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-        weakRollDesc:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 120, -75);
+        weakRollDesc:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 100, -75);
         weakRollDesc:SetText(rollAsString.weak);
-        weakRollDesc:SetFont("Fonts\\FRIZQT__.TTF", 11);
+        weakRollDesc:SetFont("Fonts\\FRIZQT__.TTF", 10);
 
   local normalRollButton = CreateFrame("Button", nil, NPCRollPanel, "UIPanelButtonTemplate");
         normalRollButton:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 20, -100);
-        normalRollButton:SetSize(95, 24);
-        normalRollButton:SetText("Нормальный");
+        normalRollButton:SetSize(75, 24);
+        normalRollButton:SetText("Норма");
         normalRollButton:RegisterForClicks("AnyUp");
+        normalRollButton:SetScript("OnClick", function()
+          SS_Roll_AsNPC(npc.name, diceCount, skillDices.normal, expectationInput:GetText());
+          expectationInput:SetText('');
+        end);
 
   local normalRollDesc = NPCRollPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-        normalRollDesc:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 120, -106);
+        normalRollDesc:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 100, -106);
         normalRollDesc:SetText(rollAsString.normal);
-        normalRollDesc:SetFont("Fonts\\FRIZQT__.TTF", 11);
+        normalRollDesc:SetFont("Fonts\\FRIZQT__.TTF", 10);
 
   local strongRollButton = CreateFrame("Button", nil, NPCRollPanel, "UIPanelButtonTemplate");
         strongRollButton:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 20, -130);
-        strongRollButton:SetSize(95, 24);
+        strongRollButton:SetSize(75, 24);
         strongRollButton:SetText("Сильный");
         strongRollButton:RegisterForClicks("AnyUp");
+        strongRollButton:SetScript("OnClick", function()
+          SS_Roll_AsNPC(npc.name, diceCount, skillDices.strong, expectationInput:GetText());
+          expectationInput:SetText('');
+        end);
 
   local strongRollDesc = NPCRollPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-        strongRollDesc:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 120, -137);
+        strongRollDesc:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 100, -137);
         strongRollDesc:SetText(rollAsString.strong);
-        strongRollDesc:SetFont("Fonts\\FRIZQT__.TTF", 11);
+        strongRollDesc:SetFont("Fonts\\FRIZQT__.TTF", 10);
         --weakRollButton:SetScript("OnClick", parameters.clickHandler);
+
+  SS_NPCDicesViews[npcID] = NPCRollPanel;
 end;
 
 SS_NPCControll_Clear = function()
