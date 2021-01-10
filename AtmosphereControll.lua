@@ -1,0 +1,486 @@
+SS_MUSIC_LIST = {
+  ['Таверны'] = {
+    ['Альянс'] = {
+      order = 1,
+      track = 'Sound\\Music\\ZoneMusic\\TavernAlliance\\TavernAlliance02.mp3',
+    },
+    ['Орда'] = {
+      order = 2,
+      track = 'Sound\\Music\\ZoneMusic\\TavernHorde\\TavernHorde01.mp3',
+    },
+    ['Люди 1'] = {
+      order = 3,
+      track = 'Sound\\Music\\ZoneMusic\\TavernHuman\\RA_HumanTavern2A.mp3',
+    },
+    ['Люди 2'] = {
+      order = 4,
+      track = 'Sound\\Music\\ZoneMusic\\TavernHuman\\RA_HumanTavern1B.mp3',
+    },
+    ['Дворфы 1'] = {
+      order = 5,
+      track = 'Sound\\Music\\ZoneMusic\\TavernDwarf\\RA_DwarfTavern1B.mp3',
+    },
+    ['Двофры 2'] = {
+      order = 6,
+      track = 'Sound\\Music\\ZoneMusic\\TavernDwarf\\RA_DwarfTavern2B.mp3',
+    },
+    ['Двофры 3'] = {
+      order = 7,
+      track = 'Sound\\Music\\ZoneMusic\\TavernDwarf\\RA_DwarfTavern3.mp3',
+    },
+    ['Эльфы 1'] = {
+      order = 8,
+      track = 'Sound\\Music\\ZoneMusic\\TavernNightElf\\RA_TempleOfTheMoonA.mp3',
+    },
+    ['Эльфы 2'] = {
+      order = 9,
+      track = 'Sound\\Music\\ZoneMusic\\Eversong\\ES_SilvermoonWalkDay03.mp3',
+    },
+    ['Орки 1'] = {
+      order = 10,
+      track = 'Sound\\Music\\ZoneMusic\\TavernOrc\\RA_OrcRestArea1A.mp3',
+    },
+    ['Орки 2'] = {
+      order = 11,
+      track = 'Sound\\Music\\ZoneMusic\\TavernOrc\\RA_OrcRestArea2A.mp3',
+    },
+    ['Орки 3'] = {
+      order = 12,
+      track = 'Sound\\Music\\ZoneMusic\\TavernOrc\\RA_OrcRestArea3A.mp3',
+    },
+    ['Пират 1'] = {
+      order = 13,
+      track = 'Sound\\Music\\ZoneMusic\\TavernPirate\\RA_PirateTavern1A.mp3',
+    },
+    ['Пират 2'] = {
+      order = 14, 
+      track = 'Sound\\Music\\ZoneMusic\\TavernPirate\\RA_PirateTavern2A.mp3',
+    },
+    ['Пират 3 (BfA)'] = {
+      order = 15,
+      track = 'sound\\music\\battleforazeroth\\mus_80_divebar_c.mp3'
+    },
+    ['Таурен 1'] = {
+      order = 16,
+      track = 'Sound\\Music\\ZoneMusic\\TavernTauren\\RA_TaurenRestArea1A.mp3',
+    },
+    ['Таурен 2'] = {
+      order = 17,
+      track = 'Sound\\Music\\ZoneMusic\\TavernTauren\\RA_TaurenRestArea2A.mp3',
+    },
+    ['Таурен 3'] = {
+      order = 18,
+      track = 'Sound\\Music\\ZoneMusic\\TavernTauren\\RA_TaurenRestArea3A.mp3',
+    },
+  },
+  ['Столицы'] = {
+    ['Штормград 1'] = {
+      order = 1,
+      track = 'Sound\\Music\\CityMusic\\Stormwind\\stormwind04-zone.mp3',
+    },
+    ['Штормград 2'] = {
+      order = 2,
+      track = 'Sound\\Music\\CityMusic\\Stormwind\\stormwind06-zone.mp3',
+    },
+    ['Штормград 3'] = {
+      order = 3,
+      track = 'Sound\\Music\\CityMusic\\Stormwind\\stormwind07-zone.mp3',
+    },
+    ['Штормград 4'] = {
+      order = 4,
+      track = 'Sound\\Music\\CityMusic\\Stormwind\\stormwind_highSeas-moment.mp3',
+    },
+    ['Стальгорн 1'] = {
+      order = 5,
+      track = 'Sound\\Music\\CityMusic\\Ironforge\\IronForge Walking 01.mp3',
+    },
+    ['Стальгорн 2'] = {
+      order = 6,
+      track = 'Sound\\Music\\CityMusic\\Ironforge\\IronForge Walking 02.mp3',
+    },
+    ['Стальгорн 3'] = {
+      order = 7,
+      track = 'Sound\\Music\\CityMusic\\Ironforge\\IronForge Walking 03 (Glenn).mp3',
+    },
+    ['Гномреган'] = {
+      order = 8,
+      track = 'Sound\\Music\\CityMusic\\Gnomeragon\\gnomeragon01-zone.mp3',
+    },
+    ['Дарнас 1'] = {
+      order = 9,
+      track = 'Sound\\Music\\CityMusic\\Darnassus\\Darnassus Walking 2.mp3',
+    },
+    ['Дарнас 2'] = {
+      order = 10,
+      track = 'Sound\\Music\\CityMusic\\Darnassus\\Darnassus Walking 3.mp3',
+    },
+    ['Оргримар 1'] = {
+      order = 11,
+      track = 'Sound\\Music\\CityMusic\\Orgrimmar\\orgrimmar01-zone.mp3',
+    },
+    ['Оргримар 2'] = {
+      order = 12,
+      track = 'Sound\\Music\\CityMusic\\Orgrimmar\\orgrimmar02-zone.mp3',
+    },
+    ['Подгород 1'] = {
+      order = 13,
+      track = 'Sound\\Music\\CityMusic\\Undercity\\undercity01-zone.mp3',
+    },
+    ['Подгород 2'] = {
+      order = 14,
+      track = 'Sound\\Music\\CityMusic\\Undercity\\undercity02-zone.mp3',
+    },
+    ['Подгород 3'] = {
+      order = 15,
+      track = 'Sound\\Music\\CityMusic\\Undercity\\undercity03-zone.mp3',
+    },
+    ['Луносвет 1'] = {
+      order = 16,
+      track = 'Sound\\Music\\ZoneMusic\\Eversong\\ES_SilvermoonWalkDay01.mp3',
+    },
+    ['Луносвет 2'] = {
+      order = 17,
+      track = 'Sound\\Music\\ZoneMusic\\Eversong\\ES_SilvermoonWalkDay02.mp3',
+    },
+    ['Луносвет 3'] = {
+      order = 18,
+      track = 'Sound\\Music\\ZoneMusic\\Eversong\\ES_SilvermoonWalkNight01.mp3',
+    },
+    ['Луносвет 4'] = {
+      order = 19,
+      track = 'Sound\\Music\\ZoneMusic\\Eversong\\ES_SilvermoonWalkNight02.mp3',
+    },
+    ['Даларан 1'] = {
+      order = 20,
+      track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni01.mp3',
+    },
+    ['Даларан 2'] = {
+      order = 21,
+      track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni02.mp3',
+    },
+    ['Даларан 3'] = {
+      order = 22,
+      track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni03.mp3',
+    },
+    ['Даларан 4'] = {
+      order = 23,
+      track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni04.mp3',
+    }
+  },
+  ['Напряженные'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_735_pointofimpact_a.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_735_pointofimpact_d.mp3'
+    },
+    ['BfA 3'] = {
+      order = 3,
+      track = 'sound\\music\\battleforazeroth\\mus_80_bloodsacrifice_a.mp3'
+    },
+    ['BfA 4'] = {
+      order = 4,
+      track = 'sound\\music\\battleforazeroth\\mus_80_crimsonforest_a.mp3'
+    },
+    ['BfA 5'] = {
+      order = 5,
+      track = 'sound\\music\\battleforazeroth\\mus_80_drustvar_b.mp3'
+    },
+    ['BfA 6'] = {
+      order = 6,
+      track = 'sound\\music\\battleforazeroth\\mus_80_houseashvane_a.mp3'
+    },
+    ['BfA 7'] = {
+      order = 7,
+      track = 'sound\\music\\battleforazeroth\\mus_80_islands_adventure_b.mp3'
+    },
+    ['BfA 8'] = {
+      order = 8,
+      track = 'sound\\music\\battleforazeroth\\mus_80_kthir_a.mp3'
+    },
+    ['BfA 9'] = {
+      order = 9,
+      track = 'sound\\music\\battleforazeroth\\mus_80_loa_bwonsamdi_c.mp3'
+    },
+    ['BfA 10'] = {
+      order = 10,
+      track = 'sound\\music\\battleforazeroth\\mus_80_sirenssong_a.mp3'
+    },
+  },
+  ['Подземелья'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_ataldazar_a.mp3',
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_bloodmagic_a.mp3'
+    },
+    ['BfA 3'] = {
+      order = 3,
+      track = 'sound\\music\\battleforazeroth\\mus_80_nazmirswamp_a.mp3'
+    },
+  },
+  ['Боевые'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_ashvanecompany_a.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_freeholdcombat_a.mp3'
+    },
+    ['BfA 3'] = {
+      order = 3,
+      track = 'sound\\music\\battleforazeroth\\mus_80_heartofsethraliss_1_a.mp3'
+    },
+    ['BfA 4'] = {
+      order = 4,
+      track = 'sound\\music\\battleforazeroth\\mus_80_heartofsethraliss_2_a.mp3'
+    },
+    ['BfA 5'] = {
+      order = 5,
+      track = 'sound\\music\\battleforazeroth\\mus_80_islands_adventure_a.mp3'
+    },
+    ['BfA 6'] = {
+      order = 6,
+      track = 'sound\\music\\battleforazeroth\\mus_80_kultiran_highseas_a.mp3'
+    },
+    ['BfA 7'] = {
+      order = 7,
+      track = 'sound\\music\\battleforazeroth\\mus_80_loa_akunda_a.mp3'
+    },
+    ['BfA 8'] = {
+      order = 8,
+      track = 'sound\\music\\battleforazeroth\\mus_80_maghar_a.mp3'
+    },
+    ['BfA 9'] = {
+      order = 9,
+      track = 'sound\\music\\battleforazeroth\\mus_80_warfrontsbattle_h.mp3'
+    },
+  },
+  ['Боевые (эпик)'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_b.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_lordaeronalliance_1_h.mp3'
+    },
+    ['BfA 3'] = {
+      order = 3,
+      track = 'sound\\music\\battleforazeroth\\mus_80_lordaeronhorde_1_h.mp3'
+    },
+    ['BfA 4'] = {
+      order = 4,
+      track = 'sound\\music\\battleforazeroth\\mus_80_lordaeronhorde_2_h.mp3'
+    },
+  },
+  ['Торжественные'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_a.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_c.mp3'
+    },
+  },
+  ['Морские'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_e.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_freehold_a.mp3'
+    },
+  },
+  ['Спокойные'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_divebar_a.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_divebar_b.mp3'
+    },
+    ['BfA 3'] = {
+      order = 3,
+      track = 'sound\\music\\battleforazeroth\\mus_80_islands_mystical_a.mp3'
+    },
+    ['BfA 4'] = {
+      order = 4,
+      track = 'sound\\music\\battleforazeroth\\mus_80_kultiras_peaks_day_01.mp3'
+    },
+    ['BfA 5'] = {
+      order = 5,
+      track = 'sound\\music\\battleforazeroth\\mus_80_kultiras_peaks_night_04.mp3'
+    },
+    ['BfA 6'] = {
+      order = 6,
+      track = 'sound\\music\\battleforazeroth\\mus_80_outlawharbor_a.mp3'
+    },
+    ['BfA 7'] = {
+      order = 7,
+      track = 'sound\\music\\battleforazeroth\\mus_80_voldun_a.mp3'
+    },
+  },
+  ['Плутовские'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_goblingreed_a.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_islands_adventure_d.mp3'
+    },
+    ['BfA 3'] = {
+      order = 3,
+      track = 'sound\\music\\battleforazeroth\\mus_80_kultiran_parley_a.mp3'
+    },
+    ['BfA 4'] = {
+      order = 4,
+      track = 'sound\\music\\battleforazeroth\\mus_80_quilboar_a.mp3'
+    },
+    ['BfA 5'] = {
+      order = 5,
+      track = 'sound\\music\\battleforazeroth\\mus_80_thetortollan_a.mp3'
+    },
+  },
+  ['Магические'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_islands_adventure_f.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_islands_mystical_b.mp3'
+    },
+    ['BfA 3'] = {
+      order = 3,
+      track = 'sound\\music\\battleforazeroth\\mus_80_nagaincursion_a.mp3'
+    },
+  },
+  ['Траурные'] = {
+    ['BfA 1'] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_islands_winter_a.mp3'
+    },
+    ['BfA 2'] = {
+      order = 2,
+      track = 'sound\\music\\battleforazeroth\\mus_80_kultiras_sky_day_03.mp3'
+    },
+    ['BfA 3'] = {
+      order = 3,
+      track = 'sound\\music\\battleforazeroth\\mus_80_stormsong_d.mp3'
+    },
+  },
+  ['Тест'] = {
+    ['BfA '] = {
+      order = 1,
+      track = 'sound\\music\\battleforazeroth\\mus_80_zuldazarbazaar_1_h.mp3'
+    },
+  },
+};
+
+-- patch-6 bfa completed
+
+SS_AtmosphereControll_Show = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+  SS_AtmosphereControll_Menu:Show();
+  SS_AtmosphereControll_DrawMusicList();
+  SS_Event_Controll_AthmosphereControll_Button:SetText("- Атмосфера");
+end;
+
+SS_AtmosphereControll_Hide = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+  SS_AtmosphereControll_Menu:Hide();
+  SS_Event_Controll_AthmosphereControll_Button:SetText("+ Атмосфера");
+end;
+
+SS_AtmosphereControll_DrawMusicList = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+  local currentIndex = 0;
+  SS_Shared_ForEach(SS_MUSIC_LIST)(function(list, listName)
+    local currentGroupFrame = CreateFrame("Frame", nil, SS_AtmosphereControll_Menu_Scroll_Content);
+          currentGroupFrame:SetPoint("TOPLEFT", SS_AtmosphereControll_Menu_Scroll_Content, "TOPLEFT", 0, -25 * currentIndex);
+          currentGroupFrame:SetSize(160, 1);
+
+    local currentGroupListFrame = CreateFrame("Frame", nil, currentGroupFrame);
+          currentGroupListFrame:SetPoint("TOPLEFT", currentGroupFrame, "TOPLEFT", 20, -30);
+          currentGroupListFrame:SetSize(140, 1);
+
+    local button = CreateFrame("Button", nil, currentGroupFrame, "UIPanelButtonTemplate");
+          button:SetPoint("TOPLEFT", currentGroupFrame, "TOPLEFT", 0, 0);
+          button:SetSize(100, 22);
+          button:SetText('+ '..listName);
+
+    currentGroupFrame.button = button;
+    currentGroupFrame.list = currentGroupListFrame;
+    currentGroupFrame.index = currentIndex;
+          
+    SS_AtmosphereControll_Menu_Scroll_Content[listName] = currentGroupFrame;
+
+    currentGroupFrame.trackCount = 0;
+    SS_Shared_ForEachWithComparator(list)(function(soundTrack)
+      local trackName = currentGroupListFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
+            trackName:SetPoint("TOPLEFT", currentGroupListFrame, "TOPLEFT", 0, -25 * currentGroupFrame.trackCount);
+            trackName:SetText(soundTrack.index);
+            trackName:SetFont("Fonts\\FRIZQT__.TTF", 12);
+
+      local playButton = CreateFrame("Button", nil, currentGroupListFrame, "UIPanelButtonTemplate");
+            playButton:SetPoint("TOPRIGHT", currentGroupListFrame, "TOPRIGHT", 0, -25 * currentGroupFrame.trackCount + 5);
+            playButton:SetSize(50, 22);
+            playButton:SetText('Тест');
+            playButton:SetScript("OnClick", function()
+              PlayMusic(soundTrack.track);
+            end);
+
+      currentGroupFrame.trackCount = currentGroupFrame.trackCount + 1;
+    end);
+
+    currentGroupListFrame:Hide();
+
+    button:SetScript("OnClick", function()
+      if (SS_AtmosphereControll_Menu_Scroll_Content[listName].list:IsVisible()) then
+        SS_AtmosphereControll_Menu_Scroll_Content[listName].button:SetText('+ '..listName);
+        SS_AtmosphereControll_Menu_Scroll_Content[listName].list:Hide();
+
+        local innerCounter = 0;
+        SS_Shared_ForEach(SS_MUSIC_LIST)(function(_, otherListName)
+          if (not(otherListName == listName) and innerCounter > currentGroupFrame.index) then
+            local point, relativeTo, relativePoint, offsetX, offsetY = SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:GetPoint()
+            SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY + (25 * currentGroupFrame.trackCount) + 5)
+          end;
+          innerCounter = innerCounter + 1;
+        end);
+      else
+        local innerCounter = 0;
+        SS_Shared_ForEach(SS_MUSIC_LIST)(function(_, otherListName)
+          SS_AtmosphereControll_Menu_Scroll_Content[otherListName].button:SetText('+ '..otherListName);
+          SS_AtmosphereControll_Menu_Scroll_Content[otherListName].list:Hide();
+
+          if (not(otherListName == listName) and innerCounter > currentGroupFrame.index) then
+            local point, relativeTo, relativePoint, offsetX, offsetY = SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:GetPoint()
+            SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY - (25 * currentGroupFrame.trackCount) - 5)
+          end;
+
+          innerCounter = innerCounter + 1;
+        end);
+
+        SS_AtmosphereControll_Menu_Scroll_Content[listName].button:SetText('- '..listName);
+        SS_AtmosphereControll_Menu_Scroll_Content[listName].list:Show();
+      end;
+    end);
+
+    currentIndex = currentIndex + 1;
+  end);
+
+end;

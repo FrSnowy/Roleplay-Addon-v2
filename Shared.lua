@@ -71,6 +71,8 @@ SS_Shared_ForEach = function(list)
       end;
   end;
 
+  list = SS_Shared_SortTable(list);
+
   return function(callback)
     for index, element in pairs(list) do
       callback(element, index, list);
@@ -78,7 +80,30 @@ SS_Shared_ForEach = function(list)
   end;
 end;
 
+SS_Shared_ForEachWithComparator = function(list, comparator)
+  if (not(list)) then 
+      return function()
+        return nil;
+      end;
+  end;
+
+  local finishedTable = {};
+
+  SS_Shared_ForEach(list)(function(el, index)
+    finishedTable[el.order] = el;
+    finishedTable[el.order].index = index;
+  end);
+
+  return function(callback)
+    for index, element in pairs(finishedTable) do
+      callback(element, index, finishedTable);
+    end;
+  end;
+end;
+
 SS_Shared_Includes = function(list)
+  list = SS_Shared_SortTable(list);
+
   return function(checkFn)
     for index, element in pairs(list) do
       if (checkFn(element, index, list)) then

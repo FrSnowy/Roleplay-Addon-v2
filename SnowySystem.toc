@@ -29,6 +29,7 @@ BattleControll.lua
 DamageControll.lua
 ParamsControll.lua
 NPCControll.lua
+AtmosphereControll.lua
 SnowySystem.lua
 SnowySystem.xml
 Listeners\DM\onPlayerToAll.lua
@@ -101,6 +102,7 @@ View\Damage_Controll_Menu.xml
 View\Params_Controll_Menu.xml
 View\NPC_Controll_Menu.xml
 View\NPC_Create_Menu.xml
+View\Atmosphere_Controll_Menu.xml
 View\Invite_Modal.xml
 View\Event_Start_Modal.xml
 GHI.lua

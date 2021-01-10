@@ -125,7 +125,14 @@
           </Anchor> 
         </Anchors>
       </Button>
-      <Button name="$parent_Athmosphere_Button" inherits="OptionsButtonTemplate" text="+ Атмосфера">
+      <Button name="$parent_AthmosphereControll_Button" inherits="OptionsButtonTemplate" text="+ Атмосфера">
+        <Scripts>
+          <OnClick>
+            if (SS_AtmosphereControll_Menu:IsVisible()) then SS_AtmosphereControll_Hide();
+            else SS_AtmosphereControll_Show();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "120" y = "32" />
         <Anchors>
           <Anchor point="TOPRIGHT">
