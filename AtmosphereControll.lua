@@ -165,7 +165,15 @@ SS_MUSIC_LIST = {
     ['Даларан 4'] = {
       order = 23,
       track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni04.mp3',
-    }
+    },
+    ['Сурамар 1 (Legion)'] = {
+      order = 24,
+      track = 'sound\\music\\legion\\mus_70_suramar_pt1_a.mp3',
+    },
+    ['Сурамар 2 (Legion)'] = {
+      order = 25,
+      track = 'sound\\music\\legion\\mus_70_suramar_pt2_a.mp3',
+    },
   },
   ['Напряженные'] = {
     ['BfA 1'] = {
@@ -208,6 +216,22 @@ SS_MUSIC_LIST = {
       order = 10,
       track = 'sound\\music\\battleforazeroth\\mus_80_sirenssong_a.mp3'
     },
+    ['Legion 1'] = {
+      order = 11,
+      track = 'sound\\music\\legion\\mus_70_felglade_a.mp3'
+    },
+    ['Legion 2'] = {
+      order = 12,
+      track = 'sound\\music\\legion\\mus_70_sanctumofkarazhan_h1.mp3'
+    },
+    ['Legion 3'] = {
+      order = 13,
+      track = 'sound\\music\\legion\\mus_70_tempest_a.mp3'
+    },
+    ['Legion 4'] = {
+      order = 14,
+      track = 'sound\\music\\legion\\mus_72_ruinedcathedrala.mp3'
+    },
   },
   ['Подземелья'] = {
     ['BfA 1'] = {
@@ -221,6 +245,26 @@ SS_MUSIC_LIST = {
     ['BfA 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_nazmirswamp_a.mp3'
+    },
+    ['Legion 1'] = {
+      order = 4,
+      track = 'sound\\music\\legion\\mus_70_dalaransewers1_a.mp3'
+    },
+    ['Legion 2'] = {
+      order = 5,
+      track = 'sound\\music\\legion\\mus_70_emeraldnightmare_c.mp3'
+    },
+    ['Legion 3'] = {
+      order = 6,
+      track = 'sound\\music\\legion\\mus_70_menaceofthedarktitans_a.mp3'
+    },
+    ['Legion 4'] = {
+      order = 7,
+      track = 'sound\\music\\legion\\mus_70_nossharah_a.mp3'
+    },
+    ['Legion 5'] = {
+      order = 8,
+      track = 'sound\\music\\legion\\mus_72_cavernwindh.mp3'
     },
   },
   ['Боевые'] = {
@@ -260,6 +304,18 @@ SS_MUSIC_LIST = {
       order = 9,
       track = 'sound\\music\\battleforazeroth\\mus_80_warfrontsbattle_h.mp3'
     },
+    ['Legion 1'] = {
+      order = 10,
+      track = 'sound\\music\\legion\\mus_70_holywarriorsgather_h.mp3'
+    },
+    ['Legion 2'] = {
+      order = 12,
+      track = 'sound\\music\\legion\\mus_70_laststand_a.mp3'
+    },
+    ['Legion 3'] = {
+      order = 13,
+      track = 'sound\\music\\legion\\mus_72_tombofsargeras_battlea.mp3'
+    },
   },
   ['Боевые (эпик)'] = {
     ['BfA 1'] = {
@@ -278,6 +334,10 @@ SS_MUSIC_LIST = {
       order = 4,
       track = 'sound\\music\\battleforazeroth\\mus_80_lordaeronhorde_2_h.mp3'
     },
+    ['Legion 1'] = {
+      order = 1,
+      track = 'sound\\music\\legion\\mus_73_seatofthepantheon_a.mp3'
+    },
   },
   ['Торжественные'] = {
     ['BfA 1'] = {
@@ -287,6 +347,14 @@ SS_MUSIC_LIST = {
     ['BfA 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_c.mp3'
+    },
+    ['Legion 1'] = {
+      order = 3,
+      track = 'sound\\music\\legion\\mus_70_anduinpt2_b.mp3'
+    },
+    ['Legion 2'] = {
+      order = 4,
+      track = 'sound\\music\\legion\\mus_71_bondsoffate.mp3'
     },
   },
   ['Морские'] = {
@@ -328,6 +396,42 @@ SS_MUSIC_LIST = {
       order = 7,
       track = 'sound\\music\\battleforazeroth\\mus_80_voldun_a.mp3'
     },
+    ['Legion 1'] = {
+      order = 8,
+      track = 'sound\\music\\legion\\mus_70_anduinpt1_a1.mp3'
+    },
+    ['Legion 2'] = {
+      order = 9,
+      track = 'sound\\music\\legion\\mus_70_canticleofsacrifice_a.mp3'
+    },
+    ['Legion 3'] = {
+      order = 10,
+      track = 'sound\\music\\legion\\mus_70_dalaranhalls1_a.mp3'
+    },
+    ['Legion 4'] = {
+      order = 11,
+      track = 'sound\\music\\legion\\mus_70_demonhunterpt1_b.mp3'
+    },
+    ['Legion 5'] = {
+      order = 12,
+      track = 'sound\\music\\legion\\mus_70_enrapturedwoodlands_a.mp3'
+    },
+    ['Legion 6'] = {
+      order = 13,
+      track = 'sound\\music\\legion\\mus_70_highelftomb_a.mp3'
+    },
+    ['Legion 7'] = {
+      order = 14,
+      track = 'sound\\music\\legion\\mus_70_highmountain10_a.mp3'
+    },
+    ['Legion 8'] = {
+      order = 15,
+      track = 'sound\\music\\legion\\mus_70_requiemforthelostcities_a.mp3'
+    },
+    ['Legion 9'] = {
+      order = 16,
+      track = 'sound\\music\\legion\\mus_70_windsoutoftheeast_a.mp3'
+    },
   },
   ['Плутовские'] = {
     ['BfA 1'] = {
@@ -364,6 +468,22 @@ SS_MUSIC_LIST = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_nagaincursion_a.mp3'
     },
+    ['Legion 1'] = {
+      order = 4,
+      track = 'sound\\music\\legion\\mus_70_dalarandusk_a.mp3'
+    },
+    ['Legion 2'] = {
+      order = 5,
+      track = 'sound\\music\\legion\\mus_70_emeraldnightmare_l.mp3'
+    },
+    ['Legion 3'] = {
+      order = 6,
+      track = 'sound\\music\\legion\\mus_70_leylines_a.mp3'
+    },
+    ['Legion 4'] = {
+      order = 7,
+      track = 'sound\\music\\legion\\mus_70_sacredstone_a.mp3'
+    },
   },
   ['Траурные'] = {
     ['BfA 1'] = {
@@ -378,11 +498,23 @@ SS_MUSIC_LIST = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_stormsong_d.mp3'
     },
+    ['Legion 1'] = {
+      order = 4,
+      track = 'sound\\music\\legion\\mus_70_demonhunterpt2_a.mp3'
+    },
+    ['Legion 2'] = {
+      order = 5,
+      track = 'sound\\music\\legion\\mus_70_lailademon_a.mp3'
+    },
+    ['Legion 3'] = {
+      order = 6,
+      track = 'sound\\music\\legion\\mus_73_balefulnight_a.mp3'
+    },
   },
   ['Тест'] = {
-    ['BfA '] = {
+    ['Legion '] = {
       order = 1,
-      track = 'sound\\music\\battleforazeroth\\mus_80_zuldazarbazaar_1_h.mp3'
+      track = 'sound\\music\\legion\\mus_73_xera_a.mp3'
     },
   },
 };
