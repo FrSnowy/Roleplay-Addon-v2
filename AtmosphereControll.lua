@@ -56,7 +56,7 @@ SS_MUSIC_LIST = {
       order = 14, 
       track = 'Sound\\Music\\ZoneMusic\\TavernPirate\\RA_PirateTavern2A.mp3',
     },
-    ['Пират 3 (BfA)'] = {
+    ['Пират 3 (БФА)'] = {
       order = 15,
       track = 'sound\\music\\battleforazeroth\\mus_80_divebar_c.mp3'
     },
@@ -71,6 +71,14 @@ SS_MUSIC_LIST = {
     ['Таурен 3'] = {
       order = 18,
       track = 'Sound\\Music\\ZoneMusic\\TavernTauren\\RA_TaurenRestArea3A.mp3',
+    },
+    ['Дренор 1'] = {
+      order = 19,
+      track = 'sound\\music\\draenor\\mus_60_mandown_h1.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 20,
+      track = 'sound\\music\\draenor\\mus_60_village_b.mp3'
     },
   },
   ['Столицы'] = {
@@ -166,360 +174,504 @@ SS_MUSIC_LIST = {
       order = 23,
       track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni04.mp3',
     },
-    ['Сурамар 1 (Legion)'] = {
+    ['Сурамар 1 (Легион)'] = {
       order = 24,
       track = 'sound\\music\\legion\\mus_70_suramar_pt1_a.mp3',
     },
-    ['Сурамар 2 (Legion)'] = {
+    ['Сурамар 2 (Легион)'] = {
       order = 25,
       track = 'sound\\music\\legion\\mus_70_suramar_pt2_a.mp3',
     },
   },
   ['Напряженные'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_735_pointofimpact_a.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_735_pointofimpact_d.mp3'
     },
-    ['BfA 3'] = {
+    ['БФА 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_bloodsacrifice_a.mp3'
     },
-    ['BfA 4'] = {
+    ['БФА 4'] = {
       order = 4,
       track = 'sound\\music\\battleforazeroth\\mus_80_crimsonforest_a.mp3'
     },
-    ['BfA 5'] = {
+    ['БФА 5'] = {
       order = 5,
       track = 'sound\\music\\battleforazeroth\\mus_80_drustvar_b.mp3'
     },
-    ['BfA 6'] = {
+    ['БФА 6'] = {
       order = 6,
       track = 'sound\\music\\battleforazeroth\\mus_80_houseashvane_a.mp3'
     },
-    ['BfA 7'] = {
+    ['БФА 7'] = {
       order = 7,
       track = 'sound\\music\\battleforazeroth\\mus_80_islands_adventure_b.mp3'
     },
-    ['BfA 8'] = {
+    ['БФА 8'] = {
       order = 8,
       track = 'sound\\music\\battleforazeroth\\mus_80_kthir_a.mp3'
     },
-    ['BfA 9'] = {
+    ['БФА 9'] = {
       order = 9,
       track = 'sound\\music\\battleforazeroth\\mus_80_loa_bwonsamdi_c.mp3'
     },
-    ['BfA 10'] = {
+    ['БФА 10'] = {
       order = 10,
       track = 'sound\\music\\battleforazeroth\\mus_80_sirenssong_a.mp3'
     },
-    ['Legion 1'] = {
+    ['Легион 1'] = {
       order = 11,
       track = 'sound\\music\\legion\\mus_70_felglade_a.mp3'
     },
-    ['Legion 2'] = {
+    ['Легион 2'] = {
       order = 12,
       track = 'sound\\music\\legion\\mus_70_sanctumofkarazhan_h1.mp3'
     },
-    ['Legion 3'] = {
+    ['Легион 3'] = {
       order = 13,
       track = 'sound\\music\\legion\\mus_70_tempest_a.mp3'
     },
-    ['Legion 4'] = {
+    ['Легион 4'] = {
       order = 14,
       track = 'sound\\music\\legion\\mus_72_ruinedcathedrala.mp3'
     },
+    ['Дренор 1'] = {
+      order = 15,
+      track = 'sound\\music\\draenor\\mus_60_blackrock_a.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 16,
+      track = 'sound\\music\\draenor\\mus_60_felwasteland_a.mp3'
+    },
+    ['Дренор 3'] = {
+      order = 17,
+      track = 'sound\\music\\draenor\\mus_60_grinspiration_a.mp3'
+    },
+    ['Дренор 4'] = {
+      order = 18,
+      track = 'sound\\music\\draenor\\mus_60_mystic_b1.mp3'
+    },
+    ['Дренор 5'] = {
+      order = 19,
+      track = 'sound\\music\\draenor\\mus_62_mortalnight_c.mp3'
+    },
   },
   ['Подземелья'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_ataldazar_a.mp3',
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_bloodmagic_a.mp3'
     },
-    ['BfA 3'] = {
+    ['БФА 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_nazmirswamp_a.mp3'
     },
-    ['Legion 1'] = {
+    ['Легион 1'] = {
       order = 4,
       track = 'sound\\music\\legion\\mus_70_dalaransewers1_a.mp3'
     },
-    ['Legion 2'] = {
+    ['Легион 2'] = {
       order = 5,
       track = 'sound\\music\\legion\\mus_70_emeraldnightmare_c.mp3'
     },
-    ['Legion 3'] = {
+    ['Легион 3'] = {
       order = 6,
       track = 'sound\\music\\legion\\mus_70_menaceofthedarktitans_a.mp3'
     },
-    ['Legion 4'] = {
+    ['Легион 4'] = {
       order = 7,
       track = 'sound\\music\\legion\\mus_70_nossharah_a.mp3'
     },
-    ['Legion 5'] = {
+    ['Легион 5'] = {
       order = 8,
       track = 'sound\\music\\legion\\mus_72_cavernwindh.mp3'
     },
+    ['Дренор 1'] = {
+      order = 9,
+      track = 'sound\\music\\draenor\\mus_60_spiresofarak_v4.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 10,
+      track = 'sound\\music\\draenor\\mus_62_felessence_h.mp3'
+    },
+    ['Дренор 3'] = {
+      order = 11,
+      track = 'sound\\music\\draenor\\mus_62_undaunted_a.mp3'
+    },
   },
   ['Боевые'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_ashvanecompany_a.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_freeholdcombat_a.mp3'
     },
-    ['BfA 3'] = {
+    ['БФА 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_heartofsethraliss_1_a.mp3'
     },
-    ['BfA 4'] = {
+    ['БФА 4'] = {
       order = 4,
       track = 'sound\\music\\battleforazeroth\\mus_80_heartofsethraliss_2_a.mp3'
     },
-    ['BfA 5'] = {
+    ['БФА 5'] = {
       order = 5,
       track = 'sound\\music\\battleforazeroth\\mus_80_islands_adventure_a.mp3'
     },
-    ['BfA 6'] = {
+    ['БФА 6'] = {
       order = 6,
       track = 'sound\\music\\battleforazeroth\\mus_80_kultiran_highseas_a.mp3'
     },
-    ['BfA 7'] = {
+    ['БФА 7'] = {
       order = 7,
       track = 'sound\\music\\battleforazeroth\\mus_80_loa_akunda_a.mp3'
     },
-    ['BfA 8'] = {
+    ['БФА 8'] = {
       order = 8,
       track = 'sound\\music\\battleforazeroth\\mus_80_maghar_a.mp3'
     },
-    ['BfA 9'] = {
+    ['БФА 9'] = {
       order = 9,
       track = 'sound\\music\\battleforazeroth\\mus_80_warfrontsbattle_h.mp3'
     },
-    ['Legion 1'] = {
+    ['Легион 1'] = {
       order = 10,
       track = 'sound\\music\\legion\\mus_70_holywarriorsgather_h.mp3'
     },
-    ['Legion 2'] = {
-      order = 12,
+    ['Легион 2'] = {
+      order = 11,
       track = 'sound\\music\\legion\\mus_70_laststand_a.mp3'
     },
-    ['Legion 3'] = {
-      order = 13,
+    ['Легион 3'] = {
+      order = 12,
       track = 'sound\\music\\legion\\mus_72_tombofsargeras_battlea.mp3'
+    },
+    ['Дренор 1'] = {
+      order = 13,
+      track = 'sound\\music\\draenor\\mus_60_army_a.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 14,
+      track = 'sound\\music\\draenor\\mus_60_chieftansgather_h.mp3'
+    },
+    ['Дренор 3'] = {
+      order = 15,
+      track = 'sound\\music\\draenor\\mus_60_laboriousmisery_h.mp3'
+    },
+    ['Дренор 4'] = {
+      order = 16,
+      track = 'sound\\music\\draenor\\mus_60_mobilize_a.mp3'
+    },
+    ['Дренор 5'] = {
+      order = 17,
+      track = 'sound\\music\\draenor\\mus_60_ogremines_a1.mp3'
+    },
+    ['Дренор 6'] = {
+      order = 18,
+      track = 'sound\\music\\draenor\\mus_60_patiencepoint_a1.mp3'
+    },
+    ['Дренор 7'] = {
+      order = 19,
+      track = 'sound\\music\\draenor\\mus_60_warsong_v1.mp3'
     },
   },
   ['Боевые (эпик)'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_b.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_lordaeronalliance_1_h.mp3'
     },
-    ['BfA 3'] = {
+    ['БФА 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_lordaeronhorde_1_h.mp3'
     },
-    ['BfA 4'] = {
+    ['БФА 4'] = {
       order = 4,
       track = 'sound\\music\\battleforazeroth\\mus_80_lordaeronhorde_2_h.mp3'
     },
-    ['Legion 1'] = {
-      order = 1,
+    ['Легион 1'] = {
+      order = 5,
       track = 'sound\\music\\legion\\mus_73_seatofthepantheon_a.mp3'
+    },
+    ['Дренор 1'] = {
+      order = 6,
+      track = 'sound\\music\\draenor\\mus_60_armylife_h.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 7,
+      track = 'sound\\music\\draenor\\mus_60_khadgarsplan_v2.mp3'
+    },
+    ['Дренор 3'] = {
+      order = 8,
+      track = 'sound\\music\\draenor\\mus_60_protectthethrone_h3.mp3'
+    },
+    ['Дренор 4'] = {
+      order = 9,
+      track = 'sound\\music\\draenor\\mus_60_stormlordsonthemarch_h3.mp3'
     },
   },
   ['Торжественные'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_a.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_c.mp3'
     },
-    ['Legion 1'] = {
+    ['Легион 1'] = {
       order = 3,
       track = 'sound\\music\\legion\\mus_70_anduinpt2_b.mp3'
     },
-    ['Legion 2'] = {
+    ['Легион 2'] = {
       order = 4,
       track = 'sound\\music\\legion\\mus_71_bondsoffate.mp3'
     },
+    ['Дренор 1'] = {
+      order = 5,
+      track = 'sound\\music\\draenor\\mus_60_aherossacrifice_v5.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 6,
+      track = 'sound\\music\\draenor\\mus_60_warriorsjourney_h1.mp3'
+    },
   },
   ['Морские'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_e.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_freehold_a.mp3'
     },
+    ['Дренор 1'] = {
+      order = 3,
+      track = 'sound\\music\\draenor\\mus_60_proudmoore_h.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 4,
+      track = 'sound\\music\\draenor\\mus_60_tshaveit_b.mp3'
+    },
   },
   ['Спокойные'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_divebar_a.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_divebar_b.mp3'
     },
-    ['BfA 3'] = {
+    ['БФА 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_islands_mystical_a.mp3'
     },
-    ['BfA 4'] = {
+    ['БФА 4'] = {
       order = 4,
       track = 'sound\\music\\battleforazeroth\\mus_80_kultiras_peaks_day_01.mp3'
     },
-    ['BfA 5'] = {
+    ['БФА 5'] = {
       order = 5,
       track = 'sound\\music\\battleforazeroth\\mus_80_kultiras_peaks_night_04.mp3'
     },
-    ['BfA 6'] = {
+    ['БФА 6'] = {
       order = 6,
       track = 'sound\\music\\battleforazeroth\\mus_80_outlawharbor_a.mp3'
     },
-    ['BfA 7'] = {
+    ['БФА 7'] = {
       order = 7,
       track = 'sound\\music\\battleforazeroth\\mus_80_voldun_a.mp3'
     },
-    ['Legion 1'] = {
+    ['Легион 1'] = {
       order = 8,
       track = 'sound\\music\\legion\\mus_70_anduinpt1_a1.mp3'
     },
-    ['Legion 2'] = {
+    ['Легион 2'] = {
       order = 9,
       track = 'sound\\music\\legion\\mus_70_canticleofsacrifice_a.mp3'
     },
-    ['Legion 3'] = {
+    ['Легион 3'] = {
       order = 10,
       track = 'sound\\music\\legion\\mus_70_dalaranhalls1_a.mp3'
     },
-    ['Legion 4'] = {
+    ['Легион 4'] = {
       order = 11,
       track = 'sound\\music\\legion\\mus_70_demonhunterpt1_b.mp3'
     },
-    ['Legion 5'] = {
+    ['Легион 5'] = {
       order = 12,
       track = 'sound\\music\\legion\\mus_70_enrapturedwoodlands_a.mp3'
     },
-    ['Legion 6'] = {
+    ['Легион 6'] = {
       order = 13,
       track = 'sound\\music\\legion\\mus_70_highelftomb_a.mp3'
     },
-    ['Legion 7'] = {
+    ['Легион 7'] = {
       order = 14,
       track = 'sound\\music\\legion\\mus_70_highmountain10_a.mp3'
     },
-    ['Legion 8'] = {
+    ['Легион 8'] = {
       order = 15,
       track = 'sound\\music\\legion\\mus_70_requiemforthelostcities_a.mp3'
     },
-    ['Legion 9'] = {
+    ['Легион 9'] = {
       order = 16,
       track = 'sound\\music\\legion\\mus_70_windsoutoftheeast_a.mp3'
     },
+    ['Дренор 1'] = {
+      order = 17,
+      track = 'sound\\music\\draenor\\mus_60_coldmountain_duet_h.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 18,
+      track = 'sound\\music\\draenor\\mus_60_eagle_a.mp3'
+    },
+    ['Дренор 3'] = {
+      order = 19,
+      track = 'sound\\music\\draenor\\mus_60_mountains_ambient2.mp3'
+    },
+    ['Дренор 4'] = {
+      order = 20,
+      track = 'sound\\music\\draenor\\mus_62_falling_1a.mp3'
+    },
   },
   ['Плутовские'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_goblingreed_a.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_islands_adventure_d.mp3'
     },
-    ['BfA 3'] = {
+    ['БФА 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_kultiran_parley_a.mp3'
     },
-    ['BfA 4'] = {
+    ['БФА 4'] = {
       order = 4,
       track = 'sound\\music\\battleforazeroth\\mus_80_quilboar_a.mp3'
     },
-    ['BfA 5'] = {
+    ['БФА 5'] = {
       order = 5,
       track = 'sound\\music\\battleforazeroth\\mus_80_thetortollan_a.mp3'
     },
+    ['Дренор 1'] = {
+      order = 6,
+      track = 'sound\\music\\draenor\\mus_60_bfreedom_h1.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 7,
+      track = 'sound\\music\\draenor\\mus_60_plightoftheogres_h1.mp3'
+    },
   },
   ['Магические'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_islands_adventure_f.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_islands_mystical_b.mp3'
     },
-    ['BfA 3'] = {
+    ['БФА 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_nagaincursion_a.mp3'
     },
-    ['Legion 1'] = {
+    ['Легион 1'] = {
       order = 4,
       track = 'sound\\music\\legion\\mus_70_dalarandusk_a.mp3'
     },
-    ['Legion 2'] = {
+    ['Легион 2'] = {
       order = 5,
       track = 'sound\\music\\legion\\mus_70_emeraldnightmare_l.mp3'
     },
-    ['Legion 3'] = {
+    ['Легион 3'] = {
       order = 6,
       track = 'sound\\music\\legion\\mus_70_leylines_a.mp3'
     },
-    ['Legion 4'] = {
+    ['Легион 4'] = {
       order = 7,
       track = 'sound\\music\\legion\\mus_70_sacredstone_a.mp3'
     },
+    ['Дренор 1'] = {
+      order = 8,
+      track = 'sound\\music\\draenor\\mus_60_cavernsoflife_h.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 9,
+      track = 'sound\\music\\draenor\\mus_60_etherealembers_d.mp3'
+    },
+    ['Дренор 3'] = {
+      order = 10,
+      track = 'sound\\music\\draenor\\mus_60_shadowmoon_v5.mp3'
+    },
   },
   ['Траурные'] = {
-    ['BfA 1'] = {
+    ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_islands_winter_a.mp3'
     },
-    ['BfA 2'] = {
+    ['БФА 2'] = {
       order = 2,
       track = 'sound\\music\\battleforazeroth\\mus_80_kultiras_sky_day_03.mp3'
     },
-    ['BfA 3'] = {
+    ['БФА 3'] = {
       order = 3,
       track = 'sound\\music\\battleforazeroth\\mus_80_stormsong_d.mp3'
     },
-    ['Legion 1'] = {
+    ['Легион 1'] = {
       order = 4,
       track = 'sound\\music\\legion\\mus_70_demonhunterpt2_a.mp3'
     },
-    ['Legion 2'] = {
+    ['Легион 2'] = {
       order = 5,
       track = 'sound\\music\\legion\\mus_70_lailademon_a.mp3'
     },
-    ['Legion 3'] = {
+    ['Легион 3'] = {
       order = 6,
       track = 'sound\\music\\legion\\mus_73_balefulnight_a.mp3'
     },
+    ['Дренор 1'] = {
+      order = 7,
+      track = 'sound\\music\\draenor\\mus_60_callofthewarrior_h.mp3'
+    },
+    ['Дренор 2'] = {
+      order = 8,
+      track = 'sound\\music\\draenor\\mus_60_grommashhellscream_v2a.mp3'
+    },
+    ['Дренор 3'] = {
+      order = 9,
+      track = 'sound\\music\\draenor\\mus_60_wonder_h.mp3'
+    },
+    ['Дренор 4'] = {
+      order = 10,
+      track = 'sound\\music\\draenor\\mus_invincible.mp3'
+    },
   },
   ['Тест'] = {
-    ['Legion '] = {
+    ['Дренор '] = {
       order = 1,
-      track = 'sound\\music\\legion\\mus_73_xera_a.mp3'
+      track = 'sound\\music\\draenor\\mus_invincible.mp3'
     },
   },
 };
 
--- patch-6 bfa completed
+-- patch-6 legion completed
 
 SS_AtmosphereControll_Show = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
