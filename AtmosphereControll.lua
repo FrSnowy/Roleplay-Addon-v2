@@ -80,6 +80,10 @@ SS_MUSIC_LIST = {
       order = 20,
       track = 'sound\\music\\draenor\\mus_60_village_b.mp3'
     },
+    ['Ката 1'] = {
+      order = 21,
+      track = 'sound\\music\\cataclysm\\mus_wordsandmusicbyevent_e01.mp3',
+    },
   },
   ['Столицы'] = {
     ['Штормград 1'] = {
@@ -182,8 +186,16 @@ SS_MUSIC_LIST = {
       order = 25,
       track = 'sound\\music\\legion\\mus_70_suramar_pt2_a.mp3',
     },
+    ['Штормград (Ката) 1'] = {
+      order = 26,
+      track = 'sound\\music\\cataclysm\\mus_stormwind_gu01.mp3',
+    },
+    ['Штормград (Ката) 1'] = {
+      order = 27,
+      track = 'sound\\music\\cataclysm\\mus_stormwind_gu03.mp3',
+    },
   },
-  ['Напряженные'] = {
+  ['Мрачные'] = {
     ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_735_pointofimpact_a.mp3'
@@ -260,6 +272,54 @@ SS_MUSIC_LIST = {
       order = 19,
       track = 'sound\\music\\draenor\\mus_62_mortalnight_c.mp3'
     },
+    ['Пандария 1'] = {
+      order = 20,
+      track = 'sound\\music\\pandaria\\mus_50_krasarangwilds_a_hero_01.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 21,
+      track = 'sound\\music\\pandaria\\mus_50_mantid_a_03.mp3'
+    },
+    ['Пандария 3'] = {
+      order = 22,
+      track = 'sound\\music\\pandaria\\mus_50_pandaria_a_01.mp3'
+    },
+    ['Пандария 4'] = {
+      order = 23,
+      track = 'sound\\music\\pandaria\\mus_52_godsandmonster_01.mp3'
+    },
+    ['Ката 1'] = {
+      order = 24,
+      track = 'sound\\music\\cataclysm\\mus_41_za_templebethek_uu01.mp3',
+    },
+    ['Ката 2'] = {
+      order = 25,
+      track = 'sound\\music\\cataclysm\\mus_43_fangsofthefathera_uu02.mp3',
+    },
+    ['Ката 3'] = {
+      order = 26,
+      track = 'sound\\music\\cataclysm\\mus_cataclysm_uu01.mp3',
+    },
+    ['Ката 4'] = {
+      order = 27,
+      track = 'sound\\music\\cataclysm\\mus_darkwhispergorge_gu01.mp3',
+    },
+    ['Ката 5'] = {
+      order = 28,
+      track = 'sound\\music\\cataclysm\\mus_durotara_gu01.mp3',
+    },
+    ['Ката 6'] = {
+      order = 29,
+      track = 'sound\\music\\cataclysm\\mus_lostcity_gu01.mp3',
+    },
+    ['Ката 7'] = {
+      order = 30,
+      track = 'sound\\music\\cataclysm\\mus_marsh_uu01.mp3',
+    },
+    ['Ката 8'] = {
+      order = 31,
+      track = 'sound\\music\\cataclysm\\mus_treasure_uu04.mp3',
+    },
   },
   ['Подземелья'] = {
     ['БФА 1'] = {
@@ -305,6 +365,70 @@ SS_MUSIC_LIST = {
     ['Дренор 3'] = {
       order = 11,
       track = 'sound\\music\\draenor\\mus_62_undaunted_a.mp3'
+    },
+    ['Пандария 1'] = {
+      order = 12,
+      track = 'sound\\music\\pandaria\\mus_50_jinyu_a_hero_03.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 13,
+      track = 'sound\\music\\pandaria\\mus_50_scarletmonastery_a_hero_01.mp3'
+    },
+    ['Пандария 3'] = {
+      order = 14,
+      track = 'sound\\music\\pandaria\\mus_50_scarletmonastery_a_hero_01.mp3'
+    },
+    ['Пандария 4'] = {
+      order = 15,
+      track = 'sound\\music\\pandaria\\mus_50_scarletmonastery_a_hero_02.mp3'
+    },
+    ['Пандария 5'] = {
+      order = 16,
+      track = 'sound\\music\\pandaria\\mus_50_sha_02.mp3'
+    },
+    ['Пандария 6'] = {
+      order = 17,
+      track = 'sound\\music\\pandaria\\mus_52_ancientmogu_a_01.mp3'
+    },
+    ['Пандария 7'] = {
+      order = 18,
+      track = 'sound\\music\\pandaria\\mus_52_ancientmogu_d_01.mp3'
+    },
+    ['Пандария 8'] = {
+      order = 19,
+      track = 'sound\\music\\pandaria\\mus_52_thunderisle_a_05.mp3'
+    },
+    ['Пандария 9'] = {
+      order = 20,
+      track = 'sound\\music\\pandaria\\mus_54_legendary_03.mp3',
+    },
+    ['Пандария 10'] = {
+      order = 21,
+      track = 'sound\\music\\pandaria\\mus_54_shaangry_02.mp3',
+    },
+    ['Ката 1'] = {
+      order = 22,
+      track = 'sound\\music\\cataclysm\\mus_42_elemental_water_ambient_uu01.mp3',
+    },
+    ['Ката 2'] = {
+      order = 23,
+      track = 'sound\\music\\cataclysm\\mus_43_fangsofthefatherc_uu02.mp3',
+    },
+    ['Ката 3'] = {
+      order = 24,
+      track = 'sound\\music\\cataclysm\\mus_crypt_uu01.mp3',
+    },
+    ['Ката 4'] = {
+      order = 25,
+      track = 'sound\\music\\cataclysm\\mus_cursed_uu03.mp3',
+    },
+    ['Ката 5'] = {
+      order = 26,
+      track = 'sound\\music\\cataclysm\\mus_deepholm_gu01.mp3',
+    },
+    ['Ката 6'] = {
+      order = 27,
+      track = 'sound\\music\\cataclysm\\mus_silithus_gu05.mp3',
     },
   },
   ['Боевые'] = {
@@ -384,6 +508,58 @@ SS_MUSIC_LIST = {
       order = 19,
       track = 'sound\\music\\draenor\\mus_60_warsong_v1.mp3'
     },
+    ['Пандария 1'] = {
+      order = 20,
+      track = 'sound\\music\\pandaria\\mus_50_kunlaisummit_b_hero_01.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 21,
+      track = 'sound\\music\\pandaria\\mus_50_pandaria_d_hero_01.mp3'
+    },
+    ['Пандария 3'] = {
+      order = 22,
+      track = 'sound\\music\\pandaria\\mus_50_pandariapvp_hero_01.mp3'
+    },
+    ['Пандария 4'] = {
+      order = 23,
+      track = 'sound\\music\\pandaria\\mus_51_garroshtheme_a_hero_01.mp3'
+    },
+    ['Пандария 5'] = {
+      order = 24,
+      track = 'sound\\music\\pandaria\\mus_52_trollbattle_a_02.mp3'
+    },
+    ['Пандария 6'] = {
+      order = 25,
+      track = 'sound\\music\\pandaria\\mus_54_doomhammer_01.mp3'
+    },
+    ['Ката 1'] = {
+      order = 26,
+      track = 'sound\\music\\cataclysm\\mus_41_za_altarbloodgod_uu01.mp3',
+    },
+    ['Ката 2'] = {
+      order = 27,
+      track = 'sound\\music\\cataclysm\\mus_43_deathwingcorruption_uu07.mp3',
+    },
+    ['Ката 3'] = {
+      order = 28,
+      track = 'sound\\music\\cataclysm\\mus_43_deathwingsfall_hero_uu01.mp3',
+    },
+    ['Ката 4'] = {
+      order = 29,
+      track = 'sound\\music\\cataclysm\\mus_43_warships_hero_01.mp3',
+    },
+    ['Ката 5'] = {
+      order = 30,
+      track = 'sound\\music\\cataclysm\\mus_burningsteppes_gu03.mp3',
+    },
+    ['Ката 6'] = {
+      order = 31,
+      track = 'sound\\music\\cataclysm\\mus_orgrimmar_gu01.mp3',
+    },
+    ['Ката 7'] = {
+      order = 32,
+      track = 'sound\\music\\cataclysm\\mus_twilightshammer_uu01.mp3',
+    },
   },
   ['Боевые (эпик)'] = {
     ['БФА 1'] = {
@@ -422,6 +598,26 @@ SS_MUSIC_LIST = {
       order = 9,
       track = 'sound\\music\\draenor\\mus_60_stormlordsonthemarch_h3.mp3'
     },
+    ['Пандария 1'] = {
+      order = 10,
+      track = 'sound\\music\\pandaria\\mus_50_battleforpandaria_hero_02.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 11,
+      track = 'sound\\music\\pandaria\\mus_50_monk_mistweaver_a_01.mp3'
+    },
+    ['Ката 1'] = {
+      order = 12,
+      track = 'sound\\music\\cataclysm\\mus_43_gunships_hero_uu01.mp3',
+    },
+    ['Ката 2'] = {
+      order = 13,
+      track = 'sound\\music\\cataclysm\\mus_43_twilightshammer_uu01.mp3',
+    },
+    ['Ката 3'] = {
+      order = 14,
+      track = 'sound\\music\\cataclysm\\mus_shattering_uu01.mp3',
+    },
   },
   ['Торжественные'] = {
     ['БФА 1'] = {
@@ -448,6 +644,26 @@ SS_MUSIC_LIST = {
       order = 6,
       track = 'sound\\music\\draenor\\mus_60_warriorsjourney_h1.mp3'
     },
+    ['Пандария 1'] = {
+      order = 7,
+      track = 'sound\\music\\pandaria\\mus_51_alliancebattlemarch_01.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 8,
+      track = 'sound\\music\\pandaria\\mus_51_forthealliance_01.mp3'
+    },
+    ['Пандария 3'] = {
+      order = 9,
+      track = 'sound\\music\\pandaria\\mus_51_jainahomeland_lyrical_01.mp3'
+    },
+    ['Пандария 4'] = {
+      order = 10,
+      track = 'sound\\music\\pandaria\\mus_54_valehealing.mp3',
+    },
+    ['Ката 1'] = {
+      order = 11,
+      track = 'sound\\music\\cataclysm\\mus_darkironforge_gu01.mp3',
+    },
   },
   ['Морские'] = {
     ['БФА 1'] = {
@@ -465,6 +681,10 @@ SS_MUSIC_LIST = {
     ['Дренор 2'] = {
       order = 4,
       track = 'sound\\music\\draenor\\mus_60_tshaveit_b.mp3'
+    },
+    ['Ката 1'] = {
+      order = 5,
+      track = 'sound\\music\\cataclysm\\mus_piratessurrender_uu01.mp3',
     },
   },
   ['Спокойные'] = {
@@ -548,6 +768,94 @@ SS_MUSIC_LIST = {
       order = 20,
       track = 'sound\\music\\draenor\\mus_62_falling_1a.mp3'
     },
+    ['Пандария 1'] = {
+      order = 21,
+      track = 'sound\\music\\pandaria\\mus_50_augustcelestials_01.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 22,
+      track = 'sound\\music\\pandaria\\mus_50_bamboo_night_hero_01.mp3'
+    },
+    ['Пандария 3'] = {
+      order = 23,
+      track = 'sound\\music\\pandaria\\mus_50_hozen_a_06.mp3'
+    },
+    ['Пандария 4'] = {
+      order = 24,
+      track = 'sound\\music\\pandaria\\mus_50_serpentsheart_night_walk_01.mp3'
+    },
+    ['Пандария 5'] = {
+      order = 25,
+      track = 'sound\\music\\pandaria\\mus_50_songofliulang_inst_01.mp3'
+    },
+    ['Пандария 6'] = {
+      order = 26,
+      track = 'sound\\music\\pandaria\\mus_50_templeofthefivedawns_10.mp3'
+    },
+    ['Пандария 7'] = {
+      order = 27,
+      track = 'sound\\music\\pandaria\\mus_50_veb_b_01.mp3'
+    },
+    ['Пандария 8'] = {
+      order = 28,
+      track = 'sound\\music\\pandaria\\mus_52_ancientpandaria_a_01.mp3'
+    },
+    ['Пандария 9'] = {
+      order = 29,
+      track = 'sound\\music\\pandaria\\mus_54_forthepandarenalliance_a_02.mp3'
+    },
+    ['Ката 1'] = {
+      order = 30,
+      track = 'sound\\music\\cataclysm\\mus_43_zinazshari_uu04.mp3',
+    },
+    ['Ката 2'] = {
+      order = 31,
+      track = 'sound\\music\\cataclysm\\mus_adventurea_uu01.mp3',
+    },
+    ['Ката 3'] = {
+      order = 32,
+      track = 'sound\\music\\cataclysm\\mus_barrowdens_gu03.mp3',
+    },
+    ['Ката 4'] = {
+      order = 33,
+      track = 'sound\\music\\cataclysm\\mus_coldmountain_gu07.mp3',
+    },
+    ['Ката 5'] = {
+      order = 34,
+      track = 'sound\\music\\cataclysm\\mus_feralas_gu02.mp3',
+    },
+    ['Ката 6'] = {
+      order = 35,
+      track = 'sound\\music\\cataclysm\\mus_guardiansofhyjal_gu03.mp3',
+    },
+    ['Ката 7'] = {
+      order = 36,
+      track = 'sound\\music\\cataclysm\\mus_mulgoreplains_gu01.mp3',
+    },
+    ['Ката 8'] = {
+      order = 37,
+      track = 'sound\\music\\cataclysm\\mus_nightelves_gu02.mp3',
+    },
+    ['Ката 9'] = {
+      order = 38,
+      track = 'sound\\music\\cataclysm\\mus_shadowglen_gu02.mp3',
+    },
+    ['Ката 10'] = {
+      order = 39,
+      track = 'sound\\music\\cataclysm\\mus_southernbarrens_gu01.mp3',
+    },
+    ['Ката 11'] = {
+      order = 40,
+      track = 'sound\\music\\cataclysm\\mus_stonetalon_gu02.mp3',
+    },
+    ['Ката 12'] = {
+      order = 41,
+      track = 'sound\\music\\cataclysm\\mus_thunderbluff_gu01.mp3',
+    },
+    ['Ката 13'] = {
+      order = 42,
+      track = 'sound\\music\\cataclysm\\mus_westfall_gu01.mp3',
+    },
   },
   ['Плутовские'] = {
     ['БФА 1'] = {
@@ -577,6 +885,22 @@ SS_MUSIC_LIST = {
     ['Дренор 2'] = {
       order = 7,
       track = 'sound\\music\\draenor\\mus_60_plightoftheogres_h1.mp3'
+    },
+    ['Пандария 1'] = {
+      order = 8,
+      track = 'sound\\music\\pandaria\\mus_50_bottomsup_01.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 9,
+      track = 'sound\\music\\pandaria\\mus_52_zandalari_2_b_01.mp3'
+    },
+    ['Ката 1'] = {
+      order = 10,
+      track = 'sound\\music\\cataclysm\\mus_goblin_uu17.mp3',
+    },
+    ['Ката 2'] = {
+      order = 11,
+      track = 'sound\\music\\cataclysm\\mus_goblin_uu47.mp3',
     },
   },
   ['Магические'] = {
@@ -620,8 +944,52 @@ SS_MUSIC_LIST = {
       order = 10,
       track = 'sound\\music\\draenor\\mus_60_shadowmoon_v5.mp3'
     },
+    ['Пандария 1'] = {
+      order = 11,
+      track = 'sound\\music\\pandaria\\mus_50_bamboo_04.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 12,
+      track = 'sound\\music\\pandaria\\mus_50_songofliulang_inst_01.mp3'
+    },
+    ['Пандария 3'] = {
+      order = 13,
+      track = 'sound\\music\\pandaria\\mus_50_spiritcave_06.mp3'
+    },
+    ['Пандария 4'] = {
+      order = 14,
+      track = 'sound\\music\\pandaria\\mus_50_theheartland_hero_04.mp3'
+    },
+    ['Ката 1'] = {
+      order = 15,
+      track = 'sound\\music\\cataclysm\\mus_41_faeriedragon_ue01.mp3',
+    },
+    ['Ката 2'] = {
+      order = 16,
+      track = 'sound\\music\\cataclysm\\mus_43_wellofeternity_uu05.mp3',
+    },
+    ['Ката 3'] = {
+      order = 17,
+      track = 'sound\\music\\cataclysm\\mus_aftermath_uu01.mp3',
+    },
+    ['Ката 4'] = {
+      order = 18,
+      track = 'sound\\music\\cataclysm\\mus_ghosts_uu02.mp3',
+    },
+    ['Ката 5'] = {
+      order = 19,
+      track = 'sound\\music\\cataclysm\\mus_hyjal_gu01.mp3',
+    },
+    ['Ката 6'] = {
+      order = 20,
+      track = 'sound\\music\\cataclysm\\mus_moonglade_gu05.mp3',
+    },
+    ['Ката 7'] = {
+      order = 21,
+      track = 'sound\\music\\cataclysm\\mus_rift_uu01.mp3',
+    },
   },
-  ['Траурные'] = {
+  ['Грустные'] = {
     ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_islands_winter_a.mp3'
@@ -662,11 +1030,51 @@ SS_MUSIC_LIST = {
       order = 10,
       track = 'sound\\music\\draenor\\mus_invincible.mp3'
     },
+    ['Пандария 1'] = {
+      order = 11,
+      track = 'sound\\music\\pandaria\\mus_50_heartofpandaria_01.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 12,
+      track = 'sound\\music\\pandaria\\mus_50_theriver_05.mp3'
+    },
+    ['Пандария 2'] = {
+      order = 13,
+      track = 'sound\\music\\pandaria\\mus_50_townlongsteppes_a_hero_02.mp3'
+    },
+    ['Ката 1'] = {
+      order = 14,
+      track = 'sound\\music\\cataclysm\\mus_arathihighlandsc_gd01.mp3',
+    },
+    ['Ката 2'] = {
+      order = 15,
+      track = 'sound\\music\\cataclysm\\mus_cataclysm_ud07.mp3',
+    },
+    ['Ката 3'] = {
+      order = 16,
+      track = 'sound\\music\\cataclysm\\mus_cataclysm_un08.mp3',
+    },
+    ['Ката 4'] = {
+      order = 17,
+      track = 'sound\\music\\cataclysm\\mus_hyjal_gu04.mp3',
+    },
+    ['Ката 5'] = {
+      order = 18,
+      track = 'sound\\music\\cataclysm\\mus_nightelves_gu01.mp3',
+    },
+    ['Ката 6'] = {
+      order = 19,
+      track = 'sound\\music\\cataclysm\\mus_nordrassil_gu01.mp3',
+    },
+    ['Ката 7'] = {
+      order = 20,
+      track = 'sound\\music\\cataclysm\\mus_westplaguea_gd01.mp3',
+    },
   },
   ['Тест'] = {
-    ['Дренор '] = {
+    ['Ката 2'] = {
       order = 1,
-      track = 'sound\\music\\draenor\\mus_invincible.mp3'
+      track = 'sound\\music\\cataclysm\\mus_wordsandmusicbyevent_e01.mp3',
     },
   },
 };
@@ -703,7 +1111,7 @@ SS_AtmosphereControll_DrawMusicList = function()
 
     local button = CreateFrame("Button", nil, currentGroupFrame, "UIPanelButtonTemplate");
           button:SetPoint("TOPLEFT", currentGroupFrame, "TOPLEFT", 0, 0);
-          button:SetSize(100, 22);
+          button:SetSize(120, 22);
           button:SetText('+ '..listName);
 
     currentGroupFrame.button = button;
