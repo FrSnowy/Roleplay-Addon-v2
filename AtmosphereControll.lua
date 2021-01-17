@@ -80,9 +80,25 @@ SS_MUSIC_LIST = {
       order = 20,
       track = 'sound\\music\\draenor\\mus_60_village_b.mp3'
     },
-    ['Ката 1'] = {
+    ['Пандария 1'] = {
       order = 21,
+      track = 'sound\\music\\zonemusic\\darkmoonfaire\\mus_51_darkmoonfaire_merrygoround_01.mp3',
+    },
+    ['Ката 1'] = {
+      order = 22,
       track = 'sound\\music\\cataclysm\\mus_wordsandmusicbyevent_e01.mp3',
+    },
+    ['Актуал 1'] = {
+      order = 23,
+      track = 'sound\\music\\zonemusic\\argenttournament\\at_tourney02daywalk.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 24,
+      track = 'sound\\music\\zonemusic\\argenttournament\\at_tourney03nightwalkuniwalk.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 25,
+      track = 'sound\\music\\zonemusic\\argenttournament\\at_tourney06daywalk.mp3',
     },
   },
   ['Столицы'] = {
@@ -162,36 +178,48 @@ SS_MUSIC_LIST = {
       order = 19,
       track = 'Sound\\Music\\ZoneMusic\\Eversong\\ES_SilvermoonWalkNight02.mp3',
     },
-    ['Даларан 1'] = {
+    ['Луносвет 5'] = {
       order = 20,
+      track = 'sound\\music\\zonemusic\\eversong\\es_silvermoonintro01.mp3',
+    },
+    ['Даларан 1'] = {
+      order = 21,
       track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni01.mp3',
     },
     ['Даларан 2'] = {
-      order = 21,
+      order = 22,
       track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni02.mp3',
     },
     ['Даларан 3'] = {
-      order = 22,
+      order = 23,
       track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni03.mp3',
     },
     ['Даларан 4'] = {
-      order = 23,
+      order = 24,
       track = 'Sound\\Music\\ZoneMusic\\Dalaran\\DC_GeneralWalkUni04.mp3',
     },
+    ['Даларан 5'] = {
+      order = 25,
+      track = 'sound\\music\\zonemusic\\dalaran\\dc_sewerwalkuni02.mp3',
+    },
+    ['Даларан 6'] = {
+      order = 26,
+      track = 'sound\\music\\zonemusic\\dalaran\\dc_spirewalkuni01.mp3',
+    },
     ['Сурамар 1 (Легион)'] = {
-      order = 24,
+      order = 27,
       track = 'sound\\music\\legion\\mus_70_suramar_pt1_a.mp3',
     },
     ['Сурамар 2 (Легион)'] = {
-      order = 25,
+      order = 28,
       track = 'sound\\music\\legion\\mus_70_suramar_pt2_a.mp3',
     },
     ['Штормград (Ката) 1'] = {
-      order = 26,
+      order = 29,
       track = 'sound\\music\\cataclysm\\mus_stormwind_gu01.mp3',
     },
-    ['Штормград (Ката) 1'] = {
-      order = 27,
+    ['Штормград (Ката) 2'] = {
+      order = 30,
       track = 'sound\\music\\cataclysm\\mus_stormwind_gu03.mp3',
     },
   },
@@ -320,6 +348,66 @@ SS_MUSIC_LIST = {
       order = 31,
       track = 'sound\\music\\cataclysm\\mus_treasure_uu04.mp3',
     },
+    ['Ката 9'] = {
+      order = 32,
+      track = 'sound\\music\\zonemusic\\darkmoonfaire\\mus_43_darkmoonfaired_uu02.mp3',
+    },
+    ['Актуал 1'] = {
+      order = 33,
+      track = 'sound\\music\\zonemusic\\os2.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 34,
+      track = 'sound\\music\\zonemusic\\ahnqiraj\\ahnqirajinterior2.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 35,
+      track = 'sound\\music\\zonemusic\\azuremyst\\av_draeneiwalkuni03r.mp3',
+    },
+    ['Актуал 4'] = {
+      order = 36,
+      track = 'sound\\music\\zonemusic\\bladesedge\\bl_dryforestwalkuni03.mp3',
+    },
+    ['Актуал 5'] = {
+      order = 37,
+      track = 'sound\\music\\zonemusic\\eversong\\es_scortchedwalkday01.mp3',
+    },
+    ['Актуал 6'] = {
+      order = 38,
+      track = 'sound\\music\\zonemusic\\evilforest\\nightevilforest02.mp3',
+    },
+    ['Актуал 7'] = {
+      order = 39,
+      track = 'sound\\music\\zonemusic\\evilforest\\dayevilforest02.mp3',
+    },
+    ['Актуал 8'] = {
+      order = 40,
+      track = 'sound\\music\\zonemusic\\forest\\nightforest03.mp3',
+    },
+    ['Актуал 9'] = {
+      order = 41,
+      track = 'sound\\music\\zonemusic\\ghostlands\\gl_scenicwalkuni01.mp3',
+    },
+    ['Актуал 10'] = {
+      order = 42,
+      track = 'sound\\music\\zonemusic\\hellfirepeninsula\\he_generalwalkuni01.mp3',
+    },
+    ['Актуал 11'] = {
+      order = 43,
+      track = 'sound\\music\\zonemusic\\icecrownglacier\\ic_generalwalk_night05.mp3',
+    },
+    ['Актуал 12'] = {
+      order = 44,
+      track = 'sound\\music\\zonemusic\\icecrownglacier\\ic_generalwalk_day02.mp3',
+    },
+    ['Актуал 13'] = {
+      order = 45,
+      track = 'sound\\music\\zonemusic\\icecrownraid\\ir_walkm_01.mp3',
+    },
+    ['Актуал 14'] = {
+      order = 46,
+      track = 'sound\\music\\zonemusic\\karazhan\\ka_malchezarwalkuni01.mp3',
+    },
   },
   ['Подземелья'] = {
     ['БФА 1'] = {
@@ -429,6 +517,58 @@ SS_MUSIC_LIST = {
     ['Ката 6'] = {
       order = 27,
       track = 'sound\\music\\cataclysm\\mus_silithus_gu05.mp3',
+    },
+    ['Актуал 1'] = {
+      order = 28,
+      track = 'sound\\music\\zonemusic\\os1.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 29,
+      track = 'sound\\music\\zonemusic\\os3.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 30,
+      track = 'sound\\music\\zonemusic\\ahnqiraj\\ahnqirajinteriorintromain.mp3',
+    },
+    ['Актуал 4'] = {
+      order = 31,
+      track = 'sound\\music\\zonemusic\\azjolnerub\\an_generalintro_03.mp3',
+    },
+    ['Актуал 5'] = {
+      order = 32,
+      track = 'sound\\music\\zonemusic\\bladesedge\\bl_generalwalkuni03.mp3',
+    },
+    ['Актуал 6'] = {
+      order = 33,
+      track = 'sound\\music\\zonemusic\\chamberoftheaspects\\ca_aspectsgeneralwalkanight02.mp3',
+    },
+    ['Актуал 7'] = {
+      order = 34,
+      track = 'sound\\music\\zonemusic\\cursedland\\cursedland05.mp3',
+    },
+    ['Актуал 8'] = {
+      order = 35,
+      track = 'sound\\music\\zonemusic\\dragonblight\\db_generalwalk_day03.mp3',
+    },
+    ['Актуал 9'] = {
+      order = 36,
+      track = 'sound\\music\\zonemusic\\ebon hold\\eh_assaultuni07.mp3',
+    },
+    ['Актуал 10'] = {
+      order = 37,
+      track = 'sound\\music\\zonemusic\\karazhan\\ka_librarywalkuni02.mp3',
+    },
+    ['Актуал 11'] = {
+      order = 38,
+      track = 'sound\\music\\zonemusic\\naxxramas\\naxxramaswalking1.mp3',
+    },
+    ['Актуал 12'] = {
+      order = 39,
+      track = 'sound\\music\\zonemusic\\shadowmoonvalley\\sv_generalwalkuni02.mp3',
+    },
+    ['Актуал 13'] = {
+      order = 40,
+      track = 'sound\\music\\zonemusic\\shadowmoonvalley\\sv_generalwalkuni04.mp3',
     },
   },
   ['Боевые'] = {
@@ -560,8 +700,52 @@ SS_MUSIC_LIST = {
       order = 32,
       track = 'sound\\music\\cataclysm\\mus_twilightshammer_uu01.mp3',
     },
+    ['Актуал 1'] = {
+      order = 33,
+      track = 'sound\\music\\zonemusic\\argentcoliseum\\cr_tourneybattle01uniwalk.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 34,
+      track = 'sound\\music\\zonemusic\\argentcoliseum\\cr_tourneybattle02uniwalk.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 35,
+      track = 'sound\\music\\zonemusic\\argentcoliseum\\cr_tourneybattle03uniwalk.mp3',
+    },
+    ['Актуал 4'] = {
+      order = 36,
+      track = 'sound\\music\\zonemusic\\argentcoliseum\\cr_tourneybattle04uniwalk.mp3',
+    },
+    ['Актуал 5'] = {
+      order = 37,
+      track = 'sound\\music\\zonemusic\\lakewintergrasp\\wg_contested_02.mp3',
+    },
+    ['Актуал 6'] = {
+      order = 38,
+      track = 'sound\\music\\zonemusic\\naxxramas\\naxxramaskelthuzad2.mp3',
+    },
+    ['Актуал 7'] = {
+      order = 39,
+      track = 'sound\\music\\zonemusic\\naxxramas\\naxxramasabominationboss2.mp3',
+    },
+    ['Актуал 8'] = {
+      order = 40,
+      track = 'sound\\music\\zonemusic\\pvp\\mus_pvp7_02.mp3',
+    },
+    ['Актуал 9'] = {
+      order = 41,
+      track = 'sound\\music\\zonemusic\\stratholmepast\\ct_stratholmepastmalganis.mp3',
+    },
+    ['Актуал 10'] = {
+      order = 42,
+      track = 'sound\\music\\zonemusic\\sunwell\\sw_thewellwalkuni01.mp3',
+    },
+    ['Актуал 11'] = {
+      order = 43,
+      track = 'sound\\music\\zonemusic\\tempestkeep\\tk_tempestkeep_btl11.mp3',
+    },
   },
-  ['Боевые (эпик)'] = {
+  ['Превозмогание'] = {
     ['БФА 1'] = {
       order = 1,
       track = 'sound\\music\\battleforazeroth\\mus_80_classicbattle_b.mp3'
@@ -618,6 +802,22 @@ SS_MUSIC_LIST = {
       order = 14,
       track = 'sound\\music\\cataclysm\\mus_shattering_uu01.mp3',
     },
+    ['Актуал 1'] = {
+      order = 15,
+      track = 'sound\\music\\gluescreenmusic\\wow_main_theme.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 16,
+      track = 'sound\\music\\gluescreenmusic\\bc_main_theme.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 17,
+      track = 'sound\\music\\zonemusic\\argenttournament\\at_joustevent.mp3',
+    },
+    ['Актуал 4'] = {
+      order = 18,
+      track = 'sound\\music\\zonemusic\\stratholmepast\\ct_stratholmepastalleyintro.mp3',
+    },
   },
   ['Торжественные'] = {
     ['БФА 1'] = {
@@ -664,6 +864,18 @@ SS_MUSIC_LIST = {
       order = 11,
       track = 'sound\\music\\cataclysm\\mus_darkironforge_gu01.mp3',
     },
+    ['Актуал 1'] = {
+      order = 12,
+      track = 'sound\\music\\zonemusic\\pvp\\mus_pvp6_02.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 13,
+      track = 'sound\\music\\zonemusic\\stratholmepast\\ct_stratholmepastwalkuni.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 14,
+      track = 'sound\\music\\zonemusic\\sunwell\\sw_plateausunwellarrivalwalkuni01.mp3',
+    },
   },
   ['Морские'] = {
     ['БФА 1'] = {
@@ -685,6 +897,22 @@ SS_MUSIC_LIST = {
     ['Ката 1'] = {
       order = 5,
       track = 'sound\\music\\cataclysm\\mus_piratessurrender_uu01.mp3',
+    },
+    ['Актуал 1'] = {
+      order = 6,
+      track = 'sound\\music\\zonemusic\\grizzlyhills\\gh_intro1uni01.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 7,
+      track = 'sound\\music\\zonemusic\\grizzlyhills\\gh_generalwalk_a_day02.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 8,
+      track = 'sound\\music\\zonemusic\\northrend\\northrendtransport\\nr_northrendtransportgeneralday.mp3',
+    },
+    ['Актуал 4'] = {
+      order = 9,
+      track = 'sound\\music\\zonemusic\\northrend\\northrendtransport\\nr_northrendtransportgeneralnight.mp3',
     },
   },
   ['Спокойные'] = {
@@ -856,6 +1084,86 @@ SS_MUSIC_LIST = {
       order = 42,
       track = 'sound\\music\\cataclysm\\mus_westfall_gu01.mp3',
     },
+    ['Актуал 1'] = {
+      order = 43,
+      track = 'sound\\music\\zonemusic\\argenttournament\\at_tourney01nightwalk.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 44,
+      track = 'sound\\music\\zonemusic\\argenttournament\\at_tourney05nightwalk.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 45,
+      track = 'sound\\music\\zonemusic\\azuremyst\\ai_draeneiwalkuni05.mp3',
+    },
+    ['Актуал 4'] = {
+      order = 46,
+      track = 'sound\\music\\zonemusic\\barrendry\\nightbarrendry01.mp3',
+    },
+    ['Актуал 5'] = {
+      order = 47,
+      track = 'sound\\music\\zonemusic\\boreantundra\\bo_tusk_kaskaladay01.mp3',
+    },
+    ['Актуал 6'] = {
+      order = 48,
+      track = 'sound\\music\\zonemusic\\dragonblight\\db_tusk_indulenight01.mp3',
+    },
+    ['Актуал 7'] = {
+      order = 49,
+      track = 'sound\\music\\zonemusic\\enchantedforest\\enchantedforest05.mp3',
+    },
+    ['Актуал 8'] = {
+      order = 50,
+      track = 'sound\\music\\zonemusic\\forest\\dayforest02.mp3',
+    },
+    ['Актуал 9'] = {
+      order = 51,
+      track = 'sound\\music\\zonemusic\\forest\\dayforest03.mp3',
+    },
+    ['Актуал 10'] = {
+      order = 52,
+      track = 'sound\\music\\zonemusic\\howlingfjord\\hf_generalwalk_night04.mp3',
+    },
+    ['Актуал 11'] = {
+      order = 53,
+      track = 'sound\\music\\zonemusic\\howlingfjord\\hf_generalwalk_day07.mp3',
+    },
+    ['Актуал 12'] = {
+      order = 54,
+      track = 'sound\\music\\zonemusic\\howlingfjord\\hf_tusk_kamaguanight01.mp3',
+    },
+    ['Актуал 13'] = {
+      order = 55,
+      track = 'sound\\music\\zonemusic\\lakewintergrasp\\wg_generalwalk_03.mp3',
+    },
+    ['Актуал 14'] = {
+      order = 56,
+      track = 'sound\\music\\zonemusic\\mountain\\daymountain01.mp3',
+    },
+    ['Актуал 15'] = {
+      order = 57,
+      track = 'sound\\music\\zonemusic\\mountain\\nightmountain03.mp3',
+    },
+    ['Актуал 16'] = {
+      order = 58,
+      track = 'sound\\music\\zonemusic\\nagrand\\na_generalwalkday02.mp3',
+    },
+    ['Актуал 17'] = {
+      order = 59,
+      track = 'sound\\music\\zonemusic\\plains\\dayplains02.mp3',
+    },
+    ['Актуал 18'] = {
+      order = 60,
+      track = 'sound\\music\\zonemusic\\sholazarbasin\\sb_sholazarwalkday01.mp3',
+    },
+    ['Актуал 19'] = {
+      order = 61,
+      track = 'sound\\music\\zonemusic\\soggyplace\\soggyplace-zone2.mp3',
+    },
+    ['Актуал 20'] = {
+      order = 62,
+      track = 'sound\\music\\zonemusic\\stormpeaks\\sp_generalwalka_day01.mp3',
+    },
   },
   ['Плутовские'] = {
     ['БФА 1'] = {
@@ -901,6 +1209,10 @@ SS_MUSIC_LIST = {
     ['Ката 2'] = {
       order = 11,
       track = 'sound\\music\\cataclysm\\mus_goblin_uu47.mp3',
+    },
+    ['Актуал 1'] = {
+      order = 12,
+      track = 'sound\\music\\zonemusic\\plains\\nightplains02.mp3',
     },
   },
   ['Магические'] = {
@@ -988,6 +1300,38 @@ SS_MUSIC_LIST = {
       order = 21,
       track = 'sound\\music\\cataclysm\\mus_rift_uu01.mp3',
     },
+    ['Актуал 1'] = {
+      order = 22,
+      track = 'sound\\music\\zonemusic\\crystalsong\\cs_crystalsongwalkuni01.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 23,
+      track = 'sound\\music\\zonemusic\\crystalsong\\cs_crystalsongwalkuni04.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 24,
+      track = 'sound\\music\\zonemusic\\enchantedforest\\enchantedforest03.mp3',
+    },
+    ['Актуал 4'] = {
+      order = 25,
+      track = 'sound\\music\\zonemusic\\enchantedforest\\enchantedforest02.mp3',
+    },
+    ['Актуал 5'] = {
+      order = 26,
+      track = 'sound\\music\\zonemusic\\ghostmusic\\ghostmusic03.mp3',
+    },
+    ['Актуал 6'] = {
+      order = 27,
+      track = 'sound\\music\\zonemusic\\icecrownraid\\ir_crimsonhall4.mp3',
+    },
+    ['Актуал 7'] = {
+      order = 28,
+      track = 'sound\\music\\zonemusic\\mountain\\daymountain03.mp3',
+    },
+    ['Актуал 8'] = {
+      order = 29,
+      track = 'sound\\music\\zonemusic\\stormpeaks\\sp_generalwalkadark_uni01.mp3',
+    },
   },
   ['Грустные'] = {
     ['БФА 1'] = {
@@ -1070,16 +1414,98 @@ SS_MUSIC_LIST = {
       order = 20,
       track = 'sound\\music\\cataclysm\\mus_westplaguea_gd01.mp3',
     },
+    ['Актуал 1'] = {
+      order = 21,
+      track = 'sound\\music\\gluescreenmusic\\bccredits_lament_of_the_highborne.mp3',
+    },
+    ['Актуал 2'] = {
+      order = 22,
+      track = 'sound\\music\\zonemusic\\azuremyst\\av_draeneiwalkuni01.mp3',
+    },
+    ['Актуал 3'] = {
+      order = 23,
+      track = 'sound\\music\\zonemusic\\karazhan\\ka_towerwalkuni03.mp3',
+    },
+    ['Актуал 4'] = {
+      order = 24,
+      track = 'sound\\music\\zonemusic\\karazhan\\ka_foyerintrouni01.mp3',
+    },
+    ['Актуал 5'] = {
+      order = 25,
+      track = 'sound\\music\\zonemusic\\nagrand\\na_generalwalknight03.mp3',
+    },
   },
   ['Тест'] = {
-    ['Ката 2'] = {
+    ['Актуал 2'] = {
       order = 1,
-      track = 'sound\\music\\cataclysm\\mus_wordsandmusicbyevent_e01.mp3',
+      track = 'sound\\music\\zonemusic\\tempestkeep\\tk_tempestkeep_btl11.mp3',
     },
   },
 };
 
--- patch-6 legion completed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SS_AMBIENT_LIST = {
+  ['Звуки погоды'] = {
+    ['Дождь (сильн.)'] = {
+      order = 1,
+      track = 'sound\\ambience\\weather\\rainheavyloop.ogg',
+    },
+    ['Дождь (слаб.)'] = {
+      order = 2,
+      track = 'sound\\ambience\\weather\\rainlightloop.ogg',
+    },
+    ['Дождь (норм.)'] = {
+      order = 3,
+      track = 'sound\\ambience\\weather\\rainmediumloop.ogg',
+    },
+    ['Песч. буря (сильн.)'] = {
+      order = 4,
+      track = 'sound\\ambience\\weather\\sandstormheavy.ogg',
+    },
+    ['Песч. буря (слаб.)'] = {
+      order = 5,
+      track = 'sound\\ambience\\weather\\sandstormlight.ogg',
+    },
+    ['Песч. буря (норм.)'] = {
+      order = 6,
+      track = 'sound\\ambience\\weather\\sandstormmedium.ogg',
+    },
+    ['Снег (сильн.)'] = {
+      order = 7,
+      track = 'sound\\ambience\\weather\\snowheavy.ogg',
+    },
+    ['Снег (слаб.)'] = {
+      order = 8,
+      track = 'sound\\ambience\\weather\\snowlight.ogg',
+    },
+    ['Снег (норм.)'] = {
+      order = 9,
+      track = 'sound\\ambience\\weather\\snowmedium.ogg',
+    },
+  },
+}
+
+
+-- patch-6 cata completed
 
 SS_AtmosphereControll_Show = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
