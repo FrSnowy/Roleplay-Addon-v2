@@ -6,6 +6,7 @@ SS_LeadingPlots_Create = function(plotUniqueName, plotName, authorName)
     players = { authorName },
     modifiers = {},
     npc = {},
+    sound = {},
     settings = {
       isEventOngoing = false,
     }

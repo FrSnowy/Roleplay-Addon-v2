@@ -65,6 +65,8 @@ local actionFire = function(action, data, author, prefix)
     dmChangeLevel = SS_Listeners_Player_OnDMChangeLevel,
     dmChangeExp = SS_Listeners_Player_OnDMChangeExp,
     npcRoll = SS_Listeners_Player_OnNPCRollResult,
+    dmStartMusic = SS_Listeners_Player_OnDMStartMusic,
+    dmStopMusic = SS_Listeners_Player_OnDMStopMusic,
   };
 
   if (not(actions[action])) then

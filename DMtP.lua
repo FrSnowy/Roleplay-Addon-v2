@@ -425,3 +425,64 @@ SS_DMtP_SendParamUpdate = function(name, result)
 
   SS_DMtP_Every('npcRoll', SS_User.settings.currentPlot..'+'..name..'+'..result)(SS_User.settings.currentPlot);
 end;
+
+SS_DMtP_StartMusic = function(category, group, name, target)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+  if (not(category) or not(group) or not(name) or not(target)) then
+    category = SS_AtmosphereControll_TMPData.category;
+    group = SS_AtmosphereControll_TMPData.group;
+    track = SS_AtmosphereControll_TMPData.track;
+    target = SS_AtmosphereControll_TMPData.target;
+  end;
+
+  local action = 'dmStartMusic';
+  local data = SS_User.settings.currentPlot..'+'..category..'+'..group..'+'..track;
+
+  if (target == 'player') then
+    if (not(UnitName("target"))) then
+      SS_Log_NoTarget();
+      return nil;
+    end;
+
+    if (UnitName("target") == UnitName("player")) then
+      PlayMusic(SS_LIST_OF_SOUNDS[category].list[group][track].track);
+    else
+      SS_DMtP_Direct(action, data, UnitName('target'));
+    end;
+  end;
+
+  if (target == 'group') then
+    PlayMusic(SS_LIST_OF_SOUNDS[category].list[group][track].track);
+    SS_DMtP_Every(action, data, { UnitName('player') })(SS_User.settings.currentPlot);
+  end;
+end;
+
+SS_DMtP_StopMusic = function(target)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+  if (not(target)) then
+    target = SS_AtmosphereControll_TMPData.target;
+  end;
+
+  local action = 'dmStopMusic';
+  local data = SS_User.settings.currentPlot;
+
+  if (target == 'player') then
+    if (not(UnitName("target"))) then
+      SS_Log_NoTarget();
+      return nil;
+    end;
+
+    if (UnitName("target") == UnitName("player")) then
+      StopMusic();
+    else
+      SS_DMtP_Direct(action, data, UnitName('target'));
+    end;
+  end;
+
+  if (target == 'group') then
+    StopMusic();
+    SS_DMtP_Every(action, data, { UnitName('player') })(SS_User.settings.currentPlot);
+  end;
+end;

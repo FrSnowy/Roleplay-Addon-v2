@@ -80,6 +80,8 @@ Listeners\Player\onDMChangeBarrier.lua
 Listeners\Player\onDMChangeExp.lua
 Listeners\Player\onDMChangeLevel.lua
 Listeners\Player\onRollResult.lua
+Listeners\Player\onDMStartMusic.lua
+Listeners\Player\onDMStopMusic.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml

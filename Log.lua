@@ -371,6 +371,22 @@ SS_Log_ValueIsNotLevel = function()
   print('|cffFF0000Ошибка: уровень должен быть в промежутке от 1 до 20|r')
 end;
 
+SS_Log_NoTrack = function()
+  print('|cffFF0000Ошибка: не выбран ни один звуковой файл|r')
+end;
+
+SS_Log_NoCategoryFound = function()
+  print('|cffFF0000Ошибка: не найдена категория|r')
+end;
+
+SS_Log_NoListFound = function()
+  print('|cffFF0000Ошибка: не найдена группа|r')
+end;
+
+SS_Log_NoTrackFound = function()
+  print('|cffFF0000Ошибка: не найден звуковой файл|r')
+end;
+
 SS_Log_PlayerGetModifier = function(name, value, stats, player)
   local outputString = player..'|cffFFFF00 получил модификатор |r"'..name..'" ';
   

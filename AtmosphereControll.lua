@@ -1439,33 +1439,7 @@ SS_MUSIC_LIST = {
       track = 'sound\\music\\zonemusic\\nagrand\\na_generalwalknight03.mp3',
     },
   },
-  ['Тест'] = {
-    ['Актуал 2'] = {
-      order = 1,
-      track = 'sound\\music\\zonemusic\\blacktemple\\bt_arrivalwalkhero01.mp3',
-    },
-  },
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 SS_AMBIENT_LIST = {
   ['Звуки погоды'] = {
@@ -1508,14 +1482,38 @@ SS_AMBIENT_LIST = {
   },
 }
 
-
--- patch-6 cata completed
+SS_LIST_OF_SOUNDS = {
+  music = {
+    name = 'Фоновая музыка',
+    list = SS_MUSIC_LIST,
+  },
+  ambient = {
+    name = 'Фоновое окружение',
+    list = SS_AMBIENT_LIST,
+  },
+};
 
 SS_AtmosphereControll_Show = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  
+  if (not(SS_LeadingPlots_Current().sound)) then
+    SS_LeadingPlots_Current().sound = {};
+  end;
+
+  SS_AtmosphereControll_TMPData = {
+    category = SS_LeadingPlots_Current().sound.category or 'music',
+    group = SS_LeadingPlots_Current().sound.group or nil,
+    track = SS_LeadingPlots_Current().sound.track or nil,
+    target = 'player'
+  };
 
   SS_AtmosphereControll_Menu:Show();
-  SS_AtmosphereControll_DrawMusicList(SS_MUSIC_LIST);
+  SS_AtmosphereControll_DrawMusicList(SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category]);
+  SS_AtmosphereControll_SelectTrack(SS_AtmosphereControll_TMPData.track, SS_AtmosphereControll_TMPData.group);
+
+  if (SS_AtmosphereControll_TMPData.category and SS_AtmosphereControll_TMPData.group) then
+    SS_AtmosphereControll_ShowListElementDropdown(SS_AtmosphereControll_TMPData.group, SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category].list)
+  end;
   SS_Event_Controll_AthmosphereControll_Button:SetText("- Атмосфера");
 end;
 
@@ -1524,6 +1522,19 @@ SS_AtmosphereControll_Hide = function()
 
   SS_AtmosphereControll_Menu:Hide();
   SS_Event_Controll_AthmosphereControll_Button:SetText("+ Атмосфера");
+  SS_AtmosphereControll_TMPData = nil;
+end;
+
+SS_AtmosphereControll_SelectTarget = function(target)
+  SS_AtmosphereControll_TMPData.target = target;
+  SS_AtmosphereControll_Menu_Check_Target_Player:SetChecked(false);
+  SS_AtmosphereControll_Menu_Check_Target_Group:SetChecked(false);
+
+  if (target == 'player') then
+    SS_AtmosphereControll_Menu_Check_Target_Player:SetChecked(true);
+  elseif (target == 'group') then
+    SS_AtmosphereControll_Menu_Check_Target_Group:SetChecked(true);
+  end;
 end;
 
 SS_AtmosphereControll_ShowListElementDropdown = function(elementName, LIST)
@@ -1573,41 +1584,48 @@ SS_AtmosphereControll_DrawMusicList = function(LIST)
     child:Hide();
   end);
 
+  SS_AtmosphereControll_Menu_Title:SetText(LIST.name);
+
   local currentIndex = 1;
-  SS_Shared_ForEach(LIST)(function(list, listName)
+  SS_Shared_ForEach(LIST.list)(function(list, listName)
     local currentGroupFrame = CreateFrame("Frame", nil, SS_AtmosphereControll_Menu_Scroll_Content);
           currentGroupFrame:SetPoint("TOPLEFT", SS_AtmosphereControll_Menu_Scroll_Content, "TOPLEFT", 0, -25 * (currentIndex - 1));
           currentGroupFrame:SetSize(160, 1);
 
     local currentGroupListFrame = CreateFrame("Frame", nil, currentGroupFrame);
-          currentGroupListFrame:SetPoint("TOPLEFT", currentGroupFrame, "TOPLEFT", 20, -30);
+          currentGroupListFrame:SetPoint("TOPLEFT", currentGroupFrame, "TOPLEFT", 0, -30);
           currentGroupListFrame:SetSize(140, 1);
 
     local button = CreateFrame("Button", nil, currentGroupFrame, "UIPanelButtonTemplate");
           button:SetPoint("TOPLEFT", currentGroupFrame, "TOPLEFT", 0, 0);
-          button:SetSize(120, 22);
+          button:SetSize(140, 22);
           button:SetText('+ '..listName);
 
     currentGroupFrame.button = button;
     currentGroupFrame.list = currentGroupListFrame;
     currentGroupFrame.index = currentIndex;
-          
-    SS_AtmosphereControll_Menu_Scroll_Content[listName] = currentGroupFrame;
 
     currentGroupFrame.trackCount = 0;
     SS_Shared_ForEachWithComparator(list)(function(soundTrack)
       local trackName = currentGroupListFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-            trackName:SetPoint("TOPLEFT", currentGroupListFrame, "TOPLEFT", 0, -25 * currentGroupFrame.trackCount);
+            trackName:SetPoint("TOPLEFT", currentGroupListFrame, "TOPLEFT", 30, -25 * currentGroupFrame.trackCount);
             trackName:SetText(soundTrack.index);
             trackName:SetFont("Fonts\\FRIZQT__.TTF", 12);
 
-      local playButton = CreateFrame("Button", nil, currentGroupListFrame, "UIPanelButtonTemplate");
-            playButton:SetPoint("TOPRIGHT", currentGroupListFrame, "TOPRIGHT", 0, -25 * currentGroupFrame.trackCount + 5);
-            playButton:SetSize(50, 22);
-            playButton:SetText('Тест');
-            playButton:SetScript("OnClick", function()
-              PlayMusic(soundTrack.track);
+      local check = CreateFrame("CheckButton", nil, currentGroupListFrame, "OptionsCheckButtonTemplate");
+            check:SetSize(20, 20);
+            check:SetPoint("TOPLEFT", currentGroupListFrame, "TOPLEFT", 5, -25 * currentGroupFrame.trackCount + 3);
+
+            check:SetScript("OnClick", function()
+              if (check:GetChecked()) then
+                SS_AtmosphereControll_SelectTrack(soundTrack.index, listName)
+              else
+                SS_AtmosphereControll_SelectTrack(nil)
+              end;
             end);
+
+      currentGroupFrame.list[soundTrack.index] = {};
+      currentGroupFrame.list[soundTrack.index].check = check;
 
       currentGroupFrame.trackCount = currentGroupFrame.trackCount + 1;
     end);
@@ -1616,13 +1634,87 @@ SS_AtmosphereControll_DrawMusicList = function(LIST)
 
     button:SetScript("OnClick", function()
       if (SS_AtmosphereControll_Menu_Scroll_Content[listName].list:IsVisible()) then
-        SS_AtmosphereControll_HideListElementDropdown(listName, LIST);
+        SS_AtmosphereControll_HideListElementDropdown(listName, LIST.list);
       else
-        SS_AtmosphereControll_ShowListElementDropdown(listName, LIST);       
+        SS_AtmosphereControll_ShowListElementDropdown(listName, LIST.list);       
       end;
     end);
-
+    
+    SS_AtmosphereControll_Menu_Scroll_Content[listName] = currentGroupFrame;
     currentIndex = currentIndex + 1;
   end);
+end;
 
+SS_AtmosphereControll_SelectTrack = function(trackName, group)
+  if (not(trackName) or not(group)) then
+    SS_AtmosphereControll_TMPData.group = nil;
+    SS_AtmosphereControll_TMPData.track = nil;
+    SS_AtmosphereControll_Menu_Selected:SetText('Выбрано: ничего');
+    return;
+  end;
+
+  if (SS_AtmosphereControll_TMPData.group and SS_AtmosphereControll_TMPData.track) then
+    SS_AtmosphereControll_Menu_Scroll_Content[SS_AtmosphereControll_TMPData.group].list[SS_AtmosphereControll_TMPData.track].check:SetChecked(false);
+  end;
+  SS_AtmosphereControll_TMPData.group = group;
+  SS_AtmosphereControll_TMPData.track = trackName
+  SS_AtmosphereControll_Menu_Selected:SetText('Выбрано: '..SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category].name..', '..group..', '..trackName);
+  SS_AtmosphereControll_Menu_Scroll_Content[SS_AtmosphereControll_TMPData.group].list[SS_AtmosphereControll_TMPData.track].check:SetChecked(true);
+end;
+
+SS_AtmosphereControll_NextList = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_AtmosphereControll_TMPData)) then return nil; end;
+
+  if (SS_AtmosphereControll_TMPData.category == 'music') then
+    SS_AtmosphereControll_TMPData.category = 'ambient';
+  elseif (SS_AtmosphereControll_TMPData.category == 'ambient') then
+    SS_AtmosphereControll_TMPData.category = 'music';
+  end;
+
+  
+  SS_AtmosphereControll_TMPData.group = nil;
+  SS_AtmosphereControll_TMPData.track = nil;
+  SS_AtmosphereControll_SelectTrack(nil);
+
+  SS_AtmosphereControll_DrawMusicList(SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category]);
+end;
+
+SS_AtmosphereControll_ActivateMusic = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_AtmosphereControll_TMPData)) then return nil; end;
+
+  if (not(SS_AtmosphereControll_TMPData.category) or not(SS_AtmosphereControll_TMPData.group) or not(SS_AtmosphereControll_TMPData.track)) then
+    SS_Log_NoTrack();
+    return nil;
+  end;
+
+  if (not(SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category])) then
+    SS_Log_NoCategoryFound();
+    return nil;
+  end;
+
+  if (not(SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category].list[SS_AtmosphereControll_TMPData.group])) then
+    SS_Log_NoListFound();
+    return nil;
+  end;
+
+  if (not(SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category].list[SS_AtmosphereControll_TMPData.group][SS_AtmosphereControll_TMPData.track].track)) then
+    SS_Log_NoTrackFound();
+    return nil;
+  end;
+
+  SS_LeadingPlots_Current().sound = {
+    category = SS_AtmosphereControll_TMPData.category,
+    group = SS_AtmosphereControll_TMPData.group,
+    track = SS_AtmosphereControll_TMPData.track,
+  };
+
+  SS_DMtP_StartMusic();
+end;
+
+SS_AtmosphereControll_StopMusic = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_AtmosphereControll_TMPData)) then return nil; end;
+  SS_DMtP_StopMusic();
 end;

@@ -2,12 +2,12 @@
   <Frame name="SS_AtmosphereControll_Menu" parent = "UIParent" movable="true" inherits = "SS_CloseableFrameWithBG_Template" hidden="true" frameStrata="HIGH" frameLevel="5">
     <Scripts>
       <OnLoad>
-        self:SetSize(450, 240);
+        self:SetSize(450, 260);
         self.title:SetText('Атмосфера');
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\player-background";
         self:RegisterForDrag("LeftButton");
         self.closeBtn:SetScript("OnClick", function()
-          SS_ModifierControll_Hide()
+          SS_AtmosphereControll_Hide()
         end);
       </OnLoad>
       <OnDragStart>self:StartMoving();</OnDragStart>
@@ -18,11 +18,45 @@
     </Anchors>
     <Layers>
       <Layer>
-        <FontString font="Fonts\FRIZQT__.TTF" name = "$parent_Empty" text="Фоновая музыка">
+        <FontString font="Fonts\FRIZQT__.TTF" name = "$parent_Title" text="Фоновая музыка">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="12"/>
           <Anchors>
-            <Anchor point="TOPLEFT" x="20" y="-40" />
+            <Anchor point="TOPLEFT" x="20" y="-45" />
+          </Anchors>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP" maxLines="2" wordwrap="true" name = "$parent_Selected" text="Выбрано: ничего">
+          <Color r="1" g="1" b="1" a="1"/>
+          <Size x = "120" y = "40" />
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="220" y="-45" />
+            <Anchor point="TOPRIGHT" x = "-16" />
+          </Anchors>
+        </FontString>
+      </Layer>
+      <Layer>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Взаимодействие с:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="220" y="-85" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Выбранная цель">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="247" y="-110" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Вся группа">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="11"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="247" y="-135" />
           </Anchors>
         </FontString>
       </Layer>
@@ -30,7 +64,7 @@
     <Frames>
       <ScrollFrame name="$parent_Scroll" inherits="UIPanelScrollFrameTemplate">
         <Anchors>
-          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="20" y="-60"/>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="20" y="-70"/>
           <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent" x="20" y="20"/>
           <Anchor point="RIGHT" relativePoint="TOPLEFT" relativeTo="$parent" x="180"/>
         </Anchors>
@@ -44,6 +78,70 @@
           </Frame>
         </ScrollChild>
       </ScrollFrame>
+      <Button name="$parent_Next_Category" inherits="OptionsButtonTemplate" text="->">
+        <Scripts>
+          <OnClick>
+            SS_AtmosphereControll_NextList();
+          </OnClick>
+        </Scripts>
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="180" y="-46"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+
+      <CheckButton name = "$parent_Check_Target_Player" inherits="OptionsCheckButtonTemplate" checked="true">
+        <Scripts>
+          <OnClick>SS_AtmosphereControll_SelectTarget('player')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="220" y="-103"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <CheckButton name = "$parent_Check_Target_Group" inherits="OptionsCheckButtonTemplate" checked="false">
+        <Scripts>
+          <OnClick>SS_AtmosphereControll_SelectTarget('group')</OnClick>
+        </Scripts>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="220" y="-128"></AbsDimension>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <Button name="$parent_Play" inherits="OptionsButtonTemplate" text="Играть">
+        <Scripts>
+          <OnClick>
+            SS_AtmosphereControll_ActivateMusic();
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="220" y="-160"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button name="$parent_Stop" inherits="OptionsButtonTemplate" text="Стоп">
+        <Scripts>
+          <OnClick>
+            SS_AtmosphereControll_StopMusic();
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset x="320" y="-160"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
     </Frames>
   </Frame>
 </Ui>
