@@ -876,6 +876,10 @@ SS_MUSIC_LIST = {
       order = 14,
       track = 'sound\\music\\zonemusic\\sunwell\\sw_plateausunwellarrivalwalkuni01.mp3',
     },
+    ['Актуал 4'] = {
+      order = 15,
+      track = 'sound\\music\\zonemusic\\blacktemple\\bt_arrivalwalkhero01.mp3',
+    },
   },
   ['Морские'] = {
     ['БФА 1'] = {
@@ -1438,7 +1442,7 @@ SS_MUSIC_LIST = {
   ['Тест'] = {
     ['Актуал 2'] = {
       order = 1,
-      track = 'sound\\music\\zonemusic\\tempestkeep\\tk_tempestkeep_btl11.mp3',
+      track = 'sound\\music\\zonemusic\\blacktemple\\bt_arrivalwalkhero01.mp3',
     },
   },
 };
@@ -1511,7 +1515,7 @@ SS_AtmosphereControll_Show = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
   SS_AtmosphereControll_Menu:Show();
-  SS_AtmosphereControll_DrawMusicList();
+  SS_AtmosphereControll_DrawMusicList(SS_MUSIC_LIST);
   SS_Event_Controll_AthmosphereControll_Button:SetText("- Атмосфера");
 end;
 
@@ -1522,13 +1526,57 @@ SS_AtmosphereControll_Hide = function()
   SS_Event_Controll_AthmosphereControll_Button:SetText("+ Атмосфера");
 end;
 
-SS_AtmosphereControll_DrawMusicList = function()
-  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+SS_AtmosphereControll_ShowListElementDropdown = function(elementName, LIST)
+  local counter = 1;
+  SS_Shared_ForEach(LIST)(function(_, otherListName)
+    if (SS_AtmosphereControll_Menu_Scroll_Content[otherListName].list:IsVisible()) then
+      SS_AtmosphereControll_HideListElementDropdown(otherListName, LIST)
+    end;
+    counter = counter + 1;
+  end);
 
-  local currentIndex = 0;
-  SS_Shared_ForEach(SS_MUSIC_LIST)(function(list, listName)
+  local currentGroupFrame = SS_AtmosphereControll_Menu_Scroll_Content[elementName];
+
+  SS_AtmosphereControll_Menu_Scroll_Content[elementName].button:SetText('- '..elementName);
+  SS_AtmosphereControll_Menu_Scroll_Content[elementName].list:Show();
+
+  counter = 1;
+  SS_Shared_ForEach(LIST)(function(_, otherListName)
+    if (counter > currentGroupFrame.index) then
+      local point, relativeTo, relativePoint, offsetX, offsetY = SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:GetPoint()
+      SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY - (25 * currentGroupFrame.trackCount) - 5)
+    end;
+    counter = counter + 1;
+  end);
+end;
+
+SS_AtmosphereControll_HideListElementDropdown = function(elementName, LIST)
+  local currentGroupFrame = SS_AtmosphereControll_Menu_Scroll_Content[elementName];
+
+  SS_AtmosphereControll_Menu_Scroll_Content[elementName].button:SetText('+ '..elementName);
+  SS_AtmosphereControll_Menu_Scroll_Content[elementName].list:Hide();
+
+  local innerCounter = 1;
+  SS_Shared_ForEach(LIST)(function(_, otherListName)
+    if (innerCounter > currentGroupFrame.index) then
+      local point, relativeTo, relativePoint, offsetX, offsetY = SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:GetPoint()
+      SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY + (25 * currentGroupFrame.trackCount) + 5)
+    end;
+    innerCounter = innerCounter + 1;
+  end);
+end;
+
+SS_AtmosphereControll_DrawMusicList = function(LIST)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  
+  SS_Shared_ForEach({ SS_AtmosphereControll_Menu_Scroll_Content:GetChildren() })(function(child)
+    child:Hide();
+  end);
+
+  local currentIndex = 1;
+  SS_Shared_ForEach(LIST)(function(list, listName)
     local currentGroupFrame = CreateFrame("Frame", nil, SS_AtmosphereControll_Menu_Scroll_Content);
-          currentGroupFrame:SetPoint("TOPLEFT", SS_AtmosphereControll_Menu_Scroll_Content, "TOPLEFT", 0, -25 * currentIndex);
+          currentGroupFrame:SetPoint("TOPLEFT", SS_AtmosphereControll_Menu_Scroll_Content, "TOPLEFT", 0, -25 * (currentIndex - 1));
           currentGroupFrame:SetSize(160, 1);
 
     local currentGroupListFrame = CreateFrame("Frame", nil, currentGroupFrame);
@@ -1568,33 +1616,9 @@ SS_AtmosphereControll_DrawMusicList = function()
 
     button:SetScript("OnClick", function()
       if (SS_AtmosphereControll_Menu_Scroll_Content[listName].list:IsVisible()) then
-        SS_AtmosphereControll_Menu_Scroll_Content[listName].button:SetText('+ '..listName);
-        SS_AtmosphereControll_Menu_Scroll_Content[listName].list:Hide();
-
-        local innerCounter = 0;
-        SS_Shared_ForEach(SS_MUSIC_LIST)(function(_, otherListName)
-          if (not(otherListName == listName) and innerCounter > currentGroupFrame.index) then
-            local point, relativeTo, relativePoint, offsetX, offsetY = SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:GetPoint()
-            SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY + (25 * currentGroupFrame.trackCount) + 5)
-          end;
-          innerCounter = innerCounter + 1;
-        end);
+        SS_AtmosphereControll_HideListElementDropdown(listName, LIST);
       else
-        local innerCounter = 0;
-        SS_Shared_ForEach(SS_MUSIC_LIST)(function(_, otherListName)
-          SS_AtmosphereControll_Menu_Scroll_Content[otherListName].button:SetText('+ '..otherListName);
-          SS_AtmosphereControll_Menu_Scroll_Content[otherListName].list:Hide();
-
-          if (not(otherListName == listName) and innerCounter > currentGroupFrame.index) then
-            local point, relativeTo, relativePoint, offsetX, offsetY = SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:GetPoint()
-            SS_AtmosphereControll_Menu_Scroll_Content[otherListName]:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY - (25 * currentGroupFrame.trackCount) - 5)
-          end;
-
-          innerCounter = innerCounter + 1;
-        end);
-
-        SS_AtmosphereControll_Menu_Scroll_Content[listName].button:SetText('- '..listName);
-        SS_AtmosphereControll_Menu_Scroll_Content[listName].list:Show();
+        SS_AtmosphereControll_ShowListElementDropdown(listName, LIST);       
       end;
     end);
 
