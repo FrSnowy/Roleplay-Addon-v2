@@ -1480,6 +1480,305 @@ SS_AMBIENT_LIST = {
       track = 'sound\\ambience\\weather\\snowmedium.ogg',
     },
   },
+  ['Вода'] = {
+    ['Слизь'] = {
+      order = 1,
+      track = 'sound\\ambience\\water\\greenslimeloop1.ogg',
+    },
+    ['Лава'] = {
+      order = 2,
+      track = 'sound\\ambience\\water\\lavastreamloop.ogg',
+    },
+    ['Океан'] = {
+      order = 3,
+      track = 'sound\\ambience\\water\\oceana.ogg',
+    },
+    ['Река'] = {
+      order = 4,
+      track = 'sound\\ambience\\water\\river_lakestilla.ogg',
+    },
+    ['Быстрая река'] = {
+      order = 5,
+      track = 'sound\\ambience\\water\\riverfasta.ogg',
+    },
+    ['Медленная река'] = {
+      order = 6,
+      track = 'sound\\ambience\\water\\riverslowa.ogg',
+    },
+    ['Пляж днем'] = {
+      order = 7,
+      track = 'sound\\ambience\\zoneambience\\beachday.ogg',
+    },
+    ['Пляж ночью'] = {
+      order = 7,
+      track = 'sound\\ambience\\zoneambience\\beachnight.ogg',
+    },
+  },
+  ['Ветра'] = {
+    ['Ветер 1'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\ahnqirajinterirorfireflyroom.ogg',
+    },
+    ['Ветер 2'] = {
+      order = 2,
+      track = 'sound\\ambience\\wmoambience\\ahnqirajruinsbareroomtone.ogg',
+    },
+    ['Ветер 3'] = {
+      order = 3,
+      track = 'sound\\ambience\\wmoambience\\cavernsoftimebasic.ogg',
+    },
+    ['Ветер 4'] = {
+      order = 4,
+      track = 'sound\\ambience\\wmoambience\\icecrownraid_theforgeofsouls.ogg',
+    },
+    ['Ветер 5'] = {
+      order = 5,
+      track = 'sound\\ambience\\wmoambience\\cavesmallcold01.ogg',
+    },
+    ['Ветер 6'] = {
+      order = 6,
+      track = 'sound\\ambience\\wmoambience\\cavesmallwarm01.ogg',
+    },
+    ['Ветер 7'] = {
+      order = 7,
+      track = 'sound\\ambience\\wmoambience\\largeroomtone.ogg',
+    },
+    ['Ветер, молнии 1'] = {
+      order = 8,
+      track = 'sound\\ambience\\wmoambience\\blacktempleillidantower1.ogg',
+    },
+    ['Ветер, молнии 2'] = {
+      order = 9,
+      track = 'sound\\ambience\\zoneambience\\amb_citygilneas_day01.ogg',
+    },
+    ['Ветер, молнии 3'] = {
+      order = 10,
+      track = 'sound\\ambience\\zoneambience\\darkportal.ogg',
+    },
+    ['Ветер за стенами 1'] = {
+      order = 10,
+      track = 'sound\\ambience\\wmoambience\\draktharonkeep.ogg',
+    },
+  },
+  ['Капли'] = {
+    ['Капли 1'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\azjulnerubuppercity.ogg',
+    },
+    ['Капли 2'] = {
+      order = 2,
+      track = 'sound\\ambience\\wmoambience\\blacktemple_aqueduct.ogg',
+    },
+    ['Капли 3'] = {
+      order = 3,
+      track = 'sound\\ambience\\wmoambience\\blacktemplechud.ogg',
+    },
+    ['Капли 4'] = {
+      order = 4,
+      track = 'sound\\ambience\\wmoambience\\coilfangreservoir.ogg',
+    },
+    ['Капли 5'] = {
+      order = 5,
+      track = 'sound\\ambience\\wmoambience\\dalaransewers.ogg',
+    },
+    ['Капли 6'] = {
+      order = 6,
+      track = 'sound\\ambience\\wmoambience\\diremaulchamber.ogg',
+    },
+  },
+  ['Механизмы'] = {
+    ['Механизмы 1'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\coilfangsteamvault.ogg',
+    },
+    ['Механизмы 2'] = {
+      order = 2,
+      track = 'sound\\ambience\\wmoambience\\gnomeregan.ogg',
+    },
+    ['Механизмы 3'] = {
+      order = 3,
+      track = 'sound\\ambience\\wmoambience\\subwaystation.ogg',
+    },
+    ['Механизмы 4'] = {
+      order = 4,
+      track = 'sound\\vehicles\\alliancegunship\\alliancegunship.ogg',
+    },
+  },
+  ['Шорохи и голоса'] = {
+    ['Голоса, шорохи 1'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\blackrockjail.ogg',
+    },
+    ['Голоса, шорохи 2'] = {
+      order = 2,
+      track = 'sound\\ambience\\wmoambience\\dungeoncatheadral.ogg',
+    },
+    ['Голоса, шорохи 3'] = {
+      order = 3,
+      track = 'sound\\ambience\\wmoambience\\dungeoncrypt.ogg',
+    },
+    ['Голоса, шорохи 4'] = {
+      order = 4,
+      track = 'sound\\ambience\\wmoambience\\karazhan_generalambience.ogg',
+    },
+    ['Голоса, шорохи 5'] = {
+      order = 5,
+      track = 'sound\\ambience\\wmoambience\\oldstrathholme1.ogg',
+    },
+    ['Голоса, шорохи 6'] = {
+      order = 6,
+      track = 'sound\\ambience\\wmoambience\\stormwindjail.ogg',
+    },
+    ['Голоса, шорохи 7'] = {
+      order = 7,
+      track = 'sound\\ambience\\wmoambience\\undercity.ogg',
+    },
+    ['Кого-то едят 1'] = {
+      order = 8,
+      track = 'sound\\ambience\\wmoambience\\mini-hive.ogg',
+    },
+    ['Стуки 1'] = {
+      order = 9,
+      track = 'sound\\ambience\\wmoambience\\ironforge.ogg',
+    },
+  },
+  ['Бытовые'] = {
+    ['Кузня 1'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\blacksmith.ogg',
+    },
+    ['Кузня 2'] = {
+      order = 2,
+      track = 'sound\\ambience\\wmoambience\\ironforgethegreatforge.ogg',
+    },
+    ['Улица 1'] = {
+      order = 3,
+      track = 'sound\\ambience\\wmoambience\\dwarvendistrict.ogg',
+    },
+    ['Улица 2'] = {
+      order = 4,
+      track = 'sound\\ambience\\wmoambience\\stormwindday.ogg',
+    },
+    ['Улица 3'] = {
+      order = 5,
+      track = 'sound\\ambience\\wmoambience\\stormwindnight.ogg',
+    },
+    ['Таверна'] = {
+      order = 6,
+      track = 'sound\\ambience\\wmoambience\\tavern.ogg',
+    },
+    ['Колокол (плох.)'] = {
+      order = 7,
+      track = 'sound\\ambience\\wmoambience\\lordaeronbelldoodad.ogg',
+    },
+    ['Толпа далеко'] = {
+      order = 8,
+      track = 'sound\\ambience\\wmoambience\\undercitycrowd.ogg',
+    },
+    ['Корабль (снаружи)'] = {
+      order = 9,
+      track = 'sound\\ambience\\wmoambience\\shipexterior.ogg',
+    },
+    ['Корабль (внутри)'] = {
+      order = 10,
+      track = 'sound\\ambience\\wmoambience\\shipinterior.ogg',
+    },
+    ['Шахта 1'] = {
+      order = 12,
+      track = 'sound\\ambience\\zoneambience\\deadmines.ogg',
+    },
+  },
+  ['Огонь'] = {
+    ['Костер'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\cavevolcanic.ogg',
+    },
+    ['Костер с эхом'] = {
+      order = 2,
+      track = 'sound\\ambience\\wmoambience\\oldstrathholme2.ogg',
+    },
+    ['Крики вдалеке'] = {
+      order = 3,
+      track = 'sound\\ambience\\wmoambience\\stratholme.ogg',
+    },
+  },
+  ['Природные'] = {
+    ['Лес 1'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\darnassusday.ogg',
+    },
+    ['Лес 2'] = {
+      order = 2,
+      track = 'sound\\ambience\\wmoambience\\darnassusnight.ogg',
+    },
+    ['Лес 3'] = {
+      order = 3,
+      track = 'sound\\ambience\\wmoambience\\silvermoongeneralday1.ogg',
+    },
+    ['Лес 4'] = {
+      order = 4,
+      track = 'sound\\ambience\\zoneambience\\amanipassday.ogg',
+    },
+    ['Лес 5'] = {
+      order = 5,
+      track = 'sound\\ambience\\zoneambience\\eversongambienceday.ogg',
+    },
+    ['Лес, ночь 1'] = {
+      order = 6,
+      track = 'sound\\ambience\\wmoambience\\orgrimmarnight.ogg',
+    },
+    ['Лес, ночь 2'] = {
+      order = 7,
+      track = 'sound\\ambience\\wmoambience\\silvermoongeneralnight1.ogg',
+    },
+    ['Лес, ночь 3'] = {
+      order = 8,
+      track = 'sound\\ambience\\zoneambience\\amanipassnight.ogg',
+    },
+    ['Лес, ночь 4'] = {
+      order = 9,
+      track = 'sound\\ambience\\zoneambience\\blackmorass.ogg',
+    },
+    ['Лес, ночь 5'] = {
+      order = 10,
+      track = 'sound\\ambience\\zoneambience\\eversongambiencenight.ogg',
+    },
+    ['Пустошь 1'] = {
+      order = 11,
+      track = 'sound\\ambience\\wmoambience\\orgrimmarday.ogg',
+    },
+    ['Пустошь 2'] = {
+      order = 12,
+      track = 'sound\\ambience\\zoneambience\\boreantundrageneralday.ogg',
+    },
+    ['Пустошь 3'] = {
+      order = 13,
+      track = 'sound\\ambience\\zoneambience\\canyondesertday.ogg',
+    },
+    ['Пустошь 4'] = {
+      order = 14,
+      track = 'sound\\ambience\\zoneambience\\westfallday.ogg',
+    },
+  },
+  ['Магические'] = {
+    ['Звон 1'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\dalaranprison.ogg',
+    },
+    ['Звон 2'] = {
+      order = 2,
+      track = 'sound\\ambience\\wmoambience\\exodarcity1.ogg',
+    },
+  },
+}
+
+SS_SINGLE_LIST = {
+  ['Тест'] = {
+    ['1'] = {
+      order = 1,
+      track = 'sound\\ambience\\wmoambience\\dalaranprison.ogg',
+    },
+  },
 }
 
 SS_LIST_OF_SOUNDS = {
@@ -1490,6 +1789,10 @@ SS_LIST_OF_SOUNDS = {
   ambient = {
     name = 'Фоновое окружение',
     list = SS_AMBIENT_LIST,
+  },
+  single = {
+    name = 'Одиночные звуки',
+    list = SS_SINGLE_LIST,
   },
 };
 
@@ -1510,6 +1813,7 @@ SS_AtmosphereControll_Show = function()
   SS_AtmosphereControll_Menu:Show();
   SS_AtmosphereControll_DrawMusicList(SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category]);
   SS_AtmosphereControll_SelectTrack(SS_AtmosphereControll_TMPData.track, SS_AtmosphereControll_TMPData.group);
+  SS_AtmosphereControll_SelectTarget(SS_AtmosphereControll_TMPData.target);
 
   if (SS_AtmosphereControll_TMPData.category and SS_AtmosphereControll_TMPData.group) then
     SS_AtmosphereControll_ShowListElementDropdown(SS_AtmosphereControll_TMPData.group, SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category].list)
@@ -1669,7 +1973,9 @@ SS_AtmosphereControll_NextList = function()
   if (SS_AtmosphereControll_TMPData.category == 'music') then
     SS_AtmosphereControll_TMPData.category = 'ambient';
   elseif (SS_AtmosphereControll_TMPData.category == 'ambient') then
-    SS_AtmosphereControll_TMPData.category = 'music';
+    SS_AtmosphereControll_TMPData.category = 'single';
+  elseif (SS_AtmosphereControll_TMPData.category == 'single') then
+    SS_AtmosphereControll_TMPData.category = 'ambient';
   end;
 
   
