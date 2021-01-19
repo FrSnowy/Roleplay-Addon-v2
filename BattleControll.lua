@@ -670,12 +670,17 @@ end;
 
 SS_BattleControll_StartMovementWatch = function()
   if (not(SS_BattleControll_AmIPlayer())) then return nil; end;
+  if (not(SS_Plots_Current().battle)) then return nil; end;
 
   local t = 0.5;
   SS_Plots_Current().battle.movementTimer = CreateFrame("Frame")
   SS_Plots_Current().battle.movementTimer:SetScript("OnUpdate", function(self, elapsed)
     t = t - elapsed
     if t <= 0 then
+      if (not(SS_Plots_Current().battle)) then
+        SS_BattleControll_StopMovementWatch();
+        return nil;
+      end;
       if (SS_Plots_Current().battle and SS_Plots_Current().battle.maxMovementPoints) then
         local x, y = GetPlayerMapPosition("player");
         

@@ -462,6 +462,7 @@ SS_Log_PlayerAlreadyInBattle = function(name)
 end;
 
 SS_Log_PlayerLeavesBattle = function(name)
+  if (not(SS_LeadingPlots_Current().battle)) then return nil; end;
   print(name..'|cffFFFF00 покинул бой.|r');
 end;
 

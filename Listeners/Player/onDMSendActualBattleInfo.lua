@@ -22,6 +22,5 @@ SS_Listeners_Player_OnRecieveActualBattleInfo = function(data, master)
     SS_Plots_Current().battle.phase = phase;
   end;
 
-
-  SS_BattleControll_RoundStart(battleType, phase, true);
+  SS_BattleControll_RoundStart(SS_Plots_Current().battle.battleType, SS_Plots_Current().battle.phase, true);
 end;

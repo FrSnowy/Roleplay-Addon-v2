@@ -1603,6 +1603,10 @@ SS_AMBIENT_LIST = {
       order = 4,
       track = 'sound\\vehicles\\alliancegunship\\alliancegunship.ogg',
     },
+    ['Механизмы 5'] = {
+      order = 5,
+      track = 'sound\\doodad\\doodadcompression\\zeppelinengineloop.ogg',
+    },
   },
   ['Шорохи и голоса'] = {
     ['Голоса, шорохи 1'] = {
@@ -1700,6 +1704,10 @@ SS_AMBIENT_LIST = {
     ['Крики вдалеке'] = {
       order = 3,
       track = 'sound\\ambience\\wmoambience\\stratholme.ogg',
+    },
+    ['Пожар'] = {
+      order = 4,
+      track = 'sound\\doodad\\undeadfirelarge.ogg'
     },
   },
   ['Природные'] = {
@@ -1848,6 +1856,160 @@ SS_SINGLE_LIST = {
       order = 6,
       track = 'sound\\event\\event_operation_gnomergan_explosion2.ogg',
     },
+    ['Взрыв 4'] = {
+      order = 7,
+      track = 'sound\\doodad\\deadminedoor01destroy.ogg',
+    }
+  },
+  ['Скрипы'] = {
+    ['Дерево 1'] = {
+      order = 1,
+      track = 'sound\\doodad\\thunderbluffelevatorstart.ogg',
+    },
+    ['Дерево 2'] = {
+      order = 2,
+      track = 'sound\\doodad\\thunderbluffelevatorstop.ogg',
+    },
+  },
+  ['Крики'] = {
+    ['Мужской 1'] = {
+      order = 1,
+      track = 'sound\\events\\ebonhold_manscream1_01.ogg',
+    },
+    ['Мужской 2'] = {
+      order = 2,
+      track = 'sound\\events\\ebonhold_manscream2_01.ogg',
+    },
+    ['Мужской 3'] = {
+      order = 3,
+      track = 'sound\\events\\ebonhold_manscream3_01.ogg',
+    },
+    ['Мужской 4'] = {
+      order = 4,
+      track = 'sound\\events\\ebonhold_manscream4_01.ogg',
+    },
+    ['Женский 1'] = {
+      order = 5,
+      track = 'sound\\events\\ebonhold_womanscream1_01.ogg',
+    },
+    ['Женский 2'] = {
+      order = 6,
+      track = 'sound\\events\\ebonhold_womanscream2_01.ogg',
+    },
+    ['Женский 3'] = {
+      order = 7,
+      track = 'sound\\events\\ebonhold_womanscream3_01.ogg',
+    },
+    ['Женский 4'] = {
+      order = 8,
+      track = 'sound\\events\\ebonhold_womanscream4_01.ogg',
+    },
+    ['Толпа 1'] = {
+      order = 9,
+      track = 'sound\\events\\ebonhold_crowdscream1.ogg',
+    },
+    ['Толпа 2'] = {
+      order = 10,
+      track = 'sound\\events\\ebonhold_crowdscream2.ogg',
+    },
+    ['Толпа 3'] = {
+      order = 11,
+      track = 'sound\\events\\ebonhold_crowdscream3.ogg',
+    },
+    ['Толпа 4'] = {
+      order = 12,
+      track = 'sound\\events\\ebonhold_crowdscream4.ogg',
+    },
+  },
+  ['Радост. крики'] = {
+    ['Толпа 1'] = {
+      order = 1,
+      track = 'sound\\event sounds\\ogreeventcheer1.ogg',
+    },
+    ['Толпа 2'] = {
+      order = 2,
+      track = 'sound\\event sounds\\ogreeventcheer2.ogg',
+    },
+    ['Толпа 3'] = {
+      order = 3,
+      track = 'sound\\event sounds\\ogreeventcheer3.ogg',
+    },
+    ['Толпа 4'] = {
+      order = 4,
+      track = 'sound\\event sounds\\ogreeventcheer4.ogg',
+    },
+    ['Толпа 5'] = {
+      order = 5,
+      track = 'sound\\events\\arena_crowdcheer1_alliance.ogg',
+    },
+    ['Толпа 6'] = {
+      order = 6,
+      track = 'sound\\events\\arena_crowdcheer1_horde.ogg',
+    },
+    ['Толпа 7'] = {
+      order = 7,
+      track = 'sound\\events\\arena_crowdcheer2_alliance.ogg',
+    },
+    ['Толпа 8'] = {
+      order = 8,
+      track = 'sound\\events\\arena_crowdcheer2_horde.ogg',
+    },
+  },
+  ['Муз. инструменты'] = {
+    ['Горн 1'] = {
+      order = 1,
+      track = 'sound\\doodad\\dwarfhorn.ogg',
+    },
+    ['Горн 2'] = {
+      order = 2,
+      track = 'sound\\doodad\\horngoober.ogg',
+    },
+    ['Горн 3'] = {
+      order = 3,
+      track = 'sound\\doodad\\lighthousefoghorn.ogg',
+    },
+    ['Горн 4'] = {
+      order = 4,
+      track = 'sound\\doodad\\lighthousefoghorn.ogg',
+    },
+    ['Горн 5'] = {
+      order = 5,
+      track = 'sound\\events\\gruntling_horn_aa.ogg'
+    },
+    ['Горн 6'] = {
+      order = 6,
+      track = 'sound\\events\\squire_horn_aa.ogg'
+    },
+    ['Горн 7'] = {
+      order = 7,
+      track = 'sound\\events\\scourge_horn.ogg'
+    },
+    ['Флейта 1'] = {
+      order = 8,
+      track = 'sound\\spells\\fluterun.ogg'
+    },
+  },
+  ['Механизмы'] = {
+    ['Рычаг 1'] = {
+      order = 1,
+      track = 'sound\\elevator_transport\\org_arena_yellow_elevator_accelerate.ogg',
+    },
+    ['Рычаг 2'] = {
+      order = 2,
+      track = 'sound\\doodad\\icecrown_lever_open.ogg',
+    },
+    ['Газ и пар 1'] = {
+      order = 3,
+      track = 'sound\\events\\icecrown_plagueworks_pipes_gas.ogg'
+    },
+    ['Газ и пар 2'] = {
+      order = 4,
+      track = 'sound\\doodad\\deadminesteamwhistleon.ogg'
+    },
+    ['Газ и пар 3'] = {
+      order = 5,
+      track = 'sound\\doodad\\jewelcraft_grinder01steam.ogg'
+    },
   },
 }
 
@@ -1889,6 +2051,7 @@ SS_AtmosphereControll_Show = function()
     SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
       SS_AtmosphereControll_ActivateMusic(true);
     end);
+    SS_AtmosphereControll_Menu_Stop:Hide();
   else
     SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
       SS_AtmosphereControll_ActivateMusic(false);
