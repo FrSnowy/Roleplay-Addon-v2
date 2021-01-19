@@ -82,6 +82,7 @@ Listeners\Player\onDMChangeLevel.lua
 Listeners\Player\onRollResult.lua
 Listeners\Player\onDMStartMusic.lua
 Listeners\Player\onDMStopMusic.lua
+Listeners\Player\onDMPlaySound.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml

@@ -458,6 +458,38 @@ SS_DMtP_StartMusic = function(category, group, name, target)
   end;
 end;
 
+SS_DMtP_PlaySound = function(category, group, name, target)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+  if (not(category) or not(group) or not(name) or not(target)) then
+    category = SS_AtmosphereControll_TMPData.category;
+    group = SS_AtmosphereControll_TMPData.group;
+    track = SS_AtmosphereControll_TMPData.track;
+    target = SS_AtmosphereControll_TMPData.target;
+  end;
+
+  local action = 'dmPlaySound';
+  local data = SS_User.settings.currentPlot..'+'..category..'+'..group..'+'..track;
+
+  if (target == 'player') then
+    if (not(UnitName("target"))) then
+      SS_Log_NoTarget();
+      return nil;
+    end;
+
+    if (UnitName("target") == UnitName("player")) then
+      PlaySoundFile(SS_LIST_OF_SOUNDS[category].list[group][track].track, "MASTER");
+    else
+      SS_DMtP_Direct(action, data, UnitName('target'));
+    end;
+  end;
+
+  if (target == 'group') then
+    PlaySoundFile(SS_LIST_OF_SOUNDS[category].list[group][track].track, "MASTER");
+    SS_DMtP_Every(action, data, { UnitName('player') })(SS_User.settings.currentPlot);
+  end;
+end;
+
 SS_DMtP_StopMusic = function(target)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 

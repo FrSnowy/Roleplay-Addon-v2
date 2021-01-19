@@ -1773,10 +1773,80 @@ SS_AMBIENT_LIST = {
 }
 
 SS_SINGLE_LIST = {
-  ['Тест'] = {
-    ['1'] = {
+  ['Выстрелы'] = {
+    ['Ружье 1'] = {
       order = 1,
-      track = 'sound\\ambience\\wmoambience\\dalaranprison.ogg',
+      track = 'sound\\item\\weapons\\gunfire01.ogg',
+    },
+    ['Ружье 2'] = {
+      order = 2,
+      track = 'sound\\item\\weapons\\gun\\gunfire01.ogg',
+    },
+    ['Ружье 3'] = {
+      order = 3,
+      track = 'sound\\item\\weapons\\gun\\gunfire02.ogg',
+    },
+    ['Ружье 4'] = {
+      order = 4,
+      track = 'sound\\item\\weapons\\gun\\gunfire03.ogg',
+    },
+    ['Лук 1'] = {
+      order = 5,
+      track = 'sound\\item\\weapons\\bow\\bowrelease.ogg',
+    },
+    ['Лук 2'] = {
+      order = 6,
+      track = 'sound\\item\\weapons\\bow\\bowrelease02.ogg',
+    },
+    ['Лук 3'] = {
+      order = 7,
+      track = 'sound\\item\\weapons\\bow\\bowrelease03.ogg',
+    },
+    ['Пушка (короткая)'] = {
+      order = 8,
+      track = 'sound\\doodad\\cannon01_blasta.ogg',
+    },
+    ['Пушка (долгая)'] = {
+      order = 9,
+      track = 'sound\\doodad\\carni_cannon.ogg',
+    },
+    ['Катапульта 1'] = {
+      order = 10,
+      track = 'sound\\vehicles\\forsakencatapult\\forsakencatapultattackthrown1.ogg',
+    },
+    ['Катапульта 2'] = {
+      order = 11,
+      track = 'sound\\vehicles\\forsakencatapult\\forsakencatapultattackthrown2.ogg',
+    },
+    ['Катапульта 3'] = {
+      order = 12,
+      track = 'sound\\vehicles\\forsakencatapult\\forsakencatapultattackthrown3.ogg',
+    },
+  },
+  ['Взрывы'] = {
+    ['Свист и взрыв 1'] = {
+      order = 1,
+      track = 'sound\\doodad\\hellfire_raid_fx_explosion01.ogg',
+    },
+    ['Свист и взрыв 2'] = {
+      order = 2,
+      track = 'sound\\doodad\\hellfire_raid_fx_explosion04.ogg',
+    },
+    ['Свист и взрыв 3'] = {
+      order = 3,
+      track = 'sound\\doodad\\hellfire_raid_fx_explosion07.ogg',
+    },
+    ['Взрыв 1'] = {
+      order = 4,
+      track = 'sound\\spells\\dynamiteexplode.ogg',
+    },
+    ['Взрыв 2'] = {
+      order = 5,
+      track = 'sound\\spells\\halion_fiery_explosion.ogg',
+    },
+    ['Взрыв 3'] = {
+      order = 6,
+      track = 'sound\\event\\event_operation_gnomergan_explosion2.ogg',
     },
   },
 }
@@ -1814,6 +1884,16 @@ SS_AtmosphereControll_Show = function()
   SS_AtmosphereControll_DrawMusicList(SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category]);
   SS_AtmosphereControll_SelectTrack(SS_AtmosphereControll_TMPData.track, SS_AtmosphereControll_TMPData.group);
   SS_AtmosphereControll_SelectTarget(SS_AtmosphereControll_TMPData.target);
+
+  if (SS_AtmosphereControll_TMPData.category == 'single') then
+    SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
+      SS_AtmosphereControll_ActivateMusic(true);
+    end);
+  else
+    SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
+      SS_AtmosphereControll_ActivateMusic(false);
+    end);
+  end;
 
   if (SS_AtmosphereControll_TMPData.category and SS_AtmosphereControll_TMPData.group) then
     SS_AtmosphereControll_ShowListElementDropdown(SS_AtmosphereControll_TMPData.group, SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category].list)
@@ -1972,10 +2052,22 @@ SS_AtmosphereControll_NextList = function()
 
   if (SS_AtmosphereControll_TMPData.category == 'music') then
     SS_AtmosphereControll_TMPData.category = 'ambient';
+    SS_AtmosphereControll_Menu_Stop:Show();
+    SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
+      SS_AtmosphereControll_ActivateMusic(false);
+    end);
   elseif (SS_AtmosphereControll_TMPData.category == 'ambient') then
     SS_AtmosphereControll_TMPData.category = 'single';
+    SS_AtmosphereControll_Menu_Stop:Hide();
+    SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
+      SS_AtmosphereControll_ActivateMusic(true);
+    end);
   elseif (SS_AtmosphereControll_TMPData.category == 'single') then
-    SS_AtmosphereControll_TMPData.category = 'ambient';
+    SS_AtmosphereControll_TMPData.category = 'music';
+    SS_AtmosphereControll_Menu_Stop:Show();
+    SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
+      SS_AtmosphereControll_ActivateMusic(false);
+    end);
   end;
 
   
@@ -1986,7 +2078,7 @@ SS_AtmosphereControll_NextList = function()
   SS_AtmosphereControll_DrawMusicList(SS_LIST_OF_SOUNDS[SS_AtmosphereControll_TMPData.category]);
 end;
 
-SS_AtmosphereControll_ActivateMusic = function()
+SS_AtmosphereControll_ActivateMusic = function(isSoundFile)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(SS_AtmosphereControll_TMPData)) then return nil; end;
 
@@ -2016,7 +2108,11 @@ SS_AtmosphereControll_ActivateMusic = function()
     track = SS_AtmosphereControll_TMPData.track,
   };
 
-  SS_DMtP_StartMusic();
+  if (isSoundFile) then
+    SS_DMtP_PlaySound();
+  else
+    SS_DMtP_StartMusic();
+  end;
 end;
 
 SS_AtmosphereControll_StopMusic = function()

@@ -66,6 +66,7 @@ local actionFire = function(action, data, author, prefix)
     dmChangeExp = SS_Listeners_Player_OnDMChangeExp,
     npcRoll = SS_Listeners_Player_OnNPCRollResult,
     dmStartMusic = SS_Listeners_Player_OnDMStartMusic,
+    dmPlaySound = SS_Listeners_Player_OnDMPlaySound,
     dmStopMusic = SS_Listeners_Player_OnDMStopMusic,
   };
 
