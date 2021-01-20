@@ -19,7 +19,10 @@ SS_Listeners_DM_OnPlayerLeaveBattle = function(plotID, player)
     return;
   end;
 
-  if (SS_LeadingPlots_Current().battle.battleType == 'initiative' and SS_LeadingPlots_Current().battle.phase == player) then
-    SS_BattleControll_RoundNext();
+  if (SS_LeadingPlots_Current().battle.battleType == 'initiative') then
+    if (SS_LeadingPlots_Current().battle.phase == player) then
+      SS_BattleControll_RoundNext();
+    end;
+    SS_BattleControll_RemovePlayerFromInitiative(player);
   end;
 end;

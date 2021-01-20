@@ -768,6 +768,21 @@ SS_BattleControll_StopMovementWatch = function()
   SS_BattleControll_StartMovementWatch = prevMovementFn;
 end;
 
+SS_BattleControll_RemovePlayerFromInitiative = function(player)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().battle)) then return nil; end;
+
+  local playerIndex = -1;
+  local isPlayerInInitiative = SS_Shared_Includes(SS_LeadingPlots_Current().battle.playersByInitiative)(function(p, i)
+    if (p.name == player) then playerIndex = i; end;
+    return p.name == player;
+  end);
+
+  if (not(isPlayerInInitiative)) then return nil; end;
+
+  table.remove(SS_LeadingPlots_Current().battle.playersByInitiative, playerIndex);
+end;
+
 SS_BattleControll_DoubleMovement = function()
   if (not(SS_Plots_Current()) or not(SS_Plots_Current().battle)) then return nil; end;
   if (SS_Plots_Current().battle.fullRoundMovement) then return nil; end;

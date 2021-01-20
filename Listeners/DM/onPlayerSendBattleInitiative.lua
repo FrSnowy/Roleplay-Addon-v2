@@ -7,6 +7,18 @@ SS_Listeners_DM_OnPlayerSendBattleInitiative = function(data, player)
 
   initiative = SS_Shared_NumFromStr(initiative);
 
+  if (SS_LeadingPlots_Current().battle.playersByInitiative) then
+    SS_LeadingPlots_Current().battle.players[player] = {
+      isTurnEnded = false,
+    };
+  
+    table.insert(SS_LeadingPlots_Current().battle.playersByInitiative, { name = player, initiative = initiative });
+    SS_Log_PlayerJoinedToBattle(player);
+    SS_DMtP_PlayerJoinSuccess(player);
+    SS_DMtP_Direct('initiativeBattleJoinSuccess', SS_User.settings.currentPlot..'+'..SS_LeadingPlots_Current().battle.phase, player);
+    return nil;
+  end;
+
   if (not(SS_LeadingPlots_Current().battle.playersByInitiative)) then
     SS_LeadingPlots_Current().battle.playersByInitiative = {}; 
   end;
