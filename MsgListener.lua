@@ -13,7 +13,6 @@ local isFullMessage = function(text)
 end;
 
 local actionFire = function(action, data, author, prefix)
-  print(action);
   local actions = {
     playerToAll = SS_Listeners_DM_OnPlayerToAll,
     plotExists = SS_Listeners_DM_OnPlotExistsAnswer,
