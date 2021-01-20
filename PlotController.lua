@@ -16,6 +16,7 @@ SS_PlotController_MakeCurrent = function(plotIndex)
   if (plotIndex == nil) then SS_User.settings.currentPlot = nil; return; end;
   if (not(SS_Plots_Includes(plotIndex)) and not(SS_LeadingPlots_Includes(plotIndex))) then return false; end;
   SS_User.settings.currentPlot = plotIndex;
+  SS_PtDM_JoinToEvent(plotIndex, SS_Plots_Current().author);
 end;
 
 SS_PlotController_GetCountOf = function(plotType)

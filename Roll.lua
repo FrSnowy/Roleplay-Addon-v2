@@ -135,7 +135,7 @@ SS_Roll_AsNPC = function(name, diceCount, rollParams, expectationText)
   local maxResult = -1;
   local result = maxResult;
 
-  if (SS_Shared_IsNumber(expectationText)) then
+  if (expectationText and SS_Shared_IsNumber(expectationText)) then
     maxResult = SS_Shared_NumFromStr(expectationText);
     if (maxResult < rollParams.minimum + rollParams.statModifier) then
       maxResult = rollParams.minimum + rollParams.statModifier;
@@ -152,5 +152,5 @@ SS_Roll_AsNPC = function(name, diceCount, rollParams, expectationText)
     result = maxResult + rollParams.statModifier;
   end;
 
-  SS_DMtP_SendParamUpdate(name, result);
+  SS_DMtP_SendNPCRoll(name, result);
 end;

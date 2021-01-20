@@ -25,6 +25,9 @@
       <Button name="$parent_Stop_Button" inherits="OptionsButtonTemplate" text="Завершить событие">
         <Scripts>
           <OnClick>
+            SS_LeadingPlots_Current().isEventOngoing = false;
+            SS_LeadingPlots_Current().activePlayers = {};
+            SS_LeadingPlots_Current().lastDices = {};
             SS_DMtP_StopEvent();
           </OnClick>
         </Scripts>
@@ -140,7 +143,14 @@
           </Anchor> 
         </Anchors>
       </Button>
-      <Button name="$parent_Players_Button" inherits="OptionsButtonTemplate" text="+ Участники">
+      <Button name="$parent_MembersControll_Button" inherits="OptionsButtonTemplate" text="+ Участники">
+        <Scripts>
+          <OnClick>
+            if (SS_MembersControll_Menu:IsVisible()) then SS_MembersControll_Hide();
+            else SS_MembersControll_Show();
+            end;
+          </OnClick>
+        </Scripts>
         <Size x = "120" y = "32" />
         <Anchors>
           <Anchor point="TOPRIGHT">

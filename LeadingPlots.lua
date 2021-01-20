@@ -4,9 +4,11 @@ SS_LeadingPlots_Create = function(plotUniqueName, plotName, authorName)
   SS_User.leadingPlots[plotUniqueName] = {
     name = plotName,
     players = { authorName },
+    activePlayers = {},
     modifiers = {},
     npc = {},
     sound = {},
+    lastDices = {},
     settings = {
       isEventOngoing = false,
     }

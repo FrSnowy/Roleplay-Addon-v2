@@ -415,7 +415,7 @@ SS_DMtP_SendParamUpdate = function(updateValue)
   end;
 end;
 
-SS_DMtP_SendParamUpdate = function(name, result)
+SS_DMtP_SendNPCRoll = function(name, result)
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
   if (not(SS_Shared_IsNumber(result))) then

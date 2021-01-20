@@ -822,6 +822,11 @@ SS_BattleControll_KickFromBattle = function(player)
     return nil;
   end;
 
+  if (player == UnitName('player')) then
+    SS_Log_CantKickSelf();
+    return nil;
+  end;
+
   SS_DMtP_KickFromBattle(player);
 end;
 

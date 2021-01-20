@@ -589,7 +589,6 @@
       </CheckButton>
     </Frames>
   </Frame>
-  
   <Frame name = "SS_NPCElement_Template" virtual = "true">
     <Scripts>
       <OnShow>
@@ -652,6 +651,91 @@
             SS_NPCControll_DrawList();
             SS_NPCControll_Menu_Scroll_Content:Show();
           </OnClick>
+        </Scripts>
+        <Size x = "20" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="0" y="5"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+    </Frames>
+  </Frame>
+  <Frame name = "SS_MemberElement_Template" virtual = "true">
+    <Scripts>
+      <OnShow>
+        if (self.memberName == UnitName('player')) then
+          self.name:SetText(self.memberName..' (Вы)');
+          self.inspectBtn:Hide();
+          self.removeBtn:Hide();
+        else
+          local isActivePlayer = SS_Shared_Includes(SS_LeadingPlots_Current().activePlayers)(function(p)
+            return p == self.memberName
+          end);
+
+          if (isActivePlayer) then
+            self.name:SetText(self.memberName);
+          else
+            self.inspectBtn:Hide();
+            self.removeBtn:Hide();
+            self.name:SetText(self.memberName..' (не в событии)');
+          end;
+        end;
+      </OnShow>
+    </Scripts>
+    <Layers>
+      <Layer>
+        <FontString parentKey = "name" font="Fonts\FRIZQT__.TTF">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="0" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString parentKey = "results" font="Fonts\FRIZQT__.TTF" text="Последние броски: ничего">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="-25" />
+          </Anchors>
+          <Shadow>
+            <Offset x="-1" y="-1" />
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button parentKey="inspectBtn" inherits="OptionsButtonTemplate" text="Осмотреть">
+        <Scripts>
+          <OnClick>
+            SS_DMtP_DisplayInspectInfo(self:GetParent().memberName)
+          </OnClick>
+        </Scripts>
+        <Size x = "80" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="-25" y="5"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
+      <Button parentKey="removeBtn" inherits="OptionsButtonTemplate" text="x">
+        <Scripts>
+          <OnClick>
+            
+          </OnClick>
+          <OnEnter>
+            GameTooltip:SetOwner(this, "CENTER")
+            GameTooltip:AddLine("Исключить из события")
+            GameTooltip:Show()
+          </OnEnter>
+          <OnLeave>
+            GameTooltip:Hide()
+          </OnLeave>
         </Scripts>
         <Size x = "20" y = "20" />
         <Anchors>

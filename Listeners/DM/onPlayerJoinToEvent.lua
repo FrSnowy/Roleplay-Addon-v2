@@ -1,10 +1,15 @@
 SS_Listeners_DM_OnPlayerJoinToEvent = function(plotID, player)
   -- У: Мастер, от: игрок, когда: игрок принял приглашение на событие
   if (player == UnitName("player")) then return nil; end;
-  if (not(SS_Plots_Current())) then return nil; end;
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
   if (not(SS_User.settings.currentPlot == plotID)) then return nil; end;
 
   local plot = SS_Plots_Current();
+
+  table.insert(SS_LeadingPlots_Current().activePlayers, player);
+  if (SS_MembersControll_Menu:IsVisible()) then
+    SS_MembersControll_DrawList();
+  end;
 
   SS_Log_PlayerJoinedToEvent(player, plot.name);
   if (not(UnitInParty(player))) then

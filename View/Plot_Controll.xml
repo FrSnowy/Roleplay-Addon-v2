@@ -188,8 +188,10 @@
             </Anchors>
             <Scripts>
               <OnClick>
-                SS_DMtP_StartEvent(SS_User.settings.currentPlot);
                 SS_LeadingPlots_Current().isEventOngoing = true;
+                SS_LeadingPlots_Current().activePlayers = { UnitName('player') };
+                SS_LeadingPlots_Current().lastDices = {};
+                SS_DMtP_StartEvent(SS_User.settings.currentPlot);
               </OnClick>
             </Scripts>
           </Button>
