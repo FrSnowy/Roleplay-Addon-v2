@@ -183,6 +183,10 @@ SS_PlotController_OnActivate = function()
   SS_PlayerFrame:Show();
   SS_Params_DrawHealth();
 
+  if (not(SS_Plots_Current().author == UnitName('player'))) then
+    SS_PtDM_PlotActivated(SS_Plots_Current().author);
+  end;
+
   if (SS_LeadingPlots_Current()) then
     if (SS_LeadingPlots_Current().isEventOngoing) then
       

@@ -135,32 +135,44 @@ SS_Log_PlotInviteAcceptedBy = function(player, plot)
   if (UnitName("player") == player) then
     print('|cffFFFF00Вы согласились на участие в сюжете |r"'..plot..'"');
   else
-    print('|cffFFFF00'..player..' согласился на участие в сюжете |r"'..plot..'"');
+    print(player..'|cffFFFF00 согласился на участие в сюжете |r"'..plot..'"');
   end;
 end;
 
 SS_Log_PlotRemovedBy = function(player, plot)
-  print('|cffFFFF00'..player..' удалил сюжет |r"'..plot..'"|cffFFFF00 из сохрененных|r');
+  print(player..'|cffFFFF00 удалил сюжет |r"'..plot..'"|cffFFFF00 из сохрененных|r');
 end;
 
 SS_Log_PlotDeactivatedBy = function(player, plot)
-  print('|cffFFFF00'..player..' покинул событие сюжета |r"'..plot..'"|r');
+  print(player..'|cffFFFF00 покинул событие сюжета |r"'..plot..'|cffFFFF00"|r');
 end;
 
 SS_Log_PlotRemovedByDM = function(player, plot)
-  print('|cffFFFF00Ведущий '..player..' удалил сюжет |r"'..plot..'"');
+  print('|cffFFFF00Ведущий |r'..player..'|cffFFFF00 удалил сюжет |r"'..plot..'"');
 end;
 
 SS_Log_KickedByDM = function(player, plot)
-  print('|cffFFFF00Ведущий '..player..' исключил вас из сюжета |r"'..plot..'"');
+  print('|cffFFFF00Ведущий |r'..player..'|cffFFFF00 исключил вас из сюжета |r"'..plot..'"');
+end;
+
+SS_Log_KickedFromEventByDM = function(player)
+  print('|cffFFFF00Ведущий |r'..player..'|cffFFFF00 исключил вас из текущего события.|r');
 end;
 
 SS_Log_PlayerKickedSuccessfully = function(player)
-  print('|cffFFFF00Игрок '..player..' успешно исключен.|r');
+  print('|cffFFFF00Игрок |r'..player..'|cffFFFF00 успешно исключен.|r');
+end;
+
+SS_Log_PlayerKickedFromEventSuccessfully = function(player)
+  print('|cffFFFF00Игрок |r'..player..'|cffFFFF00 успешно исключен с текущего события.|r');
 end;
 
 SS_Log_EventStarting = function(plot)
   print('|cffFFFF00Начинается событие сюжета "|r'..plot..'"|cffFFFF00. Приглашение выслано участникам.|r');
+end;
+
+SS_Log_EventStartingForOne = function(player)
+  print('|cffFFFF00Приглашение на участие в событии выслано игроку |r'..player);
 end;
 
 SS_Log_DeclineEventStart = function(plot)

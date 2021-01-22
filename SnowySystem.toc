@@ -58,6 +58,8 @@ Listeners\DM\onPlayerHealthChange.lua
 Listeners\DM\onPlayerBarrierChange.lua
 Listeners\DM\onPlayerExpChange.lua
 Listeners\DM\onPlayerLevelChange.lua
+Listeners\DM\onPlayerActivatePlot.lua
+Listeners\DM\onPlayerKickSuccess.lua
 Listeners\Player\onIsOnline.lua
 Listeners\Player\onIAmOnline.lua
 Listeners\Player\onInvite.lua
@@ -84,6 +86,7 @@ Listeners\Player\onRollResult.lua
 Listeners\Player\onDMStartMusic.lua
 Listeners\Player\onDMStopMusic.lua
 Listeners\Player\onDMPlaySound.lua
+Listeners\Player\onDMKickFromEvent.lua
 View\Controll_Menu.xml
 View\Dices_Menu.xml
 View\Stats_Menu.xml

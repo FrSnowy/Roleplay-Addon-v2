@@ -40,6 +40,8 @@ local actionFire = function(action, data, author, prefix)
     playerBarrierChange = SS_Listeners_DM_OnPlayerBarrierChange,
     playerLevelChange = SS_Listeners_DM_OnPlayerLevelChange,
     playerExpChange = SS_Listeners_DM_OnPlayerExpChange,
+    playerActivatePlot = SS_Listeners_DM_OnPlayerActivatePlot,
+    playerKickSuccess= SS_Listeners_DM_OnPlayerKickSuccess,
     isOnline = SS_Listeners_Player_OnIsOnline,
     iAmOnline = SS_Listeners_Player_OnIAmOnline,
     invite = SS_Listeners_Player_OnInvite,
@@ -68,6 +70,7 @@ local actionFire = function(action, data, author, prefix)
     dmStartMusic = SS_Listeners_Player_OnDMStartMusic,
     dmPlaySound = SS_Listeners_Player_OnDMPlaySound,
     dmStopMusic = SS_Listeners_Player_OnDMStopMusic,
+    dmKickFromEvent = SS_Listeners_Player_OnDMKickFromEvent,
   };
 
   if (not(actions[action])) then

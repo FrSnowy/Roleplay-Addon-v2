@@ -2,8 +2,18 @@ SS_MembersControll_Show = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
   SS_MembersControll_DrawList();
-  SS_MembersControll_Menu:Show();
   SS_Event_Controll_MembersControll_Button:SetText("- Участники");
+
+  local activePlayers = SS_LeadingPlots_Current().activePlayers;
+
+  SS_LeadingPlots_Current().activePlayers = { UnitName('player') };
+
+  SS_Shared_ForEach(activePlayers, { UnitName('player') })(function(player)
+    SS_Shared_IfOnline(player, function()
+      table.insert(SS_LeadingPlots_Current().activePlayers, player);
+      SS_MembersControll_DrawList();
+    end);
+  end);
 end;
 
 SS_MembersControll_Hide = function()

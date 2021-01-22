@@ -5,6 +5,23 @@ SS_Listeners_Player_OnRollResult = function(data, master)
 
   local name, skill, result, efficency, diceMin, diceMax, diceCount, modifier = strsplit('+', data);
   SS_Log_RollResultOfOther(name, skill, result, efficency, diceMin, diceMax, diceCount, modifier);
+
+  if (SS_LeadingPlots_Current()) then
+    local isActivePlayer = SS_Shared_Includes(SS_LeadingPlots_Current().activePlayers)(function(p)
+      return p == name;
+    end);
+
+    if (not(SS_LeadingPlots_Current().lastDices[name])) then
+      SS_LeadingPlots_Current().lastDices[name] = {};
+    end;
+
+    if (#SS_LeadingPlots_Current().lastDices[name] < 5) then
+      table.insert(SS_LeadingPlots_Current().lastDices[name], result);
+    else
+      table.remove(SS_LeadingPlots_Current().lastDices[name], 1);
+      table.insert(SS_LeadingPlots_Current().lastDices[name], result);
+    end;
+  end;
 end;
 
 SS_Listeners_Player_OnNPCRollResult = function(data, master)

@@ -82,6 +82,18 @@ SS_DMtP_StartEvent = function(plotID)
   SS_Draw_OnEventStarts();
 end;
 
+SS_DMtP_StartEventForOne = function(name, plotID)
+  if (not(plotID)) then
+    if (not(SS_User.settings.currentPlot)) then return; end;
+    plotID = SS_User.settings.currentPlot
+  end;
+
+  local plot = SS_User.leadingPlots[plotID];
+  if (not(plot)) then return; end;
+  SS_Log_EventStartingForOne(name);
+  SS_DMtP_Direct('dmStartEvent', plotID, name);
+end;
+
 SS_DMtP_DisplayTargetInfo = function(player)
   if (not(SS_User) or not(SS_LeadingPlots_Current())) then return nil; end;
 
@@ -517,4 +529,11 @@ SS_DMtP_StopMusic = function(target)
     StopMusic();
     SS_DMtP_Every(action, data, { UnitName('player') })(SS_User.settings.currentPlot);
   end;
+end;
+
+SS_DMtP_KickFromEvent = function(plotID, target)
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+  if (not(target)) then return nil; end;
+
+  SS_DMtP_Direct('dmKickFromEvent', plotID, target);
 end;

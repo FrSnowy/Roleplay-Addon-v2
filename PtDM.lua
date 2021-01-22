@@ -239,3 +239,17 @@ SS_PtDM_ExpChanged = function(updateValue, master)
 
   SS_PtDM_Direct('playerExpChange', SS_User.settings.currentPlot.."+"..updateValue, master);
 end;
+
+SS_PtDM_PlotActivated = function(master)
+  if (not(SS_Plots_Current())) then return nil; end;
+  if (master == UnitName("player")) then return nil; end;
+
+  SS_PtDM_Direct('playerActivatePlot', SS_User.settings.currentPlot, master);
+end;
+
+SS_PtDM_PlayerKickedSuccessfully = function(plotID, master)
+  if (not(plotID)) then return nil; end;
+  if (master == UnitName("player")) then return nil; end;
+
+  SS_PtDM_Direct('playerKickSuccess', plotID, master);
+end;

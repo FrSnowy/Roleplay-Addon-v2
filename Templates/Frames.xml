@@ -668,6 +668,7 @@
           self.name:SetText(self.memberName..' (Вы)');
           self.inspectBtn:Hide();
           self.removeBtn:Hide();
+          self.inviteBtn:Hide();
         else
           local isActivePlayer = SS_Shared_Includes(SS_LeadingPlots_Current().activePlayers)(function(p)
             return p == self.memberName
@@ -675,11 +676,24 @@
 
           if (isActivePlayer) then
             self.name:SetText(self.memberName);
+            self.inviteBtn:Hide();
           else
             self.inspectBtn:Hide();
             self.removeBtn:Hide();
+            self.inviteBtn:Show();
             self.name:SetText(self.memberName..' (не в событии)');
           end;
+        end;
+
+
+        if (not(SS_LeadingPlots_Current().lastDices[self.memberName]) or #SS_LeadingPlots_Current().lastDices[self.memberName] == 0) then
+          self.results:SetText('Последние броски: ничего');
+        else
+          local dicesAsStr = '';
+          SS_Shared_ForEach(SS_LeadingPlots_Current().lastDices[self.memberName])(function(result)
+            dicesAsStr = dicesAsStr..result..', ';
+          end);
+          self.results:SetText('Последние броски: '..dicesAsStr);          
         end;
       </OnShow>
     </Scripts>
@@ -723,10 +737,23 @@
           </Anchor> 
         </Anchors>
       </Button>
+      <Button parentKey="inviteBtn" inherits="OptionsButtonTemplate" text="Пригласить">
+        <Scripts>
+          <OnClick>
+            SS_DMtP_StartEventForOne(self:GetParent().memberName)
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="0" y="5"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
       <Button parentKey="removeBtn" inherits="OptionsButtonTemplate" text="x">
         <Scripts>
           <OnClick>
-            
+            SS_DMtP_KickFromEvent(SS_User.settings.currentPlot, self:GetParent().memberName);
           </OnClick>
           <OnEnter>
             GameTooltip:SetOwner(this, "CENTER")
