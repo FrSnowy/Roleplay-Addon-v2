@@ -33,37 +33,22 @@
           </Frame>
         </ScrollChild>
       </ScrollFrame>
-      <Button name="$parent_Create_Button" inherits="OptionsButtonTemplate" text="+ Создать">
+      <Button name="$parent_Invite_Button" inherits="OptionsButtonTemplate" text="Добавить в сюжет">
         <Scripts>
           <OnClick>
-            if (SS_NPCCreate_Menu:IsVisible()) then
-              SS_NPCCreate_Menu:Hide();
-              self:SetText("+ Создать");
+            if (not(UnitName('target'))) then
+              SS_Log_NoTarget();
+            elseif (UnitName('target') == UnitName('player')) then
+              SS_Log_PlotAlreadyExistsFor(UnitName('player'))
             else
-              SS_NPCCreate_Show();
-              self:SetText("- Создать");
+              SS_DMtP_InviteToPlot(UnitName('target'));
             end;
           </OnClick>
         </Scripts>
-        <Size x = "90" y = "26" />
+        <Size x = "130" y = "26" />
         <Anchors>
           <Anchor point="BOTTOMLEFT">
             <Offset x="20" y="20"/>
-          </Anchor> 
-        </Anchors>
-        <Scripts>
-        </Scripts>
-      </Button>
-      <Button name="$parent_Clear_Button" inherits="OptionsButtonTemplate" text="Очистить">
-        <Scripts>
-          <OnClick>
-            SS_NPCControll_Clear();
-          </OnClick>
-        </Scripts>
-        <Size x = "90" y = "26" />
-        <Anchors>
-          <Anchor point="BOTTOMRIGHT">
-            <Offset x="-20" y="20"/>
           </Anchor> 
         </Anchors>
         <Scripts>
