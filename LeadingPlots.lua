@@ -49,3 +49,28 @@ SS_LeadingPlots_AddPlayer = function(playerName)
     SS_PlotController_DrawPlayers();
   end;
 end;
+
+SS_LeadingPlots_HideAllWindows = function()
+  SS_DiceControll_Hide();
+  SS_ModifierControll_Hide();
+  SS_BattleControll_Hide();
+  SS_DamageControll_Hide();
+  SS_ParamsControll_Hide();
+  SS_NPCControll_Hide();
+  SS_AtmosphereControll_Hide();
+  SS_MembersControll_Hide();
+end;
+
+SS_LeadingPlots_ResetTemporalData = function()
+  if (SS_LeadingPlots_Current()) then
+    SS_LeadingPlots_Current().isEventOngoing = false;
+    SS_LeadingPlots_Current().activePlayers = {};
+    SS_LeadingPlots_Current().lastDices = {};
+  end;
+end;
+
+SS_LeadingPlots_StopEvent = function()
+  SS_LeadingPlots_HideAllWindows();
+  SS_LeadingPlots_ResetTemporalData();
+  SS_DMtP_StopEvent();
+end;

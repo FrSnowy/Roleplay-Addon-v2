@@ -685,7 +685,6 @@
           end;
         end;
 
-
         if (not(SS_LeadingPlots_Current().lastDices[self.memberName]) or #SS_LeadingPlots_Current().lastDices[self.memberName] == 0) then
           self.results:SetText('Последние броски: ничего');
         else

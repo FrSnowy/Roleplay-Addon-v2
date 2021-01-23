@@ -13,6 +13,7 @@ SS_Listeners_Player_OnDMStartEvent = function(plotID, master)
 
   SS_Modal_EventStart_Leader:SetText('Ведущий '..master);
   SS_Modal_EventStart_PlotName:SetText(plot.name);
+  PlaySound("LEVELUPSOUND", "SFX");
   SS_Modal_EventStart:Show();
   
   SS_Modal_EventStart_Decline_Button:SetScript('OnClick', function()
@@ -22,6 +23,11 @@ SS_Listeners_Player_OnDMStartEvent = function(plotID, master)
   end);
   
   SS_Modal_EventStart_Accept_Button:SetScript('OnClick', function()
+    SS_Plot_Controll:Hide();
+    SS_Event_Controll:Hide();
+    SS_LeadingPlots_HideAllWindows();
+    SS_LeadingPlots_ResetTemporalData();
+
     SS_PlotController_MakeCurrent(plotID);
     SS_PlotController_OnActivate();
     SS_Modal_EventStart:Hide();

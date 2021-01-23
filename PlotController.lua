@@ -184,7 +184,9 @@ SS_PlotController_OnActivate = function()
   SS_Params_DrawHealth();
 
   if (not(SS_Plots_Current().author == UnitName('player'))) then
-    SS_PtDM_PlotActivated(SS_Plots_Current().author);
+    SS_Shared_IfOnline(SS_Plots_Current().author, function()
+      SS_PtDM_PlotActivated(SS_Plots_Current().author);    
+    end);
   end;
 
   if (SS_LeadingPlots_Current()) then

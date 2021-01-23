@@ -25,10 +25,7 @@
       <Button name="$parent_Stop_Button" inherits="OptionsButtonTemplate" text="Завершить событие">
         <Scripts>
           <OnClick>
-            SS_LeadingPlots_Current().isEventOngoing = false;
-            SS_LeadingPlots_Current().activePlayers = {};
-            SS_LeadingPlots_Current().lastDices = {};
-            SS_DMtP_StopEvent();
+            SS_LeadingPlots_StopEvent()
           </OnClick>
         </Scripts>
         <Size x = "150" y = "32" />
