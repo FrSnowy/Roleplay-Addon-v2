@@ -6,7 +6,7 @@ SS_Listeners_DM_OnPlayerDeletePlot = function(plotID, player)
     return player == playerName;
   end);
   SS_PlotController_DrawPlayers();
-  SS_Log_PlotRemovedBy(player, plotName);
+  SS_Log_PlotRemovedBy(player, SS_Plots_Current().name);
 
   if (player == UnitName("target")) then
     SS_Draw_HideCurrentTargetVisual()

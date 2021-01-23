@@ -28,12 +28,5 @@ SS_Listeners_Player_OnDMStartEvent = function(plotID, master)
 
     SS_User.settings.acceptNextPartyInvite = true;
     SS_Log_AcceptEventStart(plot.name);
-    if (plotID == SS_User.settings.currentPlot) then
-      SS_Shared_IfOnline(plot.author, function()
-        SS_PtDM_JoinToEvent(plotID, plot.author);
-      end);
-  
-      return nil;
-    end;
   end);
 end;
