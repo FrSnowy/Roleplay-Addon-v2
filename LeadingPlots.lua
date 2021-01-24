@@ -70,6 +70,11 @@ SS_LeadingPlots_ResetTemporalData = function()
 end;
 
 SS_LeadingPlots_StopEvent = function()
+  if (SS_LeadingPlots_Current().battle) then
+    SS_Log_CantStopOnBattle();
+    return nil;
+  end;
+
   SS_LeadingPlots_HideAllWindows();
   SS_LeadingPlots_ResetTemporalData();
   SS_DMtP_StopEvent();

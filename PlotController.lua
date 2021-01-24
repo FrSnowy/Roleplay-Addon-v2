@@ -31,8 +31,8 @@ end;
 SS_PlotController_Remove = function(plotID)
   SS_PlotController_Select(nil);
   if (SS_User.settings.currentPlot == plotID) then
-    SS_PlotController_MakeCurrent(nil);
     SS_PlotController_OnDeactivate();
+    SS_PlotController_MakeCurrent(nil);
   end;
 
   SS_User.plots[plotID] = nil;
@@ -214,6 +214,16 @@ SS_PlotController_OnDeactivate = function()
       SS_PtDM_DeactivePlot(id, plot.author);
     end);
   end;
+
+  if (SS_LeadingPlots_Current()) then
+    SS_LeadingPlots_StopEvent();
+  end;
+
+  SS_Dices_Menu:Hide();
+  SS_Stats_Menu:Hide();
+  SS_Skills_Menu:Hide();
+  SS_Armor_Menu:Hide();
+  SS_Controll_Menu:Hide();
 
   SS_Player_Menu:SetSize(84, 84);
   SS_Player_Menu_DicesIcon:Hide();

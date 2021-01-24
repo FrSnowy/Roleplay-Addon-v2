@@ -74,9 +74,14 @@
         </Anchors>
         <Scripts>
           <OnClick>
+            if (SS_Plots_Current() and SS_Plots_Current().battle) then
+              SS_Log_CantRemovePlotOnBattle();
+              return nil;
+            end;
+    
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
-              SS_PlotController_MakeCurrent(nil);
               SS_PlotController_OnDeactivate();
+              SS_PlotController_MakeCurrent(nil);
             end;
             if (SS_Plots_Selected()) then
               if (not(SS_Plots_Selected().author == UnitName("player"))) then
@@ -104,9 +109,13 @@
         </Anchors>
         <Scripts>
           <OnClick>
+            if (SS_Plots_Current() and SS_Plots_Current().battle) then
+              SS_Log_CantLeaveOnBattle();
+              return nil;
+            end;
             if (SS_User.settings.currentPlot == SS_User.settings.selectedPlot) then
-              SS_PlotController_MakeCurrent(nil);
               SS_PlotController_OnDeactivate();
+              SS_PlotController_MakeCurrent(nil);
             else
               if (SS_Plots_Current() and not(SS_Plots_Current().author == UnitName('player'))) then
                 SS_Shared_IfOnline(SS_Plots_Current().author, function()

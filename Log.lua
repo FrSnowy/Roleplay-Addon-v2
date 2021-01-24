@@ -404,6 +404,18 @@ SS_Log_NoTrackFound = function()
   print('|cffFF0000Ошибка: не найден звуковой файл|r')
 end;
 
+SS_Log_CantStopOnBattle = function()
+  print('|cffFF0000Ошибка: нельзя завершить событие во время боя|r')
+end;
+
+SS_Log_CantLeaveOnBattle = function()
+  print('|cffFF0000Ошибка: нельзя деактивировать событие во время боя|r')
+end;
+
+SS_Log_CantRemovePlotOnBattle = function()
+  print('|cffFF0000Ошибка: нельзя удалить событие во время боя|r')
+end;
+
 SS_Log_PlayerGetModifier = function(name, value, stats, player)
   local outputString = player..'|cffFFFF00 получил модификатор |r"'..name..'" ';
   
