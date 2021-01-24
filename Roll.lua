@@ -128,7 +128,34 @@ SS_Roll = function(skillName, visibility)
   SS_Modifiers_Fire('stats')(SS_Skills_GetStatOf(skillName));
   SS_Modifiers_Fire('skills')(skillName);
 
+  SS_Roll_SaveResultToMembersTable(UnitName('player'), skillResult);
+
   return skillResult;
+end;
+
+SS_Roll_SaveResultToMembersTable = function(name, result)
+  if (not(SS_LeadingPlots_Current())) then return nil; end;
+
+  local isActivePlayer = SS_Shared_Includes(SS_LeadingPlots_Current().activePlayers)(function(p)
+    return p == name;
+  end);
+
+  if (not(isActivePlayer)) then return nil; end;
+
+  if (not(SS_LeadingPlots_Current().lastDices[name])) then
+    SS_LeadingPlots_Current().lastDices[name] = {};
+  end;
+
+  if (#SS_LeadingPlots_Current().lastDices[name] < 5) then
+    table.insert(SS_LeadingPlots_Current().lastDices[name], result);
+  else
+    table.remove(SS_LeadingPlots_Current().lastDices[name], 1);
+    table.insert(SS_LeadingPlots_Current().lastDices[name], result);
+  end;
+
+  if (SS_MembersControll_Menu:IsVisible()) then
+    SS_MembersControll_DrawList();
+  end;
 end;
 
 SS_Roll_AsNPC = function(name, diceCount, rollParams, expectationText)

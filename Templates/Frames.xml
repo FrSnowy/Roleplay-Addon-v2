@@ -692,6 +692,7 @@
           SS_Shared_ForEach(SS_LeadingPlots_Current().lastDices[self.memberName])(function(result)
             dicesAsStr = dicesAsStr..result..', ';
           end);
+          dicesAsStr = strsub(dicesAsStr, 1, #dicesAsStr - 2);
           self.results:SetText('Последние броски: '..dicesAsStr);          
         end;
       </OnShow>
