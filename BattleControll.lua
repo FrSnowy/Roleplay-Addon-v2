@@ -28,6 +28,8 @@ SS_BattleControll_Show = function()
 end;
 
 SS_BattleControll_Hide = function()
+  if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
   if (not(SS_LeadingPlots_Current().battle) or not(SS_LeadingPlots_Current().battle.started)) then
     SS_BattleControll:Hide();
     SS_BattleControll_Start:Hide();
