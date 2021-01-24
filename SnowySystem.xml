@@ -233,4 +233,92 @@
       </Button>
     </Frames>
   </Frame>
+  <Button name="SS_Minimap_Button" parent="Minimap" movable="true" enableMouse="true" frameStrata="LOW">
+		<Size>
+			<AbsDimension x="33" y="33" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset x="0" y="0" />
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag('LeftButton')
+				self:RegisterForClicks('LeftButtonUp', 'RightButtonUp')
+				self:SetScript('OnClick', function()
+          if (SS_Player_Menu:IsVisible()) then SS_Player_Menu:Hide();
+          else SS_Player_Menu:Show();
+          end;
+
+          if (SS_LeadingPlots_Current() and SS_Plot_Controll:IsVisible() and not(SS_Event_Controll:IsVisible())) then
+            SS_Plot_Controll:Hide();
+          elseif (SS_LeadingPlots_Current() and not(SS_Plot_Controll:IsVisible()) and not(SS_Event_Controll:IsVisible())) then
+            SS_Plot_Controll:Show();
+          end;
+				end)
+				--STIKMiniMapButtonPosition_LoadFromDefaults()
+			</OnLoad>
+			<OnDragStart>
+				SS_Minimap_Button_DraggingFrame:Show()
+			</OnDragStart>
+			<OnDragStop>
+				SS_Minimap_Button_DraggingFrame:Hide()
+			</OnDragStop>
+			<OnEnter>
+        GameTooltip:SetOwner(this, "TOPLEFT");
+				GameTooltip:ClearLines();
+				GameTooltip:AddLine("Система игры от Снежка - Игрок")
+				GameTooltip:AddLine("Нажмите для открытия меню")
+				GameTooltip:Show()
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="STIKMiniMapButton_Icon" file="interface\ICONS\ability_parry">
+					<Size>
+						<AbsDimension x="20" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-6" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Size>
+						<AbsDimension x="56" y="56" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parent_DraggingFrame" hidden="true">
+				<Scripts>
+					<OnUpdate>
+            local xpos,ypos = GetCursorPosition()
+            local xmin,ymin = Minimap:GetLeft(), Minimap:GetBottom()
+            xpos = xmin-xpos/UIParent:GetScale()+70 
+            ypos = ypos/UIParent:GetScale()-ymin-70
+
+            local locationAngle = math.deg(math.atan2(ypos,xpos))
+            local x = 52-(80*cos(locationAngle))
+            local y = ((80*sin(locationAngle))-52)
+            SS_Minimap_Button:SetPoint("TOPLEFT","Minimap","TOPLEFT",x,y)
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+	</Button>
 </Ui>
