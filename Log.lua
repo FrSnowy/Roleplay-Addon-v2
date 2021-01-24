@@ -416,6 +416,10 @@ SS_Log_CantRemovePlotOnBattle = function()
   print('|cffFF0000Ошибка: нельзя удалить событие во время боя|r')
 end;
 
+SS_Log_CantKickOnBattle = function()
+  print('|cffFF0000Ошибка: нельзя исключить игрока во время боя|r')
+end;
+
 SS_Log_PlayerGetModifier = function(name, value, stats, player)
   local outputString = player..'|cffFFFF00 получил модификатор |r"'..name..'" ';
   

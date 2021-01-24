@@ -753,6 +753,10 @@
       <Button parentKey="removeBtn" inherits="OptionsButtonTemplate" text="x">
         <Scripts>
           <OnClick>
+            if (SS_LeadingPlots_Current().battle) then
+              SS_Log_CantKickOnBattle();
+              return nil;
+            end;
             SS_DMtP_KickFromEvent(SS_User.settings.currentPlot, self:GetParent().memberName);
           </OnClick>
           <OnEnter>
