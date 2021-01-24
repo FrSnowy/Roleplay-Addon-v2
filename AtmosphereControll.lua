@@ -2011,6 +2011,219 @@ SS_SINGLE_LIST = {
       track = 'sound\\doodad\\jewelcraft_grinder01steam.ogg'
     },
   },
+};
+
+SS_CUSTOM_LIST = {
+  ['От 1 до 10'] = {
+    ['Свой трек 1'] = {
+      order = 1,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\1.mp3',
+    },
+    ['Свой трек 2'] = {
+      order = 2,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\2.mp3',
+    },
+    ['Свой трек 3'] = {
+      order = 3,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\3.mp3',
+    },
+    ['Свой трек 4'] = {
+      order = 4,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\4.mp3',
+    },
+    ['Свой трек 5'] = {
+      order = 5,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\5.mp3',
+    },
+    ['Свой трек 6'] = {
+      order = 6,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\6.mp3',
+    },
+    ['Свой трек 7'] = {
+      order = 7,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\7.mp3',
+    },
+    ['Свой трек 8'] = {
+      order = 8,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\8.mp3',
+    },
+    ['Свой трек 9'] = {
+      order = 9,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\9.mp3',
+    },
+    ['Свой трек 10'] = {
+      order = 10,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\10.mp3',
+    },
+  },
+  ['От 11 до 20'] = {
+    ['Свой трек 11'] = {
+      order = 1,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\11.mp3',
+    },
+    ['Свой трек 12'] = {
+      order = 2,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\12.mp3',
+    },
+    ['Свой трек 13'] = {
+      order = 3,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\13.mp3',
+    },
+    ['Свой трек 14'] = {
+      order = 4,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\14.mp3',
+    },
+    ['Свой трек 15'] = {
+      order = 5,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\15.mp3',
+    },
+    ['Свой трек 16'] = {
+      order = 6,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\16.mp3',
+    },
+    ['Свой трек 17'] = {
+      order = 7,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\17.mp3',
+    },
+    ['Свой трек 18'] = {
+      order = 8,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\18.mp3',
+    },
+    ['Свой трек 19'] = {
+      order = 9,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\19.mp3',
+    },
+    ['Свой трек 20'] = {
+      order = 10,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\20.mp3',
+    },
+  },
+  ['От 21 до 30'] = {
+    ['Свой трек 21'] = {
+      order = 1,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\21.mp3',
+    },
+    ['Свой трек 22'] = {
+      order = 2,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\22.mp3',
+    },
+    ['Свой трек 23'] = {
+      order = 3,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\23.mp3',
+    },
+    ['Свой трек 24'] = {
+      order = 4,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\24.mp3',
+    },
+    ['Свой трек 25'] = {
+      order = 5,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\25.mp3',
+    },
+    ['Свой трек 26'] = {
+      order = 6,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\26.mp3',
+    },
+    ['Свой трек 27'] = {
+      order = 7,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\27.mp3',
+    },
+    ['Свой трек 28'] = {
+      order = 8,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\28.mp3',
+    },
+    ['Свой трек 29'] = {
+      order = 9,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\29.mp3',
+    },
+    ['Свой трек 30'] = {
+      order = 10,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\30.mp3',
+    },
+  },
+  ['От 31 до 40'] = {
+    ['Свой трек 31'] = {
+      order = 1,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\31.mp3',
+    },
+    ['Свой трек 32'] = {
+      order = 2,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\32.mp3',
+    },
+    ['Свой трек 33'] = {
+      order = 3,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\33.mp3',
+    },
+    ['Свой трек 34'] = {
+      order = 4,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\34.mp3',
+    },
+    ['Свой трек 35'] = {
+      order = 5,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\35.mp3',
+    },
+    ['Свой трек 36'] = {
+      order = 6,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\36.mp3',
+    },
+    ['Свой трек 37'] = {
+      order = 7,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\37.mp3',
+    },
+    ['Свой трек 38'] = {
+      order = 8,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\38.mp3',
+    },
+    ['Свой трек 39'] = {
+      order = 9,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\39.mp3',
+    },
+    ['Свой трек 40'] = {
+      order = 10,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\40.mp3',
+    },
+  },
+  ['От 41 до 50'] = {
+    ['Свой трек 41'] = {
+      order = 1,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\41.mp3',
+    },
+    ['Свой трек 42'] = {
+      order = 2,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\42.mp3',
+    },
+    ['Свой трек 43'] = {
+      order = 3,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\43.mp3',
+    },
+    ['Свой трек 44'] = {
+      order = 4,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\44.mp3',
+    },
+    ['Свой трек 45'] = {
+      order = 5,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\45.mp3',
+    },
+    ['Свой трек 46'] = {
+      order = 6,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\46.mp3',
+    },
+    ['Свой трек 47'] = {
+      order = 7,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\47.mp3',
+    },
+    ['Свой трек 48'] = {
+      order = 8,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\48.mp3',
+    },
+    ['Свой трек 49'] = {
+      order = 9,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\49.mp3',
+    },
+    ['Свой трек 50'] = {
+      order = 10,
+      track = 'Interface\\AddOns\\SnowySystem\\MUSIC\\50.mp3',
+    },
+  },
 }
 
 SS_LIST_OF_SOUNDS = {
@@ -2025,6 +2238,10 @@ SS_LIST_OF_SOUNDS = {
   single = {
     name = 'Одиночные звуки',
     list = SS_SINGLE_LIST,
+  },
+  custom = {
+    name = 'Своя музыка',
+    list = SS_CUSTOM_LIST,
   },
 };
 
@@ -2226,10 +2443,16 @@ SS_AtmosphereControll_NextList = function()
       SS_AtmosphereControll_ActivateMusic(true);
     end);
   elseif (SS_AtmosphereControll_TMPData.category == 'single') then
-    SS_AtmosphereControll_TMPData.category = 'music';
+    SS_AtmosphereControll_TMPData.category = 'custom';
     SS_AtmosphereControll_Menu_Stop:Show();
     SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
       SS_AtmosphereControll_ActivateMusic(false);
+    end);
+  elseif (SS_AtmosphereControll_TMPData.category == 'custom') then
+    SS_AtmosphereControll_TMPData.category = 'music';
+    SS_AtmosphereControll_Menu_Stop:Show();
+    SS_AtmosphereControll_Menu_Play:SetScript("OnClick", function()
+      SS_AtmosphereControll_ActivateMusic(true);
     end);
   end;
 
