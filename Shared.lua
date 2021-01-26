@@ -145,14 +145,48 @@ SS_Shared_IgnoreOfflineMsgFilter = function(self, event, msg)
   return msg:find("в игре не найден");
 end;
 
-SS_Shared_IfOnline = function(target, callback)
-  if (not(SS_Shared_IfOnlineCallback)) then
-    SS_Shared_IfOnlineCallback = { };
+SS_Shared_IsPlayerInRaidOrParty = function(name)
+  local isInParty = GetNumPartyMembers() > 0;
+  local isInRaid = UnitInRaid("player") and GetNumRaidMembers() > 0;
+
+  local targetIndex = nil;
+
+  if (isInParty and not(isInRaid) and targetIndex == nil) then
+    SS_Shared_ForEach({ 1, 2, 3, 4})(function(i)
+      local lookFor = "party"..i;
+      local n = UnitName(lookFor);
+      if (n == name) then targetIndex = lookFor; end;
+    end);
+  elseif (isInRaid and targetIndex == nil) then
+    local possilbleRaidMembers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 };
+    SS_Shared_ForEach(possilbleRaidMembers)(function(i)
+      local lookFor = "raid"..i;
+      local n = UnitName(lookFor);
+      if (n == name) then targetIndex = lookFor; end;
+    end);
   end;
 
-  SS_Shared_IfOnlineCallback[target] = callback;
-  ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", SS_Shared_IgnoreOfflineMsgFilter);
-  SS_PtP_IsOnline(target);
+  return targetIndex;
+end;
+
+SS_Shared_IfOnline = function(target, callback)
+  local playerInPartyIndex = SS_Shared_IsPlayerInRaidOrParty(target);
+
+  if (playerInPartyIndex == nil) then
+    -- Если юнит не в пати - используем систему с запрос-ответом
+    if (not(SS_Shared_IfOnlineCallback)) then
+      SS_Shared_IfOnlineCallback = { };
+    end;
+  
+    SS_Shared_IfOnlineCallback[target] = callback;
+    ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", SS_Shared_IgnoreOfflineMsgFilter);
+    SS_PtP_IsOnline(target);
+  else
+    -- Если юнит в пати - можно по-другому
+    local unitIsConnected = UnitIsConnected(playerInPartyIndex) == 1;
+    if (not(unitIsConnected)) then return nil end;
+    if (unitIsConnected) then callback(); end;
+  end;
 end;
 
 SS_Shared_IsNumber = function(str)

@@ -162,6 +162,7 @@ SS_ModifierCreate_Create = function()
 
   SS_ModifierCreate_TMPData = {
     modifierType = nil,
+    target = SS_ModifierCreate_TMPData.target or 'player',
     stats = {},
   };
 

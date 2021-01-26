@@ -237,4 +237,5 @@ SS_PlotController_OnDeactivate = function()
   SS_PlayerFrame:Hide();
 
   SS_Plot_Controll:Hide();
+  StopMusic();
 end;

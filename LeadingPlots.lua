@@ -78,4 +78,5 @@ SS_LeadingPlots_StopEvent = function()
   SS_LeadingPlots_HideAllWindows();
   SS_LeadingPlots_ResetTemporalData();
   SS_DMtP_StopEvent();
+  StopMusic();
 end;
