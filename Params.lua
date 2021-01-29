@@ -135,3 +135,18 @@ SS_Params_ChangeBarrier = function(updateValue, master)
     end);
   end;
 end;
+
+SS_Params_GetHealthModifier = function(diceRollResult)
+  if (not(SS_Plots_Current())) then return nil; end;
+
+  local maxHealth = SS_Params_GetMaxHealth();
+  local currentHealth = SS_Params_GetHealth();
+
+  if (maxHealth == currentHealth) then return diceRollResult; end;
+
+  if (currentHealth < maxHealth) then
+    local penalty = (currentHealth / maxHealth) * 0.5;
+    diceRollResult = SS_Shared_MathRound(diceRollResult - (diceRollResult * penalty));
+  end;
+  return diceRollResult;
+end;

@@ -74,10 +74,12 @@ SS_Roll_Skill = function(skillName, visibility)
     table.insert(results, result);
   end;
 
+  maxResult = SS_Params_GetHealthModifier(maxResult);
   local statModifier = SS_Stats_GetModifierFor(skillName);
   local armorModifier = SS_Armor_GetModifierFor(skillName, dices);
 
   local finalResult = maxResult + statModifier + armorModifier;
+
   if (finalResult < dices.from) then finalResult = dices.from; end;
 
   if (SS_User.settings.displayDiceInfo) then

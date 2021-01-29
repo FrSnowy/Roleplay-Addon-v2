@@ -38,6 +38,17 @@ SS_Log_SkillRoll = function(finalResult, armorModifier, statModifier, results, d
 
   outputString = '';
 
+  if (SS_Params_GetHealth() < SS_Params_GetMaxHealth()) then
+    outputString = '|cffFFFF00Из-за нехватки ОЗ бросок снижен до |r';
+    local maxResultAfterHPPenalty = SS_Params_GetHealthModifier(maxResult);
+    outputString = outputString..'|cffFF0000'..maxResultAfterHPPenalty..'|r';
+
+    if (not(maxResultAfterHPPenalty == maxResult)) then
+      print(outputString);
+    end;
+  end;
+  outputString = '';
+
   if (not(statModifier == 0)) then
     outputString = '|cffFFFF00Модификатор от |r'..SS_Locale(SS_Skills_GetStatOf(skillName))..': ';
     if (statModifier > 0) then

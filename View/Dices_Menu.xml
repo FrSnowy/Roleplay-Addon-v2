@@ -3,7 +3,7 @@
     <Scripts>
       <OnLoad>
         self.title:SetText('Проверки');
-        self:SetSize(280, 246);
+        self:SetSize(280, 225);
       </OnLoad>
     </Scripts>
     <Anchors>
@@ -15,13 +15,12 @@
       <Frame name="$parent_Active" inherits="SS_ClearFrame_Template">
         <Scripts>
           <OnLoad>
-            self.title:SetText('Активные');
             self:SetSize(140, 210);
           </OnLoad>
         </Scripts>
         <Anchors>
           <Anchor point="TOPLEFT">
-            <Offset><AbsDimension x="5" y="-20"/></Offset>
+            <Offset><AbsDimension x="5" y="0"/></Offset>
           </Anchor>
         </Anchors>
         <Frames>
@@ -86,14 +85,13 @@
       <Frame name="$parent_Passive" inherits="SS_ClearFrame_Template">
         <Scripts>
           <OnLoad>
-            self.title:SetText('Пассивные');
             self:SetSize(140, 210);
           </OnLoad>
         </Scripts>
         <Size><AbsDimension x="140" y="210"/></Size>
         <Anchors>
           <Anchor point="TOPRIGHT">
-            <Offset><AbsDimension x="-5" y="-20"/></Offset>
+            <Offset><AbsDimension x="-5" y="0"/></Offset>
           </Anchor>
         </Anchors>
         <Frames>

@@ -3,7 +3,7 @@
     <Scripts>
       <OnLoad>
         self.title:SetText('Навыки');
-        self:SetSize(430, 275);
+        self:SetSize(430, 255);
       </OnLoad>
       <OnShow>
         SS_Skills_Menu_Points_Value:SetText(SS_Skills_GetAvaliablePoints());
@@ -38,13 +38,10 @@
         <Scripts>
           <OnLoad>
             self:SetSize(220, 210);
-            self.title:SetText("Активные");
           </OnLoad>
         </Scripts>
         <Anchors>
-          <Anchor point="TOPLEFT">
-            <Offset><AbsDimension x="0" y="-20"/></Offset>
-          </Anchor>
+          <Anchor point="TOPLEFT" />
         </Anchors>
         <Layers>
           <Layer>
@@ -183,13 +180,11 @@
         <Scripts>
           <OnLoad>
             self:SetSize(220, 210);
-            self.title:SetText("Пассивные");
+            self.title:SetText("");
           </OnLoad>
         </Scripts>
         <Anchors>
-          <Anchor point="TOPRIGHT">
-            <Offset><AbsDimension x="0" y="-20"/></Offset>
-          </Anchor>
+          <Anchor point="TOPRIGHT" />
         </Anchors>
         <Layers>
           <Layer>
