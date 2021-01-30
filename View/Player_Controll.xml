@@ -6,6 +6,10 @@
         self.title:SetText("Осмотр игрока")
         self:SetSize(300, 220);
         self:RegisterForDrag("LeftButton");
+        self.closeBtn:SetScript("OnClick", function()
+          SS_Target_TMPData = nil;
+          SS_Player_Controll:Hide();
+        end);
       </OnLoad>
       <OnDragStart>self:StartMoving();</OnDragStart>
       <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
