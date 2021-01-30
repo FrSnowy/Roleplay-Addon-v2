@@ -181,8 +181,33 @@ SS_ModifierCreate_Create = function()
   SS_ModifiersControll_Menu_Create_Button:SetText("+ Создать");
 end;
 
+SS_Modifiers_RemoveStatsModifier = function(id)
+  SS_ModifiersControll_Menu_Scroll_Content:Hide();
+  SS_ModifierControll_Unselect(id, 'stats');
+  SS_DMtP_RemoveModifier('stats', id, 'group');
+  SS_LeadingPlots_Current().modifiers.stats[id] = nil;
+  SS_ModifiersControll_Menu_Scroll_Content:Show();
+  SS_ModifierCreate_DrawList();
+end;
+
+SS_Modifiers_RemoveSkillModifier = function(id)
+  SS_ModifiersControll_Menu_Scroll_Content:Hide();
+  SS_ModifierControll_Unselect(id, 'skills');
+  SS_DMtP_RemoveModifier('skills', id, 'group');
+  SS_LeadingPlots_Current().modifiers.skills[id] = nil;
+  SS_ModifiersControll_Menu_Scroll_Content:Show();
+  SS_ModifierCreate_DrawList();
+end;
+
 SS_ModifierCreate_Clear = function()
-  SS_LeadingPlots_Current().modifiers = {};
+  --SS_LeadingPlots_Current().modifiers = {};
+  SS_Shared_ForEach(SS_LeadingPlots_Current().modifiers.stats)(function(modifier, id)
+    SS_Modifiers_RemoveStatsModifier(id);
+  end);
+
+  SS_Shared_ForEach(SS_LeadingPlots_Current().modifiers.skills)(function(modifier, id)
+    SS_Modifiers_RemoveSkillModifier(id);
+  end);
   SS_ModifierCreate_DrawList();
 end;
 
@@ -203,11 +228,7 @@ SS_ModifierCreate_DrawList = function()
             ModifierPanel.modifierID = id;
 
       ModifierPanel.removeBtn:SetScript('OnClick', function()
-        SS_ModifiersControll_Menu_Scroll_Content:Hide();
-        SS_ModifierControll_Unselect(id, 'stats');
-        SS_LeadingPlots_Current().modifiers.stats[id] = nil;
-        SS_ModifiersControll_Menu_Scroll_Content:Show();
-        SS_ModifierCreate_DrawList();
+        SS_Modifiers_RemoveStatsModifier(id)
       end);
 
       SS_ModifiersControll_Menu_Scroll_Content['stats-'..id] = CreateFrame("CheckButton", nil, SS_ModifiersControll_Menu_Scroll_Content, "OptionsCheckButtonTemplate");
@@ -234,11 +255,7 @@ SS_ModifierCreate_DrawList = function()
             ModifierPanel.modifierID = id;
 
       ModifierPanel.removeBtn:SetScript('OnClick', function()
-        SS_ModifiersControll_Menu_Scroll_Content:Hide();
-        SS_ModifierControll_Unselect(id, 'skills');
-        SS_LeadingPlots_Current().modifiers.skills[id] = nil;
-        SS_ModifiersControll_Menu_Scroll_Content:Show();
-        SS_ModifierCreate_DrawList();
+        SS_Modifiers_RemoveSkillModifier(id);
       end);
 
       SS_ModifiersControll_Menu_Scroll_Content['skills-'..id] = CreateFrame("CheckButton", nil, SS_ModifiersControll_Menu_Scroll_Content, "OptionsCheckButtonTemplate");

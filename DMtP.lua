@@ -216,7 +216,7 @@ SS_DMtP_RemoveTargetModifier = function(modifierType, modifierID, player)
 end;
 
 
-SS_DMtP_RemoveModifier = function(modifierType, modifierID)
+SS_DMtP_RemoveModifier = function(modifierType, modifierID, target)
   if (not(SS_User.settings.currentPlot)) then return nil; end;
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
   if (not(modifierType) or not(modifierID)) then
@@ -230,7 +230,11 @@ SS_DMtP_RemoveModifier = function(modifierType, modifierID)
   local action = 'dmRemoveTargetModifier';
   local dataStr = SS_User.settings.currentPlot..'+'..modifierType..'+'..modifierID;
 
-  if (SS_ModifierCreate_TMPData.target == 'player') then
+  if (not(target)) then
+    target = SS_ModifierCreate_TMPData.target;
+  end;
+
+  if (target == 'player') then
     if (not(UnitName("target"))) then
       SS_Log_NoTarget();
       return nil;
@@ -239,7 +243,7 @@ SS_DMtP_RemoveModifier = function(modifierType, modifierID)
     SS_DMtP_Direct(action, dataStr, UnitName('target'));
   end;
 
-  if (SS_ModifierCreate_TMPData.target == 'group') then
+  if (target == 'group') then
     SS_DMtP_Every(action, dataStr)(SS_User.settings.currentPlot);
   end;
 end;
