@@ -124,6 +124,15 @@ end;
 SS_Progress_DrawExp = function()
   local fullWidth = MainMenuExpBar:GetWidth() - 180;
   local progress = (SS_Progress_GetExp() / SS_Progress_GetExpForUp())
+
+  if (SS_Progress_GetLevel() == 20) then
+    SS_Progress_HideExpBar();
+    return;
+  else
+    MainMenuExpBar:Hide();
+    SS_Exp_Bar:Show();
+  end;
+
   if (progress == 0) then
     SS_Exp_Bar_Progress:SetWidth(1);
   else

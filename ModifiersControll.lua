@@ -200,7 +200,6 @@ SS_Modifiers_RemoveSkillModifier = function(id)
 end;
 
 SS_ModifierCreate_Clear = function()
-  --SS_LeadingPlots_Current().modifiers = {};
   SS_Shared_ForEach(SS_LeadingPlots_Current().modifiers.stats)(function(modifier, id)
     SS_Modifiers_RemoveStatsModifier(id);
   end);
