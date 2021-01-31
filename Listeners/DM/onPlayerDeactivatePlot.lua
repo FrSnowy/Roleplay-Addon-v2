@@ -13,9 +13,7 @@ SS_Listeners_DM_OnPlayerDeactivatePlot = function(plotID, player)
   end);
 
   if (isActivePlayer) then
-    SS_LeadingPlots_Current().activePlayers[activePlayerIndex] = nil;
-    table.remove(SS_LeadingPlots_Current().activePlayers, activePlayerIndex);
-    
+    SS_LeadingPlots_Current().activePlayers[activePlayerIndex] = nil;    
     if (SS_MembersControll_Menu:IsVisible()) then
       SS_MembersControll_DrawList();
     end;

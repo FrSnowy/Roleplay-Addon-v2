@@ -12,8 +12,6 @@ SS_Listeners_DM_OnPlayerKickSuccess = function(plotID, player)
 
   if (isActivePlayer) then
     SS_LeadingPlots_Current().activePlayers[playerIndex] = nil;
-    table.remove(SS_LeadingPlots_Current().activePlayers, playerIndex);
-
     if (SS_MembersControll_Menu:IsVisible()) then
       SS_MembersControll_DrawList();
     end;
