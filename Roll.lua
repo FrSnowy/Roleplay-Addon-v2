@@ -130,7 +130,10 @@ SS_Roll = function(skillName, visibility)
   SS_Modifiers_Fire('stats')(SS_Skills_GetStatOf(skillName));
   SS_Modifiers_Fire('skills')(skillName);
 
-  SS_Roll_SaveResultToMembersTable(UnitName('player'), skillResult);
+  local amInParty = SS_Shared_IsPlayerInRaidOrParty(UnitName('player'));
+  if (not(amInParty)) then
+    SS_Roll_SaveResultToMembersTable(UnitName('player'), skillResult);
+  end;
 
   return skillResult;
 end;
