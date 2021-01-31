@@ -33,6 +33,11 @@ SS_Listeners_Player_OnDMStartEvent = function(plotID, master)
     SS_Modal_EventStart:Hide();
 
     SS_User.settings.acceptNextPartyInvite = true;
+
+    local amInParty = SS_Shared_IsPlayerInRaidOrParty(UnitName('player'));
+    if (amInParty) then
+      LeaveParty();
+    end;
     SS_Log_AcceptEventStart(plot.name);
   end);
 end;
