@@ -178,9 +178,11 @@ SS_Shared_IfOnline = function(target, callback)
       SS_Shared_IfOnlineCallback = { };
     end;
   
-    SS_Shared_IfOnlineCallback[target] = callback;
+    local timestamp = SS_Shared_TimeStamp();
+  
+    SS_Shared_IfOnlineCallback[target..'+'..timestamp] = callback;
     ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", SS_Shared_IgnoreOfflineMsgFilter);
-    SS_PtP_IsOnline(target);
+    SS_PtP_IsOnline(target, timestamp);
   else
     -- Если юнит в пати - можно по-другому
     local unitIsConnected = UnitIsConnected(playerInPartyIndex) == 1;
