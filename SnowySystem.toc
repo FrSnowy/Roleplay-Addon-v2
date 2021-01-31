@@ -5,6 +5,7 @@
 ## SavedVariablesPerCharacter: SS_User
 Templates\Frames.xml
 Templates\Buttons.xml
+Minimap.lua
 Locale.lua
 Log.lua
 Shared.lua
