@@ -6,6 +6,11 @@ end;
 SS_Minimap_ToggleContentVisibility = function()
   if (SS_Player_Menu:IsVisible()) then
     SS_Player_Menu:Hide();
+    SS_Dices_Menu:Hide();
+    SS_Stats_Menu:Hide();
+    SS_Skills_Menu:Hide();
+    SS_Armor_Menu:Hide();
+    SS_Controll_Menu:Hide();
     if (SS_LeadingPlots_Current() and SS_Plot_Controll:IsVisible()) then
       SS_Plot_Controll:Hide();
     end;
