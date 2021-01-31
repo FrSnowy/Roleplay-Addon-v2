@@ -36,7 +36,13 @@ SS_Listeners_Player_OnDMStartEvent = function(plotID, master)
 
     local amInParty = SS_Shared_IsPlayerInRaidOrParty(UnitName('player'));
     if (amInParty) then
-      LeaveParty();
+
+      local isDMInSameParty = SS_Shared_IsPlayerInRaidOrParty(master);
+      if (not(isDMInSameParty)) then
+        LeaveParty();
+      else
+        PromoteToLeader(master);
+      end;
     end;
     SS_Log_AcceptEventStart(plot.name);
   end);
