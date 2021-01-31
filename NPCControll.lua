@@ -57,8 +57,8 @@ SS_NPCControll_DrawNPCDiceMenu = function(npcID)
         NPCRollPanel:SetBackdropColor(0, 0, 0, 1);
         NPCRollPanel:SetFrameStrata("FULLSCREEN_DIALOG");
         NPCRollPanel.title:SetText('Броски от лица NPC');
-        NPCRollPanel:SetScript("OnDragStart", self.StartMoving)
-        NPCRollPanel:SetScript("OnDragStop", self.StopMovingOrSizing)
+        NPCRollPanel:SetScript("OnDragStart", NPCRollPanel.StartMoving)
+        NPCRollPanel:SetScript("OnDragStop", NPCRollPanel.StopMovingOrSizing)
 
   NPCRollPanel.closeBtn:SetScript("OnClick", function()
     SS_NPCDicesViews[npcID]:Hide();
