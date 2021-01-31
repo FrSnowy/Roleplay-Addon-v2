@@ -4,7 +4,14 @@ end;
 
 SS_PtDM_SayAll = function(action, data)
   if (not(SS_Plots_Current())) then return nil; end;
-  SS_Shared_SAM("SS-PtDM", "playerToAll", action.."+"..data, SS_Plots_Current().author);
+
+  local authorPartyIndex = SS_Shared_IsPlayerInRaidOrParty(SS_Plots_Current().author);
+  local timestamp = SS_Shared_TimeStamp();
+
+  SS_Shared_IfOnline(SS_Plots_Current().author, function()
+    SS_Shared_SAM("SS-PtDM", "playerToAll", action.."+"..data.."+"..timestamp, SS_Plots_Current().author);    
+  end);
+  SS_Shared_SAM("SS-PtDM", action, data.."+"..timestamp, SS_Plots_Current().author, "RAID");
 end;
 
 SS_PtDM_PlotAlreadyExists = function(plotName, plotAuthor)
@@ -136,7 +143,7 @@ SS_PtDM_PlayerLooseModifier = function(modifier, master)
 end;
 
 SS_PtA_RollResult = function(params)
-  local paramStr = params.skill.."+"..params.skillResult.."+"..params.efficencyResult.."+"..params.dices.from.."+"..params.dices.to.."+"..params.diceCount.."+"..params.modifier;
+  local paramStr = SS_User.settings.currentPlot.."+"..params.skill.."+"..params.skillResult.."+"..params.efficencyResult.."+"..params.dices.from.."+"..params.dices.to.."+"..params.diceCount.."+"..params.modifier;
   SS_PtDM_SayAll('rollResult', UnitName("player").."+"..paramStr);
 end;
 

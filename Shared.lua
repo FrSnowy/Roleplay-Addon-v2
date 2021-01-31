@@ -21,21 +21,22 @@ SS_Shared_TimeStamp = function()
   return string.sub(''..baseStamp, 1, 8);
 end;
 
-SS_Shared_SAM = function(prefix, action, data, target)
+SS_Shared_SAM = function(prefix, action, data, target, channel)
+  if (not(channel)) then channel = "WHISPER"; end;
   if (#data > 200) then
     messages = SS_Shared_SAM_Split_String(data);
     local timeStamp = SS_Shared_TimeStamp();
     SS_Shared_ForEach(messages)(function(msg, index)
       if (index == 1) then
-        SendAddonMessage(prefix, '~'..action..'|'..timeStamp..'|'..msg, "WHISPER", target);
+        SendAddonMessage(prefix, '~'..action..'|'..timeStamp..'|'..msg, channel, target);
       elseif (index == #messages) then
-        SendAddonMessage(prefix, action..'|'..timeStamp..'|'..msg..'~', "WHISPER", target);
+        SendAddonMessage(prefix, action..'|'..timeStamp..'|'..msg..'~', channel, target);
       else
-        SendAddonMessage(prefix, action..'|'..timeStamp..'|'..msg, "WHISPER", target);
+        SendAddonMessage(prefix, action..'|'..timeStamp..'|'..msg, channel, target);
       end;
     end);
   else
-    SendAddonMessage(prefix, '~'..action..'|'..data..'~', "WHISPER", target);
+    SendAddonMessage(prefix, '~'..action..'|'..data..'~', channel, target);
   end;
 end;
 
