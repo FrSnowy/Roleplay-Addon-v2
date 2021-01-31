@@ -12,6 +12,7 @@ SS_ModifierControll_Show = function()
     selectedModifierType = nil,
     target = 'player'
   };
+  SS_ModifierControll_SelectTarget(SS_ModifierCreate_TMPData.target);
   SS_ModifierCreate_DrawList()
 end;
 
