@@ -215,8 +215,8 @@ SS_BattleControll_CalculateMovementPoints = function(battleType, currentPhase)
         SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints();
         SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints();
       elseif (currentPhase == 'defence') then
-        SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
-        SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+        SS_Plots_Current().battle.maxMovementPoints = math.floor(SS_Stats_GetMaxMovementPoints() / 2);
+        SS_Plots_Current().battle.movementPoints = math.floor(SS_Stats_GetMaxMovementPoints() / 2);
       else
         SS_Plots_Current().battle.maxMovementPoints = 0;
         SS_Plots_Current().battle.movementPoints = 0;
@@ -227,8 +227,8 @@ SS_BattleControll_CalculateMovementPoints = function(battleType, currentPhase)
         SS_Plots_Current().battle.maxMovementPoints = 0;
         SS_Plots_Current().battle.movementPoints = 0;
       elseif (currentPhase == 'defence') then
-        SS_Plots_Current().battle.maxMovementPoints = SS_Stats_GetMaxMovementPoints() / 2;
-        SS_Plots_Current().battle.movementPoints = SS_Stats_GetMaxMovementPoints() / 2;
+        SS_Plots_Current().battle.maxMovementPoints = math.floor(SS_Stats_GetMaxMovementPoints() / 2);
+        SS_Plots_Current().battle.movementPoints = math.floor(SS_Stats_GetMaxMovementPoints() / 2);
       elseif (currentPhase == 'waiting') then
         SS_Plots_Current().battle.maxMovementPoints = 0;
         SS_Plots_Current().battle.movementPoints = 0;
