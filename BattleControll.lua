@@ -675,6 +675,10 @@ SS_BattleControll_StartMovementWatch = function()
   if (not(SS_Plots_Current().battle)) then return nil; end;
 
   local t = 0.5;
+
+  if (not(SS_Plots_Current().battle.stepsAccum)) then
+    SS_Plots_Current().battle.stepsAccum = 0;
+  end;
   SS_Plots_Current().battle.movementTimer = CreateFrame("Frame")
   SS_Plots_Current().battle.movementTimer:SetScript("OnUpdate", function(self, elapsed)
     t = t - elapsed
@@ -683,35 +687,27 @@ SS_BattleControll_StartMovementWatch = function()
         SS_BattleControll_StopMovementWatch();
         return nil;
       end;
+  
       if (SS_Plots_Current().battle and SS_Plots_Current().battle.maxMovementPoints) then
-        local x, y = GetPlayerMapPosition("player");
-        
-        local currentPosition = { x = math.floor(x * 10000), y =  math.floor(y * 10000) }
+        local currentSpeed = GetUnitSpeed("player");
+        SS_Plots_Current().battle.stepsAccum = SS_Plots_Current().battle.stepsAccum + currentSpeed;
 
-        if (not(SS_Plots_Current().battle.previousPosition)) then
-          SS_Plots_Current().battle.previousPosition = currentPosition;
+        if (SS_Plots_Current().battle.stepsAccum >= 7) then
+          SS_Plots_Current().battle.movementPoints = SS_Plots_Current().battle.movementPoints - 1;
+          SS_Plots_Current().battle.stepsAccum = 0;
         end;
-
-        local diffBetweenPosition = {
-          x = math.abs(currentPosition.x - SS_Plots_Current().battle.previousPosition.x),
-          y =  math.abs(currentPosition.y - SS_Plots_Current().battle.previousPosition.y)
-        }
-
-        local spentedPoints = math.floor(math.sqrt(math.pow(diffBetweenPosition.x, 2) + math.pow(diffBetweenPosition.y, 2)));
-        if (spentedPoints > 1) then spentedPoints = 1; end;
     
-        SS_Plots_Current().battle.movementPoints = SS_Plots_Current().battle.movementPoints - spentedPoints;
         if (SS_Plots_Current().battle.movementPoints < SS_Plots_Current().battle.maxMovementPoints) then
           SS_BattleControll_BattleInterface_Double_Move:Hide();
         end;
-
+  
         if (SS_Plots_Current().battle.movementPoints <= 0) then
           SS_Plots_Current().battle.movementPoints = 0;
           SS_BattleControll_BattleInterface.currentTurn.movement:SetTextColor(1, 0, 0);
           if (SS_Plots_Current().battle.fullRoundMovement) then
             SS_BattleControll_EndRound();
           else
-            if (diffBetweenPosition.x > 0 or diffBetweenPosition.y > 0) then
+            if (currentSpeed > 0) then
               PlaySoundFile('Sound\\Interface\\RaidWarning.ogg');
               SS_Log_NoMovementPoints();
               if (not(SS_Plots_Current().author == UnitName('player'))) then

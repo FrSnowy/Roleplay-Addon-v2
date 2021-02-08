@@ -3,6 +3,7 @@ local startPhasesBattle = function(startPhase, author)
     battleType = 'phases',
     phase = startPhase,
     isTurnEnded = false,
+    stepsAccum = 0,
   }
 
   SS_BattleControll_RoundStart('phases', startPhase);
@@ -15,6 +16,7 @@ local startInitiativeBattle = function(startPhase, author)
   SS_Plots_Current().battle = {
     battleType = 'initiative',
     isTurnEnded = false,
+    stepsAccum = 0,
   }
 
   local initiative = math.floor(math.random(0, SS_Stats_GetMaxMovementPoints()));
@@ -26,6 +28,7 @@ end;
 local startFreeBattle = function(_, author)
   SS_Plots_Current().battle = {
     battleType = 'free',
+    stepsAccum = 0,
   };
 
   if (not(author == UnitName('player'))) then

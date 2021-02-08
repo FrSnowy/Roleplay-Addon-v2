@@ -443,6 +443,7 @@ SS_DMtP_SendNPCRoll = function(name, result)
 end;
 
 SS_DMtP_StartMusic = function(category, group, name, target)
+  StopMusic();
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
 
   if (not(category) or not(group) or not(name) or not(target)) then

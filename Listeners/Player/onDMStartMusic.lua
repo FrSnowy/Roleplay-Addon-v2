@@ -5,5 +5,6 @@ SS_Listeners_Player_OnDMStartMusic = function(data, master)
   local plotID, category, group, track = strsplit('+', data);
   if (not(plotID == SS_User.settings.currentPlot)) then return nil; end;
 
+  StopMusic();
   PlayMusic(SS_LIST_OF_SOUNDS[category].list[group][track].track);
 end;

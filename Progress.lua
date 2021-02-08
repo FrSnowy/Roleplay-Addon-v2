@@ -150,6 +150,7 @@ end;
 SS_Progress_HideExpBar = function()
   MainMenuExpBar:Show();
   SS_Exp_Bar:Hide();
+  SS_Exp_Bar_Progress:SetWidth(1);
 end;
 
 SS_Progress_UpdateLevel = function(updateValue, master, noMasterMsg)
