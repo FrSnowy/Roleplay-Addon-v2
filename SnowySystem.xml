@@ -17,6 +17,12 @@
           else
             SS_PlotController_OnDeactivate();
           end;
+
+          if (SS_User.settings.interfaceHidden) then
+            self:Hide();
+          else
+            self:Show();
+          end;
         end;
 
         if (event == "CHAT_MSG_ADDON") then
