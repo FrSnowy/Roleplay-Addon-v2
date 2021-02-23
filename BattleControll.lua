@@ -660,7 +660,7 @@ SS_BattleControll_Reset = function()
   SS_BattleControll:Hide();
   SS_BattleControll_BattleInterface:Hide();
 
-  if (SS_BattleControll_AmIPlayer()) then
+  if (SS_Plots_Current().battle) then
     SS_Plots_Current().battle = nil;
   end;
 
