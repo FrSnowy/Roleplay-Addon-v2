@@ -630,6 +630,7 @@ local drawFreeInterface = function()
 end;
 
 SS_BattleControll_DrawBattleInterface = function(battleType, currentPhase)
+  if (SS_User.settings.interfaceHidden) then return nil; end;
   local drawInterfaceByType = {
     phases = drawPhasesInterface,
     initiative = drawInitiativeInterface,

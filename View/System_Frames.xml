@@ -38,11 +38,11 @@
       </Layer>
     </Layers>
     <Frames>
-      <Frame name="SS_Exp_Bar_Progress" parent = "$parent">
+      <Frame name="SS_Exp_Bar_Progress" parent = "UIParent">
         <Size><AbsDimension x="0" y="17"/></Size>
         <Anchors>
           <Anchor point="BOTTOMLEFT" relativeTo = "MainMenuExpBar">
-            <Offset><AbsDimension x="-10" y="-5"/></Offset>
+            <Offset><AbsDimension x="0" y="0"/></Offset>
           </Anchor>
         </Anchors>
         <Layers>

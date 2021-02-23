@@ -87,7 +87,9 @@
               SS_Dices_Menu:Hide();
             else
               SS_Draw_HideSubmenus();
-              SS_Dices_Menu:Show();
+              if (SS_User.settings.interfaceHidden == false) then
+                SS_Dices_Menu:Show();
+              end;
             end;
           </OnClick>
         </Scripts>
@@ -121,7 +123,9 @@
               SS_Stats_Menu_Info:Hide();
             else
               SS_Draw_HideSubmenus();
-              SS_Stats_Menu:Show();
+              if (SS_User.settings.interfaceHidden == false) then
+                SS_Stats_Menu:Show();
+              end;
             end;
           </OnClick>
         </Scripts>
@@ -154,7 +158,9 @@
               SS_Skills_Menu:Hide();
             else
               SS_Draw_HideSubmenus();
-              SS_Skills_Menu:Show();
+              if (SS_User.settings.interfaceHidden == false) then
+                SS_Skills_Menu:Show();
+              end;
             end;
           </OnClick>
         </Scripts>
@@ -187,7 +193,9 @@
               SS_Armor_Menu:Hide();
             else
               SS_Draw_HideSubmenus();
-              SS_Armor_Menu:Show();
+              if (SS_User.settings.interfaceHidden == false) then
+                SS_Armor_Menu:Show();
+              end
             end;
           </OnClick>
         </Scripts>
@@ -220,7 +228,9 @@
               SS_Controll_Menu:Hide();
             else
               SS_Draw_HideSubmenus();
-              SS_Controll_Menu:Show();
+              if (SS_User.settings.interfaceHidden == false) then
+                SS_Controll_Menu:Show();
+              end;
             end;
           </OnClick>
         </Scripts>

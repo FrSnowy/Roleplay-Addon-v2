@@ -171,6 +171,11 @@ SS_PlotController_DrawPlayers = function(_plot)
 end;
 
 SS_PlotController_OnActivate = function()
+  if (SS_User.settings.interfaceHidden) then
+    SS_Player_Menu:Hide();
+  else
+    SS_Player_Menu:Show();
+  end;
   SS_Player_Menu:SetSize(84, 255);
   SS_Player_Menu_DicesIcon:Show();
   SS_Player_Menu_StatsIcon:Show();
@@ -190,10 +195,7 @@ SS_PlotController_OnActivate = function()
   end;
 
   if (SS_LeadingPlots_Current()) then
-    if (SS_LeadingPlots_Current().isEventOngoing) then
-      
-    else
-      SS_Plot_Controll:Show();
+    if (not(SS_LeadingPlots_Current().isEventOngoing)) then
       SS_PlotController_DrawPlayers();
 
       local plot = SS_Plots_Current();
@@ -202,6 +204,12 @@ SS_PlotController_OnActivate = function()
       SS_Shared_IfOnline(plot.author, function()
         SS_PtDM_JoinToEvent(id, plot.author);
       end);
+
+      if (SS_User.settings.interfaceHidden) then
+        SS_Plot_Controll:Hide();
+      else
+        SS_Plot_Controll:Show();
+      end;
     end;
   end;
 end;

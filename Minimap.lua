@@ -4,20 +4,45 @@ SS_Minimap_LoadFromDefaults = function()
 end;
 
 SS_Minimap_ToggleContentVisibility = function()
-  if (SS_Player_Menu:IsVisible()) then
+  if (SS_User.settings.interfaceHidden == false) then
+    SS_User.settings.interfaceHidden = true;
     SS_Player_Menu:Hide();
     SS_Dices_Menu:Hide();
     SS_Stats_Menu:Hide();
     SS_Skills_Menu:Hide();
     SS_Armor_Menu:Hide();
     SS_Controll_Menu:Hide();
-    if (SS_LeadingPlots_Current() and SS_Plot_Controll:IsVisible()) then
+  
+    SS_DiceControll_Hide();
+    SS_ModifierControll_Hide();
+    SS_BattleControll_Hide();
+    SS_BattleControll_BattleInterface:Hide();
+    SS_DamageControll_Hide();
+    SS_ParamsControll_Hide();
+    SS_NPCControll_Hide();
+    SS_AtmosphereControll_Hide();
+    SS_MembersControll_Hide();
+
+    if (SS_LeadingPlots_Current()) then
       SS_Plot_Controll:Hide();
+
+      if (SS_LeadingPlots_Current().isEventOngoing) then
+        SS_Event_Controll:Hide();
+      end;
     end;
   else
+    SS_User.settings.interfaceHidden = false;
     SS_Player_Menu:Show();
-    if (SS_LeadingPlots_Current() and not(SS_Plot_Controll:IsVisible()) and not(SS_Event_Controll:IsVisible())) then
+    if (SS_LeadingPlots_Current() and not(SS_LeadingPlots_Current().isEventOngoing)) then
       SS_Plot_Controll:Show();
+    end;
+
+    if (SS_LeadingPlots_Current() and SS_LeadingPlots_Current().isEventOngoing) then
+      SS_Event_Controll:Show();
+    end;
+
+    if (SS_Plots_Current() and SS_Plots_Current().battle) then
+      SS_BattleControll_DrawBattleInterface(SS_Plots_Current().battle.battleType, SS_Plots_Current().battle.phase);
     end;
   end;
 end;

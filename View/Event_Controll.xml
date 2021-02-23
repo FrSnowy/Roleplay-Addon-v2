@@ -11,7 +11,11 @@
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
           if (SS_User.settings.currentPlot and SS_LeadingPlots_Current() and SS_LeadingPlots_Current().isEventOngoing) then
-            self:Show();
+            if (SS_User.settings.interfaceHidden == false) then
+              self:Show();
+            else
+              self:Hide();
+            end;
           end;
         end;
       </OnEvent>

@@ -11,7 +11,11 @@
 			<OnEvent>
         if(event == "PLAYER_ENTERING_WORLD") then
           if (SS_User.settings.currentPlot and SS_LeadingPlots_Current() and not SS_LeadingPlots_Current().isEventOngoing) then
-            self:Show();
+            if (SS_User.settings.interfaceHidden) then
+              self:Hide();
+            else
+              self:Show();
+            end;
             SS_PlotController_DrawPlayers();
           end;
         end;

@@ -122,7 +122,7 @@ SS_Progress_DrawDefaultLevel = function()
 end;
 
 SS_Progress_DrawExp = function()
-  local fullWidth = MainMenuExpBar:GetWidth() - 180;
+  local fullWidth = MainMenuExpBar:GetWidth();
   local progress = (SS_Progress_GetExp() / SS_Progress_GetExpForUp())
 
   if (SS_Progress_GetLevel() == 20) then
