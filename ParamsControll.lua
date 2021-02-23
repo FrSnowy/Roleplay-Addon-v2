@@ -85,14 +85,92 @@ SS_ParamsControll_SendUpdateInfo = function()
 
   if (SS_ParamsControll_Data.param == 'level' and SS_LeadingPlots_Current().battle) then
     SS_Log_CanNotInBattle();
+    return;
   elseif (SS_ParamsControll_Data.param == 'exp' and SS_Shared_NumFromStr(updateValue) < 0 and SS_LeadingPlots_Current().battle) then
     SS_Log_CanNotInBattle();
-  else
-    SS_DMtP_SendParamUpdate(updateValue);
+    return;
   end;
+
+  if (SS_ParamsControll_Data.target == 'player' and SS_Shared_TargetIsNPC() and not(SS_Shared_TargetIsConnectedNPC())) then
+    SS_Log_NoTarget();
+    return;
+  end;
+
+  if (SS_ParamsControll_Data.target == 'player' and SS_Shared_TargetIsConnectedNPC()) then
+    if (SS_ParamsControll_Data.param == 'level' or SS_ParamsControll_Data.param == 'exp') then
+      SS_Log_NoTarget();
+      return;
+    end;
+
+    local guid = SS_NPCControll_GetGUID();
+
+    local currentNPCInfo = SS_LeadingPlots_Current().npcConnections[guid];
+    if (not(currentNPCInfo)) then return nil; end;
+
+    local defaultNPCInfo = SS_LeadingPlots_Current().npc[currentNPCInfo.id];
+    if (not(defaultNPCInfo)) then return nil; end;
+  
+    updateValue = SS_Shared_NumFromStr(updateValue);
+
+    if (SS_ParamsControll_Data.param == 'health') then
+      if (currentNPCInfo.health + updateValue >= defaultNPCInfo.health) then
+        currentNPCInfo.health = defaultNPCInfo.health;
+      elseif (currentNPCInfo.health + updateValue <= 0) then
+        currentNPCInfo.health = 0;
+      else
+        currentNPCInfo.health = currentNPCInfo.health + updateValue;
+      end;
+    end;
+
+    if (SS_ParamsControll_Data.param == 'barrier') then
+      if (currentNPCInfo.barrier + updateValue <= 0) then
+        currentNPCInfo.barrier = 0;
+      else
+        currentNPCInfo.barrier = currentNPCInfo.barrier + updateValue;
+      end;
+    end;
+
+    SS_LeadingPlots_Current().npcConnections[guid] = currentNPCInfo;
+    SS_Draw_NPCInfoPlates();
+    return;
+  end;
+
+  SS_DMtP_SendParamUpdate(updateValue);
 end;
 
 SS_ParamsControll_SendResetInfo = function()
   if (not(SS_LeadingPlots_Current()) or not(SS_LeadingPlots_Current().isEventOngoing)) then return nil; end;
+
+
+  if (SS_ParamsControll_Data.target == 'player' and SS_Shared_TargetIsNPC() and not(SS_Shared_TargetIsConnectedNPC())) then
+    SS_Log_NoTarget();
+    return;
+  end;
+  
+  if (SS_ParamsControll_Data.target == 'player' and SS_Shared_TargetIsConnectedNPC()) then
+    if (SS_ParamsControll_Data.param == 'level' or SS_ParamsControll_Data.param == 'exp') then
+      SS_Log_NoTarget();
+      return;
+    end;
+
+    local guid = SS_NPCControll_GetGUID();
+
+    local currentNPCInfo = SS_LeadingPlots_Current().npcConnections[guid];
+    if (not(currentNPCInfo)) then return nil; end;
+
+    local defaultNPCInfo = SS_LeadingPlots_Current().npc[currentNPCInfo.id];
+    if (not(defaultNPCInfo)) then return nil; end;
+
+    if (SS_ParamsControll_Data.param == 'health') then
+      currentNPCInfo.health = defaultNPCInfo.health;
+    end;
+
+    if (SS_ParamsControll_Data.param == 'barrier') then
+      currentNPCInfo.barrier = defaultNPCInfo.barrier;
+    end;
+    SS_LeadingPlots_Current().npcConnections[guid] = currentNPCInfo;
+    SS_Draw_NPCInfoPlates();
+    return;
+  end;
   SS_DMtP_SendParamUpdate(88005553535);
 end;

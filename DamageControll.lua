@@ -48,7 +48,55 @@ SS_DamageControll_SendDamage = function()
     return nil;
   end;
 
+  if (SS_DamageControll_Data.target == 'player' and SS_Shared_TargetIsNPC() and not(SS_Shared_TargetIsConnectedNPC())) then
+    SS_Log_NoTarget();
+    return nil;
+  end;
+
+  if (SS_DamageControll_Data.target == 'player' and SS_Shared_TargetIsConnectedNPC()) then
+    SS_DamageControll_DamageToNPC(damage, SS_DamageControll_Data.ignoreArmor);
+    return nil;
+  end;
+
   SS_DMtP_SendDamage(damage);
+end;
+
+SS_DamageControll_DamageToNPC = function(damage, ignoreArmor)
+  local guid = SS_NPCControll_GetGUID();
+  local npc = SS_LeadingPlots_Current().npcConnections[guid];
+  local dmg = SS_Shared_NumFromStr(damage);
+
+  local currentHP = npc.health;
+  local currentBarrier = npc.barrier;
+
+  if (currentHP <= 0) then return nil; end;
+
+  if (ignoreArmor) then
+    if (currentHP <= dmg) then
+      npc.health = 0;
+    else
+      npc.health = npc.health - dmg;
+    end;
+  else
+    if (currentBarrier > 0) then
+      if (currentBarrier < dmg) then
+        dmg = dmg - currentBarrier;
+        npc.barrier = 0;
+        if (currentHP < dmg) then npc.health = 0;
+        else npc.health = npc.health - dmg;
+        end;
+      elseif (currentBarrier == dmg) then
+        npc.barrier = 0;
+      else
+        npc.barrier = npc.barrier - dmg;
+      end;
+    else
+      SS_DamageControll_DamageToNPC(damage, true);
+      return nil;
+    end;
+  end;
+
+  SS_Draw_NPCInfoPlates();
 end;
 
 SS_DamageControll_RecieveDamage = function(damage, ignoreArmor, master)  

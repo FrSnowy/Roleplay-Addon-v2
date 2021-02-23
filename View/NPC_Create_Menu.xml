@@ -2,7 +2,7 @@
   <Frame name="SS_NPCCreate_Menu" parent="SS_NPCControll_Menu" inherits = "SS_CloseableFrameWithBG_Template" hidden="true">
     <Scripts>
       <OnLoad>
-        self:SetSize(230, 220);
+        self:SetSize(230, 270);
         self.title:SetText('Создать NPC');
         self.bg = "Interface\\AddOns\\SnowySystem\\IMG\\popup-background";
         self:RegisterForDrag("LeftButton");
@@ -13,7 +13,7 @@
       </OnLoad>
     </Scripts>
     <Anchors>
-      <Anchor point="TOP" x="0" y="220" relativeTo="SS_NPCControll_Menu" />
+      <Anchor point="LEFT" x="-230" y="0" relativeTo="SS_NPCControll_Menu" />
     </Anchors>
     <Layers>
       <Layer>
@@ -29,6 +29,20 @@
           <FontHeight val="12"/>
           <Anchors>
             <Anchor point="TOPLEFT" x="20" y="-110" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Здоровье:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="22" y="-170" />
+          </Anchors>
+        </FontString>
+        <FontString font="Fonts\FRIZQT__.TTF" text="Броня:">
+          <Color r="1" g="1" b="1" a="1"/>
+          <FontHeight val="12"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="120" y="-170" />
           </Anchors>
         </FontString>
       </Layer>
@@ -59,13 +73,54 @@
             self:ClearFocus();
           </OnEscapePressed>
           <OnTabPressed>
-            SS_NPCCreate_Menu.name:SetFocus();
+            SS_NPCCreate_Menu.health:SetFocus();
           </OnTabPressed>
+          <OnTextChanged>
+            SS_NPCCreate_SetHealthByLevelInput();
+          </OnTextChanged>
         </Scripts>
         <Size x="190" y="26" />
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset><AbsDimension x="20" y="-130"/></Offset>
+          </Anchor>
+        </Anchors>
+      </EditBox>
+      <EditBox parentKey = "health" inherits="SS_Form_EditBox">
+        <Scripts>
+          <OnShow>
+            self:SetNumeric();
+          </OnShow>
+          <OnEscapePressed>
+            self:ClearFocus();
+          </OnEscapePressed>
+          <OnTabPressed>
+            SS_NPCCreate_Menu.armor:SetFocus();
+          </OnTabPressed>
+        </Scripts>
+        <Size x="80" y="26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="20" y="-190"/></Offset>
+          </Anchor>
+        </Anchors>
+      </EditBox>
+      <EditBox parentKey = "armor" inherits="SS_Form_EditBox">
+        <Scripts>
+          <OnShow>
+            self:SetNumeric();
+          </OnShow>
+          <OnEscapePressed>
+            self:ClearFocus();
+          </OnEscapePressed>
+          <OnTabPressed>
+            SS_NPCCreate_Menu.name:SetFocus();
+          </OnTabPressed>
+        </Scripts>
+        <Size x="90" y="26" />
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset><AbsDimension x="120" y="-190"/></Offset>
           </Anchor>
         </Anchors>
       </EditBox>

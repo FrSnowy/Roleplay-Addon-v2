@@ -594,7 +594,7 @@
       <OnShow>
         local npc = SS_LeadingPlots_Current().npc[self.npcID];
         self.name:SetText(npc.name);
-        self.level:SetText("Уровень "..npc.level);
+        self.meta:SetText("Уровень "..npc.level..", ОЗ: "..npc.health..", ОБ: "..npc.barrier);
       </OnShow>
     </Scripts>
     <Layers>
@@ -610,7 +610,7 @@
             <Color r="0" g="0" b="0"/>
           </Shadow>
         </FontString>
-        <FontString parentKey = "level" font="Fonts\FRIZQT__.TTF">
+        <FontString parentKey = "meta" font="Fonts\FRIZQT__.TTF">
           <Color r="1" g="1" b="1" a="1"/>
           <FontHeight val="11"/>
           <Anchors>
@@ -628,12 +628,7 @@
         <Scripts>
           <OnClick>
             local npcID = self:GetParent().npcID;
-            if (not(SS_NPCDicesViews[npcID])) then
-              SS_NPCControll_DrawNPCDiceMenu(npcID);
-            else
-              SS_NPCDicesViews[npcID]:Hide();
-              SS_NPCDicesViews[npcID] = nil;
-            end;
+            SS_NPCControll_ShowDicesMenu(npcID);
           </OnClick>
         </Scripts>
         <Size x = "70" y = "20" />
@@ -643,13 +638,25 @@
           </Anchor> 
         </Anchors>
       </Button>
+      <Button parentKey="connect" inherits="OptionsButtonTemplate" text="Доб. к цели">
+        <Scripts>
+          <OnClick>
+            local npcID = self:GetParent().npcID;
+            SS_NPCControll_ConnectWithTarget(npcID);
+          </OnClick>
+        </Scripts>
+        <Size x = "95" y = "20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset x="0" y="-20"/>
+          </Anchor> 
+        </Anchors>
+      </Button>
       <Button parentKey="removeBtn" inherits="OptionsButtonTemplate" text="x">
         <Scripts>
           <OnClick>
-            SS_LeadingPlots_Current().npc[self:GetParent().npcID] = nil;
-            SS_NPCControll_Menu_Scroll_Content:Hide();
-            SS_NPCControll_DrawList();
-            SS_NPCControll_Menu_Scroll_Content:Show();
+            local npcID = self:GetParent().npcID;
+            SS_NPCControll_Remove(npcID);
           </OnClick>
         </Scripts>
         <Size x = "20" y = "20" />

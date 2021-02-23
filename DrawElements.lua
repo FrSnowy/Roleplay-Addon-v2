@@ -30,6 +30,13 @@ SS_Draw_HidePlayerInfoPlates = function()
   SS_TargetFrame_HP_Text:SetText(nil);
   SS_TargetFrame_Barrier_Text:SetText(nil);
   SS_TargetFrame_Settings_Text:SetText(nil);
+  SS_TargetFrame_Disconnect:Hide();
+  SS_TargetFrame_NPC_Rolls:Hide();
+
+  if (SS_Shared_TargetIsNPC()) then
+    TargetFrame.levelText:SetText(UnitLevel('target'));
+    TargetFrame.levelText:SetTextColor(0.82, 0.71, 0);
+  end;
 end;
 
 SS_Draw_InfoAboutPlayer = function(params)
@@ -49,6 +56,10 @@ SS_Draw_InfoAboutPlayer = function(params)
   SS_TargetFrame_HP_Icon:Show();
   SS_TargetFrame_Barrier_Icon:Show();
   SS_TargetFrame_Settings_Icon:Show();
+  SS_TargetFrame_Settings_Text:Show();
+  
+  SS_TargetFrame_Disconnect:Hide();
+  SS_TargetFrame_NPC_Rolls:Hide();
   SS_TargetFrame:Show();
 end;
 
@@ -306,4 +317,33 @@ SS_Draw_SkillInfo = function(skill, content, examples, bonusFrom)
   end;
 
   SS_Skills_Menu_Info:Show();
+end;
+
+SS_Draw_NPCInfoPlates = function()
+  if (not(SS_LeadingPlots_Current())) then return nil end;
+  if (not(SS_LeadingPlots_Current().npcConnections)) then return nil; end;
+
+  local guid = UnitGUID("target");
+  if (not(SS_LeadingPlots_Current().npcConnections[guid])) then return nil; end;
+
+  local currentNPCInfo = SS_LeadingPlots_Current().npcConnections[guid];
+  if (not(currentNPCInfo)) then return nil; end;
+
+  local defaultNPCInfo = SS_LeadingPlots_Current().npc[currentNPCInfo.id];
+  if (not(defaultNPCInfo)) then return nil; end;
+
+  TargetFrame.levelText:SetText(currentNPCInfo.level);
+  TargetFrame.levelText:SetTextColor(1, 1, 1);
+  TargetFrame.levelText:SetFont("Fonts\\FRIZQT__.TTF", 11);
+
+  SS_TargetFrame_HP_Text:SetText(currentNPCInfo.health..'/'..defaultNPCInfo.health);
+  SS_TargetFrame_Barrier_Text:SetText(currentNPCInfo.barrier..'/'..defaultNPCInfo.barrier);
+
+  SS_TargetFrame_HP_Icon:Show();
+  SS_TargetFrame_Barrier_Icon:Show();
+  SS_TargetFrame_Disconnect:Show();
+  SS_TargetFrame_NPC_Rolls:Show();
+  SS_TargetFrame_Settings_Text:Hide();
+  SS_TargetFrame_Settings_Icon:Hide();
+  SS_TargetFrame:Show();
 end;

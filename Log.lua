@@ -431,6 +431,10 @@ SS_Log_CantKickOnBattle = function()
   print('|cffFF0000Ошибка: нельзя исключить игрока во время боя|r')
 end;
 
+SS_Log_TargetIsNotCreature = function()
+  print('|cffFF0000Ошибка: цель должна быть NPC|r')
+end;
+
 SS_Log_PlayerGetModifier = function(name, value, stats, player)
   local outputString = player..'|cffFFFF00 получил модификатор |r"'..name..'" ';
   

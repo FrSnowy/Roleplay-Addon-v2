@@ -7,6 +7,7 @@ SS_LeadingPlots_Create = function(plotUniqueName, plotName, authorName)
     activePlayers = {},
     modifiers = {},
     npc = {},
+    npcConnections = {},
     sound = {},
     lastDices = {},
     settings = {

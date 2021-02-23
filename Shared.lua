@@ -199,3 +199,14 @@ end;
 SS_Shared_NumFromStr = function(strWithNum)
   return tonumber(string.match(strWithNum, "%-?%d+"));
 end;
+
+SS_Shared_TargetIsNPC = function()
+  return UnitName('target') and not(UnitIsPlayer('target'))
+end;
+
+SS_Shared_TargetIsConnectedNPC = function()
+  if (not(SS_Shared_TargetIsNPC())) then return false; end;
+
+  local guid = SS_NPCControll_GetGUID();
+  if (SS_LeadingPlots_Current().npcConnections[guid]) then return true; else return false; end;
+end;

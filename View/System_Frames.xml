@@ -280,6 +280,28 @@
           </OnLeave>
         </Scripts>
       </Button>
+      <Button name ="$parent_NPC_Rolls" inherits="OptionsButtonTemplate" text="Броски">
+        <Scripts>
+          <OnClick>
+            SS_NPCControll_ShowTargetDicesMenu();
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "20" />
+        <Anchors>
+          <Anchor point="TOPLEFT" x="0" y="-50" />
+        </Anchors>
+      </Button>
+      <Button name ="$parent_Disconnect" inherits="OptionsButtonTemplate" text="Отвязать">
+        <Scripts>
+          <OnClick>
+            SS_NPCControll_DisconnectFromTarget();
+          </OnClick>
+        </Scripts>
+        <Size x = "90" y = "20" />
+        <Anchors>
+          <Anchor point="TOPLEFT" x="0" y="-75" />
+        </Anchors>
+      </Button>
     </Frames>
   </Frame>
 </Ui>

@@ -123,6 +123,7 @@ SS_DMtP_StopEvent = function(plotID)
   local plot = SS_User.leadingPlots[plotID];
   if (not(plot)) then return; end;
 
+  plot.npcConnections = {};
   plot.isEventOngoing = false;
   SS_Log_EventEnd(plot.name);
 

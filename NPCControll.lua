@@ -30,7 +30,7 @@ SS_NPCControll_DrawList = function()
     counter = counter + 1;
     local NPCPanel = CreateFrame("Frame", nil, SS_NPCControll_Menu_Scroll_Content, "SS_NPCElement_Template");
           NPCPanel:SetSize(245, 24);
-          NPCPanel:SetPoint("TOPLEFT", SS_NPCControll_Menu_Scroll_Content, "TOPLEFT", 0, -50 * (counter - 1));
+          NPCPanel:SetPoint("TOPLEFT", SS_NPCControll_Menu_Scroll_Content, "TOPLEFT", 0, -60 * (counter - 1));
           NPCPanel.npcID = id;
   end);
 
@@ -172,16 +172,103 @@ SS_NPCControll_DrawNPCDiceMenu = function(npcID)
         strongRollDesc:SetPoint("TOPLEFT", NPCRollPanel, "TOPLEFT", 100, -137);
         strongRollDesc:SetText(rollAsString.strong);
         strongRollDesc:SetFont("Fonts\\FRIZQT__.TTF", 10);
-        --weakRollButton:SetScript("OnClick", parameters.clickHandler);
 
   SS_NPCDicesViews[npcID] = NPCRollPanel;
 end;
 
+SS_NPCControll_Remove = function(npcID)
+  if (SS_LeadingPlots_Current().npcConnections) then
+    SS_Shared_ForEach(SS_LeadingPlots_Current().npcConnections)(function(info, guid)
+      if (info.id == npcID) then
+        SS_LeadingPlots_Current().npcConnections[guid] = nil;
+
+        if (SS_Shared_TargetIsNPC()) then
+          local targetGUID = SS_NPCControll_GetGUID();
+          if (guid == targetGUID) then
+            SS_Draw_HidePlayerInfoPlates();
+          end;
+        end;
+      end;
+    end);
+  end;
+
+  SS_LeadingPlots_Current().npc[npcID] = nil;
+  SS_NPCControll_Menu_Scroll_Content:Hide();
+  SS_NPCControll_DrawList();
+  SS_NPCControll_Menu_Scroll_Content:Show();
+end;
+
 SS_NPCControll_Clear = function()
   SS_LeadingPlots_Current().npc = {};
+  SS_LeadingPlots_Current().npcConnections = {};
+  
+  if (SS_Shared_TargetIsNPC()) then
+    SS_Draw_HidePlayerInfoPlates();
+  end;
+
   SS_NPCControll_Menu_Empty:Hide();
   SS_NPCControll_DrawList();
   SS_NPCControll_Menu_Empty:Show();
+end;
+
+SS_NPCControll_GetGUID = function()
+  if (not(SS_LeadingPlots_Current())) then return nil end;
+  if (UnitName('target') == nil) then SS_Log_NoTarget(); return nil; end;
+  if (UnitIsPlayer('target')) then SS_Log_TargetIsNotCreature(); return nil end;
+  local guid = UnitGUID("target");
+
+  return guid;
+end;
+
+SS_NPCControll_ShowDicesMenu = function(npcID)
+  if (not(SS_NPCDicesViews[npcID])) then
+    SS_NPCControll_DrawNPCDiceMenu(npcID);
+  else
+    SS_NPCDicesViews[npcID]:Hide();
+    SS_NPCDicesViews[npcID] = nil;
+  end;
+end;
+
+SS_NPCControll_ShowTargetDicesMenu = function(npcID)
+  if (not(SS_Shared_TargetIsConnectedNPC())) then return nil; end;
+
+  local guid = SS_NPCControll_GetGUID();
+  local npcInfo = SS_LeadingPlots_Current().npcConnections[guid];
+  SS_NPCControll_ShowDicesMenu(npcInfo.id);
+end;
+
+SS_NPCControll_ConnectWithTarget = function(npcID)
+  if (not(SS_LeadingPlots_Current())) then return nil end;
+  local npc = SS_LeadingPlots_Current().npc[npcID];
+  if (not(npc)) then return nil; end;
+
+  local guid = SS_NPCControll_GetGUID();
+  if (not(guid)) then return nil; end;
+
+  if (not(SS_LeadingPlots_Current().npcConnections)) then
+    SS_LeadingPlots_Current().npcConnections = {};
+  end;
+
+  SS_LeadingPlots_Current().npcConnections[guid] = {
+    id = npcID,
+    level = npc.level,
+    health = npc.health,
+    barrier = npc.barrier,
+  };
+
+  SS_Draw_NPCInfoPlates();
+end;
+
+SS_NPCControll_DisconnectFromTarget = function(npcID)
+  if (not(SS_LeadingPlots_Current())) then return nil end;
+  if (not(SS_LeadingPlots_Current().npcConnections)) then return nil; end;
+
+  local guid = SS_NPCControll_GetGUID();
+  if (not(guid)) then return nil; end;
+  if (not(SS_LeadingPlots_Current().npcConnections[guid])) then return nil; end;
+
+  SS_LeadingPlots_Current().npcConnections[guid] = nil;
+  SS_Draw_HidePlayerInfoPlates();
 end;
 
 SS_NPCCreate_Show = function()
@@ -191,9 +278,39 @@ SS_NPCCreate_Show = function()
   SS_NPCCreate_Menu:Show();
 end;
 
+SS_NPCCreate_SetHealthByLevelInput = function()
+  local level = SS_NPCCreate_Menu.level:GetText();
+  if (level == '') then 
+    SS_NPCCreate_Menu.health:SetText('');
+    SS_NPCCreate_Menu.armor:SetText('');
+    return nil;
+  end;
+  if (not(SS_Shared_IsNumber(level))) then
+    SS_NPCCreate_Menu.health:SetText('');
+    SS_NPCCreate_Menu.armor:SetText('');
+    return nil;
+  end;
+  level = SS_Shared_NumFromStr(level);
+
+  if (level < 1 or level > 20) then
+    SS_NPCCreate_Menu.health:SetText('');
+    SS_NPCCreate_Menu.armor:SetText('');
+    return nil;
+  end;
+
+  local averageStatsByLevel = { 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 16, 17, 18, 20, 21, 21, 22, 24 };
+  local healthPoints = 2 + math.floor(averageStatsByLevel[level] / 3);
+  if (healthPoints < 1) then healthPoints = 1 end;
+
+  SS_NPCCreate_Menu.health:SetText(healthPoints);
+  SS_NPCCreate_Menu.armor:SetText(math.floor(healthPoints / 2));
+end;
+
 SS_NPCCreate_Create = function()
   local name = SS_NPCCreate_Menu.name:GetText();
-  local level = SS_NPCCreate_Menu.level:GetText('');
+  local level = SS_NPCCreate_Menu.level:GetText();
+  local health = SS_NPCCreate_Menu.health:GetText();
+  local armor = SS_NPCCreate_Menu.armor:GetText();
 
   if (name == '' or level == '') then
     SS_Log_NoValue();
@@ -205,7 +322,20 @@ SS_NPCCreate_Create = function()
     return;
   end;
 
+  if (not(SS_Shared_IsNumber(health))) then
+    SS_Log_ValueMustBeNum();
+    return;
+  end;
+
+  if (not(SS_Shared_IsNumber(armor))) then
+    SS_Log_ValueMustBeNum();
+    return;
+  end;
+
   level = SS_Shared_NumFromStr(level);
+  health = SS_Shared_NumFromStr(health);
+  armor = SS_Shared_NumFromStr(armor);
+
   if (level < 1 or level > 20) then
     SS_Log_ValueIsNotLevel();
     return;
@@ -216,6 +346,8 @@ SS_NPCCreate_Create = function()
   SS_LeadingPlots_Current().npc[id] = {
     name = name,
     level = level,
+    health = health,
+    barrier = armor,
   };
 
   SS_NPCCreate_Menu:Hide();
