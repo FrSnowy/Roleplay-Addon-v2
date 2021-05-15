@@ -9,6 +9,7 @@ SS_ApplicationLoad = function()
       acceptInvites = true,
       displayDiceInfo = false,
       displayModifierInfo = true,
+      interfaceHidden = false,
     },
   };
   if (SS_User.plots == nil) then SS_User.plots = { }; end;
